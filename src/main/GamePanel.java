@@ -24,8 +24,8 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	
 	int FPS = 60;
-	TileManager tileM = new TileManager(this);
-	Player player = new Player(this, keyH);
+	//TileManager tileM = new TileManager(this);
+	//Player player = new Player(this, keyH);
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
