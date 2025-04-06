@@ -7,10 +7,6 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entity.BackGround;
-import entity.Player;
-import tile.TileManager;
-
 public class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
 	final int originalTileSize = 16; // 16 x 16 
