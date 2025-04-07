@@ -26,9 +26,12 @@ public class SpriteSheet {
 	
 	/**
 	* <h1>constructor SpriteSheet</h1>
-	* public SpriteSheet(String path, int widthSheet, int heightSheet, int maxNumber, int x, int y,
-			int sizeWidth, int sizeHeight)
+	*
+	* <p>public SpriteSheet(String path, int widthSheet, int heightSheet, int maxNumber, int x, int y,
+			int sizeWidth, int sizeHeight)</p>
 	* <p>
+	* <b>Chú thích</b> Có thể lấy thông số ở link sau:
+	* <a href="https://ezgif.com/crop">https://ezgif.com/crop</a> <br>
 	* @param path là String đường dẫn đến file ảnh SpriteSheet
 	* @param widthSheet là chiều dài của ảnh SpriteSheet
 	* @param heightSheet là chiều cao của ảnh SpriteSheet
