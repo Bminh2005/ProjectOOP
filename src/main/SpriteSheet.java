@@ -6,10 +6,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class SpriteSheet {
-	BufferedImage imgSheet;
+	public BufferedImage imgSheet;
 	int widthSheet;
 	int heightSheet;
-	int maxNumber;
+	public int maxNumber;
 	int	x, y;
 	int sizeWidth;
 	int sizeHeight;
@@ -86,5 +86,29 @@ public class SpriteSheet {
 		}
 		sprite = this.imgSheet.getSubimage(x + index*this.step, y, sizeWidth, sizeHeight);
 		return sprite;
+	}
+	/**
+	* <h1>matchSprite</h1>
+	* public void getSprite()
+	* <p> Hàm này dùng để đưa các Sprite đã cắt từ một SpriteSheet
+	* Rồi đưa đưa vào một mảng BufferedImage animation[]
+	* Và trả về animation
+	* 
+	* </p>
+	* <p>
+	* 
+	*
+	* @return animation là đối tượng tạo từ this SpriteSheet
+	* @author  Nguyễn Bình Minh
+	* @version 1.0
+	* @since   2025-07-04
+	*/
+	public BufferedImage[] getSprite() {
+		BufferedImage animation[];
+		animation = new BufferedImage[this.maxNumber];
+		for(int i = 0; i < this.maxNumber; i++) {
+			animation[i] = this.getSpriteNum(i); 
+		}
+		return animation;
 	}
 }
