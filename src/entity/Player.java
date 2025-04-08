@@ -103,7 +103,7 @@ public class Player extends Entity{
         	this.image = Color.BLUE;
         }
         g2.setColor(this.image);
-        g2.fillRect(this.worldX, this.worldY, gp.tileSize, gp.tileSize);
+        g2.fillRect(this.x, this.y, gp.tileSize, gp.tileSize);
         // Display the player's current state as text
         //g2.setColor(Color.BLACK);
         //g2.drawString("State: " + state, x, y - 10);

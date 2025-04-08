@@ -1,11 +1,11 @@
 package entity;
 
 public class Entity {
-	int worldX;
-	int worldY;
-	int x;
-	int y;
-	int hp;
-	int mp;
-	int speed;
+	public int worldX;
+	public int worldY;
+	public int x;
+	public int y;
+	public int hp;
+	public int mp;
+	public int speed;
 }

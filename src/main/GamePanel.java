@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import map.TempMap;
 
 public class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
@@ -20,10 +21,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenHeight = tileSize * maxScreenRow;
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
-	
+	TempMap map  = new TempMap(Color.DARK_GRAY, this);
 	int FPS = 60;
 	//TileManager tileM = new TileManager(this);
-	Player player = new Player(this, keyH);
+	public Player player = new Player(this, keyH);
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.setBackground(Color.black);
@@ -71,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		map.draw(g2);
 		player.draw(g2);
 		g2.dispose();
 	}
