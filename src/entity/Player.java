@@ -29,6 +29,7 @@ public class Player extends Entity{
 		this.y = (gp.screenHeight/2) - (gp.tileSize/2);
     }
     public void update() {
+    	if(state.equals("DYING") == false) {
     	if(this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true || this.keyH.rightPressed == true) {
     		this.move();
     	}
@@ -45,29 +46,30 @@ public class Player extends Entity{
     		this.dying();
     		if(state.equals("DYING") == false) {
     			state = "DYING";
+    			state = state;
     		}
     	}
+    	}
+    	
     }
     public void idle() {
     	this.state = "NORMAL";
     }
     public void move() {
-    	if(this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true || this.keyH.rightPressed == true) {
-    		System.out.println("Player is moving!");
-    		this.state ="NORMAL";
-    		if(this.keyH.upPressed == true) {
-    			this.worldY -= this.speed;
+    	System.out.println("Player is moving!");
+    	this.state ="NORMAL";
+    	if(this.keyH.upPressed == true) {
+    		this.worldY -= this.speed;
     		}
-    		if(this.keyH.downPressed == true) {
-    			this.worldY += this.speed;
+    	if(this.keyH.downPressed == true) {
+    		this.worldY += this.speed;
     		}
-    		if(this.keyH.leftPressed == true) {
-    			this.worldX -= this.speed;
+    	if(this.keyH.leftPressed == true) {
+    		this.worldX -= this.speed;
     		}
-    		if(this.keyH.rightPressed == true) {
-    			this.worldX += this.speed;
-    		}
-    	}
+    	if(this.keyH.rightPressed == true) {
+    		this.worldX += this.speed;
+    	   }
     }
     
     public void attack() {
