@@ -14,6 +14,7 @@ public class SpriteSheet {
 	int sizeWidth;
 	int sizeHeight;
 	int step;
+	public BufferedImage animation[];
 	
 	public SpriteSheet(String path) {
 		try {
@@ -22,6 +23,7 @@ public class SpriteSheet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
 	/**
@@ -62,6 +64,7 @@ public class SpriteSheet {
 		this.sizeWidth = sizeWidth;
 		this.sizeHeight = sizeHeight;
 		step = widthSheet/maxNumber;
+		this.getSprite();
 	}
 
 
@@ -103,12 +106,12 @@ public class SpriteSheet {
 	* @version 1.0
 	* @since   2025-07-04
 	*/
-	public BufferedImage[] getSprite() {
+	public void getSprite() {
 		BufferedImage animation[];
 		animation = new BufferedImage[this.maxNumber];
 		for(int i = 0; i < this.maxNumber; i++) {
 			animation[i] = this.getSpriteNum(i); 
 		}
-		return animation;
+		this.animation = animation;
 	}
 }

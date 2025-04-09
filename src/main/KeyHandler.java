@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean attackPressed, damagePressed, diePressed;
+	public boolean runPressed;
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -33,6 +34,9 @@ public class KeyHandler implements KeyListener{
 		
 		if (code == KeyEvent.VK_K)
             diePressed = true;
+		if (code == KeyEvent.VK_SHIFT) {
+			runPressed = true;
+		}
 	}
 
 	@Override
@@ -51,18 +55,18 @@ public class KeyHandler implements KeyListener{
 	        if (code == KeyEvent.VK_D) {
 	            rightPressed = false; // Set rightPressed to false if 'D' is released
 	        }
-	        if (code == KeyEvent.VK_J) {
-	        	attackPressed = false;
-	        }
 	            
 	        if (code == KeyEvent.VK_I) {
-	        	damagePressed = false;
+	        	//damagePressed = false;
 	        }
 	            
 	        if (code == KeyEvent.VK_K) {
 	        	diePressed = false;
 	        }
-	            
+	        
+	        if (code == KeyEvent.VK_SHIFT) {
+				runPressed = false;
+			}
 		
 	}
 

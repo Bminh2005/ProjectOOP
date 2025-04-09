@@ -1,5 +1,5 @@
 package map;
-
+/*
 import tile.TileLayer;
 import tile.TileManager;
 import tile.TileSet;
@@ -83,3 +83,5 @@ public class GameMap {
         return mapHeight;
     }
 }
+
+*/

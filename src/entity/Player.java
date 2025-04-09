@@ -2,21 +2,36 @@ package entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.SpriteSheet;
 
 public class Player extends Entity{
 	public KeyHandler keyH;
 	public GamePanel gp;
     int speed;
     public String state;
-    public Color image;
+    public BufferedImage image;
+    private SpriteSheet playerIdle;
+    private SpriteSheet playerWalk;
+    private SpriteSheet playerAttack1;
+    private SpriteSheet playerAttack2;
+    private SpriteSheet playerAttack3;
+    private SpriteSheet playerHurt;
+    private SpriteSheet playerRun;
+    private SpriteSheet playerDefend;
+    private SpriteSheet playerDying;
+    private int spriteNum;
+    private int frameCounter;
+    private boolean flip;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
         setDefaultValues();
+        getPlayerImage();
     }
     public void setDefaultValues() {
 		this.hp = 100;
@@ -25,39 +40,100 @@ public class Player extends Entity{
 		this.worldX = 0;
 		this.worldY = 0;
 		this.speed = 3;
+		this.frameCounter = 0;
+		this.flip = false;
 		this.x = (gp.screenWidth/2) - (gp.tileSize/2);
 		this.y = (gp.screenHeight/2) - (gp.tileSize/2);
     }
+    public void getPlayerImage() {
+    	playerIdle = new SpriteSheet("/Player/IDLE.png", 672, 84, 7, 21, 23, 53, 40);
+    	playerWalk = new SpriteSheet("/Player/WALK.png", 768, 84, 8, 21, 23, 53, 40);
+    	playerAttack1 = new SpriteSheet("/Player/ATTACK1.png", 576, 84, 6, 21, 23, 53, 40);
+    	playerAttack2 = new SpriteSheet("/Player/ATTACK2.png", 480, 84, 5, 21, 23, 53, 40);
+    	playerAttack3 = new SpriteSheet("/Player/ATTACK3.png", 576, 84, 6, 21, 23, 53, 40);
+    	playerHurt = new SpriteSheet("/Player/HURT.png", 384, 84, 4, 21, 23, 53, 40);
+    	playerRun = new SpriteSheet("/Player/RUN.png", 768, 84, 8, 21, 23, 53, 40);
+    	playerDefend = new SpriteSheet("/Player/DEFEND.png", 576, 84, 6, 21, 23, 53, 40); //0->1 gio khien, 2->5 do don
+    	playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
+    }
     public void update() {
-    	if(state.equals("DYING") == false) {
+    	if(hp > 0) {
     	if(this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true || this.keyH.rightPressed == true) {
+    		if(this.keyH.runPressed) {
+    			this.run();
+    		}
+    		else {
+    			this.walk();
+    		}
     		this.move();
     	}
     	else if(this.keyH.attackPressed == true) {
     		this.attack();
+    		if(this.spriteNum == this.playerAttack1.maxNumber) {
+    			this.keyH.attackPressed = false;
+    			this.idle();
+    		}
     	}
     	else if(this.keyH.damagePressed == true) {
-    		this.damaged();
+    		this.hurt();
+    		if(this.spriteNum == this.playerHurt.maxNumber) {
+    			this.keyH.damagePressed = false;
+    			this.hp -= 5;
+    			this.idle();
+    		}
     	}
     	else {
     		this.idle();
     	}
-    	if(hp <= 0) {
+    	}
+    	else{
     		this.dying();
     		if(state.equals("DYING") == false) {
     			state = "DYING";
-    			state = state;
     		}
     	}
+    	this.frameCounter++;
+    	
+    }
+    
+    public void idle() {
+    	if(this.state.equals("IDLE") == false) {
+    		this.spriteNum = this.playerIdle.maxNumber - 1;
+    	}
+    	this.state = "IDLE";
+    	if(this.frameCounter%5 == 0) {
+    		this.spriteNum = (this.spriteNum + 1)%this.playerIdle.maxNumber;
     	}
     	
     }
-    public void idle() {
-    	this.state = "NORMAL";
+    
+    public void run() {
+    	if(this.state.equals("RUN") == false) {
+    		this.spriteNum = this.playerRun.maxNumber -1;
+    		this.frameCounter = 0;
+    		this.speed = 5;
+    	}
+    	System.out.println("Player is running!");
+    	this.state ="RUN";
+    	if(this.frameCounter%5 == 0) {
+    		this.spriteNum = (this.spriteNum + 1)%this.playerRun.maxNumber;
+    	}
+    	
+    }
+    public void walk() {
+    	if(this.state.equals("WALK") == false) {
+    		this.spriteNum = this.playerWalk.maxNumber - 1;
+    		this.frameCounter = 0;
+    		this.speed = 3;
+    	}
+    	System.out.println("Player is walking!");
+    	this.state ="WALK";
+    	if(this.frameCounter%5 == 0) {
+    		this.spriteNum = (this.spriteNum + 1)%this.playerWalk.maxNumber;
+    	}
+    	
     }
     public void move() {
-    	System.out.println("Player is moving!");
-    	this.state ="NORMAL";
     	if(this.keyH.upPressed == true) {
     		this.worldY -= this.speed;
     		}
@@ -66,46 +142,81 @@ public class Player extends Entity{
     		}
     	if(this.keyH.leftPressed == true) {
     		this.worldX -= this.speed;
+    		this.flip = true;
     		}
     	if(this.keyH.rightPressed == true) {
     		this.worldX += this.speed;
+    		this.flip = false;
     	   }
     }
-    
     public void attack() {
+    	if(this.state.equals("ATTACKING") == false) {
+    		this.spriteNum = -1;
+    		this.frameCounter = 0;
+    	}
     	System.out.println("Player is attacking!");
 		this.state = "ATTACKING";
+		if(this.frameCounter%5 == 0) {
+			System.out.println(this.spriteNum);
+			this.spriteNum++;
+		}
     }
-    public void damaged() {
+    public void hurt() {
     	System.out.println("Player is injured!");
-    	hp -= 1;
+    	if(this.state.equals("HURT") == false) {
+    		this.spriteNum = -1;
+    		this.frameCounter = 0;
+    	}
+    	this.worldX -= 1;
     	System.out.println("HP = " + this.hp);
-    	this.state = "DAMAGED";
+    	this.state = "HURT";
+    	if(this.frameCounter%5 == 0) {
+    		this.spriteNum++;
+		}
     }
     
     public void dying() {
+    	if(this.state.equals("DYING") == false) {
+    		this.spriteNum = -1;
+    		this.frameCounter = 0;
+    	}
     	System.out.println("Player is died!");
     	this.state = "DYING";
+    	if(this.frameCounter%10 == 0) {
+    		if(this.spriteNum < this.playerDying.maxNumber - 1) {
+    			this.spriteNum++;
+    		}
+		}
+    	
     }
     
     public void draw(Graphics2D g2) {
         switch (state) {
-        case "NORMAL":
-        	this.image = Color.WHITE;
+        case "IDLE":
+        	this.image = this.playerIdle.animation[this.spriteNum];
+        	break;
+        case "WALK":
+        	this.image = this.playerWalk.animation[this.spriteNum];
         	break;
         case "ATTACKING":
-        	this.image = Color.RED;
+        	this.image = this.playerAttack1.animation[this.spriteNum];
         	break;
         case "DYING":
-        	if (image.getBlue() >= 0) {
-                image = new Color(0,0,Math.max(image.getBlue() - 10, 0));
-            }
+        	this.image = this.playerDying.animation[this.spriteNum];
         	break;
-        case "DAMAGED":
-        	this.image = Color.BLUE;
+        case "HURT":
+        	this.image = this.playerHurt.animation[this.spriteNum];
+        	break;
+        case "RUN":
+        	this.image = this.playerRun.animation[this.spriteNum];
+        	break;
         }
-        g2.setColor(this.image);
-        g2.fillRect(this.x, this.y, gp.tileSize, gp.tileSize);
+        if(flip) {
+        	g2.drawImage(image, x + gp.tileSize*53/40, y, -gp.tileSize*53/40, gp.tileSize, null);
+        }
+        else {
+        	g2.drawImage(image, x, y, gp.tileSize*53/40, gp.tileSize, null);
+        }
         // Display the player's current state as text
         //g2.setColor(Color.BLACK);
         //g2.drawString("State: " + state, x, y - 10);
