@@ -16,9 +16,7 @@ public class Player extends Entity{
     public BufferedImage image;
     private SpriteSheet playerIdle;
     private SpriteSheet playerWalk;
-    private SpriteSheet playerAttack1;
-    private SpriteSheet playerAttack2;
-    private SpriteSheet playerAttack3;
+    private SpriteSheet playerAttack[];
     private SpriteSheet playerHurt;
     private SpriteSheet playerRun;
     private SpriteSheet playerDefend;
@@ -26,7 +24,7 @@ public class Player extends Entity{
     private int spriteNum;
     private int frameCounter;
     private boolean flip;
-
+    private int attackType;
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
@@ -42,15 +40,17 @@ public class Player extends Entity{
 		this.speed = 3;
 		this.frameCounter = 0;
 		this.flip = false;
+		this.attackType = 0;
 		this.x = (gp.screenWidth/2) - (gp.tileSize/2);
 		this.y = (gp.screenHeight/2) - (gp.tileSize/2);
+		this.playerAttack = new SpriteSheet[3];
     }
     public void getPlayerImage() {
     	playerIdle = new SpriteSheet("/Player/IDLE.png", 672, 84, 7, 21, 23, 53, 40);
     	playerWalk = new SpriteSheet("/Player/WALK.png", 768, 84, 8, 21, 23, 53, 40);
-    	playerAttack1 = new SpriteSheet("/Player/ATTACK1.png", 576, 84, 6, 21, 23, 53, 40);
-    	playerAttack2 = new SpriteSheet("/Player/ATTACK2.png", 480, 84, 5, 21, 23, 53, 40);
-    	playerAttack3 = new SpriteSheet("/Player/ATTACK3.png", 576, 84, 6, 21, 23, 53, 40);
+    	playerAttack[0] = new SpriteSheet("/Player/ATTACK1.png", 576, 84, 6, 21, 23, 53, 40);
+    	playerAttack[1] = new SpriteSheet("/Player/ATTACK2.png", 480, 84, 5, 21, 23, 53, 40);
+    	playerAttack[2] = new SpriteSheet("/Player/ATTACK3.png", 576, 84, 6, 21, 23, 53, 40);
     	playerHurt = new SpriteSheet("/Player/HURT.png", 384, 84, 4, 21, 23, 53, 40);
     	playerRun = new SpriteSheet("/Player/RUN.png", 768, 84, 8, 21, 23, 53, 40);
     	playerDefend = new SpriteSheet("/Player/DEFEND.png", 576, 84, 6, 21, 23, 53, 40); //0->1 gio khien, 2->5 do don
@@ -69,7 +69,7 @@ public class Player extends Entity{
     	}
     	else if(this.keyH.attackPressed == true) {
     		this.attack();
-    		if(this.spriteNum == this.playerAttack1.maxNumber) {
+    		if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
     			this.keyH.attackPressed = false;
     			this.idle();
     		}
@@ -156,8 +156,11 @@ public class Player extends Entity{
     	}
     	System.out.println("Player is attacking!");
 		this.state = "ATTACKING";
+		if(this.frameCounter%20 == 0) {
+			this.worldX += 1;
+		}
 		if(this.frameCounter%5 == 0) {
-			System.out.println(this.spriteNum);
+			//System.out.println(this.spriteNum);
 			this.spriteNum++;
 		}
     }
@@ -199,7 +202,7 @@ public class Player extends Entity{
         	this.image = this.playerWalk.animation[this.spriteNum];
         	break;
         case "ATTACKING":
-        	this.image = this.playerAttack1.animation[this.spriteNum];
+        	this.image = this.playerAttack[this.attackType].animation[this.spriteNum];
         	break;
         case "DYING":
         	this.image = this.playerDying.animation[this.spriteNum];
