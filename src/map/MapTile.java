@@ -8,11 +8,11 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
-public class MapTitle {
+public class MapTile {
 	private BufferedImage img;
 	private int height;
 	private int width;
-	public MapTitle(GamePanel gp, String path) {
+	public MapTile(GamePanel gp, String path) {
 		try {
 			this.img = ImageIO.read(getClass().getResourceAsStream(path));
 		} catch (IOException e) {
@@ -22,7 +22,7 @@ public class MapTitle {
 		this.height = gp.tileSize;
 		this.width  = gp.tileSize;
 	}
-	public MapTitle(GamePanel gp, String path, int width, int height) {
+	public MapTile(GamePanel gp, String path, int width, int height) {
 		try {
 			this.img = ImageIO.read(getClass().getResourceAsStream(path));
 		} catch (IOException e) {
