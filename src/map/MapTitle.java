@@ -14,7 +14,7 @@ public class MapTitle {
 	private int width;
 	public MapTitle(GamePanel gp, String path) {
 		try {
-			img = ImageIO.read(getClass().getResourceAsStream(path));
+			this.img = ImageIO.read(getClass().getResourceAsStream(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,15 +22,15 @@ public class MapTitle {
 		this.height = gp.tileSize;
 		this.width  = gp.tileSize;
 	}
-	public MapTitle(GamePanel gp, String path, int height, int width) {
+	public MapTitle(GamePanel gp, String path, int width, int height) {
 		try {
-			img = ImageIO.read(getClass().getResourceAsStream(path));
+			this.img = ImageIO.read(getClass().getResourceAsStream(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.width = gp.tileSize;
-		this.height = gp.tileSize*height/width;
+		this.width = gp.tileSize + gp.tileSize/2;
+		this.height = this.width*height/width;
 	}
 	
 	public void draw(Graphics2D g2, int x, int y) {

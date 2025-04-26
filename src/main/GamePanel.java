@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import map.Map;
 import map.TempMap;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -15,15 +16,24 @@ public class GamePanel extends JPanel implements Runnable{
 	final int originalTileSize = 16; // 16 x 16 
 	final int scale  = 3;
 	public final int tileSize = originalTileSize * scale; //48 x 48
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 9;
+	public final int maxScreenCol = 16*2;
+	public final int maxScreenRow = 9*2;
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
+	
+	
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	TempMap map  = new TempMap(Color.DARK_GRAY, this);
+	Map testmap = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	int FPS = 60;
-	//TileManager tileM = new TileManager(this);
+	
+	//WORLD SETTINGS
+	public final int maxWorldCol = 50;
+	public final int maxWorldRow = 50;
+	public final int maxWorldHeight = maxWorldRow * tileSize;
+	public final int maxWorldWidth = maxWorldRow * tileSize;
+	
 	public Player player = new Player(this, keyH);
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -72,8 +82,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		map.draw(g2);
+		testmap.draw(g2, 1);
 		player.draw(g2);
+		testmap.draw(g2, 2);
 		g2.dispose();
 	}
 

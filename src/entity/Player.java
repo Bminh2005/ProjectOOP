@@ -9,8 +9,8 @@ import main.KeyHandler;
 import main.SpriteSheet;
 
 public class Player extends Entity{
-	public KeyHandler keyH;
-	public GamePanel gp;
+	KeyHandler keyH;
+	GamePanel gp;
     int speed;
     public String state;
     public BufferedImage image;
@@ -35,8 +35,8 @@ public class Player extends Entity{
 		this.hp = 100;
 		this.mp = 100;
 		this.state = "NORMAL";
-		this.worldX = 0;
-		this.worldY = 0;
+		this.worldX = 24* gp.tileSize;
+		this.worldY = 24* gp.tileSize;
 		this.speed = 3;
 		this.frameCounter = 0;
 		this.flip = false;
@@ -157,7 +157,8 @@ public class Player extends Entity{
     	System.out.println("Player is attacking!");
 		this.state = "ATTACKING";
 		if(this.frameCounter%20 == 0) {
-			this.worldX += 1;
+			if(flip) this.worldX -= 1;
+			else this.worldX += 1;
 		}
 		if(this.frameCounter%5 == 0) {
 			//System.out.println(this.spriteNum);

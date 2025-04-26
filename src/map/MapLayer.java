@@ -14,25 +14,28 @@ public class MapLayer {
     public MapLayer(GamePanel gp, String path){
     	this.path = path;
     	titles = new MapTitle[100];
+    	layerTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
     	getImage(gp);
     	loadLayer(gp);
     }
     public void getImage(GamePanel gp) {
-    	titles[0] = new MapTitle(gp, null);
-    	titles[1] = new MapTitle(gp, null);
-    	titles[2] = new MapTitle(gp, null);
-    	titles[3] = new MapTitle(gp, null);
-    	titles[4] = new MapTitle(gp, null);
-    	titles[5] = new MapTitle(gp, null);
-    	titles[6] = new MapTitle(gp, null);
-    	titles[7] = new MapTitle(gp, null);
-    	titles[8] = new MapTitle(gp, null);
-    	titles[9] = new MapTitle(gp, null);
-    	titles[10] = new MapTitle(gp, null);
-    	titles[11] = new MapTitle(gp, null);
-    	titles[12] = new MapTitle(gp, null);
-    	titles[13] = new MapTitle(gp, null);
-    	titles[14] = new MapTitle(gp, null);
+    	titles[0] = null;
+    	titles[1] = new MapTitle(gp, "/tiles/grand.png");
+    	titles[2] = new MapTitle(gp, "/tiles/lane1.png");
+    	titles[3] = new MapTitle(gp, "/tiles/lane2.png");
+    	titles[4] = new MapTitle(gp, "/tiles/ngatu1.png");
+    	titles[5] = new MapTitle(gp, "/tiles/ngatu2.png");
+    	titles[6] = new MapTitle(gp, "/tiles/ngatu3.png");
+    	titles[7] = new MapTitle(gp, "/tiles/ngatu4.png");
+    	titles[8] = new MapTitle(gp, "/tiles/lane11.png");
+    	titles[9] = new MapTitle(gp, "/tiles/lane12.png");
+    	titles[10] = new MapTitle(gp, "/tiles/tree0.png", 48, 63);
+    	titles[11] = new MapTitle(gp, "/tiles/tree1.png");
+    	titles[12] = new MapTitle(gp, "/tiles/tree2.png", 28, 45);
+    	titles[13] = new MapTitle(gp, "/tiles/rock1.png");
+    	titles[14] = new MapTitle(gp, "/tiles/tree3.png", 80, 96);
+    	/**
+    	
     	titles[15] = new MapTitle(gp, null);
     	titles[16] = new MapTitle(gp, null);
     	titles[17] = new MapTitle(gp, null);
@@ -69,6 +72,7 @@ public class MapLayer {
     	titles[48] = new MapTitle(gp, null);
     	titles[49] = new MapTitle(gp, null);
     	titles[50] = new MapTitle(gp, null);
+    	**/
     }
     public void loadLayer(GamePanel gp) {
 		try {
@@ -77,15 +81,15 @@ public class MapLayer {
 			
 			int col = 0;
 			int row = 0;
-			while (col < gp.maxScreenCol && row < gp.maxScreenRow ) {
+			while (col < gp.maxWorldCol && row < gp.maxWorldRow ) {
 				String line = br.readLine();
 				String numbers[] = line.split(" ");
-				while (col < gp.maxScreenCol) {
+				while (col < gp.maxWorldCol) {
 					int num = Integer.parseInt(numbers[col]);
 					layerTileNum[row][col] = num;
 					col++;
 				}
-				if (col >= gp.maxScreenCol) {
+				if (col >= gp.maxWorldCol) {
 					col = 0;
 				}
 				row++;
@@ -95,20 +99,25 @@ public class MapLayer {
 			
 		}
 	}
-    public void draw(GamePanel gp,Graphics2D g2, int x0, int y0) {
+    public void draw(GamePanel gp,Graphics2D g2) {
     	int col = 0;
 		int row = 0;
-		int x, y;
-		while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
-			x = col*gp.tileSize - gp.player.worldX + gp.player.x + x0;
-			y = row*gp.tileSize - gp.player.worldY + gp.player.y + y0;
+		int x, y, worldX, worldY;
+		while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
+			x = col*gp.tileSize+ - gp.player.worldX + gp.player.x;
+			y = row*gp.tileSize - gp.player.worldY + gp.player.y;
 			int titleNum = layerTileNum[row][col];
-			titles[titleNum].draw(g2, x, y);
+			if(titleNum != 0) {
+				if(x >= -2*gp.tileSize && x <= gp.screenWidth + 2*gp.tileSize &&
+						y >= -2* gp.tileSize && y <= gp.screenHeight + 2*gp.tileSize)
+				titles[titleNum].draw(g2, x, y);
+			}
 			col++;
-			if(col == gp.maxScreenCol) {
+			if(col >= gp.maxWorldCol) {
 				col = 0;
 				row++;
 			}
 		}		
 	}
+
 }
