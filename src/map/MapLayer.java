@@ -34,6 +34,7 @@ public class MapLayer {
     	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 28, 45);
     	tiles[13] = new MapTile(gp, "/tiles/rock1.png");
     	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96);
+    	//tiles[15] = new MapTile(gp,"tiles/hut.png");
     	/**
     	
     	tiles[15] = new MapTile(gp, null);

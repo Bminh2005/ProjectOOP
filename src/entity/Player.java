@@ -32,7 +32,7 @@ public class Player extends Entity{
         getPlayerImage();
     }
     public void setDefaultValues() {
-		this.hp = 100;
+    	this.hp = 100;
 		this.mp = 100;
 		this.state = "NORMAL";
 		this.worldX = 24* gp.tileSize;
@@ -148,6 +148,7 @@ public class Player extends Entity{
     		this.worldX += this.speed;
     		this.flip = false;
     	   }
+    	//System.out.println(this.worldX +" "+ this.worldY);
     }
     public void attack() {
     	if(this.state.equals("ATTACKING") == false) {

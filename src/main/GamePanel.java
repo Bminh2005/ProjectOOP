@@ -10,7 +10,8 @@ import javax.swing.JPanel;
 import entity.Player;
 import map.Map;
 import map.TempMap;
-
+import map.Teleport;
+import java.util.*;
 public class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
 	final int originalTileSize = 16; // 16 x 16 
@@ -20,12 +21,14 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxScreenRow = 9;
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
-	
+	public ArrayList<Teleport> teleportList = new ArrayList<>();
+	public int num_CurrentMap = 1;
+	public int maxMap = 2;
 	public Map currentMap;
+	public Map[] maps = new Map[maxMap];
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	TempMap map  = new TempMap(Color.DARK_GRAY, this);
-	private final Map testmap = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	int FPS = 60;
 	//WORLD SETTINGS
 	public final int maxWorldCol = 50;
@@ -40,7 +43,18 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-		currentMap = testmap;
+		maps[1] = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
+		//maps[2]= new Map(this, "/map/layer2.txt", "/map/layer1.txt");
+		currentMap = maps[1];
+		teleportList.add(new Teleport(
+			    1, 4, 42,   // từ Map 1 tại tile (4,42)
+			    2, 30, 9    // sang Map 2 tile (30,9)
+			));
+			teleportList.add(new Teleport(
+			    2, 30, 10,  // từ Map 2 tile (30,10)
+			    1, 42, 3    // sang Map 1 tile (42,2)
+			));
+
 	}
 	
 	public void startGameThread() {
@@ -76,15 +90,32 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		player.update();
-		
-		
+		//System.out.println(player.worldX +" "+ player.worldY);
+		int playerCol = player.worldX/tileSize;
+		int playerRow = player.worldY/tileSize;
+		for (Teleport tp : teleportList) {
+	        if (num_CurrentMap == tp.fromMap &&
+	            playerCol == tp.fromCol &&
+	            playerRow == tp.fromRow) {
+	            
+	            Teleport(tp.toMap, tp.toCol, tp.toRow);
+	            break;
+	        }
+		}
 	}
+	public void Teleport(int targetmap, int col, int row ) {
+		num_CurrentMap = targetmap;
+		currentMap = maps[num_CurrentMap];
+		player.worldX = col * tileSize;
+		player.worldY = row * tileSize;
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		testmap.draw(g2, 1);
+		currentMap.draw(g2, 1);
 		player.draw(g2);
-		testmap.draw(g2, 2);
+		currentMap.draw(g2, 2);
 		g2.dispose();
 	}
 
