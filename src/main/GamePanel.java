@@ -25,7 +25,8 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	TempMap map  = new TempMap(Color.DARK_GRAY, this);
-	private final Map testmap = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
+	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
+	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
 	int FPS = 60;
 	//WORLD SETTINGS
 	public final int maxWorldCol = 50;
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-		currentMap = testmap;
+		currentMap = MAP02;
 	}
 	
 	public void startGameThread() {
@@ -82,9 +83,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		testmap.draw(g2, 1);
+		currentMap.draw(g2, 1);
+		currentMap.draw(g2, 2);
 		player.draw(g2);
-		testmap.draw(g2, 2);
 		g2.dispose();
 	}
 
