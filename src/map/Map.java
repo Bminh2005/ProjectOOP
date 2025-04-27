@@ -25,7 +25,7 @@ public class Map {
 			layer1.draw(gp, g2);
 			break;
 		case 2:
-			layer2.draw(gp, g2);
+		    layer2.draw(gp, g2);
 		}
 	}
 }
