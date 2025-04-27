@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 
-public abstract class Entity {
+public class Entity {
 	GamePanel gp;
 	public int worldX;
 	public int worldY;
