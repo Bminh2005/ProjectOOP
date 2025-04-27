@@ -30,7 +30,6 @@ public class Slime extends Monster {
         getImage(); // Lấy ảnh cho quái vật
     }
 
-    @Override
     public void getImage() {
 //        up1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
 //        up2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
@@ -42,7 +41,6 @@ public class Slime extends Monster {
 //        right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
-    @Override
     public void setAction() {
 //        actionLockCounter++;
 //        if (actionLockCounter == 120) {
