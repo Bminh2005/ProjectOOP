@@ -82,10 +82,10 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		ProcessFrontBehindEntity processor = new ProcessFrontBehindEntity(currentMap.getLayer2(), player);
 		Graphics2D g2 = (Graphics2D)g;
 		currentMap.draw(g2, 1);
-		currentMap.draw(g2, 2);
-		player.draw(g2);
+		processor.draw(this, g2);
 		g2.dispose();
 	}
 

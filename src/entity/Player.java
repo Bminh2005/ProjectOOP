@@ -10,10 +10,8 @@ import main.SpriteSheet;
 
 public class Player extends Entity{
 	KeyHandler keyH;
-	GamePanel gp;
     int speed;
     public String state;
-    public BufferedImage image;
     private SpriteSheet playerIdle;
     private SpriteSheet playerWalk;
     private SpriteSheet playerAttack[];

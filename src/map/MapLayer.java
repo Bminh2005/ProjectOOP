@@ -9,7 +9,7 @@ import main.GamePanel;
 
 public class MapLayer {
 	public MapTile[] tiles;
-	private int layerTileNum[][];
+	public int layerTileNum[][];
 	String path;
     public MapLayer(GamePanel gp, String path){
     	this.path = path;
