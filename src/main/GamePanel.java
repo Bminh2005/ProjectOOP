@@ -29,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	TempMap map  = new TempMap(Color.DARK_GRAY, this);
+	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
+	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
 	int FPS = 60;
 	//WORLD SETTINGS
 	public final int maxWorldCol = 50;
@@ -54,7 +56,6 @@ public class GamePanel extends JPanel implements Runnable{
 			    2, 30, 10,  // từ Map 2 tile (30,10)
 			    1, 42, 3    // sang Map 1 tile (42,2)
 			));
-
 	}
 	
 	public void startGameThread() {

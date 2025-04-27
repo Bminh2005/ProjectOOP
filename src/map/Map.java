@@ -8,7 +8,6 @@ public class Map {
 	private GamePanel gp;
 	private MapLayer layer1;
 	private MapLayer layer2;
-	int x0, y0;
 	public Map(GamePanel gp,String path1, String path2) {
 		this.gp = gp;
 		layer1 = new MapLayer(gp, path1);

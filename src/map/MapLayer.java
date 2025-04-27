@@ -34,10 +34,11 @@ public class MapLayer {
     	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 28, 45);
     	tiles[13] = new MapTile(gp, "/tiles/rock1.png");
     	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96);
-    	//tiles[15] = new MapTile(gp,"tiles/hut.png");
+    	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
+
     	/**
     	
-    	tiles[15] = new MapTile(gp, null);
+    	
     	tiles[16] = new MapTile(gp, null);
     	tiles[17] = new MapTile(gp, null);
     	tiles[18] = new MapTile(gp, null);
@@ -103,9 +104,9 @@ public class MapLayer {
     public void draw(GamePanel gp,Graphics2D g2) {
     	int col = 0;
 		int row = 0;
-		int x, y, worldX, worldY;
+		int x, y;
 		while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-			x = col*gp.tileSize+ - gp.player.worldX + gp.player.x;
+			x = col*gp.tileSize - gp.player.worldX + gp.player.x;
 			y = row*gp.tileSize - gp.player.worldY + gp.player.y;
 			int titleNum = layerTileNum[row][col];
 			if(titleNum != 0) {
