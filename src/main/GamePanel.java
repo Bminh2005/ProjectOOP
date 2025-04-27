@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenHeight = tileSize * maxScreenRow;
 	public ArrayList<Teleport> teleportList = new ArrayList<>();
 	public int num_CurrentMap = 1;
-	public int maxMap = 2;
+	public int maxMap = 3;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	KeyHandler keyH = new KeyHandler();
@@ -45,16 +45,16 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
-		maps[1] = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
-		//maps[2]= new Map(this, "/map/layer2.txt", "/map/layer1.txt");
+		maps[1] = MAP01;
+		maps[2]= MAP02;
 		currentMap = maps[1];
 		teleportList.add(new Teleport(
-			    1, 4, 42,   // từ Map 1 tại tile (4,42)
+			    1, 2, 40,   // từ Map 1 tại tile (4,42)
 			    2, 30, 9    // sang Map 2 tile (30,9)
 			));
 			teleportList.add(new Teleport(
 			    2, 30, 10,  // từ Map 2 tile (30,10)
-			    1, 42, 3    // sang Map 1 tile (42,2)
+			    1, 3, 40    // sang Map 1 tile (42,2)
 			));
 	}
 	
@@ -94,6 +94,10 @@ public class GamePanel extends JPanel implements Runnable{
 		//System.out.println(player.worldX +" "+ player.worldY);
 		int playerCol = player.worldX/tileSize;
 		int playerRow = player.worldY/tileSize;
+		System.out.println(playerCol +" "+ playerRow);
+		if(playerCol == 4 && playerRow ==42) {
+			System.out.println("True!");
+		}
 		for (Teleport tp : teleportList) {
 	        if (num_CurrentMap == tp.fromMap &&
 	            playerCol == tp.fromCol &&
