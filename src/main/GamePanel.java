@@ -14,6 +14,7 @@ import map.Teleport;
 import java.util.*;
 public class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
+	private ProcessFrontBehindEntity processor;
 	final int originalTileSize = 16; // 16 x 16 
 	final int scale  = 3;
 	public final int tileSize = originalTileSize * scale; //48 x 48
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 			    2, 30, 10,  // từ Map 2 tile (30,10)
 			    1, 3, 40    // sang Map 1 tile (42,2)
 			));
+		processor = new ProcessFrontBehindEntity (maps[1].getLayer2(), player);
 	}
 	
 	public void startGameThread() {
@@ -119,8 +121,9 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		currentMap.draw(g2, 1);
-		player.draw(g2);
-		currentMap.draw(g2, 2);
+		processor.draw(this, g2);
+		//player.draw(g2);
+		//currentMap.draw(g2, 2);
 		g2.dispose();
 	}
 

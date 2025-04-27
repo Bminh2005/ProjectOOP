@@ -10,9 +10,12 @@ import main.GamePanel;
 
 public class MapTile {
 	private BufferedImage img;
+	private GamePanel gp;
 	private int height;
 	private int width;
+	
 	public MapTile(GamePanel gp, String path) {
+		this.gp = gp;
 		try {
 			this.img = ImageIO.read(getClass().getResourceAsStream(path));
 		} catch (IOException e) {
@@ -22,7 +25,15 @@ public class MapTile {
 		this.height = gp.tileSize;
 		this.width  = gp.tileSize;
 	}
+	
+	public int getHeight() {
+		return height;
+	}
+	public int getWidth() {
+		return width;
+	}
 	public MapTile(GamePanel gp, String path, int width, int height) {
+		this.gp = gp;
 		try {
 			this.img = ImageIO.read(getClass().getResourceAsStream(path));
 		} catch (IOException e) {
