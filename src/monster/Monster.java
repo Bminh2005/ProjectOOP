@@ -5,8 +5,9 @@ import main.GamePanel;
 
 public abstract class Monster extends Entity {
 
+	GamePanel gp;
     public Monster(GamePanel gp) {
-        super(gp);
+        this.gp = gp;
     }
 
     @Override
