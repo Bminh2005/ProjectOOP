@@ -25,6 +25,9 @@ public class Player extends Entity{
     private int attackType;
     private int comboAttackDelayTime;//don vi frames
     private boolean runningCountAttackDelay;
+    
+    
+    
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
@@ -46,6 +49,8 @@ public class Player extends Entity{
 		this.y = (gp.screenHeight/2) - (gp.tileSize/2);
 		this.playerAttack = new SpriteSheet[3];
 		this.runningCountAttackDelay = false;
+		this.height = gp.tileSize;
+		this.width = gp.tileSize * 53/40;
 		
     }
     public void getPlayerImage() {
@@ -231,10 +236,10 @@ public class Player extends Entity{
         	break;
         }
         if(flip) {
-        	g2.drawImage(image, x + gp.tileSize*53/40, y, -gp.tileSize*53/40, gp.tileSize, null);
+        	g2.drawImage(image, x + gp.tileSize*53/40, y, -this.width, this.height, null);
         }
         else {
-        	g2.drawImage(image, x, y, gp.tileSize*53/40, gp.tileSize, null);
+        	g2.drawImage(image, x, y, this.width, this.height, null);
         }
         // Display the player's current state as text
         //g2.setColor(Color.BLACK);

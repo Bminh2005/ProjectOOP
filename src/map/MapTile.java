@@ -29,7 +29,9 @@ public class MapTile {
 	public int getHeight() {
 		return height;
 	}
-
+	public int getWidth() {
+		return width;
+	}
 	public MapTile(GamePanel gp, String path, int width, int height) {
 		this.gp = gp;
 		try {

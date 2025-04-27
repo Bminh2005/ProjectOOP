@@ -14,6 +14,8 @@ public abstract class Entity {
 	public int hp;
 	public int mp;
 	public int speed;
+	public int width;
+	public int height;
 	public BufferedImage image;
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);

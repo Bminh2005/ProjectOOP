@@ -22,8 +22,11 @@ public class ProcessFrontBehindEntity {
 		int col = 0;
 		int row = 0;
 		int x, y;
+		int worldX, worldY;
 		entity.draw(g2);
 		while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
+			worldX = col*gp.tileSize;
+			worldY = row*gp.tileSize;
 			x = col*gp.tileSize - gp.player.worldX + gp.player.x;
 			y = row*gp.tileSize - gp.player.worldY + gp.player.y;
 			int tileNum = layer.layerTileNum[row][col];
@@ -31,7 +34,8 @@ public class ProcessFrontBehindEntity {
 				
 				if(x >= -2*gp.tileSize && x <= gp.screenWidth + 2*gp.tileSize &&
 						y >= -2* gp.tileSize && y <= gp.screenHeight + 2*gp.tileSize) {
-					if(entity.y + gp.tileSize< y + layer.tiles[tileNum].getHeight()) {
+					
+					if(entity.worldY + entity.height < worldY + layer.tiles[tileNum].getHeight()) {
 						layer.tiles[tileNum].draw(g2, x, y);
 					}
 					else {
