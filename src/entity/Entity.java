@@ -14,10 +14,19 @@ public class Entity {
 	public int hp;
 	public int mp;
 	public int speed;
+	public String name;
+	public int maxHp;
+	public int attack;
+	public int defense;
+	public int exp;
 	public int width;
 	public int height;
 	public BufferedImage image;
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	};
+	public void update()
+	{
+		
+	}
 }
