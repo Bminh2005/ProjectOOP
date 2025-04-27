@@ -25,6 +25,8 @@ public class Player extends Entity{
     private int frameCounter;
     private boolean flip;
     private int attackType;
+    private int comboAttackDelayTime;//don vi frames
+    private boolean runningCountAttackDelay;
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
@@ -41,9 +43,12 @@ public class Player extends Entity{
 		this.frameCounter = 0;
 		this.flip = false;
 		this.attackType = 0;
+		this.comboAttackDelayTime = 0;
 		this.x = (gp.screenWidth/2) - (gp.tileSize/2);
 		this.y = (gp.screenHeight/2) - (gp.tileSize/2);
 		this.playerAttack = new SpriteSheet[3];
+		this.runningCountAttackDelay = false;
+		
     }
     public void getPlayerImage() {
     	playerIdle = new SpriteSheet("/Player/IDLE.png", 672, 84, 7, 21, 23, 53, 40);
@@ -57,6 +62,12 @@ public class Player extends Entity{
     	playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
     }
     public void update() {
+    	if(this.runningCountAttackDelay) {
+    		this.comboAttackDelayTime++;
+    		if(this.comboAttackDelayTime == 20) {
+    			this.attackType = 0;
+    		}
+    	}
     	if(hp > 0) {
     	if(this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true || this.keyH.rightPressed == true) {
     		if(this.keyH.runPressed) {
@@ -68,9 +79,13 @@ public class Player extends Entity{
     		this.move();
     	}
     	else if(this.keyH.attackPressed == true) {
+    		this.runningCountAttackDelay = false;
+    		this.comboAttackDelayTime = 0;
     		this.attack();
     		if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
     			this.keyH.attackPressed = false;
+    			this.attackType = (this.attackType + 1)%3;
+    			this.runningCountAttackDelay = true;
     			this.idle();
     		}
     	}
@@ -171,7 +186,8 @@ public class Player extends Entity{
     		this.spriteNum = -1;
     		this.frameCounter = 0;
     	}
-    	this.worldX -= 1;
+    	if(this.flip) this.worldX += 1;
+    	else this.worldX -= 1;
     	System.out.println("HP = " + this.hp);
     	this.state = "HURT";
     	if(this.frameCounter%5 == 0) {
