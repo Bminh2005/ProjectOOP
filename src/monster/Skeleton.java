@@ -43,6 +43,18 @@ public class Skeleton extends Monster {
         //death
         skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 1152, 84, 12, 21, 23, 53, 40);
     }
+
+	public void setAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void checkDrop() {
+		// TODO Auto-generated method stub
+		
+	}
+}
+    /*
     public void setAction() {
         actionLockCounter++;
 
@@ -95,3 +107,4 @@ public void checkDrop() {
     }
   }
 }
+    */

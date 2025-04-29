@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map[] maps = new Map[maxMap];
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
+	public CollisionChecker cChecker;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
@@ -46,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		this.cChecker = new CollisionChecker(this);
 		maps[1] = MAP01;
 		maps[2]= MAP02;
 		currentMap = maps[1];
