@@ -20,21 +20,21 @@ public class MapLayer {
     }
     public void getImage(GamePanel gp) {
     	tiles[0] = null;
-    	tiles[1] = new MapTile(gp, "/tiles/grand.png");
-    	tiles[2] = new MapTile(gp, "/tiles/lane1.png");
-    	tiles[3] = new MapTile(gp, "/tiles/lane2.png");
-    	tiles[4] = new MapTile(gp, "/tiles/ngatu1.png");
-    	tiles[5] = new MapTile(gp, "/tiles/ngatu2.png");
-    	tiles[6] = new MapTile(gp, "/tiles/ngatu3.png");
-    	tiles[7] = new MapTile(gp, "/tiles/ngatu4.png");
-    	tiles[8] = new MapTile(gp, "/tiles/lane11.png");
-    	tiles[9] = new MapTile(gp, "/tiles/lane12.png");
-    	tiles[10] = new MapTile(gp, "/tiles/tree0.png", 48, 63);
-    	tiles[11] = new MapTile(gp, "/tiles/tree1.png");
-    	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 28, 45);
-    	tiles[13] = new MapTile(gp, "/tiles/rock1.png");
-    	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96);
-    	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
+    	tiles[1] = new MapTile(gp, "/tiles/grand.png", false);
+    	tiles[2] = new MapTile(gp, "/tiles/lane1.png", false);
+    	tiles[3] = new MapTile(gp, "/tiles/lane2.png", false);
+    	tiles[4] = new MapTile(gp, "/tiles/ngatu1.png", false);
+    	tiles[5] = new MapTile(gp, "/tiles/ngatu2.png", false);
+    	tiles[6] = new MapTile(gp, "/tiles/ngatu3.png", false);
+    	tiles[7] = new MapTile(gp, "/tiles/ngatu4.png", false);
+    	tiles[8] = new MapTile(gp, "/tiles/lane11.png", false);
+    	tiles[9] = new MapTile(gp, "/tiles/lane12.png", false);
+    	tiles[10] = new MapTile(gp, "/tiles/tree0.png", 48, 63, true);
+    	tiles[11] = new MapTile(gp, "/tiles/tree1.png", true);
+    	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 28, 45, true);
+    	tiles[13] = new MapTile(gp, "/tiles/rock1.png", true);
+    	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96, true);
+    	tiles[15] = new MapTile(gp, "/tiles/tile006.png", false);
     	//tiles[16] = new MapTile(gp,"tiles/hut.png");
     	/**
     	

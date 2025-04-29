@@ -152,22 +152,29 @@ public class Player extends Entity{
     	
     }
     public void move() {
-    	if(this.keyH.upPressed == true) {
-    		this.worldY -= this.speed;
-    		}
-    	if(this.keyH.downPressed == true) {
-    		this.worldY += this.speed;
-    		}
-    	if(this.keyH.leftPressed == true) {
-    		this.worldX -= this.speed;
-    		this.flip = true;
-    		}
-    	if(this.keyH.rightPressed == true) {
-    		this.worldX += this.speed;
-    		this.flip = false;
-    	   }
+    	boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width)*10/20 || this.worldX <= (gp.screenWidth - this.width)*10/20;
+    	boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height)*10/20 || this.worldY <= (gp.screenHeight - this.height)*10/20;
+	    if(this.keyH.upPressed == true) {
+	    	if(overy) this.y -= this.speed;
+	    	this.worldY -= this.speed;
+	    }
+	    if(this.keyH.downPressed == true) {
+	    	if(overy) this.y += this.speed;
+	    	this.worldY += this.speed;
+	    }
+	    if(this.keyH.leftPressed == true) {
+	    	if(overx) this.x -= this.speed;
+	    	this.worldX -= this.speed;
+	    	this.flip = true;
+	    }
+	    if(this.keyH.rightPressed == true) {
+	    	if(overx) this.x += this.speed;
+	    	this.worldX += this.speed;
+	    	this.flip = false;
+	    }
     	//System.out.println(this.worldX +" "+ this.worldY);
     }
+    
     public void attack() {
     	if(this.state.equals("ATTACKING") == false) {
     		this.spriteNum = -1;

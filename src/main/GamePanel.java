@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map[] maps = new Map[maxMap];
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
-	TempMap map  = new TempMap(Color.DARK_GRAY, this);
+	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
 	int FPS = 60;
