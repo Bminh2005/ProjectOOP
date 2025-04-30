@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
@@ -27,7 +28,6 @@ public class Player extends Entity{
     private boolean runningCountAttackDelay;
     
     
-    
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
@@ -51,7 +51,9 @@ public class Player extends Entity{
 		this.runningCountAttackDelay = false;
 		this.height = gp.tileSize;
 		this.width = gp.tileSize * 53/40;
-		
+		this.solidArea = new Rectangle(17, 23, 20, 17);
+		this.CollisionOn = false;
+		this.direction = "up";
     }
     public void getPlayerImage() {
     	playerIdle = new SpriteSheet("/Player/IDLE.png", 672, 84, 7, 21, 23, 53, 40);
@@ -65,6 +67,7 @@ public class Player extends Entity{
     	playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
     }
     public void update() {
+    	
     	if(this.runningCountAttackDelay) {
     		this.comboAttackDelayTime++;
     		if(this.comboAttackDelayTime == 20) {
@@ -152,22 +155,51 @@ public class Player extends Entity{
     	
     }
     public void move() {
+    	boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width)*10/20 || this.worldX <= (gp.screenWidth - this.width)*10/20;
+    	boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height)*10/20 || this.worldY <= (gp.screenHeight - this.height)*10/20;
     	if(this.keyH.upPressed == true) {
-    		this.worldY -= this.speed;
-    		}
-    	if(this.keyH.downPressed == true) {
-    		this.worldY += this.speed;
-    		}
-    	if(this.keyH.leftPressed == true) {
-    		this.worldX -= this.speed;
-    		this.flip = true;
-    		}
-    	if(this.keyH.rightPressed == true) {
-    		this.worldX += this.speed;
-    		this.flip = false;
-    	   }
-    	//System.out.println(this.worldX +" "+ this.worldY);
+	    	direction = "up";
+	    	this.CollisionOn = false;
+		    gp.cChecker.checkTile(this);
+	    	if(!this.CollisionOn) {
+	    	if(overy) this.y -= this.speed;
+	    	this.worldY -= this.speed;
+	    	}
+	    }
+	    if(this.keyH.downPressed == true) {
+	    	direction = "down";
+	    	this.CollisionOn = false;
+		    gp.cChecker.checkTile(this);
+	    	if(!this.CollisionOn) {
+	    	if(overy) this.y += this.speed;
+	    	this.worldY += this.speed;
+	    	}
+	    }
+	    if(this.keyH.leftPressed == true) {
+	    	direction = "left";
+	    	this.CollisionOn = false;
+		    gp.cChecker.checkTile(this);
+	    	if(!this.CollisionOn) {
+	    	if(overx) this.x -= this.speed;
+	    	this.worldX -= this.speed;
+	    	this.flip = true;
+	    	}
+	    	
+	    }
+	    if(this.keyH.rightPressed == true) {
+	    	direction = "right";
+	    	this.CollisionOn = false;
+		    gp.cChecker.checkTile(this);
+	    	if(!this.CollisionOn) {
+	    	if(overx) this.x += this.speed;
+	    	this.worldX += this.speed;
+	    	this.flip = false;
+	    	}
+	    }
+	    
     }
+    	//System.out.println(this.worldX +" "+ this.worldY);
+    
     public void attack() {
     	if(this.state.equals("ATTACKING") == false) {
     		this.spriteNum = -1;

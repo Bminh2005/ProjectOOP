@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
@@ -21,7 +22,10 @@ public class Entity {
 	public int exp;
 	public int width;
 	public int height;
+	public String direction;
+	public boolean CollisionOn;
 	public BufferedImage image;
+	public Rectangle solidArea;
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	};
