@@ -23,7 +23,7 @@ public class CollisionChecker {
 		int tileNum2;
 		switch(entity.direction) {
 		case "up":
-			entityTopRow = (entityTopWorldY-entity.speed)/gp.tileSize;
+			entityTopRow = (entityTopWorldY- 2*entity.speed)/gp.tileSize;
 			tileNum1 = gp.currentMap.getLayer2().layerTileNum[entityTopRow][entityLeftCol];
 			tileNum2 = gp.currentMap.getLayer2().layerTileNum[entityTopRow][entityRightCol];
 			if(tileNum1!= 0 || tileNum2 !=0) {

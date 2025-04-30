@@ -13,6 +13,20 @@ public class Player extends Entity{
 	KeyHandler keyH;
     int speed;
     public String state;
+    
+    //PLAYER'S SAITAMA
+    private float saitama;
+    private final float MAX_SAITAMA = 100f;
+    private final float MIN_SAITAMA_TO_RUN = 50f;
+    private final float SAITAMA_DECREASE_RATE = 20f;
+    private final float SAITAMA_RECOVER_RATE = 10f;
+    private boolean tired;
+    
+    private final int DEFAULT_SPEED = 3;
+    private final int TIRED_SPEED = 2;
+    private final int RUN_SPEED = 5; 
+    
+    //PLAYER'S IMAGE
     private SpriteSheet playerIdle;
     private SpriteSheet playerWalk;
     private SpriteSheet playerAttack[];
@@ -20,6 +34,8 @@ public class Player extends Entity{
     private SpriteSheet playerRun;
     private SpriteSheet playerDefend;
     private SpriteSheet playerDying;
+    
+    //PROCESS FRAMES
     private int spriteNum;
     private int frameCounter;
     private boolean flip;
@@ -34,7 +50,10 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
     }
+    
     public void setDefaultValues() {
+    	this.tired = false;
+    	this.saitama = MAX_SAITAMA;
     	this.hp = 100;
 		this.mp = 100;
 		this.state = "NORMAL";
@@ -67,7 +86,7 @@ public class Player extends Entity{
     	playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
     }
     public void update() {
-    	
+    	System.out.println("SAITAMA = " + this.saitama);
     	if(this.runningCountAttackDelay) {
     		this.comboAttackDelayTime++;
     		if(this.comboAttackDelayTime == 20) {
@@ -75,11 +94,18 @@ public class Player extends Entity{
     		}
     	}
     	if(hp > 0) {
-    	if(this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true || this.keyH.rightPressed == true) {
-    		if(this.keyH.runPressed) {
+    		
+    		if(this.state.equals("RUN") == false) {
+    			if(this.saitama < this.MAX_SAITAMA) this.saitama += this.SAITAMA_RECOVER_RATE*1f/60f;
+    		}
+    		if(this.saitama >= this.MIN_SAITAMA_TO_RUN) this.tired = false; 
+    		if(this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true || this.keyH.rightPressed == true) {
+    		if(this.saitama <= 0) this.tired = true;
+    		if(this.keyH.runPressed && this.tired == false) {	
     			this.run();
     		}
     		else {
+    			
     			this.walk();
     		}
     		this.move();
@@ -132,20 +158,31 @@ public class Player extends Entity{
     	if(this.state.equals("RUN") == false) {
     		this.spriteNum = this.playerRun.maxNumber -1;
     		this.frameCounter = 0;
-    		this.speed = 5;
+    		this.speed = this.RUN_SPEED;
     	}
     	System.out.println("Player is running!");
     	this.state ="RUN";
+    	if(this.saitama > 0) {
+    		this.saitama -= this.SAITAMA_DECREASE_RATE*1f/60f;
+    	}
+    	else {
+    		this.saitama = 0;
+    	}
+    	
     	if(this.frameCounter%5 == 0) {
     		this.spriteNum = (this.spriteNum + 1)%this.playerRun.maxNumber;
     	}
+    	
     	
     }
     public void walk() {
     	if(this.state.equals("WALK") == false) {
     		this.spriteNum = this.playerWalk.maxNumber - 1;
     		this.frameCounter = 0;
-    		this.speed = 3;
+    		this.speed = this.DEFAULT_SPEED;
+    	}
+    	if(this.tired) {
+    		this.speed = this.TIRED_SPEED;
     	}
     	System.out.println("Player is walking!");
     	this.state ="WALK";
