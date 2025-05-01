@@ -10,12 +10,9 @@ import javax.swing.JPanel;
 import entity.Player;
 import map.Map;
 import map.TempMap;
-<<<<<<< HEAD
 import monster.Monster;
-=======
 import monster.ChuDongTanCong;
 import monster.MonsterCube;
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 import map.Teleport;
 import java.util.*;
 public class GamePanel extends JPanel implements Runnable{
