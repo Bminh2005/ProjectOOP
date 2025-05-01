@@ -86,7 +86,8 @@ public class Player extends Entity{
     	playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
     }
     public void update() {
-    	System.out.println("SAITAMA = " + this.saitama);
+    	//System.out.println("SAITAMA = " + this.saitama);
+    	//System.out.println("SPEED = " + this.speed);
     	if(this.runningCountAttackDelay) {
     		this.comboAttackDelayTime++;
     		if(this.comboAttackDelayTime == 20) {
@@ -184,6 +185,7 @@ public class Player extends Entity{
     	if(this.tired) {
     		this.speed = this.TIRED_SPEED;
     	}
+    	else this.speed = this.DEFAULT_SPEED;
     	System.out.println("Player is walking!");
     	this.state ="WALK";
     	if(this.frameCounter%5 == 0) {
@@ -259,6 +261,7 @@ public class Player extends Entity{
     		this.spriteNum = -1;
     		this.frameCounter = 0;
     	}
+    	this.hp -= 5;
     	if(this.flip) this.worldX += 1;
     	else this.worldX -= 1;
     	System.out.println("HP = " + this.hp);

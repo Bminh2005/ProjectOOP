@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import entity.Player;
 import map.Map;
 import map.TempMap;
+import monster.ChuDongTanCong;
+import monster.MonsterCube;
 import map.Teleport;
 import java.util.*;
 public class GamePanel extends JPanel implements Runnable{
@@ -30,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public CollisionChecker cChecker;
+	public ChuDongTanCong QuaiVatTanCong;
+	MonsterCube cube;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
@@ -48,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable{
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
 		this.cChecker = new CollisionChecker(this);
+		this.QuaiVatTanCong = new ChuDongTanCong(this);
+		this.cube = new MonsterCube(this);
 		maps[1] = MAP01;
 		maps[2]= MAP02;
 		currentMap = maps[1];
@@ -95,6 +101,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		player.update();
+		cube.update();
 		//System.out.println(player.worldX +" "+ player.worldY);
 		int playerCol = player.worldX/tileSize;
 		int playerRow = player.worldY/tileSize;
@@ -127,6 +134,10 @@ public class GamePanel extends JPanel implements Runnable{
 		processor.draw(this, g2);
 		//currentMap.draw(g2, 2);
 		//player.draw(g2);
+		if(player.hp > 0) {
+			cube.draw(g2);
+		}
+		
 		g2.dispose();
 	}
 
