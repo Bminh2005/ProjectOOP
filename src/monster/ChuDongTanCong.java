@@ -23,7 +23,7 @@ public class ChuDongTanCong {
 				&& player.worldY <= monster.worldY + warZoneHeight/2
 				&& player.worldY >= monster.worldY - warZoneHeight/2
 				) {
-			tanCong = true;
+			tanCong = true; //Trạng thái đuổi bắt đầu
 		}
 		if(player.worldX < monster.worldX - safeZoneWidth/2
 				|| player.worldX > monster.worldX + safeZoneWidth/2
@@ -34,16 +34,16 @@ public class ChuDongTanCong {
 		
 		if(tanCong) {
 			if(monster.worldX < player.worldX - 15) {
-				monster.worldX += 3;
+				monster.worldX += 2; // += monster.speed
 			}
 			else if(monster.worldX > player.worldX + 15) {
-				monster.worldX -= 3;
+				monster.worldX -= 2;
 			}
 			if(monster.worldY < player.worldY - 10) {
-				monster.worldY += 3;
+				monster.worldY += 2;
 			}
 			else if(monster.worldY > player.worldY + 10) {
-				monster.worldY -= 3;
+				monster.worldY -= 2;
 			}
 		}
 	}
