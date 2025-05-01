@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import entity.Player;
 import map.Map;
 import map.TempMap;
+import monster.Monster;
 import map.Teleport;
 import java.util.*;
 public class GamePanel extends JPanel implements Runnable{
@@ -39,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxWorldRow = 50;
 	public final int maxWorldHeight = maxWorldRow * tileSize;
 	public final int maxWorldWidth = maxWorldRow * tileSize;
-	
+	public ArrayList<Monster> monsters = new ArrayList<>(); 
 	public Player player = new Player(this, keyH);
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));

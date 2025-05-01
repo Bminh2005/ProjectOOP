@@ -15,6 +15,10 @@ public abstract class Monster extends Entity {
         setAction();
         super.update(); // Cập nhật các hành động cơ bản
     }
+    public void takeDamage(int n) {
+    	this.hp -= n;
+    	if(this.hp < 0) this.hp =0;
+    }
 
     // Phuong thuc abstract cho hành động của quái vật
     public abstract void setAction();

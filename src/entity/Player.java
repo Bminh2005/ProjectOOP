@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import main.GamePanel;
 import main.KeyHandler;
 import main.SpriteSheet;
+import monster.Monster;
 
 public class Player extends Entity{
 	KeyHandler keyH;
@@ -49,6 +50,7 @@ public class Player extends Entity{
         this.gp = gp;
         setDefaultValues();
         getPlayerImage();
+        System.out.println(this.state);
     }
     
     public void setDefaultValues() {
@@ -282,7 +284,28 @@ public class Player extends Entity{
 		}
     	
     }
-    
+    public void checkAttackonMonster() {
+    	if(this.state.equals("ATTACKING")) {
+    		Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y, this.solidArea.width,this.solidArea.height);
+    		if (flip) attackzone.x -= 10;
+            else attackzone.x += 10;
+            attackzone.width += 10;
+            for(int i=0 ;i< gp.monsters.size();i++) {
+            	Monster m = gp.monsters.get(i);
+            	if (m != null && m.hp > 0) {
+                    Rectangle monsterArea = new Rectangle(
+                        m.worldX + m.solidArea.x,
+                        m.worldY + m.solidArea.y,
+                        m.solidArea.width,
+                        m.solidArea.height
+                    );
+                    if (attackzone.intersects(monsterArea)) {
+                        m.takeDamage(10);
+                    }
+            	}
+            }
+    	}
+    }
     public void draw(Graphics2D g2) {
         switch (state) {
         case "IDLE":
