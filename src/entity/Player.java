@@ -68,30 +68,32 @@ public class Player extends Entity{
     }
     
     public void setDefaultValues() {
-    	this.tired = false;
-    	this.saitama = MAX_SAITAMA;
-    	this.maxHp = 100;
-    	this.hp = this.maxHp;
-    	this.maxMp = 100;
-		this.mp = this.maxMp;
-		this.state = "NORMAL";
-		this.worldX = 24* gp.tileSize;
-		this.worldY = 24* gp.tileSize;
-		this.speed = 3;
-		this.level = 1;
-		this.frameCounter = 0;
-		this.flip = false;
-		this.attackType = 0;
-		this.comboAttackDelayTime = 0;
-		this.x = (gp.screenWidth/2) - (gp.tileSize/2);
-		this.y = (gp.screenHeight/2) - (gp.tileSize/2);
-		this.playerAttack = new SpriteSheet[3];
-		this.runningCountAttackDelay = false;
-		this.height = gp.tileSize;
-		this.width = gp.tileSize * 53/40;
-		this.solidArea = new Rectangle(17, 23, 32, 32);
-		this.CollisionOn = false;
-		this.direction = "up";
+    	tired = false;
+    	saitama = MAX_SAITAMA;
+    	maxHp = 100;
+    	hp = this.maxHp;
+    	maxMp = 100;
+		mp = this.maxMp;
+		attack = 10;
+		defense = 10;
+		speed = 3;
+		level = 1;
+		state = "NORMAL";
+		worldX = 24* gp.tileSize;
+		worldY = 24* gp.tileSize;
+		frameCounter = 0;
+		flip = false;
+		attackType = 0;
+		comboAttackDelayTime = 0;
+		x = (gp.screenWidth/2) - (gp.tileSize/2);
+		y = (gp.screenHeight/2) - (gp.tileSize/2);
+		playerAttack = new SpriteSheet[3];
+		runningCountAttackDelay = false;
+		height = gp.tileSize;
+		width = gp.tileSize * 53/40;
+		solidArea = new Rectangle(17, 23, 32, 32);
+		CollisionOn = false;
+		direction = "up";
     }
     public void getPlayerImage() {
     	playerIdle = new SpriteSheet("/Player/IDLE.png", 672, 84, 7, 21, 23, 53, 40);
