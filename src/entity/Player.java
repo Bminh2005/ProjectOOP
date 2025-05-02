@@ -295,6 +295,25 @@ public class Player extends Entity{
 		}
     	
     }
+    public void contactMonster(int i)
+	{
+		if(i != 999)
+		{
+			if(invincible == false && gp.monster[i].dying == false)
+			{
+				
+				
+				int damage = gp.monster[i].attack - defense;
+				if(damage < 0)
+				{
+					damage = 0;
+				}
+				hp -= damage;
+				invincible = true;
+			}
+			
+		}
+	}
     public void checkAttackonMonster() {
     	if(this.state.equals("ATTACKING")) {
     		Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y, this.solidArea.width,this.solidArea.height);
