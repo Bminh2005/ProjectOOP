@@ -1,0 +1,56 @@
+package main;
+
+import monster.Slime;
+
+public class AssetSetter {
+	
+	GamePanel gp;
+	
+	public AssetSetter(GamePanel gp)
+	{
+		this.gp = gp;
+	}
+	
+	public void setObject()
+	{
+		
+	}
+	
+	public void setNPC()
+	{
+		
+	}
+	
+	public void setMonster()
+	{
+		int i = 0;
+		gp.monster[i] = new Slime(gp);
+		gp.monster[i].worldX = gp.tileSize*18;
+		gp.monster[i].worldY = gp.tileSize*24;
+		i++;
+		//gp.monster[i] = new Slime(gp);
+		//gp.monster[i].worldX = gp.tileSize*20;
+		//gp.monster[i].worldY = gp.tileSize*24;
+		//i++;
+		//gp.monster[i] = new Slime(gp);
+		//gp.monster[i].worldX = gp.tileSize*26;
+		//gp.monster[i].worldY = gp.tileSize*24;
+		//i++;
+		//gp.monster[i] = new Slime(gp);
+		//gp.monster[i].worldX = gp.tileSize*24;
+		//gp.monster[i].worldY = gp.tileSize*22;
+		//i++;
+		//gp.monster[i] = new Slime(gp);
+		//gp.monster[i].worldX = gp.tileSize*24;
+		//gp.monster[i].worldY = gp.tileSize*27;
+		//i++;
+
+	}
+	public void setInteractiveTile()
+	{
+		
+		
+	
+		
+	}
+}

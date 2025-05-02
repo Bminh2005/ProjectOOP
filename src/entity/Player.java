@@ -48,6 +48,14 @@ public class Player extends Entity{
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
+		//SOLID AREA
+		solidArea = new Rectangle();
+		solidArea.x = 8;
+		solidArea.y = 16;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
+		solidArea.width = 32;
+		solidArea.height = 32;
         setDefaultValues();
         getPlayerImage();
         System.out.println(this.state);
@@ -72,7 +80,7 @@ public class Player extends Entity{
 		this.runningCountAttackDelay = false;
 		this.height = gp.tileSize;
 		this.width = gp.tileSize * 53/40;
-		this.solidArea = new Rectangle(17, 23, 20, 17);
+		this.solidArea = new Rectangle(17, 23, 32, 32);
 		this.CollisionOn = false;
 		this.direction = "up";
     }
@@ -117,6 +125,7 @@ public class Player extends Entity{
     		this.runningCountAttackDelay = false;
     		this.comboAttackDelayTime = 0;
     		this.attack();
+    		checkAttackonMonster();
     		if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
     			this.keyH.attackPressed = false;
     			this.attackType = (this.attackType + 1)%3;
@@ -188,7 +197,7 @@ public class Player extends Entity{
     		this.speed = this.TIRED_SPEED;
     	}
     	else this.speed = this.DEFAULT_SPEED;
-    	System.out.println("Player is walking!");
+    	//System.out.println("Player is walking!");
     	this.state ="WALK";
     	if(this.frameCounter%5 == 0) {
     		this.spriteNum = (this.spriteNum + 1)%this.playerWalk.maxNumber;
@@ -246,7 +255,7 @@ public class Player extends Entity{
     		this.spriteNum = -1;
     		this.frameCounter = 0;
     	}
-    	System.out.println("Player is attacking!");
+    	//System.out.println("Player is attacking!");
 		this.state = "ATTACKING";
 		if(this.frameCounter%20 == 0) {
 			if(flip) this.worldX -= 1;
@@ -288,13 +297,15 @@ public class Player extends Entity{
     	
     }
     public void checkAttackonMonster() {
+    	 int range = 48;
     	if(this.state.equals("ATTACKING")) {
-    		Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y, this.solidArea.width,this.solidArea.height);
-    		if (flip) attackzone.x -= 10;
-            else attackzone.x += 10;
-            attackzone.width += 10;
-            for(int i=0 ;i< gp.monsters.size();i++) {
-            	Monster m = gp.monsters.get(i);
+    		Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y, this.solidArea.width, this.solidArea.height);
+    		if (flip) attackzone.x -= range;
+            else attackzone.x += range;
+            attackzone.width += range;
+            System.out.println(attackzone.x +" " + attackzone.y+ " "+ attackzone.width +" "+ attackzone.height);
+            for(int i=0 ;i< gp.monster.length;i++) {
+            	Monster m = gp.monster[i];
             	if (m != null && m.hp > 0) {
                     Rectangle monsterArea = new Rectangle(
                         m.worldX + m.solidArea.x,
@@ -302,8 +313,11 @@ public class Player extends Entity{
                         m.solidArea.width,
                         m.solidArea.height
                     );
+                    System.out.println(monsterArea.x +" " + monsterArea.y);
+                    //System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width +" "+ monsterArea.height);
                     if (attackzone.intersects(monsterArea)) {
-                        m.takeDamage(10);
+                    	System.out.println("Monster is attacked!");
+                       // m.takeDamage(10);
                     }
             	}
             }
