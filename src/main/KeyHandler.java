@@ -165,10 +165,6 @@ public class KeyHandler implements KeyListener{
 		{
 			enterPressed = true;
 		}
-		if(code == KeyEvent.VK_F)
-		{
-			shotKeyPressed = true;
-		}
 		if(code == KeyEvent.VK_ESCAPE)
 		{
 			gp.gameState = gp.optionsState;
@@ -183,29 +179,6 @@ public class KeyHandler implements KeyListener{
             diePressed = true;
 		if (code == KeyEvent.VK_SHIFT) {
 			runPressed = true;
-		}
-		
-		//DEBUG CHARACTER POSITION
-		if(code == KeyEvent.VK_T)
-		{
-			if(showDebugText == false)
-			{
-				showDebugText = true;
-			}
-			else if(showDebugText == true)
-			{
-				showDebugText = false;
-			}
-		}
-		//DEBUG LOAD MAP
-		if(code == KeyEvent.VK_R)
-		{
-			switch(gp.currentMap)
-			{
-			case 0: gp.tileM.loadMap("/maps/worldV3.txt", 0); break;
-			case 1: gp.tileM.loadMap("/maps/interior01.txt", 1); break;
-			}
-			
 		}
 	}
 	public void pauseState(int code)
