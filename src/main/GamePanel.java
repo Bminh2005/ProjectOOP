@@ -39,6 +39,15 @@ public class GamePanel extends JPanel implements Runnable{
 	public CollisionChecker cChecker;
 	public ChuDongTanCong QuaiVatTanCong;
 	MonsterCube cube;
+	//GAME STATE
+	public int gameState;
+	public final int titleState = 0;
+	public final int playState = 1;
+	public final int pauseState = 2;
+	public final int dialogueState = 3;
+	public final int characterState = 4;
+	public final int optionsState = 5;
+	public final int gameOverState = 6;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");

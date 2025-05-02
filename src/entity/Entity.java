@@ -13,6 +13,8 @@ import main.UtilityTool;
 public class Entity {
 	GamePanel gp;
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public BufferedImage image, image2, image3;
+	public String description = "";
 	
 	//Position
 	public int worldX, worldY;
@@ -28,9 +30,13 @@ public class Entity {
 	public int speed;
 	public String name;
 	public int maxHp;
+	public int maxMp;
 	public int attack;
 	public int defense;
 	public int exp;
+	public int level;
+	public Entity currentWeapon;
+	public Entity currentShield;
 	
 	//State
 	public boolean alive = true;
@@ -41,7 +47,6 @@ public class Entity {
 	public int type;
 	public int type_monster = 1;
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public BufferedImage image;
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	
 	//Counter

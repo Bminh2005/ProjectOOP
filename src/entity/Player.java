@@ -4,16 +4,20 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import main.GamePanel;
 import main.KeyHandler;
 import main.SpriteSheet;
 import monster.Monster;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 
 public class Player extends Entity{
 	KeyHandler keyH;
     int speed;
     public String state;
+    public ArrayList<Entity> inventory = new ArrayList<>();
     
     //PLAYER'S SAITAMA
     private float saitama;
@@ -58,6 +62,8 @@ public class Player extends Entity{
 		solidArea.height = 32;
         setDefaultValues();
         getPlayerImage();
+        currentWeapon = new OBJ_Sword_Normal(gp);
+		currentShield = new OBJ_Shield_Wood(gp);
         System.out.println(this.state);
     }
     
@@ -70,6 +76,7 @@ public class Player extends Entity{
 		this.worldX = 24* gp.tileSize;
 		this.worldY = 24* gp.tileSize;
 		this.speed = 3;
+		this.level = 1;
 		this.frameCounter = 0;
 		this.flip = false;
 		this.attackType = 0;
@@ -342,6 +349,13 @@ public class Player extends Entity{
             }
     	}
     }
+    public void setItems()
+	{
+		inventory.clear();
+		inventory.add(currentWeapon);
+		inventory.add(currentShield);
+		inventory.add(new OBJ_Key(gp));
+	}
     public void draw(Graphics2D g2) {
         switch (state) {
         case "IDLE":
