@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
 	public AssetSetter aSetter = new AssetSetter(this);
+	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
 	public ChuDongTanCong QuaiVatTanCong;
 	MonsterCube cube;

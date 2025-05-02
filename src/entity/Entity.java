@@ -35,6 +35,7 @@ public class Entity {
 	public int defense;
 	public int exp;
 	public int level;
+	public int value;
 	public Entity currentWeapon;
 	public Entity currentShield;
 	
@@ -44,8 +45,6 @@ public class Entity {
 	public boolean invincible = false;
 	public boolean hpBarOn = false;
 	public boolean CollisionOn = false;
-	public int type;
-	public int type_monster = 1;
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	
@@ -56,9 +55,29 @@ public class Entity {
 	public int shotAvailableCounter = 0;
 	public int dyingCounter = 0;
 	public int hpBarCounter = 0;
+	
+	//TYPE
+	public int type; // 0 = player, 1 = npc, 2 = monster
+	public final int type_player = 0;
+	public final int type_npc = 1;
+	public final int type_monster = 2;
+	public final int type_sword = 3;
+	public final int type_axe = 4;
+	public final int type_shield = 5;
+	public final int type_consumable = 6;
+	public final int type_pickUpOnly = 7;
+	
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	};
+	public Entity(GamePanel gp)
+	{
+		this.gp = gp;
+	}
+	public void update()
+	{
+		
+	}
 	public BufferedImage setup(String imagePath, int width, int height)
 	{
 		
@@ -76,9 +95,5 @@ public class Entity {
 			e.printStackTrace();
 		}
 		return image;
-	}
-	public void update()
-	{
-		
 	}
 }

@@ -50,8 +50,8 @@ public class Player extends Entity{
     
     
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.keyH = keyH;
-        this.gp = gp;
+        super(gp);
+    	this.keyH = keyH;
 		//SOLID AREA
 		solidArea = new Rectangle();
 		solidArea.x = 8;
@@ -355,6 +355,32 @@ public class Player extends Entity{
 		inventory.add(currentWeapon);
 		inventory.add(currentShield);
 //		inventory.add(new OBJ_Key(gp));
+	}
+    public void selectItem()
+	{
+		int itemIndex = gp.ui.getItemIndexOnSlot();
+		
+		if(itemIndex < inventory.size())
+		{
+			Entity selectedItem = inventory.get(itemIndex);
+			
+			if(selectedItem.type == type_sword || selectedItem.type == type_axe)
+			{
+				currentWeapon = selectedItem;
+//				attack = getAttack();
+//				getPlayerAttackImage();
+			}
+			if(selectedItem.type == type_shield)
+			{
+				currentShield = selectedItem;
+//				defense = getDefense();
+			}
+			if(selectedItem.type == type_consumable)
+			{
+//				selectedItem.use(this);
+				inventory.remove(itemIndex);
+			}
+		}
 	}
     public void draw(Graphics2D g2) {
         switch (state) {
