@@ -316,7 +316,7 @@ public class Player extends Entity{
 		}
 	}
     public void checkAttackonMonster() {
-    	 int range = 48;
+    	 int range = 10;
     	if(this.state.equals("ATTACKING")) {
     		Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y, this.solidArea.width, this.solidArea.height);
     		if (flip) attackzone.x -= range;
