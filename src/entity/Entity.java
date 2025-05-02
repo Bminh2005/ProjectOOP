@@ -37,10 +37,10 @@ public class Entity {
 	public boolean dying = false;
 	public boolean invincible = false;
 	public boolean hpBarOn = false;
+	public boolean CollisionOn = false;
 	public int type;
 	public int type_monster = 1;
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public boolean CollisionOn = false;
 	public BufferedImage image;
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	
