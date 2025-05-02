@@ -332,24 +332,24 @@ public class KeyHandler implements KeyListener{
 		}
 		if(code == KeyEvent.VK_ENTER)
 		{
-//			if(gp.ui.commandNum == 0)
-//			{
-//				gp.gameState = gp.playState;
-//				gp.retry();
+			if(gp.ui.commandNum == 0)
+			{
+				gp.gameState = gp.playState;
+				gp.retry();
 //				gp.playMusic(0);
-//			}
-//			else if(gp.ui.commandNum == 1)
-//			{
-//				gp.gameState = gp.titleState;
-//				gp.restart();
-//			}
+			}
+			else if(gp.ui.commandNum == 1)
+			{
+				gp.gameState = gp.titleState;
+				gp.restart();
+			}
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-int code = e.getKeyCode();
+		int code = e.getKeyCode();
 		
 		if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)
 		{
@@ -368,17 +368,17 @@ int code = e.getKeyCode();
 			rightPressed = false;
 		}
 	            
-	        if (code == KeyEvent.VK_I) {
-	        	//damagePressed = false;
-	        }
+	    if (code == KeyEvent.VK_I) {
+	    	damagePressed = false;
+	    }
 	            
-	        if (code == KeyEvent.VK_K) {
-	        	diePressed = false;
-	        }
+	    if (code == KeyEvent.VK_K) {
+	        diePressed = false;
+	    }
 	        
-	        if (code == KeyEvent.VK_SHIFT) {
-				runPressed = false;
-			}
+	    if (code == KeyEvent.VK_SHIFT) {
+			runPressed = false;
+		}
 		
 	}
 

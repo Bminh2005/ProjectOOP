@@ -88,6 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
 	{
 //		aSetter.setObject();
 //		aSetter.setNPC();
+		player.setItems();
 		aSetter.setMonster();
 //		aSetter.setInteractiveTile();
 //		playMusic(0);
@@ -103,7 +104,22 @@ public class GamePanel extends JPanel implements Runnable{
 //		}
 		
 	}
-	
+	public void retry()
+	{
+		player.setDefaultPositions();
+		player.restoreLifeAndMana();
+		aSetter.setNPC();
+		aSetter.setMonster();
+	}
+	public void restart()
+	{ 
+		player.setDefaultValues();
+		player.setItems();
+//		aSetter.setObject();
+//		aSetter.setNPC();
+		aSetter.setMonster();
+//		aSetter.setInteractiveTile();
+	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();

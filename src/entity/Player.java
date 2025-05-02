@@ -68,6 +68,7 @@ public class Player extends Entity{
     }
     
     public void setDefaultValues() {
+    	//Status
     	tired = false;
     	saitama = MAX_SAITAMA;
     	maxHp = 100;
@@ -79,11 +80,17 @@ public class Player extends Entity{
 		speed = 3;
 		level = 1;
 		state = "NORMAL";
+		attackType = 0;
+		exp = 0;
+		coin = 0;
+		nextLevel = level + 1;
+		//Position
 		worldX = 24* gp.tileSize;
 		worldY = 24* gp.tileSize;
 		frameCounter = 0;
 		flip = false;
-		attackType = 0;
+		
+		//Attributes
 		comboAttackDelayTime = 0;
 		x = (gp.screenWidth/2) - (gp.tileSize/2);
 		y = (gp.screenHeight/2) - (gp.tileSize/2);
@@ -297,6 +304,7 @@ public class Player extends Entity{
     	if(this.state.equals("DYING") == false) {
     		this.spriteNum = -1;
     		this.frameCounter = 0;
+    		gp.gameState = gp.gameOverState;
     	}
     	System.out.println("Player is died!");
     	this.state = "DYING";
@@ -353,6 +361,18 @@ public class Player extends Entity{
             }
     	}
     }
+    public void setDefaultPositions()
+	{
+		worldX = gp.tileSize * 23;
+		worldY = gp.tileSize * 21;
+		direction = "down";
+	}
+	public void restoreLifeAndMana()
+	{
+		hp = maxHp;
+		mp = maxMp;
+		invincible = false;
+	}
     public void setItems()
 	{
 		inventory.clear();

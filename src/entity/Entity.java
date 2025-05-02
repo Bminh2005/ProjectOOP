@@ -35,7 +35,9 @@ public class Entity {
 	public int defense;
 	public int exp;
 	public int level;
+	public int nextLevel;
 	public int value;
+	public int coin;
 	public Entity currentWeapon;
 	public Entity currentShield;
 	
