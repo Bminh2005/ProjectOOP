@@ -5,7 +5,7 @@ import entity.Player;
 import main.GamePanel;
 
 public class ChuDongTanCong {
-	private GamePanel gp;
+	GamePanel gp;
 	
 	public ChuDongTanCong(GamePanel gp) {
 		this.gp = gp;

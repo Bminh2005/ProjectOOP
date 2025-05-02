@@ -14,7 +14,7 @@ public abstract class Monster extends Entity {
 	
 	GamePanel gp;
     public Monster(GamePanel gp) {
-        super(gp);
+        this.gp = gp;
         solidArea.x = 3;
     	solidArea.y = 18;
     	solidArea.width = 42;

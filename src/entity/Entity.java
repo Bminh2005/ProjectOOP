@@ -70,10 +70,6 @@ public class Entity {
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	};
-	public Entity(GamePanel gp)
-	{
-		this.gp = gp;
-	}
 	public void update()
 	{
 		
