@@ -9,6 +9,10 @@ public class KeyHandler implements KeyListener{
 	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 	public boolean attackPressed, damagePressed, diePressed;
 	public boolean runPressed;
+	public KeyHandler(GamePanel gp)
+	{
+		this.gp = gp;
+	}
 	public void keyPressed(KeyEvent e) {
 		
 		int code = e.getKeyCode();
@@ -345,19 +349,24 @@ public class KeyHandler implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		 int code = e.getKeyCode(); // Get the key code of the released key
-	        if (code == KeyEvent.VK_W) {
-	            upPressed = false; // Set upPressed to false if 'W' is released
-	        }
-	        if (code == KeyEvent.VK_S) {
-	            downPressed = false; // Set downPressed to false if 'S' is released
-	        }
-	        if (code == KeyEvent.VK_A) {
-	            leftPressed = false; // Set leftPressed to false if 'A' is released
-	        }
-	        if (code == KeyEvent.VK_D) {
-	            rightPressed = false; // Set rightPressed to false if 'D' is released
-	        }
+int code = e.getKeyCode();
+		
+		if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP)
+		{
+			upPressed = false;
+		}
+		if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT)
+		{
+			leftPressed = false;
+		}
+		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
+		{
+			downPressed = false;
+		}
+		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
+		{
+			rightPressed = false;
+		}
 	            
 	        if (code == KeyEvent.VK_I) {
 	        	//damagePressed = false;

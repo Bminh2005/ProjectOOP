@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Monster monster[] = new Monster[20];
-	KeyHandler keyH = new KeyHandler();
+	public KeyHandler keyH = new KeyHandler(this);
 	Thread gameThread;
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
@@ -135,34 +135,41 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	public void update() {
-		
-		player.update();
-		for(int i = 0; i < monster.length; i++)
+		if(gameState == playState)
 		{
-			if(monster[i] != null)
+			player.update();
+			for(int i = 0; i < monster.length; i++)
 			{
-				monster[i].update();
+				if(monster[i] != null)
+				{
+					monster[i].update();
+				}
+			}
+			cube.update();
+			//System.out.println(player.worldX +" "+ player.worldY);
+			int playerCol = player.worldX/tileSize;
+			int playerRow = player.worldY/tileSize;
+			//System.out.println(playerCol +" "+ playerRow);
+			if(playerCol == 4 && playerRow ==42) {
+				System.out.println("True!");
+			}
+			processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
+			for (Teleport tp : teleportList) {
+		        if (num_CurrentMap == tp.fromMap &&
+		            playerCol == tp.fromCol &&
+		            playerRow == tp.fromRow) {
+		            
+		            Teleport(tp.toMap, tp.toCol, tp.toRow);
+		            break;
+		        }
 			}
 		}
-		cube.update();
-		//System.out.println(player.worldX +" "+ player.worldY);
-		int playerCol = player.worldX/tileSize;
-		int playerRow = player.worldY/tileSize;
-		//System.out.println(playerCol +" "+ playerRow);
-		if(playerCol == 4 && playerRow ==42) {
-			System.out.println("True!");
+		if(gameState == pauseState)
+		{
+			//nothing
 		}
-		processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
-		for (Teleport tp : teleportList) {
-	        if (num_CurrentMap == tp.fromMap &&
-	            playerCol == tp.fromCol &&
-	            playerRow == tp.fromRow) {
-	            
-	            Teleport(tp.toMap, tp.toCol, tp.toRow);
-	            break;
-	        }
-		}
-//		monster[0].update();
+		
+
 	}
 	public void Teleport(int targetmap, int col, int row ) {
 		num_CurrentMap = targetmap;
@@ -188,6 +195,8 @@ public class GamePanel extends JPanel implements Runnable{
 				monster[i].draw(g2);
 			}
 		}
+		//UI
+		ui.draw(g2);
 		
 		g2.dispose();
 	}
