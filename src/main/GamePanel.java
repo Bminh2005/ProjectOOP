@@ -127,6 +127,13 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		
 		player.update();
+		for(int i = 0; i < monster.length; i++)
+		{
+			if(monster[i] != null)
+			{
+				monster[i].update();
+			}
+		}
 		cube.update();
 		//System.out.println(player.worldX +" "+ player.worldY);
 		int playerCol = player.worldX/tileSize;

@@ -34,7 +34,7 @@ public class Entity {
 	public String direction;
 	public boolean CollisionOn = false;
 	public BufferedImage image;
-	public Rectangle solidArea;
+	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	
 	//Counter
 	public int spriteCounter = 0;

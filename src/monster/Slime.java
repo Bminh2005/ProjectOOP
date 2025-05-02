@@ -41,22 +41,22 @@ public class Slime extends Monster {
     }
 
     public void setAction() {
-//        actionLockCounter++;
-//        if (actionLockCounter == 120) {
-//            Random random = new Random();
-//            int i = random.nextInt(100) + 1;
-//
-//            if (i <= 25) {
-//                direction = "up";
-//            } else if (i <= 50) {
-//                direction = "down";
-//            } else if (i <= 75) {
-//                direction = "left";
-//            } else {
-//                direction = "right";
-//            }
-//            actionLockCounter = 0;
-//        }
+        actionLockCounter++;
+        if (actionLockCounter == 120) {
+            Random random = new Random();
+            int i = random.nextInt(100) + 1;
+
+            if (i <= 25) {
+                direction = "up";
+            } else if (i <= 50) {
+                direction = "down";
+            } else if (i <= 75) {
+                direction = "left";
+            } else {
+                direction = "right";
+            }
+            actionLockCounter = 0;
+        }
 //
 //        int i = new Random().nextInt(100) + 1;
 //        if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
