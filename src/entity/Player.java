@@ -70,8 +70,10 @@ public class Player extends Entity{
     public void setDefaultValues() {
     	this.tired = false;
     	this.saitama = MAX_SAITAMA;
-    	this.hp = 100;
-		this.mp = 100;
+    	this.maxHp = 100;
+    	this.hp = this.maxHp;
+    	this.maxMp = 100;
+		this.mp = this.maxMp;
 		this.state = "NORMAL";
 		this.worldX = 24* gp.tileSize;
 		this.worldY = 24* gp.tileSize;
