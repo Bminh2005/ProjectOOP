@@ -48,6 +48,14 @@ public class Player extends Entity{
     public Player(GamePanel gp, KeyHandler keyH) {
         this.keyH = keyH;
         this.gp = gp;
+		//SOLID AREA
+		solidArea = new Rectangle();
+		solidArea.x = 8;
+		solidArea.y = 16;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
+		solidArea.width = 32;
+		solidArea.height = 32;
         setDefaultValues();
         getPlayerImage();
         System.out.println(this.state);

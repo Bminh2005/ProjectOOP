@@ -104,4 +104,45 @@ public class CollisionChecker {
 			break;
 		}
 	}
+	public boolean checkPlayer(Entity entity)
+	{
+		boolean contactPlayer = false;
+		
+		//Get entity's solid area position
+		entity.solidArea.x = entity.worldX + entity.solidArea.x;
+		entity.solidArea.y = entity.worldY + entity.solidArea.y;
+		
+		// Get the object's solid area position
+		gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
+		gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+		
+		switch(entity.direction)
+		{
+		case "up":
+			entity.solidArea.y -= entity.speed;
+			break;
+		case "down":
+			entity.solidArea.y += entity.speed;
+			break;
+		case "left":
+			entity.solidArea.x -= entity.speed;
+			break;
+		case "right":
+			entity.solidArea.x += entity.speed;
+			break;
+		}
+		if(entity.solidArea.intersects(gp.player.solidArea))
+		{
+			entity.CollisionOn = true;
+			contactPlayer = true;
+		}
+		
+		
+		entity.solidArea.x = entity.solidAreaDefaultX;
+		entity.solidArea.y = entity.solidAreaDefaultY;
+		gp.player.solidArea.x = gp.player.solidAreaDefaultX;
+		gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+	
+		return contactPlayer;
+	}
 }

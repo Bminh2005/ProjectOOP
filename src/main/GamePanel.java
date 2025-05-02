@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import map.Map;
 import map.TempMap;
@@ -30,8 +32,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public int maxMap = 3;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
+	public Monster monster[] = new Monster[20];
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
+	public AssetSetter aSetter = new AssetSetter(this);
 	public CollisionChecker cChecker;
 	public ChuDongTanCong QuaiVatTanCong;
 	MonsterCube cube;
@@ -67,6 +71,27 @@ public class GamePanel extends JPanel implements Runnable{
 			    1, 3, 40    // sang Map 1 tile (42,2)
 			));
 		processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
+		setupGame();
+	}
+	
+	public void setupGame()
+	{
+//		aSetter.setObject();
+//		aSetter.setNPC();
+		aSetter.setMonster();
+//		aSetter.setInteractiveTile();
+//		playMusic(0);
+//		stopMusic();
+//		gameState = titleState;
+//		
+//		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+//		g2 = (Graphics2D)tempScreen.getGraphics();
+//		
+//		if(fullScreenOn == true)
+//		{
+//			setFullScreen();
+//		}
+		
 	}
 	
 	public void startGameThread() {
@@ -120,6 +145,7 @@ public class GamePanel extends JPanel implements Runnable{
 	            break;
 	        }
 		}
+//		monster[0].update();
 	}
 	public void Teleport(int targetmap, int col, int row ) {
 		num_CurrentMap = targetmap;
@@ -137,6 +163,13 @@ public class GamePanel extends JPanel implements Runnable{
 		//player.draw(g2);
 		if(player.hp > 0) {
 			cube.draw(g2);
+		}
+		for(int i = 0; i < monster.length; i++)
+		{
+			if(monster[i] != null)
+			{
+				monster[i].draw(g2);
+			}
 		}
 		
 		g2.dispose();

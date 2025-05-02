@@ -18,10 +18,6 @@ public class AssetSetter {
 	
 	public void setNPC()
 	{
-		int mapNum = 0;
-		int i = 0;
-		
-		
 		
 	}
 	

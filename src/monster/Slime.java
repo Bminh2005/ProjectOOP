@@ -2,10 +2,7 @@ package monster;
 
 import entity.Entity;
 import main.GamePanel;
-//import object.OBJ_Coin_Bronze;
-//import object.OBJ_Heart;
-//import object.OBJ_ManaCrystal;
-//import object.OBJ_Rock;
+
 
 import java.util.Random;
 
@@ -17,6 +14,8 @@ public class Slime extends Monster {
 
         // Thông tin quái vật
         name = "Green Slime";
+        direction = "up";
+        type = type_monster;
         speed = 1;
         maxHp = 5;
         hp = maxHp;
@@ -31,14 +30,14 @@ public class Slime extends Monster {
     }
 
     public void getImage() {
-//        up1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-//        up2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-//        down1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-//        down2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-//        left1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-//        left2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-//        right1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-//        right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {
