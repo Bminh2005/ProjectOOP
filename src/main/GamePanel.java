@@ -23,8 +23,8 @@ public class GamePanel extends JPanel implements Runnable{
 	final int originalTileSize = 16; // 16 x 16 
 	final int scale  = 3;
 	public final int tileSize = originalTileSize * scale; //48 x 48
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 9;
+	public final int maxScreenCol = 20;
+	public final int maxScreenRow = 12;
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
 	public ArrayList<Teleport> teleportList = new ArrayList<>();
