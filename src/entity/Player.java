@@ -34,7 +34,7 @@ public class Player extends Entity{
     //PLAYER'S IMAGE
     private SpriteSheet playerIdle;
     private SpriteSheet playerWalk;
-    private SpriteSheet playerAttack[];
+    public SpriteSheet playerAttack[];
     private SpriteSheet playerHurt;
     private SpriteSheet playerRun;
     private SpriteSheet playerDefend;
