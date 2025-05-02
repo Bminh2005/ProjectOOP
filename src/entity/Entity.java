@@ -13,10 +13,16 @@ import main.UtilityTool;
 public class Entity {
 	GamePanel gp;
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-	public int worldX;
-	public int worldY;
+	
+	//Position
+	public int worldX, worldY;
+	public String direction = "down";
 	public int x;
 	public int y;
+	public int width;
+	public int height;
+	
+	//Character attributes
 	public int hp;
 	public int mp;
 	public int speed;
@@ -25,14 +31,16 @@ public class Entity {
 	public int attack;
 	public int defense;
 	public int exp;
-	public int width;
-	public int height;
+	
+	//State
+	public boolean alive = true;
+	public boolean dying = false;
 	public boolean invincible = false;
+	public boolean hpBarOn = false;
+	public boolean CollisionOn = false;
 	public int type;
 	public int type_monster = 1;
 	public int solidAreaDefaultX, solidAreaDefaultY;
-	public String direction;
-	public boolean CollisionOn = false;
 	public BufferedImage image;
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	
@@ -41,8 +49,8 @@ public class Entity {
 	public int actionLockCounter = 0;
 	public int invincibleCounter = 0;
 	public int shotAvailableCounter = 0;
-	int dyingCounter = 0;
-	int hpBarCounter = 0;
+	public int dyingCounter = 0;
+	public int hpBarCounter = 0;
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	};

@@ -22,9 +22,7 @@ public class Slime extends Monster {
         attack = 5;
         defense = 0;
         exp = 2;
-        //projectile = new OBJ_Rock(gp);
-
-        //solidArea.setBounds(3, 18, 42, 30); // Cập nhật vung va cham
+        
 
         getImage(); // Lấy ảnh cho quái vật
     }
