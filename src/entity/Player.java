@@ -143,7 +143,11 @@ public class Player extends Entity{
     		this.runningCountAttackDelay = false;
     		this.comboAttackDelayTime = 0;
     		this.attack();
-    		checkAttackonMonster();
+    		System.out.println(this.spriteNum);
+    		if(this.state.equals("ATTACKING") && this.spriteNum == 3 && this.frameCounter%4 == 0) {
+    			this.checkAttackonMonster();
+    		}
+    		
     		if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
     			this.keyH.attackPressed = false;
     			this.attackType = (this.attackType + 1)%3;
@@ -355,7 +359,7 @@ public class Player extends Entity{
                     //System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width +" "+ monsterArea.height);
                     if (attackzone.intersects(monsterArea)) {
                     	System.out.println("Monster is attacked!");
-                       // m.takeDamage(10);
+                    	//m.takeDamage(10);
                     }
             	}
             }
