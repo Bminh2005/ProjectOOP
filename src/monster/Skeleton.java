@@ -107,4 +107,18 @@ public void checkDrop() {
     }
   }
 }
+@Override
+    public void draw(Graphics2D g2) {
+        int screenX = worldX - gp.player.worldX + gp.player.x;
+        int screenY = worldY - gp.player.worldY + gp.player.y;
+
+        if (worldX + gp.tileSize > gp.player.worldX - gp.player.x &&
+            worldX - gp.tileSize < gp.player.worldX + gp.player.x &&
+            worldY + gp.tileSize > gp.player.worldY - gp.player.y &&
+            worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
+
+            BufferedImage image = skeletonWalk.getFrame(spriteNum);
+            g2.drawImage(image, screenX, screenY, null);
+        }
+    }
     */
