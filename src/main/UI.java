@@ -210,12 +210,12 @@ public class UI {
 		g2.setColor(Color.white);
 		g2.drawString(text, x, y);
 		
-		//Warrior Image
-		BufferedImage frame = gp.player.playerAttack[0].animation[0]; 
-
-		x = gp.screenWidth/2 - (gp.tileSize*2)/2;
-		y += gp.tileSize;
-		g2.drawImage(frame, x-30, y, gp.tileSize*3, gp.tileSize*3, null);
+//		//Warrior Image
+//		BufferedImage frame = gp.player.playerAttack[0].animation[0]; 
+//
+//		x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+//		y += gp.tileSize;
+//		g2.drawImage(frame, x-30, y, gp.tileSize*3, gp.tileSize*3, null);
 		
 		//MENU
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 45F));
