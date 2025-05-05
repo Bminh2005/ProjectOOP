@@ -68,39 +68,67 @@ public class Player extends Entity {
 	}
 
 	public void setDefaultValues() {
-		// Status
+
+		// === Status & Stats ===
+		// Trang thai va chi so co ban
 		tired = false;
 		saitama = MAX_SAITAMA;
+
 		maxHp = 20;
 		hp = this.maxHp;
+
 		maxMp = 10;
 		mp = this.maxMp;
+
 		attack = 10;
 		defense = 10;
+
+		strength = 1;
+		dexterity = 1;
+
 		speed = 3;
 		level = 1;
 		state = "NORMAL";
 		attackType = 0;
+
 		exp = 0;
+		nextLevelExp = 5;
 		coin = 0;
 		nextLevel = level + 1;
+
+		// === Projectile ===
+		// Dan ban hoac lua
 		projectile = new OBJ_Fireball(gp);
-		// Position
+
+		// === World Position ===
+		// Vi tri trong the gioi game
 		worldX = 24 * gp.tileSize;
 		worldY = 24 * gp.tileSize;
+
+		// === Screen Position & Animation ===
+		// Vi tri hien thi tren man hinh va hoat anh
+		x = (gp.screenWidth / 2) - (gp.tileSize / 2);
+		y = (gp.screenHeight / 2) - (gp.tileSize / 2);
+
 		frameCounter = 0;
 		flip = false;
 
-		// Attributes
-		comboAttackDelayTime = 0;
-		x = (gp.screenWidth / 2) - (gp.tileSize / 2);
-		y = (gp.screenHeight / 2) - (gp.tileSize / 2);
+		// === Combat Animation ===
+		// Cac sprite tan cong va dem thoi gian combo
 		playerAttack = new SpriteSheet[3];
+		comboAttackDelayTime = 0;
 		runningCountAttackDelay = false;
+
+		// === Size & Collision ===
+		// Kich thuoc va vung va cham
 		height = gp.tileSize;
 		width = gp.tileSize * 53 / 40;
+
 		solidArea = new Rectangle(17, 23, 32, 32);
 		CollisionOn = false;
+
+		// === Initial Direction ===
+		// Huong di chuyen ban dau
 		direction = "up";
 	}
 
@@ -115,6 +143,15 @@ public class Player extends Entity {
 		playerDefend = new SpriteSheet("/Player/DEFEND.png", 576, 84, 6, 21, 23, 53, 40); // 0->1 gio khien, 2->5 do don
 		playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
 		titleImage = playerIdle.getSpriteNum(0);
+	}
+
+	public int getAttack() {
+//		attackArea = currentWeapon.attackArea;
+		return attack = attack + strength * currentWeapon.attackValue;
+	}
+
+	public int getDefense() {
+		return defense = defense + dexterity * currentShield.defenseValue;
 	}
 
 	public void update() {
@@ -184,28 +221,24 @@ public class Player extends Entity {
 			}
 		}
 		this.frameCounter++;
-		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && projectile.haveResource(this) == true)
-		{
-			//SET DEFAULT COORDINATES, DIRECTION AND USER
+		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
+				&& projectile.haveResource(this) == true) {
+			// SET DEFAULT COORDINATES, DIRECTION AND USER
 			projectile.set(worldX, worldY, direction, true, this);
-			
-			//SUBTRACT THE COST (MANA, AMMO ETC.)
+
+			// SUBTRACT THE COST (MANA, AMMO ETC.)
 			projectile.subtractResource(this);
-			
-			//ADD IT TO THE LIST
+
+			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile);
-			
+
 			shotAvailableCounter = 0;
-			
+
 //			gp.playSE(10);
 		}
-		if(shotAvailableCounter < 30)
-		{
+		if (shotAvailableCounter < 30) {
 			shotAvailableCounter++;
 		}
-		//CHECK MONSTER COLLISION
-		int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-		contactMonster(monsterIndex);
 	}
 
 	public void idle() {
@@ -361,25 +394,50 @@ public class Player extends Entity {
 		}
 
 	}
-	public void contactMonster(int i)
-	{
-		if(i != 999)
-		{
-			if(invincible == false && gp.monster[i].dying == false)
-			{
+
+	public void damageMonsterByProjectile(int i, int attack) {
+		if (i != 999) {
+
+			if (gp.monster[i].invincible == false) {
+//				gp.playSE(5);
+
+				int damage = attack - gp.monster[i].defense;
+				if (damage < 0) {
+					damage = 0;
+				}
+				gp.monster[i].hp -= damage;
+				gp.ui.addMessage(damage + " damage!");
+
+				gp.monster[i].invincible = true;
+				gp.monster[i].damageReaction();
+
+				if (gp.monster[i].hp <= 0) {
+					gp.monster[i].dying = true;
+					gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
+					gp.ui.addMessage("Exp + " + gp.monster[i].exp);
+					exp += gp.monster[i].exp;
+					checkLevelUp();
+				}
+			}
+		}
+	}
+
+	public void contactMonster(int i) {
+		if (i != 999) {
+			if (invincible == false && gp.monster[i].dying == false) {
 //				gp.playSE(6);
-				
+
 				int damage = gp.monster[i].attack - defense;
-				if(damage < 0)
-				{
+				if (damage < 0) {
 					damage = 0;
 				}
 				hp -= damage;
 				invincible = true;
 			}
-			
+
 		}
 	}
+
 	public void checkAttackonMonster() {
 		int range = 10;
 		if (this.state.equals("ATTACKING")) {
@@ -387,8 +445,7 @@ public class Player extends Entity {
 					this.solidArea.width, this.solidArea.height);
 			if (flip) {
 				attackzone.x -= range;
-			}
-			else {
+			} else {
 				attackzone.x += range;
 			}
 			attackzone.width += range;
@@ -404,6 +461,14 @@ public class Player extends Entity {
 					if (attackzone.intersects(monsterArea)) {
 						System.out.println("Monster is attacked!");
 						m.takeDamage(this.attack - gp.monster[i].defense);
+						gp.monster[i].damageReaction();
+						if (gp.monster[i].hp <= 0) {
+							gp.monster[i].dying = true;
+							gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
+							gp.ui.addMessage("Exp + " + gp.monster[i].exp);
+							exp += gp.monster[i].exp;
+							checkLevelUp();
+						}
 					}
 				}
 			}
@@ -448,6 +513,22 @@ public class Player extends Entity {
 //				selectedItem.use(this);
 				inventory.remove(itemIndex);
 			}
+		}
+	}
+
+	public void checkLevelUp() {
+		if (exp >= nextLevelExp) {
+			level++;
+			nextLevelExp = nextLevelExp * 2;
+			maxHp += 4;
+			strength++;
+			dexterity++;
+			attack = getAttack();
+			defense = getDefense();
+
+//			gp.playSE(8);
+			gp.gameState = gp.dialogueState;
+			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
 		}
 	}
 

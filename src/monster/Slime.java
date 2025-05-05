@@ -81,6 +81,7 @@ public class Slime extends Monster {
     }
     public void damageReaction()
     {
-    	if()
+    	actionLockCounter = 0;
+		direction = gp.player.direction;
     }
 }

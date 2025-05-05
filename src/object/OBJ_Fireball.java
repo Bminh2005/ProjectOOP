@@ -18,8 +18,8 @@ public class OBJ_Fireball extends Projectile{
 		speed = 8;
 		maxHp = 80;
 		hp = maxHp;
-		attack = 2;
-		useCost = 1;
+		attack = 15;
+		useCost = 2;
 		alive = false;
 		getImage();
 		

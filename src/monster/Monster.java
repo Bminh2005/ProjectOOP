@@ -29,53 +29,53 @@ public abstract class Monster extends Entity {
 
 	@Override
 	public void update() {
-		if (this.hp > 0) {
-			setAction();
-			CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-			if (this.type == type_monster && contactPlayer == true) {
-				damagePlayer(attack);
-			}
+		setAction();
+		CollisionOn = false;
+		gp.cChecker.checkTile(this);
+		gp.cChecker.checkObject(this, false);
+		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-			if (!CollisionOn) {
-				switch (direction) {
-				case "up":
-					worldY -= speed;
-					break;
-				case "down":
-					worldY += speed;
-					break;
-				case "left":
-					worldX -= speed;
-					break;
-				case "right":
-					worldX += speed;
-					break;
-				}
-			}
+		if (this.type == type_monster && contactPlayer == true) {
+			damagePlayer(attack);
+		}
 
-			spriteCounter++;
-			if (spriteCounter > 15) {
-				if (spriteNum == 1) {
-					spriteNum = 2;
-				} else if (spriteNum == 2) {
-					spriteNum = 1;
-				}
-				spriteCounter = 0;
+		if (CollisionOn == false) {
+			switch (direction) {
+			case "up":
+				worldY -= speed;
+				break;
+			case "down":
+				worldY += speed;
+				break;
+			case "left":
+				worldX -= speed;
+				break;
+			case "right":
+				worldX += speed;
+				break;
 			}
+		}
 
-			if (invincible == true) {
-				invincibleCounter++;
-				if (invincibleCounter > 40) {
-					invincible = false;
-					invincibleCounter = 0;
-				}
+		spriteCounter++;
+		if (spriteCounter > 15) {
+			if (spriteNum == 1) {
+				spriteNum = 2;
+			} else if (spriteNum == 2) {
+				spriteNum = 1;
 			}
-			if (shotAvailableCounter < 30) {
-				shotAvailableCounter++;
+			spriteCounter = 0;
+		}
+
+		if (invincible == true) {
+			invincibleCounter++;
+			if (invincibleCounter > 40) {
+				invincible = false;
+				invincibleCounter = 0;
 			}
+		}
+		if (shotAvailableCounter < 30) {
+			shotAvailableCounter++;
 		}
 	}
 
@@ -96,6 +96,7 @@ public abstract class Monster extends Entity {
 
 	public void takeDamage(int playerAttack) {
 		this.hp -= playerAttack;
+		gp.ui.addMessage(playerAttack + " damage!");
 		invincible = true;
 		if (this.hp <= 0) {
 			dying = true;
@@ -103,28 +104,29 @@ public abstract class Monster extends Entity {
 		}
 	}
 
+	public void damageReaction() {
+
+	}
+
 	// Phuong thuc abstract cho hành động của quái vật
 	public abstract void setAction();
 
 	// Phuong thuc kiểm tra việc rơi đồ
 	public void checkDrop() {
-		
+
 	};
-	
-	public void dropItem(Entity droppedItem)
-	{
-		for(int i = 0; i < gp.obj.length; i++)
-		{
-			if(gp.obj[i] == null)
-			{
+
+	public void dropItem(Entity droppedItem) {
+		for (int i = 0; i < gp.obj.length; i++) {
+			if (gp.obj[i] == null) {
 				gp.obj[i] = droppedItem;
-				gp.obj[i].worldX = worldX; //the dead monster's worldX
-				gp.obj[i].worldY = worldY; 
+				gp.obj[i].worldX = worldX; // the dead monster's worldX
+				gp.obj[i].worldY = worldY;
 				break;
 			}
 		}
 	}
-	
+
 	public void dyingAnimation(Graphics2D g2) {
 		dyingCounter++;
 		int i = 5;
@@ -161,7 +163,7 @@ public abstract class Monster extends Entity {
 	public void changeAlpha(Graphics2D g2, float alphaValue) {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 	}
-	
+
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.x;
@@ -214,9 +216,8 @@ public abstract class Monster extends Entity {
 				dyingAnimation(g2);
 				hpBarOn = false;
 			}
-			
+
 			g2.drawImage(image, screenX, screenY, null);
-		
 
 			changeAlpha(g2, 1F);
 
