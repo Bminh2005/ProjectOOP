@@ -27,7 +27,7 @@ public class Slime extends Monster {
         exp = 2;
         
 
-        getImage(); // Lấy ảnh cho quái vật
+        getImage(); 
     }
 
     public void getImage() {

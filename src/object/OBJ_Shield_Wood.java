@@ -9,11 +9,11 @@ public class OBJ_Shield_Wood extends Entity{
 	
 	public OBJ_Shield_Wood(GamePanel gp)
 	{
-		this.gp = gp;
+		super(gp);
 		
 		type = type_shield;
 		name = "Wood Shield";
-		down1 = setup("/objects/shield_wood",gp.tileSize, gp.tileSize);
+		down1 = setup("/objects/shield_wood", 3*gp.tileSize/4, 3*gp.tileSize/4);
 //		defenseValue = 1;
 		description = "[" + name + "]\nMade by wood.";
 	}

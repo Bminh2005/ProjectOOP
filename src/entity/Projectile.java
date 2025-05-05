@@ -9,7 +9,7 @@ public class Projectile extends Entity{
 	Monster monster;
 
 	public Projectile(GamePanel gp) {
-		this.gp = gp;
+		super(gp);
 		
 	}
 	

@@ -50,7 +50,7 @@ public class Player extends Entity {
 	private boolean runningCountAttackDelay;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+		super(gp);
 		this.keyH = keyH;
 		// SOLID AREA
 		solidArea = new Rectangle();
@@ -203,6 +203,9 @@ public class Player extends Entity {
 		{
 			shotAvailableCounter++;
 		}
+		//CHECK MONSTER COLLISION
+		int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+		contactMonster(monsterIndex);
 	}
 
 	public void idle() {
@@ -358,16 +361,36 @@ public class Player extends Entity {
 		}
 
 	}
-
+	public void contactMonster(int i)
+	{
+		if(i != 999)
+		{
+			if(invincible == false && gp.monster[i].dying == false)
+			{
+//				gp.playSE(6);
+				
+				int damage = gp.monster[i].attack - defense;
+				if(damage < 0)
+				{
+					damage = 0;
+				}
+				hp -= damage;
+				invincible = true;
+			}
+			
+		}
+	}
 	public void checkAttackonMonster() {
 		int range = 10;
 		if (this.state.equals("ATTACKING")) {
 			Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y,
 					this.solidArea.width, this.solidArea.height);
-			if (flip)
+			if (flip) {
 				attackzone.x -= range;
-			else
+			}
+			else {
 				attackzone.x += range;
+			}
 			attackzone.width += range;
 			System.out.println(attackzone.x + " " + attackzone.y + " " + attackzone.width + " " + attackzone.height);
 			for (int i = 0; i < gp.monster.length; i++) {

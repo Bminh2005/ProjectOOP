@@ -72,8 +72,15 @@ public class Entity {
 	public final int type_consumable = 6;
 	public final int type_pickUpOnly = 7;
 	
+	public Entity(GamePanel gp)
+	{
+		this.gp = gp;
+	}
+	
 	public void draw(Graphics2D g2) {
-//		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+		int screenX = worldX - gp.player.worldX + gp.player.x;
+		int screenY = worldY - gp.player.worldY + gp.player.y;
+		g2.drawImage(image, screenX, screenY, null);
 	};
 	public void update()
 	{

@@ -120,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable{
 		player.setDefaultValues();
 		player.setItems();
 //		aSetter.setObject();
-//		aSetter.setNPC();
+		aSetter.setNPC();
 		aSetter.setMonster();
 //		aSetter.setInteractiveTile();
 	}
@@ -166,11 +166,11 @@ public class GamePanel extends JPanel implements Runnable{
 					{
 						monster[i].update();
 					}
-					if(monster[i].alive == false)
-					{
-						monster[i].checkDrop();
-						monster[i] = null;
+					if (monster[i].alive == false) {
+					    monster[i].checkDrop(); 
+					    monster[i] = null;
 					}
+
 				}
 			}
 			for(int i = 0; i < projectileList.size(); i++)
@@ -237,6 +237,13 @@ public class GamePanel extends JPanel implements Runnable{
 				monster[i].draw(g2);
 			}
 		}
+		for(int i = 0; i < obj.length; i++)
+		{
+			if(obj[i] != null)
+			{
+				obj[i].draw(g2);
+			}
+		}
 		for(int i = 0; i < projectileList.size(); i++)
 		{
 			if(projectileList.get(i) != null)
@@ -245,13 +252,7 @@ public class GamePanel extends JPanel implements Runnable{
 				projectileList.get(i).draw(g2);
 			}
 		}
-		for(int i = 0; i < obj.length; i++)
-		{
-			if(obj[i] != null)
-			{
-				obj[i].draw(g2);
-			}
-		}
+		
 //		projectileList.clear();
 		//UI
 		ui.draw(g2);

@@ -15,6 +15,7 @@ public abstract class Monster extends Entity {
 	GamePanel gp;
 
 	public Monster(GamePanel gp) {
+		super(gp);
 		this.gp = gp;
 		solidArea.x = 2;
 		solidArea.y = 14;
@@ -32,9 +33,6 @@ public abstract class Monster extends Entity {
 			setAction();
 			CollisionOn = false;
 			gp.cChecker.checkTile(this);
-//		gp.cChecker.checkObject(this, false);
-//		gp.cChecker.checkEntity(this, gp.npc);
-//		gp.cChecker.checkEntity(this, gp.monster);
 			boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
 			if (this.type == type_monster && contactPlayer == true) {
@@ -96,11 +94,12 @@ public abstract class Monster extends Entity {
 		}
 	}
 
-	public void takeDamage(int n) {
-		this.hp -= n;
+	public void takeDamage(int playerAttack) {
+		this.hp -= playerAttack;
 		invincible = true;
 		if (this.hp <= 0) {
 			dying = true;
+//			checkDrop();
 		}
 	}
 
@@ -125,6 +124,7 @@ public abstract class Monster extends Entity {
 			}
 		}
 	}
+	
 	public void dyingAnimation(Graphics2D g2) {
 		dyingCounter++;
 		int i = 5;
@@ -161,7 +161,7 @@ public abstract class Monster extends Entity {
 	public void changeAlpha(Graphics2D g2, float alphaValue) {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 	}
-
+	
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.x;
@@ -214,9 +214,9 @@ public abstract class Monster extends Entity {
 				dyingAnimation(g2);
 				hpBarOn = false;
 			}
-			if (alive) {
-				g2.drawImage(image, screenX, screenY, null);
-			}
+			
+			g2.drawImage(image, screenX, screenY, null);
+		
 
 			changeAlpha(g2, 1F);
 

@@ -8,13 +8,13 @@ public class OBJ_Coin_Bronze extends Entity {
     GamePanel gp;
 
     public OBJ_Coin_Bronze(GamePanel gp) {
-    	this.gp = gp;
+    	super(gp);
 
         type = type_pickUpOnly;
         name = "Bronze Coin";
         value = 1; 
 
-        down1 = setup("/object/coin_bronze", gp.tileSize, gp.tileSize);
+        down1 = setup("/objects/coin_bronze", 3*gp.tileSize/4, 3*gp.tileSize/4);
         image = down1;
     }
 
