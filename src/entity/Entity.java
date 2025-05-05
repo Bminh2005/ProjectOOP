@@ -38,8 +38,10 @@ public class Entity {
 	public int nextLevel;
 	public int value;
 	public int coin;
+	public int useCost;
 	public Entity currentWeapon;
 	public Entity currentShield;
+	public Projectile projectile;
 	
 	//State
 	public boolean alive = true;
@@ -52,6 +54,7 @@ public class Entity {
 	
 	//Counter
 	public int spriteCounter = 0;
+	public int spriteNum = 1;
 	public int actionLockCounter = 0;
 	public int invincibleCounter = 0;
 	public int shotAvailableCounter = 0;
@@ -70,7 +73,7 @@ public class Entity {
 	public final int type_pickUpOnly = 7;
 	
 	public void draw(Graphics2D g2) {
-		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+//		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
 	};
 	public void update()
 	{

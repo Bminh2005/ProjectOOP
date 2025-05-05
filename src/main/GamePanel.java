@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import entity.Entity;
 import entity.Player;
+import entity.Projectile;
 import map.Map;
 import map.TempMap;
 import monster.Monster;
@@ -28,11 +29,14 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
 	public ArrayList<Teleport> teleportList = new ArrayList<>();
+	public ArrayList<Entity> projectileList = new ArrayList<>();
 	public int num_CurrentMap = 1;
 	public int maxMap = 3;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
+	public Entity obj[] = new Entity[20];
 	public Monster monster[] = new Monster[20];
+//	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Thread gameThread;
 	public AssetSetter aSetter = new AssetSetter(this);
@@ -158,10 +162,32 @@ public class GamePanel extends JPanel implements Runnable{
 			{
 				if(monster[i] != null)
 				{
-					monster[i].update();
+					if(monster[i].alive == true && monster[i].dying == false)
+					{
+						monster[i].update();
+					}
+					if(monster[i].alive == false)
+					{
+						monster[i].checkDrop();
+						monster[i] = null;
+					}
 				}
 			}
-			cube.update();
+			for(int i = 0; i < projectileList.size(); i++)
+			{
+				if(projectileList.get(i) != null)
+				{
+					if(projectileList.get(i).alive == true)
+					{
+						projectileList.get(i).update();
+					}
+					if(projectileList.get(i).alive == false)
+					{
+						projectileList.remove(i);
+					}
+				}
+			}
+//			cube.update();
 			//System.out.println(player.worldX +" "+ player.worldY);
 			int playerCol = player.worldX/tileSize;
 			int playerRow = player.worldY/tileSize;
@@ -201,9 +227,9 @@ public class GamePanel extends JPanel implements Runnable{
 		processor.draw(this, g2);
 		//currentMap.draw(g2, 2);
 		//player.draw(g2);
-		if(player.hp > 0) {
-			cube.draw(g2);
-		}
+//		if(player.hp > 0) {
+//			cube.draw(g2);
+//		}
 		for(int i = 0; i < monster.length; i++)
 		{
 			if(monster[i] != null)
@@ -211,6 +237,22 @@ public class GamePanel extends JPanel implements Runnable{
 				monster[i].draw(g2);
 			}
 		}
+		for(int i = 0; i < projectileList.size(); i++)
+		{
+			if(projectileList.get(i) != null)
+			{
+//				projectileList.get(i).update();
+				projectileList.get(i).draw(g2);
+			}
+		}
+		for(int i = 0; i < obj.length; i++)
+		{
+			if(obj[i] != null)
+			{
+				obj[i].draw(g2);
+			}
+		}
+//		projectileList.clear();
 		//UI
 		ui.draw(g2);
 		
