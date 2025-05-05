@@ -79,4 +79,8 @@ public class Slime extends Monster {
             dropItem(new OBJ_ManaCrystal(gp));
         }
     }
+    public void damageReaction()
+    {
+    	if()
+    }
 }
