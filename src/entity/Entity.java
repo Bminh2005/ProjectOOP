@@ -12,7 +12,7 @@ import main.UtilityTool;
 
 public class Entity {
 	GamePanel gp;
-	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2, titleImage;
 	public BufferedImage image, image2, image3;
 	public String description = "";
 	

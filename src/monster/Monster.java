@@ -21,13 +21,14 @@ public abstract class Monster extends Entity {
     	solidArea.height = 30;
     	solidAreaDefaultX = solidArea.x;
     	solidAreaDefaultY = solidArea.y;
+    	alive = true;
     	
     }
 
     @Override
     public void update() {
+    	if(this.hp > 0) {
     	setAction();
-		
 		CollisionOn = false;
 		gp.cChecker.checkTile(this);
 //		gp.cChecker.checkObject(this, false);
@@ -76,6 +77,7 @@ public abstract class Monster extends Entity {
 		{
 			shotAvailableCounter++;
 		}
+    	}
     }
     public void damagePlayer(int attack)
 	{
@@ -92,11 +94,15 @@ public abstract class Monster extends Entity {
 			gp.player.hp -= damage;
 			
 			gp.player.invincible = true;
+			gp.player.hurt();
 		}
 	}
     public void takeDamage(int n) {
     	this.hp -= n;
-    	if(this.hp < 0) this.hp =0;
+    	invincible = true;
+    	if(this.hp <= 0) {
+    		dying = true;
+    	}
     }
 
     // Phuong thuc abstract cho hành động của quái vật
@@ -200,11 +206,15 @@ public abstract class Monster extends Entity {
 			if(dying == true)
 			{
 				dyingAnimation(g2);
+				hpBarOn = false;
 			}
-			
-			g2.drawImage(image, screenX, screenY, null);
+			if(alive) {
+				g2.drawImage(image, screenX, screenY, null);
+			}
+		
 			
 			changeAlpha(g2, 1F);
+			
 		}
 	}
 }

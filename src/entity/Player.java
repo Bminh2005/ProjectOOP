@@ -71,9 +71,9 @@ public class Player extends Entity{
     	//Status
     	tired = false;
     	saitama = MAX_SAITAMA;
-    	maxHp = 100;
+    	maxHp = 20;
     	hp = this.maxHp;
-    	maxMp = 100;
+    	maxMp = 10;
 		mp = this.maxMp;
 		attack = 10;
 		defense = 10;
@@ -112,6 +112,7 @@ public class Player extends Entity{
     	playerRun = new SpriteSheet("/Player/RUN.png", 768, 84, 8, 21, 23, 53, 40);
     	playerDefend = new SpriteSheet("/Player/DEFEND.png", 576, 84, 6, 21, 23, 53, 40); //0->1 gio khien, 2->5 do don
     	playerDying = new SpriteSheet("/Player/DEATH.png", 1152, 84, 12, 21, 23, 53, 40);
+    	titleImage = playerIdle.getSpriteNum(0);
     }
     public void update() {
     	//System.out.println("SAITAMA = " + this.saitama);
@@ -120,6 +121,13 @@ public class Player extends Entity{
     		this.comboAttackDelayTime++;
     		if(this.comboAttackDelayTime == 20) {
     			this.attackType = 0;
+    		}
+    	}
+    	if(this.invincible) {
+    		this.invincibleCounter++;
+    		if(this.invincibleCounter >= 60) {
+    			this.invincible = false;
+    			this.invincibleCounter = 0;
     		}
     	}
     	if(hp > 0) {
@@ -359,7 +367,7 @@ public class Player extends Entity{
                     //System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width +" "+ monsterArea.height);
                     if (attackzone.intersects(monsterArea)) {
                     	System.out.println("Monster is attacked!");
-                    	//m.takeDamage(10);
+                    	m.takeDamage(this.attack);
                     }
             	}
             }
@@ -367,8 +375,8 @@ public class Player extends Entity{
     }
     public void setDefaultPositions()
 	{
-		worldX = gp.tileSize * 23;
-		worldY = gp.tileSize * 21;
+		worldX = gp.tileSize * 24;
+		worldY = gp.tileSize * 24;
 		direction = "down";
 	}
 	public void restoreLifeAndMana()
