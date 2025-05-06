@@ -40,7 +40,7 @@ public abstract class Monster extends Entity {
 			damagePlayer(attack);
 		}
 
-		if (CollisionOn == false) {
+		if (true) {
 			switch (direction) {
 			case "up":
 				worldY -= speed;

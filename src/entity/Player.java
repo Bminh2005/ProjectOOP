@@ -170,9 +170,7 @@ public class Player extends Entity {
 				this.invincibleCounter = 0;
 			}
 		}
-		if (hp > 0) {
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
+		if (hp > 0) {			
 			if (this.state.equals("RUN") == false) {
 				if (this.saitama < this.MAX_SAITAMA)
 					this.saitama += this.SAITAMA_RECOVER_RATE * 1f / 60f;
@@ -181,15 +179,27 @@ public class Player extends Entity {
 				this.tired = false;
 			if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
 					|| this.keyH.rightPressed == true) {
+				boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
+						|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
+				boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height) * 10 / 20
+						|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
 				if (this.saitama <= 0)
 					this.tired = true;
 				if (this.keyH.runPressed && this.tired == false) {
 					this.run();
 				} else {
-
+					
 					this.walk();
 				}
+				int dx = this.worldX;
+				int dy = this.worldY;
 				this.move();
+				gp.cChecker.checkTile(this);
+				dx = this.worldX - dx;
+				dy = this.worldY - dy;
+				if(overx) this.x += dx;
+				if(overy) this.y += dy;
+				
 			} else if (this.keyH.attackPressed == true) {
 				this.runningCountAttackDelay = false;
 				this.comboAttackDelayTime = 0;
@@ -292,34 +302,25 @@ public class Player extends Entity {
 	}
 
 	public void move() {
-		boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
-				|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
-		boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height) * 10 / 20
-				|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
+		
 		if (this.keyH.upPressed == true) {
 			direction = "up";
-				if (overy && this.CollisionOn == false)
-					this.y -= this.speed;
 				this.worldY -= this.speed;
 		}
 		if (this.keyH.downPressed == true) {
 			direction = "down";
-				if (overy && this.CollisionOn == false)
-					this.y += this.speed;
+				
 				this.worldY += this.speed;
 		}
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
-			if (overx && this.CollisionOn == false)
-				this.x -= this.speed;
+			
 				this.worldX -= this.speed;
 				this.flip = true;
 
 		}
 		if (this.keyH.rightPressed == true) {
 			direction = "right";
-				if (overx && this.CollisionOn == false)
-					this.x += this.speed;
 				this.worldX += this.speed;
 				this.flip = false;
 		}
