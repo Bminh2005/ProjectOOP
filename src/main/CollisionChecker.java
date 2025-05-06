@@ -33,6 +33,7 @@ public class CollisionChecker {
 			tileNum4 = layer.layerTileNum[entityTopRow][entityRightCol - 1];
 		
 		if(layer.tiles[tileNum1].collision || layer.tiles[tileNum2].collision || layer.tiles[tileNum3].collision || layer.tiles[tileNum4].collision) {
+			entity.CollisionOn = true;
 			if(layer.tiles[tileNum1].collision) {
 				int tileTop = entityBottomRow * gp.tileSize;
 				if(entityTopWorldY <= tileTop) {

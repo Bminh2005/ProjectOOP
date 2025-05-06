@@ -171,7 +171,8 @@ public class Player extends Entity {
 			}
 		}
 		if (hp > 0) {
-
+			this.CollisionOn = false;
+			gp.cChecker.checkTile(this);
 			if (this.state.equals("RUN") == false) {
 				if (this.saitama < this.MAX_SAITAMA)
 					this.saitama += this.SAITAMA_RECOVER_RATE * 1f / 60f;
@@ -188,7 +189,6 @@ public class Player extends Entity {
 
 					this.walk();
 				}
-				gp.cChecker.checkTile(this);
 				this.move();
 			} else if (this.keyH.attackPressed == true) {
 				this.runningCountAttackDelay = false;
@@ -298,38 +298,30 @@ public class Player extends Entity {
 				|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
 		if (this.keyH.upPressed == true) {
 			direction = "up";
-			if (!this.CollisionOn) {
-				if (overy)
+				if (overy && this.CollisionOn == false)
 					this.y -= this.speed;
 				this.worldY -= this.speed;
-			}
 		}
 		if (this.keyH.downPressed == true) {
 			direction = "down";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			if (!this.CollisionOn) {
-				if (overy)
+				if (overy && this.CollisionOn == false)
 					this.y += this.speed;
 				this.worldY += this.speed;
-			}
 		}
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
-				if (overx)
-					this.x -= this.speed;
+			if (overx && this.CollisionOn == false)
+				this.x -= this.speed;
 				this.worldX -= this.speed;
 				this.flip = true;
 
 		}
 		if (this.keyH.rightPressed == true) {
 			direction = "right";
-			if (!this.CollisionOn) {
-				if (overx)
+				if (overx && this.CollisionOn == false)
 					this.x += this.speed;
 				this.worldX += this.speed;
 				this.flip = false;
-			}
 		}
 
 	}
