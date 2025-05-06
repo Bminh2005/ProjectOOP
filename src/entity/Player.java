@@ -177,7 +177,23 @@ public class Player extends Entity {
 			}
 			if (this.saitama >= this.MIN_SAITAMA_TO_RUN)
 				this.tired = false;
-			if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
+			if (this.keyH.attackPressed == true) {
+					this.runningCountAttackDelay = false;
+					this.comboAttackDelayTime = 0;
+					this.attack();
+					System.out.println(this.spriteNum);
+					if (this.state.equals("ATTACKING") && this.spriteNum == 3 && this.frameCounter % 4 == 0) {
+						this.checkAttackonMonster();
+					}
+
+					if (this.spriteNum == this.playerAttack[attackType].maxNumber) {
+						this.keyH.attackPressed = false;
+						this.attackType = (this.attackType + 1) % 3;
+						this.runningCountAttackDelay = true;
+						this.idle();
+					}
+				}
+			else if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
 					|| this.keyH.rightPressed == true) {
 				boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
 						|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
@@ -200,21 +216,6 @@ public class Player extends Entity {
 				if(overx) this.x += dx;
 				if(overy) this.y += dy;
 				
-			} else if (this.keyH.attackPressed == true) {
-				this.runningCountAttackDelay = false;
-				this.comboAttackDelayTime = 0;
-				this.attack();
-				System.out.println(this.spriteNum);
-				if (this.state.equals("ATTACKING") && this.spriteNum == 3 && this.frameCounter % 4 == 0) {
-					this.checkAttackonMonster();
-				}
-
-				if (this.spriteNum == this.playerAttack[attackType].maxNumber) {
-					this.keyH.attackPressed = false;
-					this.attackType = (this.attackType + 1) % 3;
-					this.runningCountAttackDelay = true;
-					this.idle();
-				}
 			} else if (this.keyH.damagePressed == true) {
 				this.hurt();
 				if (this.spriteNum == this.playerHurt.maxNumber) {
