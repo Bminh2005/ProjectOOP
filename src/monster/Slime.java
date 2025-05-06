@@ -2,12 +2,15 @@ package monster;
 
 import entity.Entity;
 import main.GamePanel;
-
+import object.OBJ_Coin_Bronze;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 
 import java.util.Random;
 
 public class Slime extends Monster {
-
+	
+	GamePanel gp;
     public Slime(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -17,14 +20,14 @@ public class Slime extends Monster {
         direction = "up";
         type = type_monster;
         speed = 1;
-        maxHp = 5;
+        maxHp = 25;
         hp = maxHp;
-        attack = 5;
+        attack = 1;
         defense = 0;
         exp = 2;
         
 
-        getImage(); // Lấy ảnh cho quái vật
+        getImage(); 
     }
 
     public void getImage() {
@@ -66,14 +69,19 @@ public class Slime extends Monster {
 
     @Override
     public void checkDrop() {
-//        int i = new Random().nextInt(100) + 1;
-//
-//        if (i < 50) {
-//            dropItem(new OBJ_Coin_Bronze(gp));
-//        } else if (i < 75) {
-//            dropItem(new OBJ_Heart(gp));
-//        } else {
-//            dropItem(new OBJ_ManaCrystal(gp));
-//        }
+        int i = new Random().nextInt(100) + 1;
+
+        if (i < 50) {
+            dropItem(new OBJ_Coin_Bronze(gp));
+        } else if (i < 75) {
+            dropItem(new OBJ_Heart(gp));
+        } else {
+            dropItem(new OBJ_ManaCrystal(gp));
+        }
+    }
+    public void damageReaction()
+    {
+    	actionLockCounter = 0;
+		direction = gp.player.direction;
     }
 }

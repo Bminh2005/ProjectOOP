@@ -8,14 +8,14 @@ public class OBJ_ManaCrystal extends Entity{
 	GamePanel gp;
 	
 	public OBJ_ManaCrystal(GamePanel gp) {
-		this.gp = gp;
+		super(gp);
 		
 		type = type_pickUpOnly;
 		name = "Mana Crystal";
 		value = 1;
-		down1 = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
-		image = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
-		image2 = setup("/objects/manacrystal_blank", gp.tileSize, gp.tileSize);
+		down1 = setup("/objects/manacrystal_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
+		image = setup("/objects/manacrystal_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
+		image2 = setup("/objects/manacrystal_blank", 3*gp.tileSize/4, 3*gp.tileSize/4);
 	}
 	public void use(Entity entity)
 	{

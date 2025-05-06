@@ -1,5 +1,6 @@
 package main;
 
+import monster.Skeleton;
 import monster.Slime;
 
 public class AssetSetter {
@@ -28,18 +29,18 @@ public class AssetSetter {
 		gp.monster[i].worldX = gp.tileSize*18;
 		gp.monster[i].worldY = gp.tileSize*24;
 		i++;
-		//gp.monster[i] = new Slime(gp);
-		//gp.monster[i].worldX = gp.tileSize*20;
-		//gp.monster[i].worldY = gp.tileSize*24;
-		//i++;
-		//gp.monster[i] = new Slime(gp);
-		//gp.monster[i].worldX = gp.tileSize*26;
-		//gp.monster[i].worldY = gp.tileSize*24;
-		//i++;
-		//gp.monster[i] = new Slime(gp);
-		//gp.monster[i].worldX = gp.tileSize*24;
-		//gp.monster[i].worldY = gp.tileSize*22;
-		//i++;
+//		gp.monster[i] = new Skeleton(gp);
+//		gp.monster[i].worldX = gp.tileSize*20;
+//		gp.monster[i].worldY = gp.tileSize*24;
+//		i++;
+		gp.monster[i] = new Slime(gp);
+		gp.monster[i].worldX = gp.tileSize*26;
+		gp.monster[i].worldY = gp.tileSize*24;
+		i++;
+		gp.monster[i] = new Slime(gp);
+		gp.monster[i].worldX = gp.tileSize*24;
+		gp.monster[i].worldY = gp.tileSize*22;
+		i++;
 		//gp.monster[i] = new Slime(gp);
 		//gp.monster[i].worldX = gp.tileSize*24;
 		//gp.monster[i].worldY = gp.tileSize*27;

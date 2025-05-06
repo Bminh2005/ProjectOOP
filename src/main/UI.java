@@ -23,6 +23,7 @@ public class UI {
 	public boolean messageOn = false;
 	ArrayList<String> message = new ArrayList<>();
 	ArrayList<Integer> messageCounter = new ArrayList<>();
+	public Entity entity;
 	public boolean gameFinished = false;
 	public String currentDialogue = "";
 	public int commandNum = 0;
@@ -211,11 +212,11 @@ public class UI {
 		g2.drawString(text, x, y);
 		
 		//Warrior Image
-		BufferedImage frame = gp.player.playerAttack[0].animation[0]; 
+		BufferedImage frame = gp.player.titleImage;
 
 		x = gp.screenWidth/2 - (gp.tileSize*2)/2;
 		y += gp.tileSize;
-		g2.drawImage(frame, x-30, y, gp.tileSize*3, gp.tileSize*3, null);
+		g2.drawImage(frame, x-50, y, gp.tileSize*53/40*3, gp.tileSize*3, null);
 		
 		//MENU
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 45F));
