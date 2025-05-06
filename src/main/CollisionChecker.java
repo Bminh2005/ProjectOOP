@@ -54,7 +54,7 @@ public class CollisionChecker {
 			}
 			if(layer.tiles[tileNum4].collision) {
 				int tileLeft = entityRightCol * gp.tileSize;
-				if(entityRightWorldX <= tileLeft) {
+				if(entityLeftWorldX <= tileLeft) {
 					entity.worldX = tileLeft - entity.solidAreaDefaultX;
 				}
 			}
