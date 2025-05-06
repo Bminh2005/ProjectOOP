@@ -19,7 +19,7 @@ public class MapLayer {
     	loadLayer(gp);
     }
     public void getImage(GamePanel gp) {
-    	tiles[0] = null;
+    	tiles[0] = new MapTile(gp);
     	tiles[1] = new MapTile(gp, "/tiles/grand.png");
     	tiles[2] = new MapTile(gp, "/tiles/lane1.png");
     	tiles[3] = new MapTile(gp, "/tiles/lane2.png");

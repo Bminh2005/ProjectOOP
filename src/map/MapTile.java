@@ -16,6 +16,14 @@ public class MapTile {
 	public Rectangle collisionArea;
 	public boolean collision; // Nếu true, không thể đi qua
 	
+	public MapTile(GamePanel gp) {
+		this.gp = gp;
+		img = null;
+		height = gp.tileSize;
+		width = gp.tileSize;
+		collision = false;
+		collisionArea = new Rectangle();
+	}
 	public MapTile(GamePanel gp, String path) {
 		this.gp = gp;
 		try {

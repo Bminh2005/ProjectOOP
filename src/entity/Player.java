@@ -188,6 +188,7 @@ public class Player extends Entity {
 
 					this.walk();
 				}
+				gp.cChecker.checkTile(this);
 				this.move();
 			} else if (this.keyH.attackPressed == true) {
 				this.runningCountAttackDelay = false;
@@ -297,8 +298,6 @@ public class Player extends Entity {
 				|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
 		if (this.keyH.upPressed == true) {
 			direction = "up";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
 			if (!this.CollisionOn) {
 				if (overy)
 					this.y -= this.speed;
@@ -317,20 +316,14 @@ public class Player extends Entity {
 		}
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			if (!this.CollisionOn) {
 				if (overx)
 					this.x -= this.speed;
 				this.worldX -= this.speed;
 				this.flip = true;
-			}
 
 		}
 		if (this.keyH.rightPressed == true) {
 			direction = "right";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
 			if (!this.CollisionOn) {
 				if (overx)
 					this.x += this.speed;
