@@ -19,6 +19,7 @@ public class Player extends Entity {
 	int speed;
 	public String state;
 	public ArrayList<Entity> inventory = new ArrayList<>();
+	public int maxInventorySize = 20;
 
 	// PLAYER'S SAITAMA
 	private float saitama;
@@ -529,6 +530,36 @@ public class Player extends Entity {
 //			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
+		}
+	}
+	public void pickUpObject(int i)
+	{
+		if(i != 999)
+		{
+			//PICKUP ONLY ITEMS
+			if(gp.obj[i].type == type_pickUpOnly)
+			{
+				gp.obj[i].use(this);
+				gp.obj[i] = null;
+			}
+			//INVENTORY ITEMS
+			else
+			{
+				String text;
+				
+				if(inventory.size() != maxInventorySize)
+				{
+					inventory.add(gp.obj[i]);
+//					gp.playSE(1);
+					text = "Got a " + gp.obj[i].name + "!";
+				}
+				else
+				{
+					text = "You cannot carry any more!";
+				}
+				gp.ui.addMessage(text);
+				gp.obj[i] = null;
+			}
 		}
 	}
 

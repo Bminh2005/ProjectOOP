@@ -101,7 +101,10 @@ public class Entity {
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
-
+	public void use(Entity entity)
+	{
+		
+	}
 	public void draw(Graphics2D g2) {
 		int screenX = worldX - gp.player.worldX + gp.player.x;
 		int screenY = worldY - gp.player.worldY + gp.player.y;
