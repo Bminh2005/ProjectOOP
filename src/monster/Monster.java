@@ -39,11 +39,9 @@ public abstract class Monster extends Entity {
 		if (this.type == type_monster && contactPlayer == true) {
 			damagePlayer(attack);
 		}
-
-
 		if (true) {
 
-		if (CollisionOn == false) {
+		if (true) {
 
 			switch (direction) {
 			case "up":
