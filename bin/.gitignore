@@ -1,5 +1,29 @@
+<<<<<<< HEAD
 /projectile/
+=======
+/Player/
 /entity/
+/font/
+/main/
+/map/
+/monster/
+/object/
+/objects/
+<<<<<<< HEAD
+/tiles/
+=======
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
+/entity/
+<<<<<<< HEAD
 /map/
 /main/
 /monster/
+=======
+/main/
+/map/
+/monster/
+/Player/
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
+/projectiles/
+/projectile/
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git

@@ -40,7 +40,11 @@ public abstract class Monster extends Entity {
 			damagePlayer(attack);
 		}
 
+<<<<<<< HEAD
 		if (true) {
+=======
+		if (CollisionOn == false) {
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 			switch (direction) {
 			case "up":
 				worldY -= speed;
