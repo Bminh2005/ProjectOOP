@@ -13,7 +13,7 @@ import main.UtilityTool;
 public class Entity {
 	// === Game reference ===
 	// Tham chieu toi GamePanel
-	GamePanel gp;
+	protected GamePanel gp;
 
 	// === Image & Sprite ===
 	// Anh sprite cho nhan vat va vat pham

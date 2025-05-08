@@ -227,6 +227,8 @@ public class Player extends Entity {
 				int dy = this.worldY;
 				this.move();
 				gp.cChecker.checkTile(this);
+				int objIndex = gp.cChecker.checkObject(this, true);
+				this.pickUpObject(objIndex);
 				dx = this.worldX - dx;
 				dy = this.worldY - dy;
 				if(overx) this.x += dx;
@@ -573,29 +575,31 @@ public class Player extends Entity {
 	{
 		if(i != 999)
 		{
+			if(gp.obj[i] != null) {
 			//PICKUP ONLY ITEMS
-			if(gp.obj[i].type == type_pickUpOnly)
-			{
-				gp.obj[i].use(this);
-				gp.obj[i] = null;
-			}
-			//INVENTORY ITEMS
-			else
-			{
-				String text;
-				
-				if(inventory.size() != maxInventorySize)
+				if(gp.obj[i].type == type_pickUpOnly)
 				{
-					inventory.add(gp.obj[i]);
-//					gp.playSE(1);
-					text = "Got a " + gp.obj[i].name + "!";
+					gp.obj[i].use(this);
+					gp.obj[i] = null;
 				}
+				//INVENTORY ITEMS
 				else
 				{
-					text = "You cannot carry any more!";
+					String text;
+					
+					if(inventory.size() != maxInventorySize)
+					{
+						inventory.add(gp.obj[i]);
+	//					gp.playSE(1);
+						text = "Got a " + gp.obj[i].name + "!";
+					}
+					else
+					{
+						text = "You cannot carry any more!";
+					}
+					gp.ui.addMessage(text);
+					gp.obj[i] = null;
 				}
-				gp.ui.addMessage(text);
-				gp.obj[i] = null;
 			}
 		}
 	}

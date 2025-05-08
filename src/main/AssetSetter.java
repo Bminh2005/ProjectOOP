@@ -2,6 +2,7 @@ package main;
 
 import monster.Skeleton;
 import monster.Slime;
+import object.OBJ_Coin_Bronze;
 
 public class AssetSetter {
 	
@@ -14,7 +15,6 @@ public class AssetSetter {
 	
 	public void setObject()
 	{
-		
 	}
 	
 	public void setNPC()
@@ -45,7 +45,10 @@ public class AssetSetter {
 		//gp.monster[i].worldX = gp.tileSize*24;
 		//gp.monster[i].worldY = gp.tileSize*27;
 		//i++;
-
+		
+		gp.obj[0] = new OBJ_Coin_Bronze(gp);
+		gp.obj[0].worldX = gp.tileSize*24;
+		gp.obj[0].worldY = gp.tileSize*30;
 	}
 	public void setInteractiveTile()
 	{

@@ -5,7 +5,6 @@ import main.GamePanel;
 
 public class OBJ_Coin_Bronze extends Entity {
 
-    GamePanel gp;
 
     public OBJ_Coin_Bronze(GamePanel gp) {
     	super(gp);
@@ -20,7 +19,7 @@ public class OBJ_Coin_Bronze extends Entity {
 
     public void use(Entity entity) {
         gp.ui.addMessage("Gold + " + value);
-        gp.player.coin += value;
+    	
         entity.coin += value;
     }
 }
