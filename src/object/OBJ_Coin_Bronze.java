@@ -20,10 +20,7 @@ public class OBJ_Coin_Bronze extends Entity {
 
     public void use(Entity entity) {
         gp.ui.addMessage("Gold + " + value);
-<<<<<<< HEAD
         gp.player.coin += value;
-=======
         entity.coin += value;
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
     }
 }

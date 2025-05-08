@@ -19,7 +19,6 @@ public class Player extends Entity {
 	int speed;
 	public String state;
 	public ArrayList<Entity> inventory = new ArrayList<>();
-<<<<<<< HEAD
 	
 	// PLAYER attackZone
 	private Rectangle attackZone;
@@ -54,63 +53,21 @@ public class Player extends Entity {
 	private int comboAttackDelayTime;// don vi frames
 	private boolean runningCountAttackDelay;
 
-	public Player(GamePanel gp, KeyHandler keyH) {
-		super(gp);
-		this.keyH = keyH;
-		// SOLID AREA
-		attackZone = new Rectangle(42, 13, 27, 34);
-		// 35, 11, 22, 28 --> 42, 13, 27, 34
-		attackZoneDefaultX = attackZone.x;
-		attackZoneDefaultY = attackZone.y;
-=======
 	public int maxInventorySize = 20;
 
-	// PLAYER'S SAITAMA
-	private float saitama;
-	private final float MAX_SAITAMA = 100f;
-	private final float MIN_SAITAMA_TO_RUN = 50f;
-	private final float SAITAMA_DECREASE_RATE = 20f;
-	private final float SAITAMA_RECOVER_RATE = 10f;
-	private boolean tired;
-
-	private final int DEFAULT_SPEED = 3;
-	private final int TIRED_SPEED = 2;
-	private final int RUN_SPEED = 5;
-
-	// PLAYER'S IMAGE
-	private SpriteSheet playerIdle;
-	private SpriteSheet playerWalk;
-	public SpriteSheet playerAttack[];
-	private SpriteSheet playerHurt;
-	private SpriteSheet playerRun;
-	private SpriteSheet playerDefend;
-	private SpriteSheet playerDying;
-
-	// PROCESS FRAMES
-	private int spriteNum;
-	private int frameCounter;
-	private boolean flip;
-	private int attackType;
-	private int comboAttackDelayTime;// don vi frames
-	private boolean runningCountAttackDelay;
-
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
 		// SOLID AREA
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 		solidArea = new Rectangle();
 		solidArea.x = 21; // = 17*gp.tileSize/40
 		solidArea.y = 26; // = 22*gp.tileSize/40
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-<<<<<<< HEAD
 		solidArea.width = 22; // = 21*gp.tileSize/40
 		solidArea.height = 22; //= 18*gp.tileSize/40
-=======
 		solidArea.width = 32;
 		solidArea.height = 32;
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 		setDefaultValues();
 		getPlayerImage();
 		currentWeapon = new OBJ_Sword_Normal(gp);
@@ -175,11 +132,8 @@ public class Player extends Entity {
 		height = gp.tileSize;
 		width = gp.tileSize * 53 / 40;
 
-<<<<<<< HEAD
 		//solidArea = new Rectangle(17, 23, 32, 32);
-=======
 		solidArea = new Rectangle(17, 23, 32, 32);
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 		CollisionOn = false;
 
 		// === Initial Direction ===
@@ -220,7 +174,6 @@ public class Player extends Entity {
 		}
 		if (this.invincible) {
 			this.invincibleCounter++;
-<<<<<<< HEAD
 			if (this.invincibleCounter >= 120) {
 				this.invincible = false;
 				if(this.state.equals("HURT")) {
@@ -382,183 +335,11 @@ public class Player extends Entity {
 			direction = "right";
 				this.worldX += this.speed;
 				this.flip = false;
-=======
-			if (this.invincibleCounter >= 60) {
-				this.invincible = false;
-				this.invincibleCounter = 0;
-			}
-		}
-		if (hp > 0) {
-
-			if (this.state.equals("RUN") == false) {
-				if (this.saitama < this.MAX_SAITAMA)
-					this.saitama += this.SAITAMA_RECOVER_RATE * 1f / 60f;
-			}
-			if (this.saitama >= this.MIN_SAITAMA_TO_RUN)
-				this.tired = false;
-			if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
-					|| this.keyH.rightPressed == true) {
-				if (this.saitama <= 0)
-					this.tired = true;
-				if (this.keyH.runPressed && this.tired == false) {
-					this.run();
-				} else {
-
-					this.walk();
-				}
-				this.move();
-			} else if (this.keyH.attackPressed == true) {
-				this.runningCountAttackDelay = false;
-				this.comboAttackDelayTime = 0;
-				this.attack();
-				System.out.println(this.spriteNum);
-				if (this.state.equals("ATTACKING") && this.spriteNum == 3 && this.frameCounter % 4 == 0) {
-					this.checkAttackonMonster();
-				}
-
-				if (this.spriteNum == this.playerAttack[attackType].maxNumber) {
-					this.keyH.attackPressed = false;
-					this.attackType = (this.attackType + 1) % 3;
-					this.runningCountAttackDelay = true;
-					this.idle();
-				}
-			} else if (this.keyH.damagePressed == true) {
-				this.hurt();
-				if (this.spriteNum == this.playerHurt.maxNumber) {
-					this.keyH.damagePressed = false;
-					this.hp -= 5;
-					this.idle();
-				}
-			} else {
-				this.idle();
-			}
-		} else {
-			this.dying();
-			if (state.equals("DYING") == false) {
-				state = "DYING";
-			}
-		}
-		this.frameCounter++;
-		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
-				&& projectile.haveResource(this) == true) {
-			// SET DEFAULT COORDINATES, DIRECTION AND USER
-			projectile.set(worldX, worldY, direction, true, this);
-
-			// SUBTRACT THE COST (MANA, AMMO ETC.)
-			projectile.subtractResource(this);
-
-			// ADD IT TO THE LIST
-			gp.projectileList.add(projectile);
-
-			shotAvailableCounter = 0;
-
-//			gp.playSE(10);
-		}
-		if (shotAvailableCounter < 30) {
-			shotAvailableCounter++;
-		}
-	}
-
-	public void idle() {
-		if (this.state.equals("IDLE") == false) {
-			this.spriteNum = this.playerIdle.maxNumber - 1;
-		}
-		this.state = "IDLE";
-		if (this.frameCounter % 5 == 0) {
-			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
-		}
 
 	}
-
-	public void run() {
-		if (this.state.equals("RUN") == false) {
-			this.spriteNum = this.playerRun.maxNumber - 1;
-			this.frameCounter = 0;
-			this.speed = this.RUN_SPEED;
-		}
-		System.out.println("Player is running!");
-		this.state = "RUN";
-		if (this.saitama > 0) {
-			this.saitama -= this.SAITAMA_DECREASE_RATE * 1f / 60f;
-		} else {
-			this.saitama = 0;
-		}
-
-		if (this.frameCounter % 5 == 0) {
-			this.spriteNum = (this.spriteNum + 1) % this.playerRun.maxNumber;
-		}
-
 	}
 
-	public void walk() {
-		if (this.state.equals("WALK") == false) {
-			this.spriteNum = this.playerWalk.maxNumber - 1;
-			this.frameCounter = 0;
-			this.speed = this.DEFAULT_SPEED;
-		}
-		if (this.tired) {
-			this.speed = this.TIRED_SPEED;
-		} else
-			this.speed = this.DEFAULT_SPEED;
-		// System.out.println("Player is walking!");
-		this.state = "WALK";
-		if (this.frameCounter % 5 == 0) {
-			this.spriteNum = (this.spriteNum + 1) % this.playerWalk.maxNumber;
-		}
 
-	}
-
-	public void move() {
-		boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
-				|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
-		boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height) * 10 / 20
-				|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
-		if (this.keyH.upPressed == true) {
-			direction = "up";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			if (!this.CollisionOn) {
-				if (overy)
-					this.y -= this.speed;
-				this.worldY -= this.speed;
-			}
-		}
-		if (this.keyH.downPressed == true) {
-			direction = "down";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			if (!this.CollisionOn) {
-				if (overy)
-					this.y += this.speed;
-				this.worldY += this.speed;
-			}
-		}
-		if (this.keyH.leftPressed == true) {
-			direction = "left";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			if (!this.CollisionOn) {
-				if (overx)
-					this.x -= this.speed;
-				this.worldX -= this.speed;
-				this.flip = true;
-			}
-
-		}
-		if (this.keyH.rightPressed == true) {
-			direction = "right";
-			this.CollisionOn = false;
-			gp.cChecker.checkTile(this);
-			if (!this.CollisionOn) {
-				if (overx)
-					this.x += this.speed;
-				this.worldX += this.speed;
-				this.flip = false;
-			}
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
-		}
-
-	}
 	// System.out.println(this.worldX +" "+ this.worldY);
 
 	public void attack() {
@@ -586,10 +367,7 @@ public class Player extends Entity {
 			this.spriteNum = -1;
 			this.frameCounter = 0;
 		}
-<<<<<<< HEAD
-=======
 		this.hp -= 5;
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 		if (this.flip)
 			this.worldX += 1;
 		else
@@ -599,12 +377,9 @@ public class Player extends Entity {
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum++;
 		}
-<<<<<<< HEAD
 		if (this.spriteNum == this.playerHurt.maxNumber) {
 			this.idle();
 		}
-=======
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 	}
 
 	public void dying() {
@@ -667,7 +442,6 @@ public class Player extends Entity {
 	}
 
 	public void checkAttackonMonster() {
-<<<<<<< HEAD
 		int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
 		if (this.state.equals("ATTACKING")) {
 			this.attackZone.x = this.worldX + this.attackZoneDefaultX;
@@ -710,44 +484,6 @@ public class Player extends Entity {
 		
 		
 	}
-=======
-		int range = 10;
-		if (this.state.equals("ATTACKING")) {
-			Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y,
-					this.solidArea.width, this.solidArea.height);
-			if (flip) {
-				attackzone.x -= range;
-			} else {
-				attackzone.x += range;
-			}
-			attackzone.width += range;
-			System.out.println(attackzone.x + " " + attackzone.y + " " + attackzone.width + " " + attackzone.height);
-			for (int i = 0; i < gp.monster.length; i++) {
-				Monster m = gp.monster[i];
-				if (m != null && m.hp > 0) {
-					Rectangle monsterArea = new Rectangle(m.worldX + m.solidArea.x, m.worldY + m.solidArea.y,
-							m.solidArea.width, m.solidArea.height);
-					System.out.println(monsterArea.x + " " + monsterArea.y);
-					// System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width
-					// +" "+ monsterArea.height);
-					if (attackzone.intersects(monsterArea)) {
-						System.out.println("Monster is attacked!");
-						m.takeDamage(this.attack - gp.monster[i].defense);
-						gp.monster[i].damageReaction();
-						if (gp.monster[i].hp <= 0) {
-							gp.monster[i].dying = true;
-							gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
-							gp.ui.addMessage("Exp + " + gp.monster[i].exp);
-							exp += gp.monster[i].exp;
-							checkLevelUp();
-						}
-					}
-				}
-			}
-		}
-	}
-
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 	public void setDefaultPositions() {
 		worldX = gp.tileSize * 24;
 		worldY = gp.tileSize * 24;
@@ -804,8 +540,6 @@ public class Player extends Entity {
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
 		}
 	}
-<<<<<<< HEAD
-
 	public void draw(Graphics2D g2) {
 		switch (state) {
 		case "IDLE":
@@ -834,7 +568,7 @@ public class Player extends Entity {
 		}
 		g2.setColor(Color.DARK_GRAY);
 		g2.fillRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
-=======
+	}
 	public void pickUpObject(int i)
 	{
 		if(i != 999)
@@ -864,37 +598,5 @@ public class Player extends Entity {
 				gp.obj[i] = null;
 			}
 		}
-	}
-
-	public void draw(Graphics2D g2) {
-		switch (state) {
-		case "IDLE":
-			this.image = this.playerIdle.animation[this.spriteNum];
-			break;
-		case "WALK":
-			this.image = this.playerWalk.animation[this.spriteNum];
-			break;
-		case "ATTACKING":
-			this.image = this.playerAttack[this.attackType].animation[this.spriteNum];
-			break;
-		case "DYING":
-			this.image = this.playerDying.animation[this.spriteNum];
-			break;
-		case "HURT":
-			this.image = this.playerHurt.animation[this.spriteNum];
-			break;
-		case "RUN":
-			this.image = this.playerRun.animation[this.spriteNum];
-			break;
-		}
-		if (flip) {
-			g2.drawImage(image, x + gp.tileSize * 53 / 40, y, -this.width, this.height, null);
-		} else {
-			g2.drawImage(image, x, y, this.width, this.height, null);
-		}
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
-		// Display the player's current state as text
-		// g2.setColor(Color.BLACK);
-		// g2.drawString("State: " + state, x, y - 10);
 	}
 }

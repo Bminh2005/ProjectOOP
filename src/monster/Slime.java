@@ -22,7 +22,7 @@ public class Slime extends Monster {
         speed = 1;
         maxHp = 25;
         hp = maxHp;
-<<<<<<< HEAD
+
         attack = 20;
         defense = 0;
         exp = 2;
@@ -42,38 +42,12 @@ public class Slime extends Monster {
         right2 = setup("/monster/greenslime_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
     }
 
-    public void setAction() {
-        actionLockCounter++;
-        if(gp.player.invincible == false)
-        gp.QuaiVatTanCong.attackByTouch(this);
-        if (actionLockCounter == 120) {
-            Random random = new Random();
-            
-=======
-        attack = 1;
-        defense = 0;
-        exp = 2;
-        
-
-        getImage(); 
-    }
-
-    public void getImage() {
-        up1 = setup("/monster/greenslime_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        up2 = setup("/monster/greenslime_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        down1 = setup("/monster/greenslime_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        down2 = setup("/monster/greenslime_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        left1 = setup("/monster/greenslime_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        left2 = setup("/monster/greenslime_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        right1 = setup("/monster/greenslime_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
-        right2 = setup("/monster/greenslime_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
-    }
 
     public void setAction() {
         actionLockCounter++;
         if (actionLockCounter == 120) {
             Random random = new Random();
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
+
             int i = random.nextInt(100) + 1;
 
             if (i <= 25) {
