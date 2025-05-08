@@ -31,7 +31,7 @@ public class Projectile extends Entity{
 	{
 		if(user == gp.player)
 		{
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
 			if(monsterIndex != 999)
 			{
 				gp.player.damageMonsterByProjectile(monsterIndex, attack);

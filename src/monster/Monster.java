@@ -43,7 +43,7 @@ public abstract class Monster extends Entity {
 
 		if (true) {
 
-		if (CollisionOn == false) {
+		if (true) {
 
 			switch (direction) {
 			case "up":
