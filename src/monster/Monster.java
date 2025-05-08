@@ -39,9 +39,8 @@ public abstract class Monster extends Entity {
 		if (this.type == type_monster && contactPlayer == true) {
 			damagePlayer(attack);
 		}
-		if (true) {
 
-		if (true) {
+		if (CollisionOn == true) {
 
 			switch (direction) {
 			case "up":
@@ -79,7 +78,6 @@ public abstract class Monster extends Entity {
 		if (shotAvailableCounter < 30) {
 			shotAvailableCounter++;
 		}
-	}
 	}
 
 	public void damagePlayer(int attack) {
