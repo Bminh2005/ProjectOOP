@@ -68,6 +68,8 @@ public class Player extends Entity {
 		solidArea.height = 22; //= 18*gp.tileSize/40
 		solidArea.width = 32;
 		solidArea.height = 32;
+		//(31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
+		attackZone = new Rectangle(37, 17, 30, 32);
 		setDefaultValues();
 		getPlayerImage();
 		currentWeapon = new OBJ_Sword_Normal(gp);
@@ -133,7 +135,6 @@ public class Player extends Entity {
 		width = gp.tileSize * 53 / 40;
 
 		//solidArea = new Rectangle(17, 23, 32, 32);
-		solidArea = new Rectangle(17, 23, 32, 32);
 		CollisionOn = false;
 
 		// === Initial Direction ===
