@@ -1,5 +1,7 @@
 package monster;
 
+import java.awt.Rectangle;
+
 import entity.Entity;
 import entity.Player;
 import main.GamePanel;
@@ -10,7 +12,17 @@ public class ChuDongTanCong {
 	public ChuDongTanCong(GamePanel gp) {
 		this.gp = gp;
 	}
-	
+	public void attackByTouch(Entity monster) {
+		int playerLeftX = gp.player.worldX + gp.player.solidAreaDefaultX;
+		int playerTopY = gp.player.worldY + gp.player.solidAreaDefaultY;
+		Rectangle playerZone = new Rectangle(playerLeftX, playerTopY, gp.player.solidArea.width, gp.player.solidArea.height);
+		monster.solidArea.x = monster.worldX;
+		monster.solidArea.y = monster.worldY;
+		if(monster.solidArea.intersects(playerZone) && gp.player.invincible == false) {
+			gp.player.takeDamge(monster.attack);
+			gp.player.invincible = true;
+		}
+	}
 	public void QuaiVatDuoiTheoPlayer(Entity monster) {
 		boolean tanCong = false;
 		int warZoneWidth = 6*gp.tileSize;

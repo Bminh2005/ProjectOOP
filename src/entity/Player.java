@@ -19,7 +19,11 @@ public class Player extends Entity {
 	int speed;
 	public String state;
 	public ArrayList<Entity> inventory = new ArrayList<>();
-
+	
+	// PLAYER attackZone
+	private Rectangle attackZone;
+	private int attackZoneDefaultX;
+	private int attackZoneDefaultY;
 	// PLAYER'S SAITAMA
 	private float saitama;
 	private final float MAX_SAITAMA = 100f;
@@ -53,6 +57,10 @@ public class Player extends Entity {
 		super(gp);
 		this.keyH = keyH;
 		// SOLID AREA
+		attackZone = new Rectangle(42, 13, 27, 34);
+		// 35, 11, 22, 28 --> 42, 13, 27, 34
+		attackZoneDefaultX = attackZone.x;
+		attackZoneDefaultY = attackZone.y;
 		solidArea = new Rectangle();
 		solidArea.x = 21; // = 17*gp.tileSize/40
 		solidArea.y = 26; // = 22*gp.tileSize/40
@@ -165,12 +173,19 @@ public class Player extends Entity {
 		}
 		if (this.invincible) {
 			this.invincibleCounter++;
-			if (this.invincibleCounter >= 60) {
+			if (this.invincibleCounter >= 120) {
 				this.invincible = false;
+				if(this.state.equals("HURT")) {
+					this.state = "IDLE";
+				}
 				this.invincibleCounter = 0;
 			}
 		}
-		if (hp > 0) {			
+		if (hp > 0) {
+			if (this.state.equals("HURT")) {
+				this.hurt();
+			}
+			else {
 			if (this.state.equals("RUN") == false) {
 				if (this.saitama < this.MAX_SAITAMA)
 					this.saitama += this.SAITAMA_RECOVER_RATE * 1f / 60f;
@@ -216,21 +231,16 @@ public class Player extends Entity {
 				if(overx) this.x += dx;
 				if(overy) this.y += dy;
 				
-			} else if (this.keyH.damagePressed == true) {
-				this.hurt();
-				if (this.spriteNum == this.playerHurt.maxNumber) {
-					this.keyH.damagePressed = false;
-					this.hp -= 5;
-					this.idle();
-				}
 			} else {
 				this.idle();
 			}
+		}
 		} else {
 			this.dying();
 			if (state.equals("DYING") == false) {
 				state = "DYING";
 			}
+			
 		}
 		this.frameCounter++;
 		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
@@ -354,7 +364,6 @@ public class Player extends Entity {
 			this.spriteNum = -1;
 			this.frameCounter = 0;
 		}
-		this.hp -= 5;
 		if (this.flip)
 			this.worldX += 1;
 		else
@@ -363,6 +372,9 @@ public class Player extends Entity {
 		this.state = "HURT";
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum++;
+		}
+		if (this.spriteNum == this.playerHurt.maxNumber) {
+			this.idle();
 		}
 	}
 
@@ -426,17 +438,14 @@ public class Player extends Entity {
 	}
 
 	public void checkAttackonMonster() {
-		int range = 10;
+		int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
 		if (this.state.equals("ATTACKING")) {
-			Rectangle attackzone = new Rectangle(this.worldX + this.solidArea.x, this.worldY + this.solidArea.y,
-					this.solidArea.width, this.solidArea.height);
+			this.attackZone.x = this.worldX + this.attackZoneDefaultX;
+			this.attackZone.y = this.worldY + this.attackZoneDefaultY;
 			if (flip) {
-				attackzone.x -= range;
-			} else {
-				attackzone.x += range;
+				attackZone.x -= range;
 			}
-			attackzone.width += range;
-			System.out.println(attackzone.x + " " + attackzone.y + " " + attackzone.width + " " + attackzone.height);
+			System.out.println(attackZone.x + " " + attackZone.y + " " + attackZone.width + " " + attackZone.height);
 			for (int i = 0; i < gp.monster.length; i++) {
 				Monster m = gp.monster[i];
 				if (m != null && m.hp > 0) {
@@ -445,7 +454,7 @@ public class Player extends Entity {
 					System.out.println(monsterArea.x + " " + monsterArea.y);
 					// System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width
 					// +" "+ monsterArea.height);
-					if (attackzone.intersects(monsterArea)) {
+					if (attackZone.intersects(monsterArea)) {
 						System.out.println("Monster is attacked!");
 						m.takeDamage(this.attack - gp.monster[i].defense);
 						gp.monster[i].damageReaction();
@@ -461,7 +470,16 @@ public class Player extends Entity {
 			}
 		}
 	}
-
+	
+	public void takeDamge(int damage) {
+		if(damage - getDefense() > 0 && this.invincible == false) {
+			this.hp -= damage - getDefense();
+		}
+		this.invincible = true;
+		this.state = "HURT";
+		
+		
+	}
 	public void setDefaultPositions() {
 		worldX = gp.tileSize * 24;
 		worldY = gp.tileSize * 24;
@@ -534,7 +552,7 @@ public class Player extends Entity {
 			this.image = this.playerDying.animation[this.spriteNum];
 			break;
 		case "HURT":
-			this.image = this.playerHurt.animation[this.spriteNum];
+			this.image = this.playerHurt.animation[this.spriteNum%this.playerHurt.maxNumber];
 			break;
 		case "RUN":
 			this.image = this.playerRun.animation[this.spriteNum];

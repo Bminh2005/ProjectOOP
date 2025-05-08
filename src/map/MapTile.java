@@ -1,5 +1,6 @@
 package map;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -105,6 +106,7 @@ public class MapTile {
 	public void draw(Graphics2D g2, int x, int y) {
 		g2.drawImage(img, x, y, this.width, this.height, null);
 		if(collision) {
+			g2.setColor(Color.ORANGE);
 			g2.fillRect(x, y, gp.tileSize, gp.tileSize);
 		}
 		// Cập nhật vị trí vùng va chạm theo vị trí hiện tại

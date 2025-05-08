@@ -22,7 +22,7 @@ public class Slime extends Monster {
         speed = 1;
         maxHp = 25;
         hp = maxHp;
-        attack = 1;
+        attack = 20;
         defense = 0;
         exp = 2;
         
@@ -43,8 +43,11 @@ public class Slime extends Monster {
 
     public void setAction() {
         actionLockCounter++;
+        if(gp.player.invincible == false)
+        gp.QuaiVatTanCong.attackByTouch(this);
         if (actionLockCounter == 120) {
             Random random = new Random();
+            
             int i = random.nextInt(100) + 1;
 
             if (i <= 25) {
