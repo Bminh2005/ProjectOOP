@@ -1,9 +1,10 @@
 package object;
 
 import entity.Entity;
+import entity.Item;
 import main.GamePanel;
 
-public class OBJ_Shield_Wood extends Entity{
+public class OBJ_Shield_Wood extends Item{
 	
 	GamePanel gp;
 	

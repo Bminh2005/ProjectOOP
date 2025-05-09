@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import entity.Entity;
+import entity.Item;
 import entity.Player;
 import entity.Projectile;
 import map.Map;
@@ -29,12 +30,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
 	public ArrayList<Teleport> teleportList = new ArrayList<>();
-	public ArrayList<Entity> projectileList = new ArrayList<>();
+	public ArrayList<Projectile> projectileList = new ArrayList<>();
 	public int num_CurrentMap = 1;
 	public int maxMap = 3;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
-	public Entity obj[] = new Entity[20];
+	public Item obj[] = new Item[20];
 	public Monster monster[] = new Monster[20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
@@ -128,6 +129,8 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+	
+	//Method run is a method of interface Runable
 	public void run() {
 		double drawInterval = 1000000000/FPS;
 		double delta = 0;

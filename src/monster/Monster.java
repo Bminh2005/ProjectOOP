@@ -6,12 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import entity.Entity;
+import entity.Item;
 import main.GamePanel;
+import entity.Character;
 
-public abstract class Monster extends Entity {
+public abstract class Monster extends Character {
 
 	public int spriteNum = 1;
-
+	public int exp = 2;
 	GamePanel gp;
 
 	public Monster(GamePanel gp) {
@@ -117,7 +119,7 @@ public abstract class Monster extends Entity {
 
 	};
 
-	public void dropItem(Entity droppedItem) {
+	public void dropItem(Item droppedItem) {
 		for (int i = 0; i < gp.obj.length; i++) {
 			if (gp.obj[i] == null) {
 				gp.obj[i] = droppedItem;

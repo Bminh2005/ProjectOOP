@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import map.MapLayer;
+import entity.Character;
 
 public class CollisionChecker {
 	GamePanel gp;
@@ -61,7 +62,7 @@ public class CollisionChecker {
 			}
 		}
 	}
-	public int checkObject(Entity entity, boolean player)
+	public int checkObject(Character entity, boolean player)
 	{
 		int index = 999;
 		
@@ -118,7 +119,7 @@ public class CollisionChecker {
 		return index;
 	}
 	//NPC or MONSTER
-	public int checkEntity(Entity entity, Entity[] target)
+	public int checkEntity(Character entity, Character[] target)
 	{
 		int index = 999;
 		
@@ -173,7 +174,7 @@ public class CollisionChecker {
 			
 		return index;
 	}
-	public boolean checkPlayer(Entity entity)
+	public boolean checkPlayer(Character entity)
 	{
 		boolean contactPlayer = false;
 		

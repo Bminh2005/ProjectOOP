@@ -1,9 +1,11 @@
 package object;
 
 import entity.Entity;
+import entity.Item;
+import entity.Player;
 import main.GamePanel;
 
-public class OBJ_Heart extends Entity {
+public class OBJ_Heart extends Item {
 	
 	GamePanel gp;
 	
@@ -20,7 +22,7 @@ public class OBJ_Heart extends Entity {
 		image3 = setup("/objects/heart_blank", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		
 	}
-	public void use(Entity entity)
+	public void use(Player entity)
 	{
 		gp.ui.addMessage("Life + " + value);
 		entity.hp += value;

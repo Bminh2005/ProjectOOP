@@ -31,31 +31,15 @@ public class Entity {
 	// === Character Stats ===
 	// Thuoc tinh nhan vat: mau, mana, cong, thu, kinh nghiem, cap do
 	public String name;
-	public int level;
-	public int nextLevel;
-	public int exp;
-	public int nextLevelExp;
-
-	public int hp, maxHp;
-	public int mp, maxMp;
-
-	public int attack;
-	public int attackValue;
-	public int defense;
-	public int defenseValue;
-	public int strength;
+	
+	
+	
 	public int dexterity;
-
-	public int speed;
 	public int value;
-	public int coin;
 	public int useCost;
 
 	// === Equipment & Items ===
 	// Vu khi, la chan va du an (dan, lua, etc.)
-	public Entity currentWeapon;
-	public Entity currentShield;
-	public Projectile projectile;
 
 	// === Entity State ===
 	// Cac trang thai hoat dong cua nhan vat

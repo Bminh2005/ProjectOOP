@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import main.GamePanel;
 import monster.Monster;
 
-public class Projectile extends Entity{
+public class Projectile extends Character{
 	
 	Entity user;
 	Monster monster;
@@ -78,14 +78,14 @@ public class Projectile extends Entity{
 			spriteCounter = 0;
 		}
 	}
-	public boolean haveResource(Entity user)
+	public boolean haveResource(Player user)
 	{
 		boolean haveResource = false;
 		return haveResource;
 	}
-	public void subtractResource(Entity user)
+	public void subtractResource(Player user)
 	{
-		
+		user.mp -= 1;
 	}
 	public void draw(Graphics2D g2) {
 		BufferedImage image = null;

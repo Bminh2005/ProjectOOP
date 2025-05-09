@@ -14,11 +14,11 @@ import object.OBJ_Fireball;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
-public class Player extends Entity {
+public class Player extends Character {
 	KeyHandler keyH;
 	int speed;
 	public String state;
-	public ArrayList<Entity> inventory = new ArrayList<>();
+	public ArrayList<Item> inventory = new ArrayList<>();
 	
 	// PLAYER attackZone
 	private Rectangle attackZone;
@@ -54,6 +54,16 @@ public class Player extends Entity {
 	private boolean runningCountAttackDelay;
 
 	public int maxInventorySize = 20;
+	
+	public Item currentWeapon;
+	public Item currentShield;
+	public Projectile projectile;
+	
+	public int level;
+	public int nextLevel;
+	public int exp;
+	public int nextLevelExp;
+	public int coin;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -70,6 +80,8 @@ public class Player extends Entity {
 		solidArea.height = 32;
 		//(31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
 		attackZone = new Rectangle(37, 17, 30, 32);
+		attackZoneDefaultX = attackZone.x;
+		attackZoneDefaultY = attackZone.y;
 		setDefaultValues();
 		getPlayerImage();
 		currentWeapon = new OBJ_Sword_Normal(gp);
@@ -510,7 +522,7 @@ public class Player extends Entity {
 		int itemIndex = gp.ui.getItemIndexOnSlot();
 
 		if (itemIndex < inventory.size()) {
-			Entity selectedItem = inventory.get(itemIndex);
+			Item selectedItem = inventory.get(itemIndex);
 
 			if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
 				currentWeapon = selectedItem;

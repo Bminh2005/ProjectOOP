@@ -12,7 +12,7 @@ public class ChuDongTanCong {
 	public ChuDongTanCong(GamePanel gp) {
 		this.gp = gp;
 	}
-	public void attackByTouch(Entity monster) {
+	public void attackByTouch(Monster monster) {
 		int playerLeftX = gp.player.worldX + gp.player.solidAreaDefaultX;
 		int playerTopY = gp.player.worldY + gp.player.solidAreaDefaultY;
 		Rectangle playerZone = new Rectangle(playerLeftX, playerTopY, gp.player.solidArea.width, gp.player.solidArea.height);

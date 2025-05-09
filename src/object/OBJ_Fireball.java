@@ -3,6 +3,7 @@ package object;
 import java.awt.Color;
 
 import entity.Entity;
+import entity.Player;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -36,7 +37,7 @@ public class OBJ_Fireball extends Projectile{
 		right1 = setup("/projectile/fireball_right_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		right2 = setup("/projectile/fireball_right_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
 	}
-	public boolean haveResource(Entity user)
+	public boolean haveResource(Player user)
 	{
 		boolean haveResource = false;
 		if(user.mp >= useCost)
@@ -45,7 +46,7 @@ public class OBJ_Fireball extends Projectile{
 		}
 		return haveResource;
 	}
-	public void subtractResource(Entity user)
+	public void subtractResource(Player user)
 	{
 		user.mp -= useCost;
 	}

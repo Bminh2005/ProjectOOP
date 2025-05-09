@@ -1,9 +1,11 @@
 package object;
 
 import entity.Entity;
+import entity.Item;
+import entity.Player;
 import main.GamePanel;
 
-public class OBJ_Coin_Bronze extends Entity {
+public class OBJ_Coin_Bronze extends Item {
 
 
     public OBJ_Coin_Bronze(GamePanel gp) {
@@ -17,7 +19,7 @@ public class OBJ_Coin_Bronze extends Entity {
         image = down1;
     }
 
-    public void use(Entity entity) {
+    public void use(Player entity) {
         gp.ui.addMessage("Gold + " + value);
     	
         entity.coin += value;
