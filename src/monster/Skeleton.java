@@ -1,7 +1,6 @@
 package monster;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import entity.Entity;
@@ -10,9 +9,6 @@ import main.SpriteSheet;
 //import object.OBJ_Coin_Bronze;
 //import object.OBJ_Heart;
 //import object.OBJ_ManaCrystal;
-import object.OBJ_Coin_Bronze;
-import object.OBJ_Heart;
-import object.OBJ_ManaCrystal;
 
 public class Skeleton extends Monster {
 
@@ -39,17 +35,26 @@ public class Skeleton extends Monster {
 
     public void getImage() {
         // walk
-        skeletonWalk = new SpriteSheet("/monster/skeleton_walk.png", 600, 150, 4, 45, 38, 68, 68);
+        skeletonWalk = new SpriteSheet("/monster/skeleton_walk.png", 768, 84, 8, 21, 23, 53, 40);
 
         // attack
-        //skeletonAttack[0] = new SpriteSheet("/monster/skeleton_attack.png", 1200, 150, 8, 45, 38, 68, 68);
+        skeletonAttack[0] = new SpriteSheet("/monster/skeleton_attack.png", 576, 84, 6, 21, 23, 53, 40);
         
         //death
-        //skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 1200, 150, 8, 45, 38, 68, 68);
+        skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 1152, 84, 12, 21, 23, 53, 40);
     }
 
+	public void setAction() {
+		// TODO Auto-generated method stub
+		
+	}
 
-  
+	public void checkDrop() {
+		// TODO Auto-generated method stub
+		
+	}
+}
+    /*
     public void setAction() {
         actionLockCounter++;
 
@@ -101,6 +106,7 @@ public void checkDrop() {
         dropItem(new OBJ_ManaCrystal(gp));
     }
   }
+}
 @Override
     public void draw(Graphics2D g2) {
         int screenX = worldX - gp.player.worldX + gp.player.x;
@@ -111,9 +117,8 @@ public void checkDrop() {
             worldY + gp.tileSize > gp.player.worldY - gp.player.y &&
             worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
 
-            BufferedImage image = skeletonWalk.getSpriteNum(spriteNum);
+            BufferedImage image = skeletonWalk.getFrame(spriteNum);
             g2.drawImage(image, screenX, screenY, null);
         }
     }
-}
- 
+    */

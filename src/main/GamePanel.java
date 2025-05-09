@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Entity obj[] = new Entity[20];
-	public Monster monster[][] = new Monster[4][20];
+	public Monster monster[] = new Monster[20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Thread gameThread;
@@ -160,15 +160,15 @@ public class GamePanel extends JPanel implements Runnable{
 			player.update();
 			for(int i = 0; i < monster.length; i++)
 			{
-				if(monster[num_CurrentMap][i] != null)
+				if(monster[i] != null)
 				{
-					if(monster[num_CurrentMap][i].alive == true && monster[num_CurrentMap][i].dying == false)
+					if(monster[i].alive == true && monster[i].dying == false)
 					{
-						monster[num_CurrentMap][i].update();
+						monster[i].update();
 					}
-					if (monster[num_CurrentMap][i].alive == false) {
-					    monster[num_CurrentMap][i].checkDrop(); 
-					    monster[num_CurrentMap][i] = null;
+					if (monster[i].alive == false) {
+					    monster[i].checkDrop(); 
+					    monster[i] = null;
 					}
 
 				}
@@ -230,11 +230,11 @@ public class GamePanel extends JPanel implements Runnable{
 //		if(player.hp > 0) {
 //			cube.draw(g2);
 //		}
-		for(int i = 0; i < monster[num_CurrentMap].length; i++)
+		for(int i = 0; i < monster.length; i++)
 		{
-			if(monster[num_CurrentMap][i] != null)
+			if(monster[i] != null)
 			{
-				monster[num_CurrentMap][i].draw(g2);
+				monster[i].draw(g2);
 			}
 		}
 		for(int i = 0; i < obj.length; i++)

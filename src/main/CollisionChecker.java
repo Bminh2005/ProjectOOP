@@ -25,9 +25,9 @@ public class CollisionChecker {
 		MapLayer layer = gp.currentMap.getLayer2();
 		if(entityTopRow >= 1)
 			tileNum1 = layer.layerTileNum[entityBottomRow - 1][entityLeftCol];
-		if(entityLeftCol < gp.maxWorldCol - 1)
+		if(entityLeftCol < gp.maxWorldCol)
 			tileNum2 = layer.layerTileNum[entityTopRow][entityLeftCol + 1];
-		if(entityTopRow < gp.maxWorldRow -1 )
+		if(entityTopRow < gp.maxWorldRow)
 			tileNum3 = layer.layerTileNum[entityTopRow + 1][entityLeftCol];
 		if(entityLeftCol >= 1)
 			tileNum4 = layer.layerTileNum[entityTopRow][entityRightCol - 1];
@@ -118,8 +118,6 @@ public class CollisionChecker {
 		return index;
 	}
 	//NPC or MONSTER
-	
-	//checkEntity(player, moster[current_map]
 	public int checkEntity(Entity entity, Entity[] target)
 	{
 		int index = 999;
