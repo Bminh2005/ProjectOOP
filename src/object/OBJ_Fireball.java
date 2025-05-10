@@ -9,18 +9,21 @@ import main.GamePanel;
 
 public class OBJ_Fireball extends Projectile{
 
-	GamePanel gp;
 	
 	public OBJ_Fireball(GamePanel gp) {
 		super(gp);
-		this.gp = gp;
-		
 		name = "Fireball";
 		speed = 8;
 		maxHp = 80;
 		hp = maxHp;
 		attack = 15;
 		useCost = 2;
+		solidArea.x = 12;
+		solidArea.y = 12;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
+		solidArea.width = 12;
+		solidArea.height = 12;
 		alive = false;
 		getImage();
 		

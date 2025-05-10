@@ -6,16 +6,13 @@ import entity.Player;
 import main.GamePanel;
 
 public class OBJ_Heart extends Item {
-	
-	GamePanel gp;
-	
 	public OBJ_Heart(GamePanel gp)
 	{
 		super(gp);
 		
 		type = type_pickUpOnly;
 		name = "Heart";
-//		value = 2;
+		value = 2;
 		down1 = setup("/objects/heart_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		image = setup("/objects/heart_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		image2 = setup("/objects/heart_half", 3*gp.tileSize/4, 3*gp.tileSize/4);

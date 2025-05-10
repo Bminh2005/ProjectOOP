@@ -86,7 +86,7 @@ public class Entity {
 		this.gp = gp;
 	}
 
-	public void use(Entity entity)
+	public void use(Player entity)
 	{
 		
 	}

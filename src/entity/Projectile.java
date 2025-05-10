@@ -14,7 +14,6 @@ public class Projectile extends Character{
 
 	public Projectile(GamePanel gp) {
 		super(gp);
-		
 	}
 	
 	public void set(int worldX, int worldY, String direction, boolean alive, Entity user)
@@ -29,6 +28,7 @@ public class Projectile extends Character{
 	
 	public void update()
 	{
+		gp.cChecker.checkTile(this);
 		if(user == gp.player)
 		{
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
@@ -110,8 +110,10 @@ public class Projectile extends Character{
 				image = (spriteNum == 1) ? right1 : right2;
 				break;
 			}
-
+			if(alive)
 			g2.drawImage(image, screenX, screenY, null);
+			g2.setColor(Color.blue);
+			g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
 		}
 	}

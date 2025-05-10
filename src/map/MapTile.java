@@ -106,8 +106,8 @@ public class MapTile {
 	public void draw(Graphics2D g2, int x, int y) {
 		g2.drawImage(img, x, y, this.width, this.height, null);
 		if(collision) {
-			g2.setColor(Color.ORANGE);
-			g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+			g2.setColor(Color.RED);
+			g2.drawRect(x, y, gp.tileSize, gp.tileSize);
 		}
 		// Cập nhật vị trí vùng va chạm theo vị trí hiện tại
 		//collisionArea.x = x;

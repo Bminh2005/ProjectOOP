@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Player;
 import map.MapLayer;
 import entity.Character;
 
@@ -11,7 +12,7 @@ public class CollisionChecker {
 		this.gp = gp;
 	}
 	
-	public void checkTile(Entity entity) {
+	public void checkTile(Character entity) {
 		int entityLeftWorldX = entity.worldX + entity.solidAreaDefaultX;
 		int entityRightWorldX = entityLeftWorldX + entity.solidArea.width;
 		int entityTopWorldY = entity.worldY + entity.solidAreaDefaultY;
@@ -21,46 +22,76 @@ public class CollisionChecker {
 		int entityTopRow = entityTopWorldY/gp.tileSize;
 		int entityBottomRow = entityBottomWorldY/gp.tileSize;
 		int entityRightCol = entityRightWorldX/gp.tileSize;
-		System.out.println("X: " + entityLeftCol +" Y: " + entityTopRow);
-		int tileNum1 = 0, tileNum2 = 0, tileNum3 = 0, tileNum4 = 0;
-		MapLayer layer = gp.currentMap.getLayer2();
-		if(entityTopRow >= 1)
-			tileNum1 = layer.layerTileNum[entityBottomRow - 1][entityLeftCol];
-		if(entityLeftCol < gp.maxWorldCol)
-			tileNum2 = layer.layerTileNum[entityTopRow][entityLeftCol + 1];
-		if(entityTopRow < gp.maxWorldRow)
-			tileNum3 = layer.layerTileNum[entityTopRow + 1][entityLeftCol];
-		if(entityLeftCol >= 1)
-			tileNum4 = layer.layerTileNum[entityTopRow][entityRightCol - 1];
-		
-		if(layer.tiles[tileNum1].collision || layer.tiles[tileNum2].collision || layer.tiles[tileNum3].collision || layer.tiles[tileNum4].collision) {
-			entity.CollisionOn = true;
-			if(layer.tiles[tileNum1].collision) {
-				int tileTop = entityBottomRow * gp.tileSize;
-				if(entityTopWorldY <= tileTop) {
-					entity.worldY = tileTop - entity.solidAreaDefaultY;
-				}
-			}
-			if(layer.tiles[tileNum2].collision) {
-				int tileRight = (entityLeftCol + 1) * gp.tileSize;
-				if(entityRightWorldX >= tileRight) {
-					entity.worldX = tileRight - entity.solidArea.width - entity.solidAreaDefaultX;
-				}
-			}
-			
-			if(layer.tiles[tileNum3].collision) {
-				int tileBottom = (entityTopRow + 1)*gp.tileSize;
-				if(entityBottomWorldY >= tileBottom) {
-					entity.worldY = tileBottom - entity.solidAreaDefaultY - entity.solidArea.height;
-				}
-			}
-			if(layer.tiles[tileNum4].collision) {
-				int tileLeft = entityRightCol * gp.tileSize;
-				if(entityLeftWorldX <= tileLeft) {
-					entity.worldX = tileLeft - entity.solidAreaDefaultX;
-				}
-			}
+		if(entity instanceof Player) {
+			System.out.println("LeftCol: " + entityLeftCol +" RightCol: " + entityRightCol);
+			System.out.println("TopRow: " + entityTopRow +" BottomRow: " + entityBottomRow);
 		}
+		int tileNum1 = 0, tileNum2 = 0, tileNum3 = 0, tileNum4 = 0, tileNum5 = 0, tileNum6 = 0, tileNum7 = 0, tileNum8 = 0;
+		MapLayer layer = gp.currentMap.getLayer2();
+		if(entityBottomRow >= 1 && entityBottomRow < gp.maxWorldRow + 1 &&  entityLeftCol >= 0 && entityRightCol < 50) {
+			tileNum1 = layer.layerTileNum[entityBottomRow - 1][entityLeftCol];
+			tileNum5 = layer.layerTileNum[entityBottomRow - 1][entityRightCol];
+		}
+			
+		if(entityLeftCol < gp.maxWorldCol - 1 && entityLeftCol >= -1 && entityTopRow >= 0 && entityBottomRow < 50) {
+			tileNum2 = layer.layerTileNum[entityTopRow][entityLeftCol + 1];
+			tileNum6 = layer.layerTileNum[entityBottomRow][entityLeftCol + 1];
+		}
+		if(entityTopRow < gp.maxWorldRow - 1 && entityTopRow >= -1 && entityLeftCol >= 0 && entityRightCol < 50) {
+			tileNum3 = layer.layerTileNum[entityTopRow + 1][entityLeftCol];
+			tileNum7 = layer.layerTileNum[entityTopRow + 1][entityRightCol];
+		}
+		if(entityRightCol >= 1 && entityRightCol < gp.maxWorldCol + 1 && entityTopRow >= 0 && entityBottomRow < 50) {
+			tileNum4 = layer.layerTileNum[entityTopRow][entityRightCol - 1];
+			tileNum8 = layer.layerTileNum[entityBottomRow][entityRightCol - 1];
+		}
+		if(entity instanceof Player) {
+			System.out.println("Num2: " + tileNum2 +" Num6: " + tileNum6);
+		}
+		switch(entity.direction) {
+		case "up":
+			//UP CASE
+			if(layer.tiles[tileNum1].collision || layer.tiles[tileNum5].collision || entityBottomRow == 0) {
+				int tileTop = entityBottomRow * gp.tileSize;
+				if(entityTopWorldY - entity.speed<= tileTop) {
+					entity.worldY = tileTop - entity.solidAreaDefaultY + 1;
+					entity.CollisionOn = true;
+				}
+			}
+			break;
+		case "down":
+			//DOWN CASE
+			if(layer.tiles[tileNum3].collision || layer.tiles[tileNum7].collision || entityTopRow == 0) {
+				int tileBottom = (entityTopRow + 1)*gp.tileSize;
+				if(entityBottomWorldY + entity.speed >= tileBottom) {
+					entity.worldY = tileBottom - entity.solidAreaDefaultY - entity.solidArea.height -1;
+				}
+			}
+			break;
+		case "left":
+			//LEFT CASE
+			if(layer.tiles[tileNum4].collision || layer.tiles[tileNum8].collision || entityRightCol == 49) {
+				int tileLeft = entityRightCol * gp.tileSize;
+				if(entityLeftWorldX - entity.speed <= tileLeft) {
+					entity.worldX = tileLeft - entity.solidAreaDefaultX + 1;
+				}
+			}
+			break;
+		case "right":
+			//RIGHT CASE
+			if(layer.tiles[tileNum2].collision || layer.tiles[tileNum6].collision || entityLeftCol == 40) {
+				
+				int tileRight = (entityLeftCol + 1) * gp.tileSize;
+				if(entityRightWorldX + entity.speed>= tileRight) {
+					entity.worldX = tileRight - entity.solidArea.width - entity.solidAreaDefaultX -1;
+				}
+			}
+			break;
+		}
+			
+			
+			
+			
 	}
 	public int checkObject(Character entity, boolean player)
 	{

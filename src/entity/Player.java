@@ -76,8 +76,6 @@ public class Player extends Character {
 		solidAreaDefaultY = solidArea.y;
 		solidArea.width = 22; // = 21*gp.tileSize/40
 		solidArea.height = 22; //= 18*gp.tileSize/40
-		solidArea.width = 32;
-		solidArea.height = 32;
 		//(31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
 		attackZone = new Rectangle(37, 17, 30, 32);
 		attackZoneDefaultX = attackZone.x;
@@ -329,16 +327,6 @@ public class Player extends Character {
 	}
 
 	public void move() {
-		
-		if (this.keyH.upPressed == true) {
-			direction = "up";
-				this.worldY -= this.speed;
-		}
-		if (this.keyH.downPressed == true) {
-			direction = "down";
-				
-				this.worldY += this.speed;
-		}
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
 			
@@ -346,12 +334,22 @@ public class Player extends Character {
 				this.flip = true;
 
 		}
-		if (this.keyH.rightPressed == true) {
+		else if (this.keyH.rightPressed == true) {
 			direction = "right";
 				this.worldX += this.speed;
 				this.flip = false;
-
-	}
+				
+		}
+		else if (this.keyH.upPressed == true) {
+			direction = "up";
+				this.worldY -= this.speed;
+		}
+		else if (this.keyH.downPressed == true) {
+			 direction = "down";
+				
+				this.worldY += this.speed;
+		}
+		
 	}
 
 
@@ -366,9 +364,9 @@ public class Player extends Character {
 		this.state = "ATTACKING";
 		if (this.frameCounter % 20 == 0) {
 			if (flip)
-				this.worldX -= 1;
+				this.worldX -= 3;
 			else
-				this.worldX += 1;
+				this.worldX += 3;
 		}
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
@@ -487,6 +485,8 @@ public class Player extends Character {
 					}
 				}
 			}
+			this.attackZone.x = this.attackZoneDefaultX;
+			this.attackZone.y = this.attackZoneDefaultY;
 		}
 	}
 	
@@ -581,8 +581,14 @@ public class Player extends Character {
 		} else {
 			g2.drawImage(image, x, y, this.width, this.height, null);
 		}
-		g2.setColor(Color.DARK_GRAY);
-		g2.fillRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
+		g2.setColor(Color.RED);
+		g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
+		g2.setColor(Color.BLUE);
+		if(flip) {
+			int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
+			g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
+		}
+		else g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
 	}
 	public void pickUpObject(int i)
 	{

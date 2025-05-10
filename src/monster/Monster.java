@@ -42,7 +42,7 @@ public abstract class Monster extends Character {
 			damagePlayer(attack);
 		}
 
-		if (CollisionOn == true) {
+		if (CollisionOn == false) {
 
 			switch (direction) {
 			case "up":
