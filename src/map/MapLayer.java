@@ -35,8 +35,7 @@ public class MapLayer {
     	tiles[13] = new MapTile(gp, "/tiles/rock1.png", true);
     	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96, true);
     	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
-    	tiles[31] = new MapTile(gp,"/tiles/hut.png");
-    	
+    	tiles[31] = new MapTile(gp,"/tiles/hut.png");    	
     	tiles[16] = new MapTile(gp,"/tiles/03brick13.png");
     	tiles[17] = new MapTile(gp, "/tiles/03brick22.png");
     	tiles[18] = new MapTile(gp, "/tiles/03brick27.png");
@@ -52,27 +51,20 @@ public class MapLayer {
     	tiles[28] = new MapTile(gp, "/tiles/03water26.png");
     	tiles[29] = new MapTile(gp, "/tiles/03water33.png");
     	tiles[30] = new MapTile(gp, "/tiles/03water36.png");
-    	/*tiles[31] = new MapTile(gp, null);
-    	tiles[32] = new MapTile(gp, null);
-    	tiles[33] = new MapTile(gp, null);
-    	tiles[34] = new MapTile(gp, null);
-    	tiles[35] = new MapTile(gp, null);
-    	tiles[36] = new MapTile(gp, null);
-    	tiles[37] = new MapTile(gp, null);
-    	tiles[38] = new MapTile(gp, null);
-    	tiles[39] = new MapTile(gp, null);
-    	tiles[40] = new MapTile(gp, null);
-    	tiles[41] = new MapTile(gp, null);
-    	tiles[42] = new MapTile(gp, null);
-    	tiles[43] = new MapTile(gp, null);
-    	tiles[44] = new MapTile(gp, null);
-    	tiles[45] = new MapTile(gp, null);
-    	tiles[46] = new MapTile(gp, null);
-    	tiles[47] = new MapTile(gp, null);
-    	tiles[48] = new MapTile(gp, null);
-    	tiles[49] = new MapTile(gp, null);
-    	tiles[50] = new MapTile(gp, null);
-    	*/
+    	tiles[32] = new MapTile(gp, "/tiles/03map32.png");
+    	tiles[33] = new MapTile(gp, "/tiles/03brick33.png");
+		/*
+		 * tiles[34] = new MapTile(gp, null); tiles[35] = new MapTile(gp, null);
+		 * tiles[36] = new MapTile(gp, null); tiles[37] = new MapTile(gp, null);
+		 * tiles[38] = new MapTile(gp, null); tiles[39] = new MapTile(gp, null);
+		 * tiles[40] = new MapTile(gp, null); tiles[41] = new MapTile(gp, null);
+		 * tiles[42] = new MapTile(gp, null); tiles[43] = new MapTile(gp, null);
+		 * tiles[44] = new MapTile(gp, null); tiles[45] = new MapTile(gp, null);
+		 * tiles[46] = new MapTile(gp, null); tiles[47] = new MapTile(gp, null);
+		 * tiles[48] = new MapTile(gp, null); tiles[49] = new MapTile(gp, null);
+		 * tiles[50] = new MapTile(gp, null);
+		 */
+    	
     }
     public void loadLayer(GamePanel gp) {
 		try {
