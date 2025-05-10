@@ -35,26 +35,24 @@ public class MapLayer {
     	tiles[13] = new MapTile(gp, "/tiles/rock1.png", true);
     	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96, true);
     	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
-    	tiles[16] = new MapTile(gp,"/tiles/hut.png");
-    	/**
+    	tiles[31] = new MapTile(gp,"/tiles/hut.png");
     	
-    	
-    	tiles[16] = new MapTile(gp, null);
-    	tiles[17] = new MapTile(gp, null);
-    	tiles[18] = new MapTile(gp, null);
-    	tiles[19] = new MapTile(gp, null);
-    	tiles[20] = new MapTile(gp, null);
-    	tiles[21] = new MapTile(gp, null);
-    	tiles[22] = new MapTile(gp, null);
-    	tiles[23] = new MapTile(gp, null);
-    	tiles[24] = new MapTile(gp, null);
-    	tiles[25] = new MapTile(gp, null);
-    	tiles[26] = new MapTile(gp, null);
-    	tiles[27] = new MapTile(gp, null);
-    	tiles[28] = new MapTile(gp, null);
-    	tiles[29] = new MapTile(gp, null);
-    	tiles[30] = new MapTile(gp, null);
-    	tiles[31] = new MapTile(gp, null);
+    	tiles[16] = new MapTile(gp,"/tiles/03brick13.png");
+    	tiles[17] = new MapTile(gp, "/tiles/03brick22.png");
+    	tiles[18] = new MapTile(gp, "/tiles/03brick27.png");
+    	tiles[19] = new MapTile(gp, "/tiles/03brick32.png",true);
+    	tiles[20] = new MapTile(gp, "/tiles/03Door04.png");
+    	tiles[21] = new MapTile(gp, "/tiles/03land14.png");
+    	tiles[22] = new MapTile(gp, "/tiles/03land18.png");
+    	tiles[23] = new MapTile(gp, "/tiles/03land28.png");
+    	tiles[24] = new MapTile(gp, "/tiles/03land29.png");
+    	tiles[25] = new MapTile(gp, "/tiles/03road35.png");
+    	tiles[26] = new MapTile(gp, "/tiles/03water24.png");
+    	tiles[27] = new MapTile(gp, "/tiles/03water25.png");
+    	tiles[28] = new MapTile(gp, "/tiles/03water26.png");
+    	tiles[29] = new MapTile(gp, "/tiles/03water33.png");
+    	tiles[30] = new MapTile(gp, "/tiles/03water36.png");
+    	/*tiles[31] = new MapTile(gp, null);
     	tiles[32] = new MapTile(gp, null);
     	tiles[33] = new MapTile(gp, null);
     	tiles[34] = new MapTile(gp, null);
@@ -74,7 +72,7 @@ public class MapLayer {
     	tiles[48] = new MapTile(gp, null);
     	tiles[49] = new MapTile(gp, null);
     	tiles[50] = new MapTile(gp, null);
-    	**/
+    	*/
     }
     public void loadLayer(GamePanel gp) {
 		try {
