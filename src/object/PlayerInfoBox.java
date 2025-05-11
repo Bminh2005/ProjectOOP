@@ -15,10 +15,10 @@ public class PlayerInfoBox {
 	public BufferedImage boxImage; //58, 16  fix 16--> 72
 	public BufferedImage avatarImage;
 	public final double healthBarHeight = 30D;  //21, 0, 29, 8
-	public final double healthBarWidthMax = 130.5D;
+	public final double healthBarWidthMax = 122D;
 	public final int healthBarX = 94;
 	public final int healthBarY = 5;
-	public double healthBarWidth = 130.5D;
+	public double healthBarWidth = 122D;
 	public final double manaBarHeight = 13.5D;  //21, 8, 29, 3
 	public final double manaBarWidthMax = 130.5D;
 	public final int manaBarX = 94;
