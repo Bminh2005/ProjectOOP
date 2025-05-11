@@ -414,24 +414,24 @@ public class Player extends Character {
 	public void damageMonsterByProjectile(int i, int attack) {
 		if (i != 999) {
 
-			if (gp.monster[i].invincible == false) {
+			if (gp.monster[gp.num_CurrentMap][i].invincible == false) {
 //				gp.playSE(5);
 
-				int damage = attack - gp.monster[i].defense;
+				int damage = attack - gp.monster[gp.num_CurrentMap][i].defense;
 				if (damage < 0) {
 					damage = 0;
 				}
-				gp.monster[i].hp -= damage;
+				gp.monster[gp.num_CurrentMap][i].hp -= damage;
 				gp.ui.addMessage(damage + " damage!");
 
-				gp.monster[i].invincible = true;
-				gp.monster[i].damageReaction();
+				gp.monster[gp.num_CurrentMap][i].invincible = true;
+				gp.monster[gp.num_CurrentMap][i].damageReaction();
 
-				if (gp.monster[i].hp <= 0) {
-					gp.monster[i].dying = true;
-					gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
-					gp.ui.addMessage("Exp + " + gp.monster[i].exp);
-					exp += gp.monster[i].exp;
+				if (gp.monster[gp.num_CurrentMap][i].hp <= 0) {
+					gp.monster[gp.num_CurrentMap][i].dying = true;
+					gp.ui.addMessage("Killed the " + gp.monster[gp.num_CurrentMap][i].name + "!");
+					gp.ui.addMessage("Exp + " + gp.monster[gp.num_CurrentMap][i].exp);
+					exp += gp.monster[gp.num_CurrentMap][i].exp;
 					checkLevelUp();
 				}
 			}
@@ -440,10 +440,10 @@ public class Player extends Character {
 
 	public void contactMonster(int i) {
 		if (i != 999) {
-			if (invincible == false && gp.monster[i].dying == false) {
+			if (invincible == false && gp.monster[gp.num_CurrentMap][i].dying == false) {
 //				gp.playSE(6);
 
-				int damage = gp.monster[i].attack - defense;
+				int damage = gp.monster[gp.num_CurrentMap][i].attack - defense;
 				if (damage < 0) {
 					damage = 0;
 				}
@@ -464,7 +464,7 @@ public class Player extends Character {
 			}
 			System.out.println(attackZone.x + " " + attackZone.y + " " + attackZone.width + " " + attackZone.height);
 			for (int i = 0; i < gp.monster.length; i++) {
-				Monster m = gp.monster[i];
+				Monster m = gp.monster[gp.num_CurrentMap][i];
 				if (m != null && m.hp > 0) {
 					Rectangle monsterArea = new Rectangle(m.worldX + m.solidArea.x, m.worldY + m.solidArea.y,
 							m.solidArea.width, m.solidArea.height);
@@ -473,13 +473,13 @@ public class Player extends Character {
 					// +" "+ monsterArea.height);
 					if (attackZone.intersects(monsterArea)) {
 						System.out.println("Monster is attacked!");
-						m.takeDamage(this.attack - gp.monster[i].defense);
-						gp.monster[i].damageReaction();
-						if (gp.monster[i].hp <= 0) {
-							gp.monster[i].dying = true;
-							gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
-							gp.ui.addMessage("Exp + " + gp.monster[i].exp);
-							exp += gp.monster[i].exp;
+						m.takeDamage(this.attack - gp.monster[gp.num_CurrentMap][i].defense);
+						gp.monster[gp.num_CurrentMap][i].damageReaction();
+						if (gp.monster[gp.num_CurrentMap][i].hp <= 0) {
+							gp.monster[gp.num_CurrentMap][i].dying = true;
+							gp.ui.addMessage("Killed the " + gp.monster[gp.num_CurrentMap][i].name + "!");
+							gp.ui.addMessage("Exp + " + gp.monster[gp.num_CurrentMap][i].exp);
+							exp += gp.monster[gp.num_CurrentMap][i].exp;
 							checkLevelUp();
 						}
 					}

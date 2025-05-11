@@ -32,11 +32,11 @@ public class GamePanel extends JPanel implements Runnable{
 	public ArrayList<Teleport> teleportList = new ArrayList<>();
 	public ArrayList<Projectile> projectileList = new ArrayList<>();
 	public int num_CurrentMap = 1;
-	public int maxMap = 3;
+	public int maxMap = 4;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Item obj[] = new Item[20];
-	public Monster monster[] = new Monster[20];
+	public Monster monster[][] = new Monster[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Thread gameThread;
@@ -56,7 +56,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 6;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
-	private final Map MAP02 = new Map(this, "/map/Map03.txt", "/map/layer1.txt");
+	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
+	private final Map MAP03 = new Map(this, "/map/Map03.txt", "/map/layer1.txt");
 	int FPS = 60;
 	//WORLD SETTINGS
 	public final int maxWorldCol = 50;
@@ -76,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.cube = new MonsterCube(this);
 		maps[1] = MAP01;
 		maps[2]= MAP02;
+		maps[3] = MAP03;
 		currentMap = maps[1];
 		teleportList.add(new Teleport(
 			    1, 2, 40,   // từ Map 1 tại tile (4,42)
@@ -83,8 +85,12 @@ public class GamePanel extends JPanel implements Runnable{
 			));
 		teleportList.add(new Teleport(
 			    2, 30, 10,  // từ Map 2 tile (30,10)
-			    1, 3, 40    // sang Map 1 tile (42,2)
+			    3, 2, 20    // sang Map 1 tile (42,2)
 			));
+		teleportList.add(new Teleport(
+				3, 2, 19,
+				1 , 2, 39
+				));
 		processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
 		setupGame();
 	}
@@ -163,15 +169,15 @@ public class GamePanel extends JPanel implements Runnable{
 			player.update();
 			for(int i = 0; i < monster.length; i++)
 			{
-				if(monster[i] != null)
+				if(monster[num_CurrentMap][i] != null)
 				{
-					if(monster[i].alive == true && monster[i].dying == false)
+					if(monster[num_CurrentMap][i].alive == true && monster[num_CurrentMap][i].dying == false)
 					{
-						monster[i].update();
+						monster[num_CurrentMap][i].update();
 					}
-					if (monster[i].alive == false) {
-					    monster[i].checkDrop(); 
-					    monster[i] = null;
+					if (monster[num_CurrentMap][i].alive == false) {
+					    monster[num_CurrentMap][i].checkDrop(); 
+					    monster[num_CurrentMap][i] = null;
 					}
 
 				}
@@ -233,11 +239,11 @@ public class GamePanel extends JPanel implements Runnable{
 //		if(player.hp > 0) {
 //			cube.draw(g2);
 //		}
-		for(int i = 0; i < monster.length; i++)
+		for(int i = 0; i < monster[num_CurrentMap].length; i++)
 		{
-			if(monster[i] != null)
+			if(monster[num_CurrentMap][i] != null)
 			{
-				monster[i].draw(g2);
+				monster[num_CurrentMap][i].draw(g2);
 			}
 		}
 		for(int i = 0; i < obj.length; i++)
