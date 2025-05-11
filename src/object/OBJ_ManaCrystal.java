@@ -19,6 +19,9 @@ public class OBJ_ManaCrystal extends Item{
 	public void use(Player entity)
 	{
 		gp.ui.addMessage("Mana + " + value);
-		entity.mp += value;
+		if(entity.mp + value > entity.maxMp) {
+			entity.mp = entity.maxMp;
+		}
+		else entity.mp += value;
 	}
 }

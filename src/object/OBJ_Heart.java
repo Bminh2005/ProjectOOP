@@ -22,6 +22,11 @@ public class OBJ_Heart extends Item {
 	public void use(Player entity)
 	{
 		gp.ui.addMessage("Life + " + value);
-		entity.hp += value;
+		if(entity.hp + value > entity.maxHp) {
+			entity.hp = entity.maxHp;
+		}
+		else {
+			entity.hp += value;
+		}
 	}
 }
