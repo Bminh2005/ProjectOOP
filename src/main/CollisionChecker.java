@@ -51,7 +51,7 @@ public class CollisionChecker {
 		switch(entity.direction) {
 		case "up":
 			//UP CASE
-			if(layer.tiles[tileNum1].collision || layer.tiles[tileNum5].collision || entityBottomRow == 0) {
+			if(layer.tiles[tileNum1].collision || layer.tiles[tileNum5].collision || entityBottomRow <= 0) {
 				int tileTop = entityBottomRow * gp.tileSize;
 				if(entityTopWorldY - entity.speed<= tileTop) {
 					entity.worldY = tileTop - entity.solidAreaDefaultY + 1;
@@ -61,7 +61,7 @@ public class CollisionChecker {
 			break;
 		case "down":
 			//DOWN CASE
-			if(layer.tiles[tileNum3].collision || layer.tiles[tileNum7].collision || entityTopRow == 0) {
+			if(layer.tiles[tileNum3].collision || layer.tiles[tileNum7].collision || entityTopRow >= 49) {
 				int tileBottom = (entityTopRow + 1)*gp.tileSize;
 				if(entityBottomWorldY + entity.speed >= tileBottom) {
 					entity.worldY = tileBottom - entity.solidAreaDefaultY - entity.solidArea.height -1;
@@ -70,7 +70,7 @@ public class CollisionChecker {
 			break;
 		case "left":
 			//LEFT CASE
-			if(layer.tiles[tileNum4].collision || layer.tiles[tileNum8].collision || entityRightCol == 49) {
+			if(layer.tiles[tileNum4].collision || layer.tiles[tileNum8].collision || entityRightCol <= 0) {
 				int tileLeft = entityRightCol * gp.tileSize;
 				if(entityLeftWorldX - entity.speed <= tileLeft) {
 					entity.worldX = tileLeft - entity.solidAreaDefaultX + 1;
@@ -79,7 +79,7 @@ public class CollisionChecker {
 			break;
 		case "right":
 			//RIGHT CASE
-			if(layer.tiles[tileNum2].collision || layer.tiles[tileNum6].collision || entityLeftCol == 40) {
+			if(layer.tiles[tileNum2].collision || layer.tiles[tileNum6].collision || entityLeftCol >= 49) {
 				
 				int tileRight = (entityLeftCol + 1) * gp.tileSize;
 				if(entityRightWorldX + entity.speed>= tileRight) {

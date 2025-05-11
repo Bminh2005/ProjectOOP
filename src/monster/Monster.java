@@ -19,9 +19,9 @@ public abstract class Monster extends Character {
 	public Monster(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
-		solidArea.x = 2;
+		solidArea.x = 3;
 		solidArea.y = 14;
-		solidArea.width = 24;
+		solidArea.width = 30;
 		solidArea.height = 24;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
@@ -37,7 +37,6 @@ public abstract class Monster extends Character {
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this, false);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
-
 		if (this.type == type_monster && contactPlayer == true) {
 			damagePlayer(attack);
 		}
@@ -86,12 +85,7 @@ public abstract class Monster extends Character {
 		if (gp.player.invincible == false) {
 			// we can give damage
 //			gp.playSE(6);
-
-			int damage = attack - gp.player.defense;
-			if (damage < 0) {
-				damage = 0;
-			}
-			gp.player.hp -= damage;
+			gp.player.takeDamge(attack);
 
 			gp.player.invincible = true;
 		}
@@ -190,7 +184,7 @@ public abstract class Monster extends Character {
 				image = (spriteNum == 1) ? right1 : right2;
 				break;
 			}
-
+			
 			// MONSTER HP BAR
 			if (type == 2 && hpBarOn == true) {
 				double oneScale = (double) gp.tileSize / maxHp;
@@ -221,7 +215,7 @@ public abstract class Monster extends Character {
 			}
 
 			g2.drawImage(image, screenX, screenY, null);
-
+			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 			changeAlpha(g2, 1F);
 
 		}

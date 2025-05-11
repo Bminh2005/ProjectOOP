@@ -15,13 +15,18 @@ public class ChuDongTanCong {
 	public void attackByTouch(Monster monster) {
 		int playerLeftX = gp.player.worldX + gp.player.solidAreaDefaultX;
 		int playerTopY = gp.player.worldY + gp.player.solidAreaDefaultY;
-		Rectangle playerZone = new Rectangle(playerLeftX, playerTopY, gp.player.solidArea.width, gp.player.solidArea.height);
+		gp.player.solidArea.x = playerLeftX;
+		gp.player.solidArea.y = playerTopY;
 		monster.solidArea.x = monster.worldX;
 		monster.solidArea.y = monster.worldY;
-		if(monster.solidArea.intersects(playerZone) && gp.player.invincible == false) {
+		if((monster.solidArea.intersects(gp.player.solidArea)) && (gp.player.invincible == false)) {
+			System.out.println("===================================================");
 			gp.player.takeDamge(monster.attack);
-			gp.player.invincible = true;
 		}
+		gp.player.solidArea.x = gp.player.solidAreaDefaultX;
+		gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+		monster.solidArea.x = monster.solidAreaDefaultX;
+		monster.solidArea.y = monster.solidAreaDefaultY;
 	}
 	public void QuaiVatDuoiTheoPlayer(Entity monster) {
 		boolean tanCong = false;

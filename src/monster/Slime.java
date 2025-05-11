@@ -45,9 +45,10 @@ public class Slime extends Monster {
 
     public void setAction() {
         actionLockCounter++;
+        gp.QuaiVatTanCong.attackByTouch(this);
+       
         if (actionLockCounter == 120) {
             Random random = new Random();
-
             int i = random.nextInt(100) + 1;
 
             if (i <= 25) {

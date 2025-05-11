@@ -177,6 +177,14 @@ public class Player extends Character {
 	public void update() {
 		// System.out.println("SAITAMA = " + this.saitama);
 		// System.out.println("SPEED = " + this.speed);
+		
+		boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
+				|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
+		boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height) * 10 / 20
+				|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
+		int dx = this.worldX;
+		int dy = this.worldY;
+		gp.cChecker.checkTile(this);
 		if (this.runningCountAttackDelay) {
 			this.comboAttackDelayTime++;
 			if (this.comboAttackDelayTime == 20) {
@@ -185,18 +193,19 @@ public class Player extends Character {
 		}
 		if (this.invincible) {
 			this.invincibleCounter++;
-			if (this.invincibleCounter >= 120) {
+			if (this.invincibleCounter >= 60) {
 				this.invincible = false;
-				if(this.state.equals("HURT")) {
-					this.state = "IDLE";
-				}
 				this.invincibleCounter = 0;
 			}
 		}
 		if (hp > 0) {
 			if (this.state.equals("HURT")) {
 				this.hurt();
+				if(this.spriteNum == this.playerHurt.maxNumber - 1) {
+					this.idle();
+				}
 			}
+			
 			else {
 			if (this.state.equals("RUN") == false) {
 				if (this.saitama < this.MAX_SAITAMA)
@@ -222,10 +231,7 @@ public class Player extends Character {
 				}
 			else if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
 					|| this.keyH.rightPressed == true) {
-				boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
-						|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
-				boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height) * 10 / 20
-						|| this.worldY <= (gp.screenHeight - this.height) * 10 / 20;
+				
 				if (this.saitama <= 0)
 					this.tired = true;
 				if (this.keyH.runPressed && this.tired == false) {
@@ -234,20 +240,14 @@ public class Player extends Character {
 					
 					this.walk();
 				}
-				int dx = this.worldX;
-				int dy = this.worldY;
+				
 				this.move();
-				gp.cChecker.checkTile(this);
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
-				dx = this.worldX - dx;
-				dy = this.worldY - dy;
-				if(overx) this.x += dx;
-				if(overy) this.y += dy;
 				
-			} else {
-				this.idle();
-			}
+				
+			} 
+			else this.idle();
 		}
 		} else {
 			this.dying();
@@ -275,13 +275,18 @@ public class Player extends Character {
 		if (shotAvailableCounter < 30) {
 			shotAvailableCounter++;
 		}
+		dx = this.worldX - dx;
+		dy = this.worldY - dy;
+		if(overx) this.x += dx;
+		if(overy) this.y += dy;
 	}
 
 	public void idle() {
 		if (this.state.equals("IDLE") == false) {
-			this.spriteNum = this.playerIdle.maxNumber - 1;
+			this.spriteNum = -1;
+			this.frameCounter = 0;
+			this.state = "IDLE";
 		}
-		this.state = "IDLE";
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
 		}
@@ -376,22 +381,21 @@ public class Player extends Character {
 
 	public void hurt() {
 		System.out.println("Player is injured!");
-		if (this.state.equals("HURT") == false) {
-			this.spriteNum = -1;
-			this.frameCounter = 0;
+		if(this.state.equals("HURT") == false) {
+			this.spriteCounter = 0;
+			this.spriteNum = 0;
 		}
-		this.hp -= 5;
 		if (this.flip)
 			this.worldX += 1;
 		else
 			this.worldX -= 1;
 		System.out.println("HP = " + this.hp);
-		this.state = "HURT";
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum++;
 		}
-		if (this.spriteNum == this.playerHurt.maxNumber) {
-			this.idle();
+		if (this.spriteNum == this.playerHurt.maxNumber - 1) {
+			this.spriteNum = 0;
+			this.state = "IDLE";		
 		}
 	}
 
