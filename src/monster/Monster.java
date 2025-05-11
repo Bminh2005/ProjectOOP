@@ -40,6 +40,7 @@ public abstract class Monster extends Character {
 		if (this.type == type_monster && contactPlayer == true) {
 			damagePlayer(attack);
 		}
+		
 
 		if (CollisionOn == false) {
 

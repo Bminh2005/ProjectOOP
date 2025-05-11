@@ -44,7 +44,6 @@ public class GamePanel extends JPanel implements Runnable{
 	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
 	public ChuDongTanCong QuaiVatTanCong;
-	MonsterCube cube;
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -54,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int characterState = 4;
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
+	public final int storeState = 7;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
@@ -74,7 +74,6 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 		this.cChecker = new CollisionChecker(this);
 		this.QuaiVatTanCong = new ChuDongTanCong(this);
-		this.cube = new MonsterCube(this);
 		maps[1] = MAP01;
 		maps[2]= MAP02;
 		maps[3] = MAP03;
@@ -209,7 +208,8 @@ public class GamePanel extends JPanel implements Runnable{
 		        if (num_CurrentMap == tp.fromMap &&
 		            playerCol == tp.fromCol &&
 		            playerRow == tp.fromRow) {
-		            
+		            this.player.x = this.player.defaultScreenX;
+		            this.player.y = this.player.defaultScreenY;
 		            Teleport(tp.toMap, tp.toCol, tp.toRow);
 		            break;
 		        }

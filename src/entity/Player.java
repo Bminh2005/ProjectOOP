@@ -64,6 +64,9 @@ public class Player extends Character {
 	public int exp;
 	public int nextLevelExp;
 	public int coin;
+	public int defaultScreenX;
+	public int defaultScreenY;
+	
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -129,7 +132,9 @@ public class Player extends Character {
 		// Vi tri hien thi tren man hinh va hoat anh
 		x = (gp.screenWidth / 2) - (gp.tileSize / 2);
 		y = (gp.screenHeight / 2) - (gp.tileSize / 2);
-
+		defaultScreenX = x;
+		defaultScreenY = y;
+		
 		frameCounter = 0;
 		flip = false;
 
