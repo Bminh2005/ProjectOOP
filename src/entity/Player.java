@@ -25,12 +25,12 @@ public class Player extends Character {
 	private int attackZoneDefaultX;
 	private int attackZoneDefaultY;
 	// PLAYER'S SAITAMA
-	private float saitama;
-	private final float MAX_SAITAMA = 100f;
-	private final float MIN_SAITAMA_TO_RUN = 50f;
-	private final float SAITAMA_DECREASE_RATE = 20f;
+	public float saitama;
+	public final float MAX_SAITAMA = 100f;
+	public final float MIN_SAITAMA_TO_RUN = 50f;
+	private final float SAITAMA_DECREASE_RATE = 30f;
 	private final float SAITAMA_RECOVER_RATE = 10f;
-	private boolean tired;
+	public boolean tired;
 
 	private final int DEFAULT_SPEED = 3;
 	private final int TIRED_SPEED = 2;
