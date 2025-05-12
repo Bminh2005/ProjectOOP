@@ -104,7 +104,7 @@ public class Player extends Character {
 		mp = this.maxMp;
 
 		attack = 10;
-		defense = 10;
+		defense = 5;
 
 		strength = 1;
 		dexterity = 1;
@@ -244,8 +244,6 @@ public class Player extends Character {
 					this.walk();
 				}
 				this.CollisionOn = false;
-				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
-				if(this.CollisionOn == false)
 				this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
@@ -400,11 +398,12 @@ public class Player extends Character {
 		System.out.println("HP = " + this.hp);
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum++;
+			if (this.spriteNum == this.playerHurt.maxNumber) {
+				this.spriteNum = 0;
+				this.state = "IDLE";		
+			}
 		}
-		if (this.spriteNum == this.playerHurt.maxNumber) {
-			this.spriteNum = 0;
-			this.state = "IDLE";		
-		}
+		
 	}
 
 	public void dying() {

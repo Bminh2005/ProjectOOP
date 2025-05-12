@@ -150,6 +150,48 @@ public class CollisionChecker {
 		return index;
 	}
 	//NPC or MONSTER
+	public void checkCharacter(Character c1, Character c2) {
+		c1.solidArea.x = c1.worldX + c1.solidAreaDefaultX;
+		c1.solidArea.y = c1.worldY + c1.solidAreaDefaultY;
+		c2.solidArea.x = c2.worldX + c2.solidAreaDefaultX;
+		c2.solidArea.y = c2.worldY + c2.solidAreaDefaultY;
+		
+		if(c1.solidArea.intersects(c2.solidArea)) {
+			switch(c1.direction) {
+			case "up":
+				c1.worldY += c1.speed + 1;
+				
+				break;
+			case "down":
+				c1.worldY -= c1.speed + 1;
+				
+				break;
+			case "left":
+				c1.worldX += c1.speed + 1;
+				break;
+			case "right":
+				c1.worldX -= c1.speed + 1;
+				break;
+			}
+			
+			switch(c2.direction) {
+			case "up":
+				c2.worldY += c2.speed + 1;
+				
+				break;
+			case "down":
+				c2.worldY -= c2.speed + 1;
+				
+				break;
+			case "left":
+				c2.worldX += c2.speed + 1;
+				break;
+			case "right":
+				c2.worldX -= c2.speed + 1;
+				break;
+			}
+		}
+	}
 	public int checkEntity(Character entity, Character[] target)
 	{
 		int index = 999;
