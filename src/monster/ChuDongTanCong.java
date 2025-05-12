@@ -20,7 +20,7 @@ public class ChuDongTanCong {
 		monster.solidArea.x = monster.worldX;
 		monster.solidArea.y = monster.worldY;
 		if((monster.solidArea.intersects(gp.player.solidArea)) && (gp.player.invincible == false)) {
-			System.out.println("===================================================");
+			gp.player.invincible = true;
 			gp.player.takeDamge(monster.attack);
 		}
 		gp.player.solidArea.x = gp.player.solidAreaDefaultX;

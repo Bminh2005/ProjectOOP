@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import entity.Character;
 import entity.Entity;
 import entity.Item;
 import entity.Player;
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Item obj[] = new Item[20];
-	public Monster monster[][] = new Monster[4][20];
+	public Monster[][] monster = new Monster[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Thread gameThread;

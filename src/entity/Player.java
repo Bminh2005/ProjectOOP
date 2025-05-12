@@ -200,15 +200,13 @@ public class Player extends Character {
 			this.invincibleCounter++;
 			if (this.invincibleCounter >= 60) {
 				this.invincible = false;
+				this.state = "IDLE";
 				this.invincibleCounter = 0;
 			}
 		}
 		if (hp > 0) {
 			if (this.state.equals("HURT")) {
 				this.hurt();
-				if(this.spriteNum == this.playerHurt.maxNumber - 1) {
-					this.idle();
-				}
 			}
 			
 			else {
@@ -227,7 +225,7 @@ public class Player extends Character {
 						this.checkAttackonMonster();
 					}
 
-					if (this.spriteNum == this.playerAttack[attackType].maxNumber) {
+					if (this.spriteNum == this.playerAttack[attackType].maxNumber - 1) {
 						this.keyH.attackPressed = false;
 						this.attackType = (this.attackType + 1) % 3;
 						this.runningCountAttackDelay = true;
@@ -245,7 +243,9 @@ public class Player extends Character {
 					
 					this.walk();
 				}
-				
+				this.CollisionOn = false;
+				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+				if(this.CollisionOn == false)
 				this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
@@ -381,6 +381,9 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
 			this.spriteNum++;
+			if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
+				this.spriteNum = 0;
+			}
 		}
 	}
 
@@ -398,7 +401,7 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum++;
 		}
-		if (this.spriteNum == this.playerHurt.maxNumber - 1) {
+		if (this.spriteNum == this.playerHurt.maxNumber) {
 			this.spriteNum = 0;
 			this.state = "IDLE";		
 		}
@@ -500,10 +503,9 @@ public class Player extends Character {
 	}
 	
 	public void takeDamge(int damage) {
-		if(damage - getDefense() > 0 && this.invincible == false) {
+		if(damage - getDefense() > 0) {
 			this.hp -= damage - getDefense();
 		}
-		this.invincible = true;
 		this.state = "HURT";
 		
 		
