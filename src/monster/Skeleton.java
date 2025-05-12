@@ -35,13 +35,13 @@ public class Skeleton extends Monster {
 
     public void getImage() {
         // walk
-        skeletonWalk = new SpriteSheet("/monster/skeleton_walk.png", 768, 84, 8, 21, 23, 53, 40);
+        skeletonWalk = new SpriteSheet("/monster/skeleton_walk.png", 600, 150, 4, 21, 23, 53, 40);
 
         // attack
-        skeletonAttack[0] = new SpriteSheet("/monster/skeleton_attack.png", 576, 84, 6, 21, 23, 53, 40);
+        skeletonAttack[0] = new SpriteSheet("/monster/skeleton_attack.png", 1200, 150, 8, 21, 23, 53, 40);
         
         //death
-        skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 1152, 84, 12, 21, 23, 53, 40);
+        skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 600, 150, 4, 21, 23, 53, 40);
     }
 
 	public void setAction() {
