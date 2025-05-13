@@ -15,7 +15,8 @@ public abstract class Monster extends Character {
 	public int spriteNum = 1;
 	public int exp = 2;
 	GamePanel gp;
-
+	public int attackDelayCounter;
+	boolean attacking = false;
 	public Monster(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
@@ -26,6 +27,7 @@ public abstract class Monster extends Character {
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		alive = true;
+		attackDelayCounter = 0;
 
 	}
 
@@ -37,10 +39,15 @@ public abstract class Monster extends Character {
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this, false);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
-		if (this.type == type_monster && contactPlayer == true) {
-			damagePlayer(attack);
+//		if (this.type == type_monster && contactPlayer == true) {
+//			damagePlayer(attack);
+//		}
+		attackDelayCounter++;
+		if(attackDelayCounter == 25) {
+			gp.QuaiVatTanCong.attackByTouch(this);
+			attacking = true;
+			attackDelayCounter = 0;
 		}
-		
 
 		if (CollisionOn == false) {
 
@@ -214,9 +221,14 @@ public abstract class Monster extends Character {
 				dyingAnimation(g2);
 				hpBarOn = false;
 			}
-
+			Color c = new Color(255, 0, 0, 210);
 			g2.drawImage(image, screenX, screenY, null);
 			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
+			g2.setColor(c);
+			if(attacking) {
+				g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
+				attacking = false;
+			}
 			changeAlpha(g2, 1F);
 
 		}

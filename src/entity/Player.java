@@ -52,12 +52,13 @@ public class Player extends Character {
 	private int attackType;
 	private int comboAttackDelayTime;// don vi frames
 	private boolean runningCountAttackDelay;
-
+	private boolean hurting = false;
 	public int maxInventorySize = 20;
 	
 	public Item currentWeapon;
 	public Item currentShield;
 	public Projectile projectile;
+	
 	
 	public int level;
 	public int nextLevel;
@@ -205,7 +206,7 @@ public class Player extends Character {
 			}
 		}
 		if (hp > 0) {
-			if (this.state.equals("HURT")) {
+			if (hurting) {
 				this.hurt();
 			}
 			
@@ -259,7 +260,7 @@ public class Player extends Character {
 			}
 			
 		}
-		this.frameCounter++;
+		
 		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
 				&& projectile.haveResource(this) == true) {
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
@@ -282,6 +283,7 @@ public class Player extends Character {
 		dy = this.worldY - dy;
 		if(overx) this.x += dx;
 		if(overy) this.y += dy;
+		this.frameCounter++;
 	}
 
 	public void idle() {
@@ -388,21 +390,24 @@ public class Player extends Character {
 	public void hurt() {
 		System.out.println("Player is injured!");
 		if(this.state.equals("HURT") == false) {
-			this.spriteCounter = 0;
+			this.frameCounter = 0;
+			this.spriteNum = -1;
+			this.state = "HURT";
+		}
+		if (this.frameCounter % 5 == 0) {
+			this.spriteNum++;	
+		}
+		System.out.println("-----------------------------" + spriteNum);
+		if (this.spriteNum == this.playerHurt.maxNumber) {
 			this.spriteNum = 0;
+			hurting = false;
+			this.state = "IDLE";		
 		}
 		if (this.flip)
 			this.worldX += 1;
 		else
 			this.worldX -= 1;
 		System.out.println("HP = " + this.hp);
-		if (this.frameCounter % 5 == 0) {
-			this.spriteNum++;
-			if (this.spriteNum == this.playerHurt.maxNumber) {
-				this.spriteNum = 0;
-				this.state = "IDLE";		
-			}
-		}
 		
 	}
 
@@ -502,10 +507,10 @@ public class Player extends Character {
 	}
 	
 	public void takeDamge(int damage) {
-		if(damage - getDefense() > 0) {
-			this.hp -= damage - getDefense();
+		if(damage - defense > 0) {
+			this.hp -= (damage - defense);
 		}
-		this.state = "HURT";
+		this.hurting = true;
 		
 		
 	}
@@ -580,7 +585,7 @@ public class Player extends Character {
 			this.image = this.playerDying.animation[this.spriteNum];
 			break;
 		case "HURT":
-			this.image = this.playerHurt.animation[this.spriteNum%this.playerHurt.maxNumber];
+			this.image = this.playerHurt.animation[this.spriteNum];
 			break;
 		case "RUN":
 			this.image = this.playerRun.animation[this.spriteNum];

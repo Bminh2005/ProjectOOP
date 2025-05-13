@@ -84,6 +84,8 @@ public class Entity {
 
 	public Entity(GamePanel gp) {
 		this.gp = gp;
+		this.worldX = 0;
+		this.worldY = 0;
 	}
 
 	public void use(Player entity)

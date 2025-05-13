@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import entity.Entity;
 import entity.Player;
+import entity.Character;
 import main.GamePanel;
 
 public class ChuDongTanCong {
@@ -17,18 +18,18 @@ public class ChuDongTanCong {
 		int playerTopY = gp.player.worldY + gp.player.solidAreaDefaultY;
 		gp.player.solidArea.x = playerLeftX;
 		gp.player.solidArea.y = playerTopY;
-		monster.solidArea.x = monster.worldX;
-		monster.solidArea.y = monster.worldY;
+		monster.solidArea.x = monster.worldX + monster.solidAreaDefaultX;
+		monster.solidArea.y = monster.worldY + monster.solidAreaDefaultY;
 		if((monster.solidArea.intersects(gp.player.solidArea)) && (gp.player.invincible == false)) {
 			gp.player.invincible = true;
-			gp.player.takeDamge(monster.attack);
+			gp.player.takeDamge(10);
 		}
 		gp.player.solidArea.x = gp.player.solidAreaDefaultX;
 		gp.player.solidArea.y = gp.player.solidAreaDefaultY;
 		monster.solidArea.x = monster.solidAreaDefaultX;
 		monster.solidArea.y = monster.solidAreaDefaultY;
 	}
-	public void QuaiVatDuoiTheoPlayer(Entity monster) {
+	public void QuaiVatDuoiTheoPlayer(Character monster) {
 		boolean tanCong = false;
 		int warZoneWidth = 6*gp.tileSize;
 		int warZoneHeight = 6*gp.tileSize;
@@ -51,12 +52,12 @@ public class ChuDongTanCong {
 		
 		if(tanCong) {
 			if(monster.worldX < player.worldX - 15) {
-				monster.worldX += 3;
+				monster.worldX += monster.speed;
 			}
 			else if(monster.worldX > player.worldX + 15) {
 				monster.worldX -= 3;
 			}
-			if(monster.worldY < player.worldY - 10) {
+			else if(monster.worldY < player.worldY - 10) {
 				monster.worldY += 3;
 			}
 			else if(monster.worldY > player.worldY + 10) {
