@@ -361,12 +361,12 @@ public class UI {
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
-		value = String.valueOf(gp.player.coin);
+		value = String.valueOf(gp.player.nextLevel);
 		textX = getXforAlignToRightText(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
-		value = String.valueOf(gp.player.nextLevel);
+		value = String.valueOf(gp.player.coin);
 		textX = getXforAlignToRightText(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;

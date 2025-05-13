@@ -38,7 +38,7 @@ public abstract class Monster extends Character {
 		CollisionOn = false;
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this, false);
-		boolean contactPlayer = gp.cChecker.checkPlayer(this);
+		gp.cChecker.checkPlayer(this);
 //		if (this.type == type_monster && contactPlayer == true) {
 //			damagePlayer(attack);
 //		}

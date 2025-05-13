@@ -266,8 +266,8 @@ public class GamePanel extends JPanel implements Runnable{
 		
 //		projectileList.clear();
 		//UI
-		ui.draw(g2);
 		
+		ui.draw(g2);
 		g2.dispose();
 	}
 
