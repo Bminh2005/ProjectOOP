@@ -122,9 +122,5 @@ public class MapTile {
 			g2.setColor(Color.RED);
 			g2.drawRect(x + this.collisionArea.x, y + this.collisionArea.y, this.collisionArea.width, this.collisionArea.height);
 		}
-		
-		// Cập nhật vị trí vùng va chạm theo vị trí hiện tại
-		//collisionArea.x = x;
-		//collisionArea.y = y;
 	}
 }
