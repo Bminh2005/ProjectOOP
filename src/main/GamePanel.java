@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
 				3, 2, 19,
 				1 , 2, 39
 				));
-		processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
+		processor = new ProcessFrontBehindEntity (this);
 		setupGame();
 	}
 	
@@ -205,7 +205,6 @@ public class GamePanel extends JPanel implements Runnable{
 			if(playerCol == 4 && playerRow ==42) {
 				System.out.println("True!");
 			}
-			processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
 			for (Teleport tp : teleportList) {
 		        if (num_CurrentMap == tp.fromMap &&
 		            playerCol == tp.fromCol &&
@@ -235,7 +234,7 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		currentMap.draw(g2, 1);
-		processor.draw(this, g2);
+		processor.draw(g2, currentMap.getLayer2(), player);
 		//currentMap.draw(g2, 2);
 		//player.draw(g2);
 //		if(player.hp > 0) {
@@ -245,7 +244,7 @@ public class GamePanel extends JPanel implements Runnable{
 		{
 			if(monster[num_CurrentMap][i] != null)
 			{
-				monster[num_CurrentMap][i].draw(g2);
+				processor.draw(g2, currentMap.getLayer2(), monster[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < obj.length; i++)

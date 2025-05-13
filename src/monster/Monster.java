@@ -33,10 +33,9 @@ public abstract class Monster extends Character {
 
 	@Override
 	public void update() {
-
+        gp.cChecker.checkTile(this);
 		setAction();
 		CollisionOn = false;
-		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this, false);
 		gp.cChecker.checkPlayer(this);
 //		if (this.type == type_monster && contactPlayer == true) {

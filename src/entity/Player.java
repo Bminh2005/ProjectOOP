@@ -247,7 +247,7 @@ public class Player extends Character {
 				this.CollisionOn = false;
 				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
 				if(CollisionOn == false)
-				this.move();
+					this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
 				

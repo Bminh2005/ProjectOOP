@@ -3,6 +3,10 @@ package main;
 import entity.Entity;
 import entity.Player;
 import map.MapLayer;
+import map.MapTile;
+
+import java.awt.Rectangle;
+
 import entity.Character;
 
 public class CollisionChecker {
@@ -13,85 +17,79 @@ public class CollisionChecker {
 	}
 	
 	public void checkTile(Character entity) {
-		int entityLeftWorldX = entity.worldX + entity.solidAreaDefaultX;
-		int entityRightWorldX = entityLeftWorldX + entity.solidArea.width;
-		int entityTopWorldY = entity.worldY + entity.solidAreaDefaultY;
-		int entityBottomWorldY = entityTopWorldY + entity.solidArea.height;
-		
-		int entityLeftCol = entityLeftWorldX/gp.tileSize;		
-		int entityTopRow = entityTopWorldY/gp.tileSize;
-		int entityBottomRow = entityBottomWorldY/gp.tileSize;
-		int entityRightCol = entityRightWorldX/gp.tileSize;
-		if(entity instanceof Player) {
-			System.out.println("LeftCol: " + entityLeftCol +" RightCol: " + entityRightCol);
-			System.out.println("TopRow: " + entityTopRow +" BottomRow: " + entityBottomRow);
-		}
-		int tileNum1 = 0, tileNum2 = 0, tileNum3 = 0, tileNum4 = 0, tileNum5 = 0, tileNum6 = 0, tileNum7 = 0, tileNum8 = 0;
+		int col = 0;
+		int row = 0;
+		int x = 0;
+		int y = 0;
 		MapLayer layer = gp.currentMap.getLayer2();
-		if(entityBottomRow >= 1 && entityBottomRow < gp.maxWorldRow + 1 &&  entityLeftCol >= 0 && entityRightCol < 50) {
-			tileNum1 = layer.layerTileNum[entityBottomRow - 1][entityLeftCol];
-			tileNum5 = layer.layerTileNum[entityBottomRow - 1][entityRightCol];
-		}
-			
-		if(entityLeftCol < gp.maxWorldCol - 1 && entityLeftCol >= -1 && entityTopRow >= 0 && entityBottomRow < 50) {
-			tileNum2 = layer.layerTileNum[entityTopRow][entityLeftCol + 1];
-			tileNum6 = layer.layerTileNum[entityBottomRow][entityLeftCol + 1];
-		}
-		if(entityTopRow < gp.maxWorldRow - 1 && entityTopRow >= -1 && entityLeftCol >= 0 && entityRightCol < 50) {
-			tileNum3 = layer.layerTileNum[entityTopRow + 1][entityLeftCol];
-			tileNum7 = layer.layerTileNum[entityTopRow + 1][entityRightCol];
-		}
-		if(entityRightCol >= 1 && entityRightCol < gp.maxWorldCol + 1 && entityTopRow >= 0 && entityBottomRow < 50) {
-			tileNum4 = layer.layerTileNum[entityTopRow][entityRightCol - 1];
-			tileNum8 = layer.layerTileNum[entityBottomRow][entityRightCol - 1];
-		}
-		if(entity instanceof Player) {
-			System.out.println("Num2: " + tileNum2 +" Num6: " + tileNum6);
-		}
+		int[][] layerTileNum = layer.layerTileNum;
+		while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
+			int worldX = col*gp.tileSize;
+			int worldY = row*gp.tileSize;
+			x = worldX - gp.player.worldX + gp.player.x;
+			y = worldY- gp.player.worldY + gp.player.y;
+			int tileNum = layerTileNum[row][col];
+			if(worldX + gp.tileSize > entity.worldX - 5* gp.tileSize &&
+					worldX - gp.tileSize < entity.worldX + 5*gp.tileSize &&
+					worldY + gp.tileSize > entity.worldY - 5*gp.tileSize &&
+					worldY - gp.tileSize < entity.worldY + 5*gp.tileSize) {
+				if(tileNum != 0) {
+					checkTile(entity, layer.tiles[tileNum], worldX, worldY);
+				}
+			}
+			col++;
+			if(col >= gp.maxWorldCol) {
+				col = 0;
+				row++;
+			}
+		}		
+	}
+	
+	public void checkTile(Character entity, MapTile tile, int x, int y) {
+		entity.solidArea.x = entity.worldX + entity.solidAreaDefaultX;
+		entity.solidArea.y = entity.worldY + entity.solidAreaDefaultY;
+		Rectangle solid = new Rectangle();
+		solid.x = x + tile.collisionArea.x;
+		solid.y = y + tile.collisionArea.y;
+		solid.height = tile.collisionArea.height;
+		solid.width = tile.collisionArea.width;
 		switch(entity.direction) {
 		case "up":
-			//UP CASE
-			if(layer.tiles[tileNum1].collision || layer.tiles[tileNum5].collision || entityBottomRow <= 0) {
-				int tileTop = entityBottomRow * gp.tileSize;
-				if(entityTopWorldY - entity.speed<= tileTop) {
-					entity.worldY = tileTop - entity.solidAreaDefaultY + 1;
-					entity.CollisionOn = true;
+			if(solid.intersects(entity.solidArea)) {
+				while(solid.intersects(entity.solidArea)) {
+					entity.solidArea.y += 1;
+					entity.worldY += 1;
 				}
 			}
 			break;
 		case "down":
-			//DOWN CASE
-			if(layer.tiles[tileNum3].collision || layer.tiles[tileNum7].collision || entityTopRow >= 49) {
-				int tileBottom = (entityTopRow + 1)*gp.tileSize;
-				if(entityBottomWorldY + entity.speed >= tileBottom) {
-					entity.worldY = tileBottom - entity.solidAreaDefaultY - entity.solidArea.height -1;
+			if(solid.intersects(entity.solidArea)) {
+				while(solid.intersects(entity.solidArea)) {
+					entity.solidArea.y -= 1;
+					entity.worldY -= 1;
 				}
 			}
 			break;
 		case "left":
-			//LEFT CASE
-			if(layer.tiles[tileNum4].collision || layer.tiles[tileNum8].collision || entityRightCol <= 0) {
-				int tileLeft = entityRightCol * gp.tileSize;
-				if(entityLeftWorldX - entity.speed <= tileLeft) {
-					entity.worldX = tileLeft - entity.solidAreaDefaultX + 1;
+			if(solid.intersects(entity.solidArea)) {
+				while(solid.intersects(entity.solidArea)) {
+					entity.solidArea.x += 1;
+					entity.worldX += 1;
 				}
 			}
 			break;
 		case "right":
-			//RIGHT CASE
-			if(layer.tiles[tileNum2].collision || layer.tiles[tileNum6].collision || entityLeftCol >= 49) {
-				
-				int tileRight = (entityLeftCol + 1) * gp.tileSize;
-				if(entityRightWorldX + entity.speed>= tileRight) {
-					entity.worldX = tileRight - entity.solidArea.width - entity.solidAreaDefaultX -1;
+			entity.solidArea.x += entity.speed;
+			if(solid.intersects(entity.solidArea)) {
+				while(solid.intersects(entity.solidArea)) {
+					entity.solidArea.x -= 1;
+					entity.worldX -= 1;
 				}
 			}
 			break;
 		}
-			
-			
-			
-			
+		entity.solidArea.x = entity.solidAreaDefaultX;
+		entity.solidArea.y = entity.solidAreaDefaultY;
 	}
 	public int checkObject(Character entity, boolean player)
 	{

@@ -7,18 +7,13 @@ import map.MapLayer;
 import map.MapTile;
 
 public class ProcessFrontBehindEntity {
-	private MapLayer layer;
-	private Entity entity;
-	
-	
-	public ProcessFrontBehindEntity(MapLayer layer, Entity entity) {
-		super();
-		this.layer = layer;
-		this.entity = entity;
+	GamePanel gp;
+	public ProcessFrontBehindEntity(GamePanel gp) {
+		this.gp = gp;
 	}
 
 
-	public void draw(GamePanel gp,Graphics2D g2) {
+	public void draw(Graphics2D g2, MapLayer layer, Entity entity) {
 		int col = 0;
 		int row = 0;
 		int x, y;

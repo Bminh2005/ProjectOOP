@@ -62,6 +62,7 @@ public class Slime extends Monster {
             }
             actionLockCounter = 0;
         }
+        
 //
 //        int i = new Random().nextInt(100) + 1;
 //        if (i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
