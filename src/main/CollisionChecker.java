@@ -60,6 +60,7 @@ public class CollisionChecker {
 					entity.solidArea.y += 1;
 					entity.worldY += 1;
 				}
+				entity.worldY += 1;
 			}
 			break;
 		case "down":
@@ -68,6 +69,7 @@ public class CollisionChecker {
 					entity.solidArea.y -= 1;
 					entity.worldY -= 1;
 				}
+				entity.worldY -= 1;
 			}
 			break;
 		case "left":
@@ -76,6 +78,7 @@ public class CollisionChecker {
 					entity.solidArea.x += 1;
 					entity.worldX += 1;
 				}
+				entity.worldX += 1;
 			}
 			break;
 		case "right":
@@ -85,6 +88,7 @@ public class CollisionChecker {
 					entity.solidArea.x -= 1;
 					entity.worldX -= 1;
 				}
+				entity.worldX -= 1;
 			}
 			break;
 		}

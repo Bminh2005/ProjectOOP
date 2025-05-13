@@ -233,8 +233,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		ArrayList<Entity> entities = new ArrayList();
+		entities.add(player);
 		currentMap.draw(g2, 1);
-		processor.draw(g2, currentMap.getLayer2(), player);
 		//currentMap.draw(g2, 2);
 		//player.draw(g2);
 //		if(player.hp > 0) {
@@ -244,14 +245,14 @@ public class GamePanel extends JPanel implements Runnable{
 		{
 			if(monster[num_CurrentMap][i] != null)
 			{
-				processor.draw(g2, currentMap.getLayer2(), monster[num_CurrentMap][i]);
+				entities.add(monster[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < obj.length; i++)
 		{
 			if(obj[i] != null)
 			{
-				obj[i].draw(g2);
+				entities.add(obj[i]);
 			}
 		}
 		for(int i = 0; i < projectileList.size(); i++)
@@ -259,10 +260,14 @@ public class GamePanel extends JPanel implements Runnable{
 			if(projectileList.get(i) != null)
 			{
 //				projectileList.get(i).update();
-				projectileList.get(i).draw(g2);
+				entities.add(projectileList.get(i));
 			}
 		}
-		
+		for(Entity e: entities) {
+			e.draw(g2);
+		}
+		currentMap.draw(g2, 2);
+		processor.draw(g2, currentMap.getLayer2(), entities);
 //		projectileList.clear();
 		//UI
 		

@@ -220,11 +220,14 @@ public abstract class Monster extends Character {
 				dyingAnimation(g2);
 				hpBarOn = false;
 			}
-			Color c = new Color(255, 0, 0, 210);
+			
 			g2.drawImage(image, screenX, screenY, null);
+			g2.setColor(Color.red);
 			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
-			g2.setColor(c);
+			
 			if(attacking) {
+				Color c = new Color(255, 0, 0, 210);
+				g2.setColor(c);
 				g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 				attacking = false;
 			}
