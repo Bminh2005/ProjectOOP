@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
-	public ChuDongTanCong QuaiVatTanCong;
+	public ChuDongTanCong quaiVatTanCong;
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
 		this.cChecker = new CollisionChecker(this);
-		this.QuaiVatTanCong = new ChuDongTanCong(this);
+		this.quaiVatTanCong = new ChuDongTanCong(this);
 		maps[1] = MAP01;
 		maps[2]= MAP02;
 		maps[3] = MAP03;

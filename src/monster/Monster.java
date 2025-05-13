@@ -44,7 +44,7 @@ public abstract class Monster extends Character {
 //		}
 		attackDelayCounter++;
 		if(attackDelayCounter == 25) {
-			gp.QuaiVatTanCong.attackByTouch(this);
+			gp.quaiVatTanCong.attackByTouch(this);
 			attacking = true;
 			attackDelayCounter = 0;
 		}

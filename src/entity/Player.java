@@ -81,7 +81,7 @@ public class Player extends Character {
 		solidArea.width = 22; // = 21*gp.tileSize/40
 		solidArea.height = 22; //= 18*gp.tileSize/40
 		//(31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
-		attackZone = new Rectangle(37, 17, 30, 32);
+		attackZone = new Rectangle(37, 17, 40, 40);
 		attackZoneDefaultX = attackZone.x;
 		attackZoneDefaultY = attackZone.y;
 		setDefaultValues();
@@ -264,7 +264,7 @@ public class Player extends Character {
 		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
 				&& projectile.haveResource(this) == true) {
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
-			projectile.set(worldX, worldY, direction, true, this);
+			projectile.set(worldX, worldY + 10, direction, true, this);
 
 			// SUBTRACT THE COST (MANA, AMMO ETC.)
 			projectile.subtractResource(this);
