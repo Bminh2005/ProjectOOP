@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
 
@@ -114,6 +115,12 @@ public class Entity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return image;
+	}
+
+	public BufferedImage setup(BufferedImage image, int width, int height) {
+		UtilityTool uTool = new UtilityTool();
+		image = uTool.scaleImage(image, width, height);
 		return image;
 	}
 }

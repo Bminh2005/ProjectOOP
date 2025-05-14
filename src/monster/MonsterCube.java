@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 import main.GamePanel;
 import main.KeyHandler;
 
-
-
 public class MonsterCube extends Monster{
 		Color color;
 		int Frame;

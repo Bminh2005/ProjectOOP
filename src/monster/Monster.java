@@ -11,7 +11,6 @@ import main.GamePanel;
 import entity.Character;
 
 public abstract class Monster extends Character {
-
 	public int spriteNum = 1;
 	public int exp = 2;
 	GamePanel gp;
@@ -47,7 +46,12 @@ public abstract class Monster extends Character {
 			attacking = true;
 			attackDelayCounter = 0;
 		}
+<<<<<<< HEAD
 
+=======
+		
+
+>>>>>>> acaa42f (bat)
 		if (CollisionOn == false) {
 
 			switch (direction) {
