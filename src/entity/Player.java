@@ -372,6 +372,7 @@ public class Player extends Character {
 		// System.out.println("Player is attacking!");
 		this.state = "ATTACKING";
 		if (this.frameCounter % 20 == 0) {
+			gp.playSE(4);
 			if (flip)
 				this.worldX -= 3;
 			else
@@ -610,6 +611,7 @@ public class Player extends Character {
 		if(i != 999)
 		{
 			if(gp.obj[i] != null) {
+				gp.playSE(1);
 			//PICKUP ONLY ITEMS
 				if(gp.obj[i].type == type_pickUpOnly)
 				{

@@ -226,6 +226,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	}
 	public void Teleport(int targetmap, int col, int row ) {
+		playSE(6);
 		num_CurrentMap = targetmap;
 		currentMap = maps[num_CurrentMap];
 		player.worldX = col * tileSize;
