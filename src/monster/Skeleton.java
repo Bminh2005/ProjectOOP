@@ -13,7 +13,7 @@ import main.SpriteSheet;
 public class Skeleton extends Monster {
 
     private SpriteSheet skeletonWalk;
-    private SpriteSheet skeletonAttack[];
+    private SpriteSheet skeletonAttack;
     private SpriteSheet skeletonDeath;
 
     public Skeleton(GamePanel gp) {
@@ -28,8 +28,7 @@ public class Skeleton extends Monster {
         attack = 5;
         defense = 2;
         exp = 5;
-
-        skeletonAttack = new SpriteSheet[4];  
+        alive = true; 
         getImage();  
     }
 
@@ -38,7 +37,7 @@ public class Skeleton extends Monster {
         skeletonWalk = new SpriteSheet("/monster/skeleton_walk.png", 600, 150, 4, 21, 23, 53, 40);
 
         // attack
-        skeletonAttack[0] = new SpriteSheet("/monster/skeleton_attack.png", 1200, 150, 8, 21, 23, 53, 40);
+        skeletonAttack = new SpriteSheet("/monster/skeleton_attack.png", 1200, 150, 8, 21, 23, 53, 40);
         
         //death
         skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 600, 150, 4, 21, 23, 53, 40);

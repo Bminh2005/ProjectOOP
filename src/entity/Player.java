@@ -197,15 +197,16 @@ public class Player extends Character {
 				this.attackType = 0;
 			}
 		}
-		if (this.invincible) {
-			this.invincibleCounter++;
-			if (this.invincibleCounter >= 60) {
-				this.invincible = false;
-				this.state = "IDLE";
-				this.invincibleCounter = 0;
-			}
-		}
+		
 		if (hp > 0) {
+			if (this.invincible) {
+				this.invincibleCounter++;
+				if (this.invincibleCounter >= 60) {
+					this.invincible = false;
+					this.state = "IDLE";
+					this.invincibleCounter = 0;
+				}
+			}
 			if (hurting) {
 				this.hurt();
 			}
@@ -257,10 +258,6 @@ public class Player extends Character {
 		}
 		} else {
 			this.dying();
-			if (state.equals("DYING") == false) {
-				state = "DYING";
-			}
-			
 		}
 		
 		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
@@ -417,15 +414,16 @@ public class Player extends Character {
 		if (this.state.equals("DYING") == false) {
 			this.spriteNum = -1;
 			this.frameCounter = 0;
-			gp.gameState = gp.gameOverState;
+			this.state = "DYING";
 		}
-		System.out.println("Player is died!");
-		this.state = "DYING";
 		if (this.frameCounter % 10 == 0) {
-			if (this.spriteNum < this.playerDying.maxNumber - 1) {
-				this.spriteNum++;
+			this.spriteNum++;
+			if(this.spriteNum == this.playerDying.maxNumber - 1) {
+				gp.gameState = gp.gameOverState;
 			}
 		}
+		System.out.println("----------------------------"+ this.spriteNum);
+		
 
 	}
 
