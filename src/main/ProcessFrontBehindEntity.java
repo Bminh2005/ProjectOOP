@@ -29,7 +29,7 @@ public class ProcessFrontBehindEntity {
 				if(x >= -2*gp.tileSize && x <= gp.screenWidth + 2*gp.tileSize &&
 						y >= -2* gp.tileSize && y <= gp.screenHeight + 2*gp.tileSize) {
 					for(Entity e: entities) {
-						if(e.worldX > worldX -gp.tileSize && e.worldX <= worldX + layer.tiles[titleNum].getWidth() && e.worldY >= worldY && e.worldY <= (worldY + layer.tiles[titleNum].collisionArea.y + layer.tiles[titleNum].collisionArea.height) &&
+						if(e.worldX >= worldX && e.worldX <= worldX + layer.tiles[titleNum].getWidth() && e.worldY >= worldY && e.worldY <= (worldY + layer.tiles[titleNum].collisionArea.y + layer.tiles[titleNum].collisionArea.height) &&
 								e.worldY + e.solidAreaDefaultY + e.solidArea.height >=  (worldY + layer.tiles[titleNum].collisionArea.y + layer.tiles[titleNum].collisionArea.height)) {
 							e.draw(g2);
 						}
