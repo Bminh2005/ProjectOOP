@@ -25,12 +25,12 @@ public class Player extends Character {
 	private int attackZoneDefaultX;
 	private int attackZoneDefaultY;
 	// PLAYER'S SAITAMA
-	private float saitama;
-	private final float MAX_SAITAMA = 100f;
-	private final float MIN_SAITAMA_TO_RUN = 50f;
-	private final float SAITAMA_DECREASE_RATE = 20f;
+	public float saitama;
+	public final float MAX_SAITAMA = 100f;
+	public final float MIN_SAITAMA_TO_RUN = 50f;
+	private final float SAITAMA_DECREASE_RATE = 30f;
 	private final float SAITAMA_RECOVER_RATE = 10f;
-	private boolean tired;
+	public boolean tired;
 
 	private final int DEFAULT_SPEED = 3;
 	private final int TIRED_SPEED = 2;
@@ -52,18 +52,22 @@ public class Player extends Character {
 	private int attackType;
 	private int comboAttackDelayTime;// don vi frames
 	private boolean runningCountAttackDelay;
-
+	private boolean hurting = false;
 	public int maxInventorySize = 20;
 	
 	public Item currentWeapon;
 	public Item currentShield;
 	public Projectile projectile;
 	
+	
 	public int level;
 	public int nextLevel;
 	public int exp;
 	public int nextLevelExp;
 	public int coin;
+	public int defaultScreenX;
+	public int defaultScreenY;
+	
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -77,7 +81,7 @@ public class Player extends Character {
 		solidArea.width = 22; // = 21*gp.tileSize/40
 		solidArea.height = 22; //= 18*gp.tileSize/40
 		//(31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
-		attackZone = new Rectangle(37, 17, 30, 32);
+		attackZone = new Rectangle(37, 17, 40, 40);
 		attackZoneDefaultX = attackZone.x;
 		attackZoneDefaultY = attackZone.y;
 		setDefaultValues();
@@ -101,7 +105,7 @@ public class Player extends Character {
 		mp = this.maxMp;
 
 		attack = 10;
-		defense = 10;
+		defense = 5;
 
 		strength = 1;
 		dexterity = 1;
@@ -129,7 +133,9 @@ public class Player extends Character {
 		// Vi tri hien thi tren man hinh va hoat anh
 		x = (gp.screenWidth / 2) - (gp.tileSize / 2);
 		y = (gp.screenHeight / 2) - (gp.tileSize / 2);
-
+		defaultScreenX = x;
+		defaultScreenY = y;
+		
 		frameCounter = 0;
 		flip = false;
 
@@ -191,19 +197,18 @@ public class Player extends Character {
 				this.attackType = 0;
 			}
 		}
-		if (this.invincible) {
-			this.invincibleCounter++;
-			if (this.invincibleCounter >= 60) {
-				this.invincible = false;
-				this.invincibleCounter = 0;
-			}
-		}
+		
 		if (hp > 0) {
-			if (this.state.equals("HURT")) {
-				this.hurt();
-				if(this.spriteNum == this.playerHurt.maxNumber - 1) {
-					this.idle();
+			if (this.invincible) {
+				this.invincibleCounter++;
+				if (this.invincibleCounter >= 60) {
+					this.invincible = false;
+					this.state = "IDLE";
+					this.invincibleCounter = 0;
 				}
+			}
+			if (hurting) {
+				this.hurt();
 			}
 			
 			else {
@@ -222,7 +227,7 @@ public class Player extends Character {
 						this.checkAttackonMonster();
 					}
 
-					if (this.spriteNum == this.playerAttack[attackType].maxNumber) {
+					if (this.spriteNum == this.playerAttack[attackType].maxNumber - 1) {
 						this.keyH.attackPressed = false;
 						this.attackType = (this.attackType + 1) % 3;
 						this.runningCountAttackDelay = true;
@@ -240,8 +245,10 @@ public class Player extends Character {
 					
 					this.walk();
 				}
-				
-				this.move();
+				this.CollisionOn = false;
+				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+				if(CollisionOn == false)
+					this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
 				
@@ -251,16 +258,12 @@ public class Player extends Character {
 		}
 		} else {
 			this.dying();
-			if (state.equals("DYING") == false) {
-				state = "DYING";
-			}
-			
 		}
-		this.frameCounter++;
+		
 		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
 				&& projectile.haveResource(this) == true) {
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
-			projectile.set(worldX, worldY, direction, true, this);
+			projectile.set(worldX, worldY + 10, direction, true, this);
 
 			// SUBTRACT THE COST (MANA, AMMO ETC.)
 			projectile.subtractResource(this);
@@ -279,6 +282,7 @@ public class Player extends Character {
 		dy = this.worldY - dy;
 		if(overx) this.x += dx;
 		if(overy) this.y += dy;
+		this.frameCounter++;
 	}
 
 	public void idle() {
@@ -376,42 +380,50 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
 			this.spriteNum++;
+			if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
+				this.spriteNum = 0;
+			}
 		}
 	}
 
 	public void hurt() {
 		System.out.println("Player is injured!");
 		if(this.state.equals("HURT") == false) {
-			this.spriteCounter = 0;
+			this.frameCounter = 0;
+			this.spriteNum = -1;
+			this.state = "HURT";
+		}
+		if (this.frameCounter % 5 == 0) {
+			this.spriteNum++;	
+		}
+		System.out.println("-----------------------------" + spriteNum);
+		if (this.spriteNum == this.playerHurt.maxNumber) {
 			this.spriteNum = 0;
+			hurting = false;
+			this.state = "IDLE";		
 		}
 		if (this.flip)
 			this.worldX += 1;
 		else
 			this.worldX -= 1;
 		System.out.println("HP = " + this.hp);
-		if (this.frameCounter % 5 == 0) {
-			this.spriteNum++;
-		}
-		if (this.spriteNum == this.playerHurt.maxNumber - 1) {
-			this.spriteNum = 0;
-			this.state = "IDLE";		
-		}
+		
 	}
 
 	public void dying() {
 		if (this.state.equals("DYING") == false) {
 			this.spriteNum = -1;
 			this.frameCounter = 0;
-			gp.gameState = gp.gameOverState;
+			this.state = "DYING";
 		}
-		System.out.println("Player is died!");
-		this.state = "DYING";
 		if (this.frameCounter % 10 == 0) {
-			if (this.spriteNum < this.playerDying.maxNumber - 1) {
-				this.spriteNum++;
+			this.spriteNum++;
+			if(this.spriteNum == this.playerDying.maxNumber - 1) {
+				gp.gameState = gp.gameOverState;
 			}
 		}
+		System.out.println("----------------------------"+ this.spriteNum);
+		
 
 	}
 
@@ -495,11 +507,10 @@ public class Player extends Character {
 	}
 	
 	public void takeDamge(int damage) {
-		if(damage - getDefense() > 0 && this.invincible == false) {
-			this.hp -= damage - getDefense();
+		if(damage - defense > 0) {
+			this.hp -= (damage - defense);
 		}
-		this.invincible = true;
-		this.state = "HURT";
+		this.hurting = true;
 		
 		
 	}
@@ -574,7 +585,7 @@ public class Player extends Character {
 			this.image = this.playerDying.animation[this.spriteNum];
 			break;
 		case "HURT":
-			this.image = this.playerHurt.animation[this.spriteNum%this.playerHurt.maxNumber];
+			this.image = this.playerHurt.animation[this.spriteNum];
 			break;
 		case "RUN":
 			this.image = this.playerRun.animation[this.spriteNum];

@@ -20,7 +20,7 @@ public class MonsterCube extends Monster{
 		// TODO Auto-generated constructor stub
 	}
 	public void update() {
-		gp.QuaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
+		gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
 		if(abs(gp.player.worldX - this.worldX) <= 20 && abs(gp.player.worldY - this.worldY) <= 10 && gp.player.hp > 0) {
 			this.attack();
 		}

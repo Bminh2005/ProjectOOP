@@ -64,7 +64,20 @@ public class MapTile {
 			this.collisionArea = new Rectangle(0, 0, this.width, this.height);
 		}
 	}
-
+	public MapTile(GamePanel gp, String path, boolean collision, int x, int y, int cwidth, int cheight) {
+		this.gp = gp;
+		try {
+			this.img = ImageIO.read(getClass().getResourceAsStream(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.width = gp.tileSize;
+		this.height = gp.tileSize;
+		if(collision) {
+			this.collision = true;
+			this.collisionArea = new Rectangle(x, y, cwidth, cheight);
+		}
+	}
 	public MapTile(GamePanel gp, String path, int width, int height, boolean collision) {
 		this.gp = gp;
 		try {
@@ -76,7 +89,7 @@ public class MapTile {
 		this.height = this.width * height / width;
 		if(collision) {
 			this.collision = true;
-			this.collisionArea = new Rectangle(0, 0, this.width, this.height);
+			this.collisionArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
 		}
 	}
 	
@@ -107,10 +120,7 @@ public class MapTile {
 		g2.drawImage(img, x, y, this.width, this.height, null);
 		if(collision) {
 			g2.setColor(Color.RED);
-			g2.drawRect(x, y, gp.tileSize, gp.tileSize);
+			g2.drawRect(x + this.collisionArea.x, y + this.collisionArea.y, this.collisionArea.width, this.collisionArea.height);
 		}
-		// Cập nhật vị trí vùng va chạm theo vị trí hiện tại
-		//collisionArea.x = x;
-		//collisionArea.y = y;
 	}
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
+import object.PlayerInfoBox;
 import entity.Entity;
 
 public class UI {
@@ -20,6 +21,7 @@ public class UI {
 	Graphics2D g2;
 	Font maruMonica, purisaB;
 	BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
+	PlayerInfoBox infoBox;
 	public boolean messageOn = false;
 	ArrayList<String> message = new ArrayList<>();
 	ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -35,7 +37,7 @@ public class UI {
 	public UI(GamePanel gp)
 	{
 		this.gp = gp;
-		
+		infoBox = new PlayerInfoBox(gp);
 		try {
 			InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
 			maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -78,13 +80,16 @@ public class UI {
 		//PLAY STATE
 		if(gp.gameState == gp.playState)
 		{
-			drawPlayerLife();
+			
+			//drawPlayerLife();
 			drawMessage();
+			infoBox.update();
+			infoBox.draw(g2);
 		}
 		//PAUSE STATE
 		if(gp.gameState == gp.pauseState)
 		{
-			drawPlayerLife();
+			//drawPlayerLife();
 			drawPauseScreen();
 		}
 		//DIALOGUE STATE
@@ -356,12 +361,12 @@ public class UI {
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
-		value = String.valueOf(gp.player.coin);
+		value = String.valueOf(gp.player.nextLevel);
 		textX = getXforAlignToRightText(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
-		value = String.valueOf(gp.player.nextLevel);
+		value = String.valueOf(gp.player.coin);
 		textX = getXforAlignToRightText(value,tailX);
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;

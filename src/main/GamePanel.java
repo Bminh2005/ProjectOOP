@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import entity.Character;
 import entity.Entity;
 import entity.Item;
 import entity.Player;
@@ -36,15 +37,14 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Item obj[] = new Item[20];
-	public Monster monster[][] = new Monster[4][20];
+	public Monster[][] monster = new Monster[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Thread gameThread;
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
-	public ChuDongTanCong QuaiVatTanCong;
-	MonsterCube cube;
+	public ChuDongTanCong quaiVatTanCong;
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int characterState = 4;
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
+	public final int storeState = 7;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
@@ -73,8 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
 		this.cChecker = new CollisionChecker(this);
-		this.QuaiVatTanCong = new ChuDongTanCong(this);
-		this.cube = new MonsterCube(this);
+		this.quaiVatTanCong = new ChuDongTanCong(this);
 		maps[1] = MAP01;
 		maps[2]= MAP02;
 		maps[3] = MAP03;
@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
 				3, 2, 19,
 				1 , 2, 39
 				));
-		processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
+		processor = new ProcessFrontBehindEntity (this);
 		setupGame();
 	}
 	
@@ -166,6 +166,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void update() {
 		if(gameState == playState)
 		{
+			
 			player.update();
 			for(int i = 0; i < monster.length; i++)
 			{
@@ -204,12 +205,12 @@ public class GamePanel extends JPanel implements Runnable{
 			if(playerCol == 4 && playerRow ==42) {
 				System.out.println("True!");
 			}
-			processor = new ProcessFrontBehindEntity (currentMap.getLayer2(), player);
 			for (Teleport tp : teleportList) {
 		        if (num_CurrentMap == tp.fromMap &&
 		            playerCol == tp.fromCol &&
 		            playerRow == tp.fromRow) {
-		            
+		            this.player.x = this.player.defaultScreenX;
+		            this.player.y = this.player.defaultScreenY;
 		            Teleport(tp.toMap, tp.toCol, tp.toRow);
 		            break;
 		        }
@@ -232,8 +233,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		ArrayList<Entity> entities = new ArrayList();
+		entities.add(player);
 		currentMap.draw(g2, 1);
-		processor.draw(this, g2);
 		//currentMap.draw(g2, 2);
 		//player.draw(g2);
 //		if(player.hp > 0) {
@@ -243,14 +245,14 @@ public class GamePanel extends JPanel implements Runnable{
 		{
 			if(monster[num_CurrentMap][i] != null)
 			{
-				monster[num_CurrentMap][i].draw(g2);
+				entities.add(monster[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < obj.length; i++)
 		{
 			if(obj[i] != null)
 			{
-				obj[i].draw(g2);
+				entities.add(obj[i]);
 			}
 		}
 		for(int i = 0; i < projectileList.size(); i++)
@@ -258,14 +260,18 @@ public class GamePanel extends JPanel implements Runnable{
 			if(projectileList.get(i) != null)
 			{
 //				projectileList.get(i).update();
-				projectileList.get(i).draw(g2);
+				entities.add(projectileList.get(i));
 			}
 		}
-		
+		for(Entity e: entities) {
+			e.draw(g2);
+		}
+		currentMap.draw(g2, 2);
+		processor.draw(g2, currentMap.getLayer2(), entities);
 //		projectileList.clear();
 		//UI
-		ui.draw(g2);
 		
+		ui.draw(g2);
 		g2.dispose();
 	}
 
