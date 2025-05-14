@@ -40,6 +40,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public Monster[][] monster = new Monster[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
+	Sound music = new Sound();
+	Sound se = new Sound();
 	Thread gameThread;
 	public AssetSetter aSetter = new AssetSetter(this);
 	public UI ui = new UI(this);
@@ -102,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 		player.setItems();
 		aSetter.setMonster();
 //		aSetter.setInteractiveTile();
-//		playMusic(0);
+		playMusic(0);
 //		stopMusic();
 //		gameState = titleState;
 //		
@@ -274,5 +276,16 @@ public class GamePanel extends JPanel implements Runnable{
 		ui.draw(g2);
 		g2.dispose();
 	}
-
+	public void playMusic(int i) {
+		music.setFile(i);
+		music.play();
+		music.loop();
+	}
+	public void stopMusic() {
+		music.stop();
+	}
+	public void playSE(int i) {
+		se.setFile(i);
+		se.play();
+	}
 }
