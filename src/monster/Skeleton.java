@@ -1,6 +1,7 @@
 package monster;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import entity.Entity;
@@ -28,7 +29,9 @@ public class Skeleton extends Monster {
         attack = 5;
         defense = 2;
         exp = 5;
-        alive = true; 
+        alive = true;
+        this.width = 600/4;
+        this.height = 150;
         getImage();  
     }
 
@@ -52,7 +55,6 @@ public class Skeleton extends Monster {
 		// TODO Auto-generated method stub
 		
 	}
-}
     /*
     public void setAction() {
         actionLockCounter++;
@@ -106,18 +108,19 @@ public void checkDrop() {
     }
   }
 }
-@Override
-    public void draw(Graphics2D g2) {
-        int screenX = worldX - gp.player.worldX + gp.player.x;
-        int screenY = worldY - gp.player.worldY + gp.player.y;
-
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.x &&
-            worldX - gp.tileSize < gp.player.worldX + gp.player.x &&
-            worldY + gp.tileSize > gp.player.worldY - gp.player.y &&
-            worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
-
-            BufferedImage image = skeletonWalk.getFrame(spriteNum);
-            g2.drawImage(image, screenX, screenY, null);
-        }
-    }
-    */
+*/
+//@Override
+//    public void draw(Graphics2D g2) {
+//        int screenX = worldX - gp.player.worldX + gp.player.x;
+//        int screenY = worldY - gp.player.worldY + gp.player.y;
+//
+//        if (worldX + gp.tileSize > gp.player.worldX - gp.player.x &&
+//            worldX - gp.tileSize < gp.player.worldX + gp.player.x &&
+//            worldY + gp.tileSize > gp.player.worldY - gp.player.y &&
+//            worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
+//
+//            BufferedImage image = skeletonWalk.getSpriteNum(spriteNum);
+//            g2.drawImage(image, screenX, screenY, this.width, this.height,null);
+//        }
+//	}
+}

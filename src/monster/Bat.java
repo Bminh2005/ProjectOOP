@@ -4,6 +4,7 @@ import main.GamePanel;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -41,7 +42,7 @@ public class Bat extends Monster {
 
     private void loadAnimation(String state, String path, int frameCount) {
         try {
-            var is = getClass().getResourceAsStream(path); // Tải ảnh từ đường dẫn
+            InputStream is = getClass().getResourceAsStream(path); // Tải ảnh từ đường dẫn
             if (is == null) {
                 System.err.println("Không tìm thấy ảnh: " + path);
                 return;
