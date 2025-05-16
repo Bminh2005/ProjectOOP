@@ -1,21 +1,18 @@
 package monster;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import entity.Entity;
+import entity.Player;
 import main.GamePanel;
 import main.SpriteSheet;
-//import object.OBJ_Coin_Bronze;
-//import object.OBJ_Heart;
-//import object.OBJ_ManaCrystal;
 
 public class Skeleton extends Monster {
+    private ChuDongTanCong ai;
 
-    private SpriteSheet skeletonWalk;
-    private SpriteSheet skeletonAttack;
-    private SpriteSheet skeletonDeath;
-
+    private int actionLockCounter = 0;
+    
     public Skeleton(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -28,96 +25,42 @@ public class Skeleton extends Monster {
         attack = 5;
         defense = 2;
         exp = 5;
-        alive = true; 
-        getImage();  
+        alive = true;
+        getImage();
+        getAttackImage();
+        this.ai = new ChuDongTanCong(gp);
     }
 
-    public void getImage() {
-        // walk
-        skeletonWalk = new SpriteSheet("/monster/skeleton_walk.png", 600, 150, 4, 21, 23, 53, 40);
-
-        // attack
-        skeletonAttack = new SpriteSheet("/monster/skeleton_attack.png", 1200, 150, 8, 21, 23, 53, 40);
-        
-        //death
-        skeletonDeath = new SpriteSheet("/monster/skeleton_death.png", 600, 150, 4, 21, 23, 53, 40);
+    public void getImage()
+    {
+        up1 = setup("/monster/skeleton_up_1",gp.tileSize,gp.tileSize);
+        up2 = setup("/monster/skeleton_up_2",gp.tileSize,gp.tileSize);
+        down1 = setup("/monster/skeleton_down_1",gp.tileSize,gp.tileSize);
+        down2 = setup("/monster/skeleton_down_2",gp.tileSize,gp.tileSize);
+        left1 = setup("/monster/skeleton_left_1",gp.tileSize,gp.tileSize);
+        left2 = setup("/monster/skeleton_left_2",gp.tileSize,gp.tileSize);
+        right1 = setup("/monster/skeleton_right_1",gp.tileSize,gp.tileSize);
+        right2 = setup("/monster/skeleton_right_2",gp.tileSize,gp.tileSize);
     }
-
-	public void setAction() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void checkDrop() {
-		// TODO Auto-generated method stub
-		
-	}
-}
-    /*
+    public void getAttackImage()
+    {
+        attackUp1 = setup("/monster/skeleton_attack_up_1",gp.tileSize, gp.tileSize );
+        attackUp2 = setup("/monster/skeleton_attack_up_2",gp.tileSize, gp.tileSize );
+        attackDown1 = setup("/monster/skeleton_attack_down_1",gp.tileSize, gp.tileSize );
+        attackDown2 = setup("/monster/skeleton_attack_down_2",gp.tileSize, gp.tileSize );
+        attackLeft1 = setup("/monster/skeleton_attack_left_1",gp.tileSize * 2, gp.tileSize);
+        attackLeft2 = setup("/monster/skeleton_attack_left_2",gp.tileSize * 2, gp.tileSize);
+        attackRight1 = setup("/monster/skeleton_attack_right_1",gp.tileSize * 2, gp.tileSize);
+        attackRight2 = setup("/monster/skeleton_attack_right_2",gp.tileSize * 2, gp.tileSize);
+    }
+    @Override
     public void setAction() {
-        actionLockCounter++;
-
-        if (actionLockCounter == 120) {
-            int i = new java.util.Random().nextInt(100) + 1;
-
-            if (i <= 25) {
-                direction = "up";
-            } else if (i <= 50) {
-                direction = "down";
-            } else if (i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
-            }
-
-            if (isPlayerInRange()) {
-                attackPlayer(); 
-            }
-
-            actionLockCounter = 0;
-        }
-    }
-// check vị trí player
-    public boolean isPlayerInRange() {
-        int playerX = gp.player.worldX;
-        int playerY = gp.player.worldY;
-        int distance = Math.abs(worldX - playerX) + Math.abs(worldY - playerY);
-
-        return distance < 50;
+        ai.QuaiVatDuoiTheoPlayer(this);
+        ai.attackByTouch(this);
     }
 
-    public void attackPlayer() {
-        gp.player.hp -= attack;
-        System.out.println("Skeleton attacks Player! Player's HP: " + gp.player.hp);
+    public void damageReaction() {
+        actionLockCounter = 0;
+        direction = gp.player.direction;
     }
-
-@Override
-public void checkDrop() {
-    Random random = new Random();
-    int i = random.nextInt(100) + 1;
-
-    if (i < 50) { 
-        dropItem(new OBJ_Coin_Bronze(gp));
-        dropItem(new OBJ_Coin_Bronze(gp)); // drop 2 coins
-    } else if (i < 80) { 
-        dropItem(new OBJ_Heart(gp));
-    } else { 
-        dropItem(new OBJ_ManaCrystal(gp));
-    }
-  }
 }
-@Override
-    public void draw(Graphics2D g2) {
-        int screenX = worldX - gp.player.worldX + gp.player.x;
-        int screenY = worldY - gp.player.worldY + gp.player.y;
-
-        if (worldX + gp.tileSize > gp.player.worldX - gp.player.x &&
-            worldX - gp.tileSize < gp.player.worldX + gp.player.x &&
-            worldY + gp.tileSize > gp.player.worldY - gp.player.y &&
-            worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
-
-            BufferedImage image = skeletonWalk.getFrame(spriteNum);
-            g2.drawImage(image, screenX, screenY, null);
-        }
-    }
-    */
