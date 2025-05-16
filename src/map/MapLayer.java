@@ -33,7 +33,7 @@ public class MapLayer {
     	tiles[11] = new MapTile(gp, "/tiles/tree1.png", true, 0, 30, 48, 18);
     	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 28, 45, true);
     	tiles[13] = new MapTile(gp, "/tiles/rock1.png", true, 5, 20, 40, 20);
-    	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96, true);
+    	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96, true,20 ,48 ,32 ,32);
     	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
     	tiles[31] = new MapTile(gp,"/tiles/hut.png");    	
     	tiles[16] = new MapTile(gp,"/tiles/03brick13.png");
@@ -54,7 +54,7 @@ public class MapLayer {
     	tiles[32] = new MapTile(gp, "/tiles/03map32.png");
     	tiles[33] = new MapTile(gp, "/tiles/03brick33.png");
     	tiles[34] = new MapTile(gp,"/tiles/03water_brick.png");
-    	tiles[35] = new MapTile(gp,"/tiles/column.png",20,47,true);
+    	tiles[35] = new MapTile(gp,"/tiles/column.png",20,27,true,0,0,48, 96);
 		/*
 		 * tiles[34] = new MapTile(gp, null); tiles[35] = new MapTile(gp, null);
 		 * tiles[36] = new MapTile(gp, null); tiles[37] = new MapTile(gp, null);
