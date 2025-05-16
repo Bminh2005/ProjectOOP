@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
-	private final Map MAP03 = new Map(this, "/map/Map03.txt", "/map/layer1.txt");
+	private final Map MAP03 = new Map(this, "/map/Map03.txt", "/map/Map03_layer02.txt");
 	int FPS = 60;
 	//WORLD SETTINGS
 	public final int maxWorldCol = 50;
