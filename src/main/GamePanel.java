@@ -87,10 +87,10 @@ public class GamePanel extends JPanel implements Runnable{
 			));
 		teleportList.add(new Teleport(
 			    2, 30, 10,  // từ Map 2 tile (30,10)
-			    3, 2, 20    // sang Map 1 tile (42,2)
+			    3, 20, 2    // sang Map 1 tile (42,2)
 			));
 		teleportList.add(new Teleport(
-				3, 2, 19,
+				3, 19, 2,
 				1 , 2, 39
 				));
 		processor = new ProcessFrontBehindEntity (this);

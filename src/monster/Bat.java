@@ -42,11 +42,7 @@ public class Bat extends Monster {
 
     private void loadAnimation(String state, String path, int frameCount) {
         try {
-<<<<<<< HEAD
              InputStream is = getClass().getResourceAsStream(path); // Tải ảnh từ đường dẫn
-=======
-            InputStream is = getClass().getResourceAsStream(path); // Tải ảnh từ đường dẫn
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
             if (is == null) {
                 System.err.println("Không tìm thấy ảnh: " + path);
                 return;

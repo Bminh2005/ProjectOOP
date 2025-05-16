@@ -37,9 +37,9 @@ public class MapLayer {
     	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
     	tiles[31] = new MapTile(gp,"/tiles/hut.png");    	
     	tiles[16] = new MapTile(gp,"/tiles/03brick13.png");
-    	tiles[17] = new MapTile(gp, "/tiles/03brick22.png",true);
+    	tiles[17] = new MapTile(gp, "/tiles/brick_new_2.png",true);
     	tiles[18] = new MapTile(gp, "/tiles/03brick27.png");
-    	tiles[19] = new MapTile(gp, "/tiles/03brick32.png",true);
+    	tiles[19] = new MapTile(gp, "/tiles/brick_new_1.png",true);
     	tiles[20] = new MapTile(gp, "/tiles/03Door04.png");
     	tiles[21] = new MapTile(gp, "/tiles/03land14.png");
     	tiles[22] = new MapTile(gp, "/tiles/03land18.png");
