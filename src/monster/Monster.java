@@ -16,6 +16,7 @@ public abstract class Monster extends Character {
 	GamePanel gp;
 	public int attackDelayCounter;
 	boolean attacking = false;
+	int attackingCounter = 0;
 	public Monster(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
@@ -176,20 +177,30 @@ public abstract class Monster extends Character {
 				&& worldY + gp.tileSize > gp.player.worldY - gp.player.y
 				&& worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
 			switch (direction) {
-			case "up":
-				image = (spriteNum == 1) ? up1 : up2;
-				break;
-			case "down":
-				image = (spriteNum == 1) ? down1 : down2;
-				break;
-			case "left":
-				image = (spriteNum == 1) ? left1 : left2;
-				break;
-			case "right":
-				image = (spriteNum == 1) ? right1 : right2;
-				break;
+				case "up":
+					if (!attacking) {
+						image = (spriteNum == 1) ? up1 : up2;
+					} else {
+						screenY -= gp.tileSize;
+						image = (spriteNum == 1) ? attackUp1 : attackUp2;
+					}
+					break;
+				case "down":
+					image = (!attacking) ? (spriteNum == 1 ? down1 : down2) : (spriteNum == 1 ? attackDown1 : attackDown2);
+					break;
+				case "left":
+					if (!attacking) {
+						image = (spriteNum == 1) ? left1 : left2;
+					} else {
+						screenX -= gp.tileSize;
+						image = (spriteNum == 1) ? attackLeft1 : attackLeft2;
+					}
+					break;
+				case "right":
+					image = (!attacking) ? (spriteNum == 1 ? right1 : right2) : (spriteNum == 1 ? attackRight1 : attackRight2);
+					break;
 			}
-			
+
 			// MONSTER HP BAR
 			if (type == 2 && hpBarOn == true) {
 				double oneScale = (double) gp.tileSize / maxHp;
@@ -218,12 +229,12 @@ public abstract class Monster extends Character {
 				dyingAnimation(g2);
 				hpBarOn = false;
 			}
-			
+
 			g2.drawImage(image, screenX, screenY, null);
 			g2.setColor(Color.red);
 			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
-			
-			if(attacking) {
+
+			if (attacking) {
 				Color c = new Color(255, 0, 0, 210);
 				g2.setColor(c);
 				g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
