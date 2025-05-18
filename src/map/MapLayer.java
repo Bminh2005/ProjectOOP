@@ -63,6 +63,7 @@ public class MapLayer {
     	tiles[41] = new MapTile(gp,"/tiles/mushrooms.png");
     	tiles[42] = new MapTile(gp,"/tiles/inventory.png",true);
     	tiles[43] = new MapTile(gp,"/tiles/03brick_04.jpg", true);
+    	tiles[44] = new MapTile(gp,"/tiles/03statue.png",50,150,true,15,140,32,32);
 		/*
 		 * tiles[34] = new MapTile(gp, null); tiles[35] = new MapTile(gp, null);
 		 * tiles[36] = new MapTile(gp, null); tiles[37] = new MapTile(gp, null);

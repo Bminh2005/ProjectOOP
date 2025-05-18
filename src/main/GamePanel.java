@@ -82,17 +82,26 @@ public class GamePanel extends JPanel implements Runnable{
 		maps[3] = MAP03;
 		currentMap = maps[1];
 		teleportList.add(new Teleport(
-			    1, 2, 40,   // từ Map 1 tại tile (4,42)
-			    2, 30, 9    // sang Map 2 tile (30,9)
+			    1, 0, 0,   // từ Map 1 tại tile (4,42)
+			    2, 26, 25    // sang Map 2 tile (30,9)
 			));
 		teleportList.add(new Teleport(
-			    2, 30, 10,  // từ Map 2 tile (30,10)
-			    3, 20, 2    // sang Map 1 tile (42,2)
+			    2, 23, 23,  // từ Map 2 tile (30,10)
+			    1, 1, 0    // sang Map 1 tile (42,2)
 			));
 		teleportList.add(new Teleport(
-				3, 19, 2,
-				1 , 2, 39
+				1, 49, 49,
+				3 , 48, 25
 				));
+		teleportList.add(new Teleport(
+				3,48,23,
+				1,47,49));
+		teleportList.add(new Teleport(
+				2,23,49,
+				3,2,24));
+		teleportList.add(new Teleport(
+				3,1,23,
+				2,22,48));
 		processor = new ProcessFrontBehindEntity (this);
 		setupGame();
 	}
@@ -203,7 +212,7 @@ public class GamePanel extends JPanel implements Runnable{
 			//System.out.println(player.worldX +" "+ player.worldY);
 			int playerCol = player.worldX/tileSize;
 			int playerRow = player.worldY/tileSize;
-			//System.out.println(playerCol +" "+ playerRow);
+			System.out.println(playerCol +" "+ playerRow);
 			if(playerCol == 4 && playerRow ==42) {
 				System.out.println("True!");
 			}
