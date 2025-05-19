@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int storeState = 7;
 	
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
-	private final Map MAP02 = new Map(this, "/map/layer2.txt", "/map/layer1.txt");
+	private final Map MAP02 = new Map(this, "/map/map02.txt", "/map/Map02_layer02.txt");
 	private final Map MAP03 = new Map(this, "/map/Map03.txt", "/map/Map03_layer02.txt");
 	int FPS = 60;
 	//WORLD SETTINGS

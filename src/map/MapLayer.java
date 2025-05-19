@@ -64,6 +64,40 @@ public class MapLayer {
     	tiles[42] = new MapTile(gp,"/tiles/inventory.png",true);
     	tiles[43] = new MapTile(gp,"/tiles/03brick_04.jpg", true);
     	tiles[44] = new MapTile(gp,"/tiles/03statue.png",50,150,true,15,140,32,32);
+    	tiles[45]= new MapTile(gp,"/tiles/02water01.png");
+    	tiles[46]= new MapTile(gp,"/tiles/02groundne.png");
+    	tiles[47]= new MapTile(gp,"/tiles/02grass01.png");
+    	tiles[48]= new MapTile(gp,"/tiles/02giua.png");
+    	tiles[49]= new MapTile(gp,"/tiles/02trencung.png");
+    	tiles[50]= new MapTile(gp,"/tiles/tilesheet_basic-ezgif.com-crop (1).png");
+    	tiles[51]= new MapTile(gp,"/tiles/02duoi (2).png");
+    	tiles[52]= new MapTile(gp,"/tiles/tilesheet_basic-ezgif.com-crop (3).png");
+    	tiles[53]= new MapTile(gp,"/tiles/tilesheet_basic-ezgif.com-crop (4).png");
+    	tiles[54]= new MapTile(gp,"/tiles/02duoine.png");
+    	tiles[55]= new MapTile(gp,"/tiles/02duoi (2).png");
+    	tiles[56]= new MapTile(gp,"/tiles/tilesheet_basic-ezgif.com-crop (2).png");
+    	tiles[57]= new MapTile(gp,"/tiles/02all.png");
+    	tiles[58]= new MapTile(gp,"/tiles/02datcanh.png");
+    	tiles[59]= new MapTile(gp,"/tiles/02datnuoc.png");
+    	tiles[60]= new MapTile(gp,"/tiles/02canh1.png");
+    	tiles[61]= new MapTile(gp,"/tiles/02canh2.png");
+    	tiles[62]= new MapTile(gp,"/tiles/02canh3.png");
+    	tiles[63]= new MapTile(gp,"/tiles/02dat.png");
+    	tiles[64]= new MapTile(gp,"/tiles/02canh4.png");
+    	tiles[65]= new MapTile(gp,"/tiles/02canhdat.png");
+    	tiles[66]= new MapTile(gp,"/tiles/02conuoc.png");
+    	tiles[67]= new MapTile(gp,"/tiles/02dat.png");
+		/*
+		 * tiles[68]= new MapTile(gp,"/tiles/"); tiles[69]= new MapTile(gp,"/tiles/");
+		 */
+    	tiles[70]= new MapTile(gp,"/tiles/tilesheet_basic-ezgif.com-crop.png");
+    	tiles[71]= new MapTile(gp,"/tiles/02tree.png",80, 96, true,20 ,48 ,32 ,32);
+    	tiles[72]= new MapTile(gp,"/tiles/02stone.png");
+    	tiles[73]= new MapTile(gp,"/tiles/02stone_big.png");
+    	tiles[74]= new MapTile(gp,"/tiles/02greenlush.png");
+    	tiles[75]= new MapTile(gp,"/tiles/02greenlush_01.png");
+    	tiles[76]= new MapTile(gp,"/tiles/02greenlush_02.png");
+    	tiles[77]= new MapTile(gp,"/tiles/02greenlush_03.png");
 		/*
 		 * tiles[34] = new MapTile(gp, null); tiles[35] = new MapTile(gp, null);
 		 * tiles[36] = new MapTile(gp, null); tiles[37] = new MapTile(gp, null);
