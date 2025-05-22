@@ -28,7 +28,7 @@ public class Skeleton extends Monster {
         alive = true;
         getImage();
         getAttackImage();
-        this.ai = new ChuDongTanCong(gp);
+        this.ai = gp.quaiVatTanCong;
     }
 
     public void getImage()
@@ -55,6 +55,24 @@ public class Skeleton extends Monster {
     }
     @Override
     public void setAction() {
+    	 actionLockCounter++;
+         
+         
+         if (actionLockCounter == 120) {
+             Random random = new Random();
+             int i = random.nextInt(100) + 1;
+
+             if (i <= 25) {
+                 direction = "up";
+             } else if (i <= 50) {
+                 direction = "down";
+             } else if (i <= 75) {
+                 direction = "left";
+             } else {
+                 direction = "right";
+             }
+             actionLockCounter = 0;
+         }
         ai.QuaiVatDuoiTheoPlayer(this);
         ai.attackByTouch(this);
     }

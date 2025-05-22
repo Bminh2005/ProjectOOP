@@ -52,16 +52,16 @@ public class ChuDongTanCong {
 		
 		if(tanCong) {
 			if(monster.worldX < player.worldX - 15) {
-				monster.worldX += monster.speed;
+				monster.direction = "right";
 			}
 			else if(monster.worldX > player.worldX + 15) {
-				monster.worldX -= 3;
+				monster.direction = "left";
 			}
 			else if(monster.worldY < player.worldY - 10) {
-				monster.worldY += 3;
+				monster.direction = "down";
 			}
 			else if(monster.worldY > player.worldY + 10) {
-				monster.worldY -= 3;
+				monster.direction = "up";
 			}
 		}
 	}
