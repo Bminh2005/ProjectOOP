@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
 	GamePanel gp;
 	
 	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
-	public boolean attackPressed, damagePressed, diePressed;
+	public boolean attackPressed, damagePressed, diePressed, refreshPressed;
 	public boolean runPressed;
 	public KeyHandler(GamePanel gp)
 	{
@@ -188,6 +188,9 @@ public class KeyHandler implements KeyListener{
 		if (code == KeyEvent.VK_SHIFT) {
 			runPressed = true;
 		}
+		if (code == KeyEvent.VK_R) {
+			refreshPressed = true;
+		}
 	}
 	public void pauseState(int code)
 	{
@@ -283,34 +286,34 @@ public class KeyHandler implements KeyListener{
 		{
 			if(gp.ui.subState == 0)
 			{
-//				if(gp.ui.commandNum == 1 && gp.music.volumeScale > 0)
-//				{
-//					gp.music.volumeScale--;
-//					gp.music.checkVolume();
+				if(gp.ui.commandNum == 1 && gp.music.volumeScale > 0)
+				{
+					gp.music.volumeScale--;
+					gp.music.checkVolume();
 //					gp.playSE(9);
-//				}
-//				if(gp.ui.commandNum == 2 && gp.se.volumeScale > 0)
-//				{
-//					gp.se.volumeScale--;
+				}
+				if(gp.ui.commandNum == 2 && gp.se.volumeScale > 0)
+				{
+					gp.se.volumeScale--;
 //					gp.playSE(9);
-//				}
+				}
 			}
 		}
 		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
 		{
 			if(gp.ui.subState == 0)
 			{
-//				if(gp.ui.commandNum == 1 && gp.music.volumeScale < 5)
-//				{
-//					gp.music.volumeScale++;
-//					gp.music.checkVolume();
+				if(gp.ui.commandNum == 1 && gp.music.volumeScale < 5)
+				{
+					gp.music.volumeScale++;
+					gp.music.checkVolume();
 //					gp.playSE(9);
-//				}
-//				if(gp.ui.commandNum == 2 && gp.se.volumeScale < 5)
-//				{
-//					gp.se.volumeScale++;
+				}
+				if(gp.ui.commandNum == 2 && gp.se.volumeScale < 5)
+				{
+					gp.se.volumeScale++;
 //					gp.playSE(9);
-//				}
+				}
 			}
 		}
 	}
@@ -385,7 +388,9 @@ public class KeyHandler implements KeyListener{
 	    if (code == KeyEvent.VK_SHIFT) {
 			runPressed = false;
 		}
-		
+	    if (code == KeyEvent.VK_R) {
+			refreshPressed = false;
+		}
 	}
 
 	@Override

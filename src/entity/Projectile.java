@@ -28,7 +28,7 @@ public class Projectile extends Character{
 	
 	public void update()
 	{
-		gp.cChecker.checkTile(this);
+//		gp.cChecker.checkTile(this);
 		if(user == gp.player)
 		{
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
