@@ -95,7 +95,7 @@ public class UI {
 		//DIALOGUE STATE
 		if(gp.gameState == gp.dialogueState)
 		{
-			drawPlayerLife();
+//			drawPlayerLife();
 			drawDialogueScreen();
 		}
 		//CHARACTER STATE
@@ -609,17 +609,17 @@ public class UI {
 //			g2.fillRect(textX, textY, 24, 24);
 //		}
 		
-//		//MUSIC VOLUME
-//		textY += gp.tileSize;
-//		g2.drawRect(textX, textY, 120, 24); //120/5 = 24
-//		int volumeWidth = 24 * gp.music.volumeScale;
-//		g2.fillRect(textX, textY, volumeWidth, 24);
-//		
-//		//SE VOLUME
-//		textY += gp.tileSize;
-//		g2.drawRect(textX, textY, 120, 24);
-//		volumeWidth = 24 * gp.se.volumeScale;
-//		g2.fillRect(textX, textY, volumeWidth, 24);
+		//MUSIC VOLUME
+		textY += gp.tileSize;
+		g2.drawRect(textX, textY, 120, 24); //120/5 = 24
+		int volumeWidth = 24 * gp.music.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, 24);
+		
+		//SE VOLUME
+		textY += gp.tileSize;
+		g2.drawRect(textX, textY, 120, 24);
+		volumeWidth = 24 * gp.se.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, 24);
 //		
 //		gp.config.saveConfig();
 	}
@@ -716,6 +716,7 @@ public class UI {
 			if(gp.keyH.enterPressed == true)
 			{
 				subState = 0;
+				gp.retry();
 				gp.gameState = gp.titleState;
 			}
 		}

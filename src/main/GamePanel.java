@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -37,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Item obj[][] = new Item[4][20];
-	public Monster[][] monster = new Monster[4][20];
+	public Monster[][] monster = new Monster[20][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -47,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
 	public ChuDongTanCong quaiVatTanCong;
+
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -132,6 +135,7 @@ public class GamePanel extends JPanel implements Runnable{
 		player.restoreLifeAndMana();
 		aSetter.setNPC();
 		aSetter.setMonster();
+		aSetter.setObject();
 	}
 	public void restart()
 	{ 
