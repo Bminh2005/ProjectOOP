@@ -371,6 +371,10 @@ public class UI {
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize + 20, textY - 15, null);
+		textY += gp.tileSize;
+		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize + 20, textY - 15, null);
+		
 	}
 	public void drawInventory()
 	{
@@ -397,7 +401,7 @@ public class UI {
 				g2.setColor(new Color(240,190,90));
 				g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 			}
-			g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
+			g2.drawImage(gp.player.inventory.get(i).down1, slotX + 6, slotY + 6, null);
 			
 			slotX += slotSize;
 			
