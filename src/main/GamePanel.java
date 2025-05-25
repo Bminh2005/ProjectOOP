@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public int maxMap = 4;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
-	public Item obj[] = new Item[20];
+	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
@@ -260,11 +260,11 @@ public class GamePanel extends JPanel implements Runnable{
 				entities.add(monster[num_CurrentMap][i]);
 			}
 		}
-		for(int i = 0; i < obj.length; i++)
+		for(int i = 0; i < obj[num_CurrentMap].length; i++)
 		{
-			if(obj[i] != null)
+			if(obj[num_CurrentMap][i] != null)
 			{
-				entities.add(obj[i]);
+				entities.add(obj[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < projectileList.size(); i++)

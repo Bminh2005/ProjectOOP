@@ -120,11 +120,11 @@ public abstract class Monster extends Character {
 	};
 
 	public void dropItem(Item droppedItem) {
-		for (int i = 0; i < gp.obj.length; i++) {
-			if (gp.obj[i] == null) {
-				gp.obj[i] = droppedItem;
-				gp.obj[i].worldX = worldX; // the dead monster's worldX
-				gp.obj[i].worldY = worldY;
+		for (int i = 0; i < gp.obj[1].length; i++) {
+			if (gp.obj[gp.num_CurrentMap][i] == null) {
+				gp.obj[gp.num_CurrentMap][i] = droppedItem;
+				gp.obj[gp.num_CurrentMap][i].worldX = worldX; // the dead monster's worldX
+				gp.obj[gp.num_CurrentMap][i].worldY = worldY;
 				break;
 			}
 		}

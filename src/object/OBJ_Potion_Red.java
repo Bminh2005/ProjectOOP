@@ -28,7 +28,7 @@ public class OBJ_Potion_Red extends Item{
 		gp.gameState = gp.dialogueState;
 		gp.ui.currentDialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
 		player.hp += value;
-		gp.playSE(2);
+//		gp.playSE(2);
 	}
 
 }

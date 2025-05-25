@@ -11,6 +11,8 @@ import main.KeyHandler;
 import main.SpriteSheet;
 import monster.Monster;
 import object.OBJ_Fireball;
+import object.OBJ_Potion_Red;
+import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -181,6 +183,7 @@ public class Player extends Character {
 	}
 
 	public void update() {
+		refreshStatus();
 		// System.out.println("SAITAMA = " + this.saitama);
 		// System.out.println("SPEED = " + this.speed);
 		
@@ -531,7 +534,9 @@ public class Player extends Character {
 		inventory.clear();
 		inventory.add(currentWeapon);
 		inventory.add(currentShield);
-//		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Potion_Red(gp));
+		inventory.add(new OBJ_Potion_Red(gp));
+		inventory.add(new OBJ_Shield_Blue(gp));
 	}
 
 	public void selectItem() {
@@ -542,15 +547,15 @@ public class Player extends Character {
 
 			if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
 				currentWeapon = selectedItem;
-//				attack = getAttack();
+				attack = getAttack();
 //				getPlayerAttackImage();
 			}
 			if (selectedItem.type == type_shield) {
 				currentShield = selectedItem;
-//				defense = getDefense();
+				defense = getDefense();
 			}
 			if (selectedItem.type == type_consumable) {
-//				selectedItem.use(this);
+				selectedItem.use(this);
 				inventory.remove(itemIndex);
 			}
 		}
@@ -569,6 +574,11 @@ public class Player extends Character {
 //			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
+		}
+	}
+	public void refreshStatus() {
+		if(keyH.refreshPressed == true) {
+			restoreLifeAndMana();
 		}
 	}
 	public void draw(Graphics2D g2) {
@@ -610,13 +620,13 @@ public class Player extends Character {
 	{
 		if(i != 999)
 		{
-			if(gp.obj[i] != null) {
+			if(gp.obj[gp.num_CurrentMap][i] != null) {
 				gp.playSE(1);
 			//PICKUP ONLY ITEMS
-				if(gp.obj[i].type == type_pickUpOnly)
+				if(gp.obj[gp.num_CurrentMap][i].type == type_pickUpOnly)
 				{
-					gp.obj[i].use(this);
-					gp.obj[i] = null;
+					gp.obj[gp.num_CurrentMap][i].use(this);
+					gp.obj[gp.num_CurrentMap][i] = null;
 				}
 				//INVENTORY ITEMS
 				else
@@ -625,9 +635,9 @@ public class Player extends Character {
 					
 					if(inventory.size() != maxInventorySize)
 					{
-						inventory.add(gp.obj[i]);
+						inventory.add(gp.obj[gp.num_CurrentMap][i]);
 	//					gp.playSE(1);
-						text = "Got a " + gp.obj[i].name + "!";
+						text = "Got a " + gp.obj[gp.num_CurrentMap][i].name + "!";
 					}
 					else
 					{

@@ -5,9 +5,9 @@ import java.util.Random;
 import entity.Item;
 import main.GamePanel;
 
-public class OBJ_Shiled_Blue extends Item {
+public class OBJ_Shield_Blue extends Item {
 	
-	public OBJ_Shiled_Blue(GamePanel gp) {
+	public OBJ_Shield_Blue(GamePanel gp) {
 		super(gp);
 		
 		type = type_shield;

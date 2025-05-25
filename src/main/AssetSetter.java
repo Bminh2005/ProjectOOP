@@ -16,6 +16,10 @@ public class AssetSetter {
 
 	public void setObject()
 	{
+		int i = 0;
+		gp.obj[1][i] = new OBJ_Coin_Bronze(gp);
+		gp.obj[1][i].worldX = gp.tileSize*24;
+		gp.obj[1][i].worldY = gp.tileSize*30;
 	}
 
 	public void setNPC()
@@ -66,9 +70,6 @@ public class AssetSetter {
 		gp.monster[1][i].worldY = gp.tileSize * 22;  // Vị trí gần người chơi
 		i++;
 
-		gp.obj[0] = new OBJ_Coin_Bronze(gp);
-		gp.obj[0].worldX = gp.tileSize*24;
-		gp.obj[0].worldY = gp.tileSize*30;
 	}
 	public void setInteractiveTile()
 	{
