@@ -46,6 +46,8 @@ public class Minotuar extends Monster{
         exp = 2;
         direction = "down";
         
+        this.ai = gp.quaiVatTanCong;
+        
 	}
 	public void setAction() {
 		actionLockCounter++;
@@ -68,10 +70,45 @@ public class Minotuar extends Monster{
         }
 	}
 	
+<<<<<<< HEAD
 //	public void updateSpriteNum() {
 //		if(this.spriteCounter > 15) {
 //				spriteNum = (spriteNum + 1)%this.move.maxNumber;
 //			spriteCounter = 0;
+=======
+	public void updateSpriteNum() {
+		if(this.spriteCounter > 15) {
+				spriteNum = (spriteNum + 1)%this.move.maxNumber;
+			spriteCounter = 0;
+		}
+	}
+	public void damagePlayer(int attack) {
+		if (gp.player.invincible == false) {
+			// we can give damage
+//			gp.playSE(6);
+			gp.player.takeDamge(attack);
+
+			gp.player.invincible = true;
+		}
+	}
+
+	public void takeDamage(int playerAttack) {
+		this.hp -= playerAttack;
+		gp.ui.addMessage(playerAttack + " damage!");
+		invincible = true;
+		if (this.hp <= 0) {
+			dying = true;
+//			checkDrop();
+		}
+	}
+	public void update() {
+        gp.cChecker.checkTile(this);
+		CollisionOn = false;
+		gp.cChecker.checkObject(this, false);
+//		gp.cChecker.checkPlayer(this);
+//		if (this.type == type_monster && contactPlayer == true) {
+//			damagePlayer(attack);
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 //		}
 //	}
 	public void damagePlayer(int attack) {

@@ -50,8 +50,13 @@ public class AssetSetter {
 		gp.monster[1][i].worldY = gp.tileSize * 21;
 		i++;
 		gp.monster[1][i] = new Minotuar(gp);
+<<<<<<< HEAD
 		gp.monster[1][i].worldX = gp.tileSize*27;
 		gp.monster[1][i].worldY = gp.tileSize*21;
+=======
+		gp.monster[1][i].worldX = gp.tileSize*26;
+		gp.monster[1][i].worldY = gp.tileSize*24;
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 		i++;
 		
 		
