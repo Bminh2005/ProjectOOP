@@ -39,11 +39,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
 	public Item obj[][] = new Item[4][20];
-<<<<<<< HEAD
 	public Monster[][] monster = new Monster[4][20];
-=======
-	public Monster[][] monster = new Monster[20][20];
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
+
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
