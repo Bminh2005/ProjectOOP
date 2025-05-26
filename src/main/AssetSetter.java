@@ -4,6 +4,7 @@ import monster.Bat;
 import monster.Minotuar;
 import monster.Skeleton;
 import monster.Slime;
+import monster.Slime_blue;
 import object.OBJ_Coin_Bronze;
 
 public class AssetSetter {
@@ -68,7 +69,17 @@ public class AssetSetter {
 		gp.monster[2][i].worldX = gp.tileSize*26;
 		gp.monster[2][i].worldY = gp.tileSize*24;
 		i++;
-		
+		gp.monster[2][i] = new Slime_blue(gp);
+		gp.monster[2][i].worldX = gp.tileSize*27;
+		gp.monster[2][i].worldY = gp.tileSize*29;
+		i++;
+		gp.monster[2][i] = new Slime_blue(gp);
+		gp.monster[2][i].worldX = gp.tileSize*34;
+		gp.monster[2][i].worldY = gp.tileSize*35;
+		i++;
+		gp.monster[2][i] = new Slime_blue(gp);
+		gp.monster[2][i].worldX = gp.tileSize*45;
+		gp.monster[2][i].worldY = gp.tileSize*46;
 		//Map 03
 		i = 0;
 		gp.monster[3][i] = new Slime(gp);
@@ -80,8 +91,6 @@ public class AssetSetter {
 		//gp.monster[i].worldX = gp.tileSize*24;
 		//gp.monster[i].worldY = gp.tileSize*27;
 		//i++;
-
-		
 
 	}
 	public void setInteractiveTile()

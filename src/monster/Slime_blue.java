@@ -14,6 +14,7 @@ public class Slime_blue extends Monster{
 	SpriteSheet right;
 	SpriteSheet left;
 	SpriteSheet dead;
+	SpriteSheet getCurrentSheet;
 	String state;
 	boolean flip;
 	public Slime_blue(GamePanel gp) {
@@ -78,15 +79,19 @@ public class Slime_blue extends Monster{
 		switch (direction) {
 		case "up":
 			image = this.up.getSpriteNum(spriteNum); 
+			getCurrentSheet = up;
 			break;
 		case "down":
 			image = this.down.getSpriteNum(spriteNum); 
+			getCurrentSheet = down;
 			break;
 		case "left":
-			image = this.left.getSpriteNum(spriteNum); 
+			image = this.left.getSpriteNum(spriteNum);
+			getCurrentSheet = left;
 			break;
 		case "right":
-			image = this.right.getSpriteNum(spriteNum); 
+			image = this.right.getSpriteNum(spriteNum);
+			getCurrentSheet = right;
 			break;
 		}
 	}
@@ -103,4 +108,29 @@ public class Slime_blue extends Monster{
 	        alive = false;
 	    }
 	}
-}
+
+	@Override
+	public void updateSpriteNum() {
+		 spriteCounter++;
+		    int frameDelay = 3;  // giảm xuống cho mượt hơn
+
+		    if (spriteCounter > frameDelay) {
+		        spriteNum = (spriteNum + 1) % getCurrentSheet.maxNumber;
+		        spriteCounter = 0;
+		    }
+		}
+
+
+/*	public void draw(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		super.draw(g2);
+		int screenX = worldX - gp.player.worldX + gp.player.x;
+		int screenY = worldY - gp.player.worldY + gp.player.y;
+
+	    int newWidth = image.getWidth() ;
+	    int newHeight = image.getHeight();
+
+	    g2.drawImage(image, 0, 0, newWidth, newHeight, null);
+	}*/
+	}
+
