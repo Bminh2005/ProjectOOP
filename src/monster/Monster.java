@@ -167,7 +167,7 @@ public abstract class Monster extends Character {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 	}
 
-	public void updateDrawAttack(int screenX, int screenY) {
+	public void updateDrawImage(int screenX, int screenY) {
 		switch (direction) {
 		case "up":
 			if (!attacking) {
@@ -195,7 +195,7 @@ public abstract class Monster extends Character {
 				&& worldX - gp.tileSize < gp.player.worldX + gp.player.x
 				&& worldY + gp.tileSize > gp.player.worldY - gp.player.y
 				&& worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
-				updateDrawAttack(screenX, screenY);
+				updateDrawImage(screenX, screenY);
 			}
 
 			// MONSTER HP BAR

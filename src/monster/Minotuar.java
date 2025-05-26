@@ -68,4 +68,6 @@ public class Minotuar extends Monster{
 	            actionLockCounter = 0;
 	}
 	}
+	
+	
 }
