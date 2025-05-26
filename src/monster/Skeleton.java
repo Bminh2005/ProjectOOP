@@ -33,25 +33,25 @@ public class Skeleton extends Monster {
 
     public void getImage()
     {
-        up1 = setup("/monster/skeleton_up_1",gp.tileSize,gp.tileSize);
-        up2 = setup("/monster/skeleton_up_2",gp.tileSize,gp.tileSize);
-        down1 = setup("/monster/skeleton_down_1",gp.tileSize,gp.tileSize);
-        down2 = setup("/monster/skeleton_down_2",gp.tileSize,gp.tileSize);
-        left1 = setup("/monster/skeleton_left_1",gp.tileSize,gp.tileSize);
-        left2 = setup("/monster/skeleton_left_2",gp.tileSize,gp.tileSize);
-        right1 = setup("/monster/skeleton_right_1",gp.tileSize,gp.tileSize);
-        right2 = setup("/monster/skeleton_right_2",gp.tileSize,gp.tileSize);
+        up1 = setup("/monster/skeleton_up_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        up2 = setup("/monster/skeleton_up_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        down1 = setup("/monster/skeleton_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        down2 = setup("/monster/skeleton_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        left1 = setup("/monster/skeleton_left_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        left2 = setup("/monster/skeleton_left_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        right1 = setup("/monster/skeleton_right_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        right2 = setup("/monster/skeleton_right_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
     }
     public void getAttackImage()
     {
-        attackUp1 = setup("/monster/skeleton_attack_up_1",gp.tileSize, gp.tileSize );
-        attackUp2 = setup("/monster/skeleton_attack_up_2",gp.tileSize, gp.tileSize );
-        attackDown1 = setup("/monster/skeleton_attack_down_1",gp.tileSize, gp.tileSize );
-        attackDown2 = setup("/monster/skeleton_attack_down_2",gp.tileSize, gp.tileSize );
-        attackLeft1 = setup("/monster/skeleton_attack_left_1",gp.tileSize * 2, gp.tileSize);
-        attackLeft2 = setup("/monster/skeleton_attack_left_2",gp.tileSize * 2, gp.tileSize);
-        attackRight1 = setup("/monster/skeleton_attack_right_1",gp.tileSize * 2, gp.tileSize);
-        attackRight2 = setup("/monster/skeleton_attack_right_2",gp.tileSize * 2, gp.tileSize);
+        attackUp1 = setup("/monster/skeleton_attack_up_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackUp2 = setup("/monster/skeleton_attack_up_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackDown1 = setup("/monster/skeleton_attack_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackDown2 = setup("/monster/skeleton_attack_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackLeft1 = setup("/monster/skeleton_attack_left_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackLeft2 = setup("/monster/skeleton_attack_left_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackRight1 = setup("/monster/skeleton_attack_right_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+        attackRight2 = setup("/monster/skeleton_attack_right_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
     }
     @Override
     public void setAction() {

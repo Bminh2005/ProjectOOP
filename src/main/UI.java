@@ -95,7 +95,7 @@ public class UI {
 		//DIALOGUE STATE
 		if(gp.gameState == gp.dialogueState)
 		{
-			drawPlayerLife();
+//			drawPlayerLife();
 			drawDialogueScreen();
 		}
 		//CHARACTER STATE
@@ -374,6 +374,10 @@ public class UI {
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
+		g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize + 20, textY - 15, null);
+		textY += gp.tileSize;
+		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize + 20, textY - 15, null);
+		
 	}
 	public void drawInventory()
 	{
@@ -400,7 +404,7 @@ public class UI {
 				g2.setColor(new Color(240,190,90));
 				g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 			}
-			g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
+			g2.drawImage(gp.player.inventory.get(i).down1, slotX + 6, slotY + 6, null);
 			
 			slotX += slotSize;
 			
@@ -608,17 +612,17 @@ public class UI {
 //			g2.fillRect(textX, textY, 24, 24);
 //		}
 		
-//		//MUSIC VOLUME
-//		textY += gp.tileSize;
-//		g2.drawRect(textX, textY, 120, 24); //120/5 = 24
-//		int volumeWidth = 24 * gp.music.volumeScale;
-//		g2.fillRect(textX, textY, volumeWidth, 24);
-//		
-//		//SE VOLUME
-//		textY += gp.tileSize;
-//		g2.drawRect(textX, textY, 120, 24);
-//		volumeWidth = 24 * gp.se.volumeScale;
-//		g2.fillRect(textX, textY, volumeWidth, 24);
+		//MUSIC VOLUME
+		textY += gp.tileSize;
+		g2.drawRect(textX, textY, 120, 24); //120/5 = 24
+		int volumeWidth = 24 * gp.music.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, 24);
+		
+		//SE VOLUME
+		textY += gp.tileSize;
+		g2.drawRect(textX, textY, 120, 24);
+		volumeWidth = 24 * gp.se.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, 24);
 //		
 //		gp.config.saveConfig();
 	}
@@ -715,7 +719,11 @@ public class UI {
 			if(gp.keyH.enterPressed == true)
 			{
 				subState = 0;
+<<<<<<< HEAD
 				gp.restart();
+=======
+				gp.retry();
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 				gp.gameState = gp.titleState;
 			}
 		}

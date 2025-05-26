@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -36,8 +38,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public int maxMap = 4;
 	public Map currentMap;
 	public Map[] maps = new Map[maxMap];
-	public Item obj[] = new Item[20];
+	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
+
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -47,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
 	public ChuDongTanCong quaiVatTanCong;
+
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -132,6 +136,7 @@ public class GamePanel extends JPanel implements Runnable{
 		player.restoreLifeAndMana();
 		aSetter.setNPC();
 		aSetter.setMonster();
+		aSetter.setObject();
 	}
 	public void restart()
 	{ 
@@ -179,7 +184,7 @@ public class GamePanel extends JPanel implements Runnable{
 		{
 			
 			player.update();
-			for(int i = 0; i < monster.length; i++)
+			for(int i = 0; i < monster[num_CurrentMap].length; i++)
 			{
 				if(monster[num_CurrentMap][i] != null)
 				{
@@ -263,11 +268,11 @@ public class GamePanel extends JPanel implements Runnable{
 				entities.add(monster[num_CurrentMap][i]);
 			}
 		}
-		for(int i = 0; i < obj.length; i++)
+		for(int i = 0; i < obj[num_CurrentMap].length; i++)
 		{
-			if(obj[i] != null)
+			if(obj[num_CurrentMap][i] != null)
 			{
-				entities.add(obj[i]);
+				entities.add(obj[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < projectileList.size(); i++)
