@@ -13,9 +13,7 @@ public class Minotuar extends Monster{
 	SpriteSheet move;
 	SpriteSheet attackImage;
 	String state;
-	String direction;
 	boolean flip;
-	private ChuDongTanCong ai;
 	public Minotuar(GamePanel gp) {
 		super(gp);
 		idle = new SpriteSheet("/monster/minotuar/MinotuarIDLE_480x96.png", 480, 96, 5, 0, 0, 96, 70);
@@ -44,14 +42,13 @@ public class Minotuar extends Monster{
         attack = 10;
         defense = 0;
         exp = 2;
-        direction = "down";
-        
-        this.ai = gp.quaiVatTanCong;
-        
+        direction = "up";
+        actionLockCounter = 0;
 	}
 	@Override
 	public void setAction() {
 		// TODO Auto-generated method stub
+		actionLockCounter++;
 		 if (actionLockCounter == 120) {
 	            Random random = new Random();
 	            int i = random.nextInt(100) + 1;
@@ -66,8 +63,33 @@ public class Minotuar extends Monster{
 	                direction = "right";
 	            }
 	            actionLockCounter = 0;
+	            System.out.printf("!111111111111111111111111111111111111111111111111111111111");
+	            
+	            
+		 }
+		 System.out.println(direction);
 	}
+	public void updateDrawImage(int screenX, int screenY) {
+		switch (direction) {
+		case "up":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		case "down":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		case "left":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		case "right":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		}
 	}
-	
-	
+	public void updateSpriteNum() {
+		if (spriteCounter > 15) {
+			
+			spriteNum = (spriteNum+1)%move.maxNumber;
+			spriteCounter = 0;
+		}
+	}
 }
