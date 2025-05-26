@@ -70,47 +70,34 @@ public class Minotuar extends Monster{
         }
 	}
 	
-<<<<<<< HEAD
 //	public void updateSpriteNum() {
 //		if(this.spriteCounter > 15) {
 //				spriteNum = (spriteNum + 1)%this.move.maxNumber;
 //			spriteCounter = 0;
-=======
 	public void updateSpriteNum() {
 		if(this.spriteCounter > 15) {
 				spriteNum = (spriteNum + 1)%this.move.maxNumber;
 			spriteCounter = 0;
 		}
 	}
-	public void damagePlayer(int attack) {
-		if (gp.player.invincible == false) {
-			// we can give damage
-//			gp.playSE(6);
-			gp.player.takeDamge(attack);
 
-			gp.player.invincible = true;
-		}
-	}
-
-	public void takeDamage(int playerAttack) {
-		this.hp -= playerAttack;
-		gp.ui.addMessage(playerAttack + " damage!");
-		invincible = true;
-		if (this.hp <= 0) {
-			dying = true;
-//			checkDrop();
-		}
-	}
+	/*
+	 * public void damagePlayer(int attack) { if (gp.player.invincible == false) {
+	 * // we can give damage // gp.playSE(6); gp.player.takeDamge(attack);
+	 * 
+	 * gp.player.invincible = true; } }
+	 */
+	/*
+	 * public void takeDamage(int playerAttack) { this.hp -= playerAttack;
+	 * gp.ui.addMessage(playerAttack + " damage!"); invincible = true; if (this.hp
+	 * <= 0) { dying = true; // checkDrop(); } }
+	 */
 	public void update() {
         gp.cChecker.checkTile(this);
 		CollisionOn = false;
 		gp.cChecker.checkObject(this, false);
-//		gp.cChecker.checkPlayer(this);
-//		if (this.type == type_monster && contactPlayer == true) {
-//			damagePlayer(attack);
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
-//		}
-//	}
+		gp.cChecker.checkPlayer(this);
+		}
 	public void damagePlayer(int attack) {
 		if (gp.player.invincible == false) {
 			// we can give damage
@@ -120,8 +107,7 @@ public class Minotuar extends Monster{
 			gp.player.invincible = true;
 		}
 	}
-
-	public void takeDamage(int playerAttack) {
+/*	public void takeDamage(int playerAttack) {
 		this.hp -= playerAttack;
 		gp.ui.addMessage(playerAttack + " damage!");
 		invincible = true;
@@ -129,7 +115,7 @@ public class Minotuar extends Monster{
 			dying = true;
 //			checkDrop();
 		}
-	}
+	}*/
 //	@Override
 //	public void update() {
 //        gp.cChecker.checkTile(this);

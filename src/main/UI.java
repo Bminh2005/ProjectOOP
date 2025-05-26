@@ -719,11 +719,8 @@ public class UI {
 			if(gp.keyH.enterPressed == true)
 			{
 				subState = 0;
-<<<<<<< HEAD
 				gp.restart();
-=======
 				gp.retry();
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 				gp.gameState = gp.titleState;
 			}
 		}

@@ -391,10 +391,7 @@ public class KeyHandler implements KeyListener{
 	    if (code == KeyEvent.VK_R) {
 			refreshPressed = false;
 		}
-<<<<<<< HEAD
 		
-=======
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 	}
 
 	@Override

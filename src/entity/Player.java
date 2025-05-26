@@ -578,14 +578,12 @@ public class Player extends Character {
 		}
 	}
 	public void refreshStatus() {
-<<<<<<< HEAD
 		if(gp.keyH.refreshPressed == true) {
 			setDefaultValues();
-=======
 		if(keyH.refreshPressed == true) {
 			restoreLifeAndMana();
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 		}
+	}
 	}
 	public void draw(Graphics2D g2) {
 		switch (state) {
