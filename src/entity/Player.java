@@ -283,6 +283,7 @@ public class Player extends Character {
 		if(overx) this.x += dx;
 		if(overy) this.y += dy;
 		this.frameCounter++;
+		refreshStatus();
 	}
 
 	public void idle() {
@@ -569,6 +570,11 @@ public class Player extends Character {
 //			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
+		}
+	}
+	public void refreshStatus() {
+		if(gp.keyH.refreshPressed == true) {
+			setDefaultValues();
 		}
 	}
 	public void draw(Graphics2D g2) {

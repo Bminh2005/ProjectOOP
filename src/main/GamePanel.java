@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 	public final int storeState = 7;
-	
+	public final int transition_state = 8;
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/map02.txt", "/map/Map02_layer02.txt");
 	private final Map MAP03 = new Map(this, "/map/Map03.txt", "/map/Map03_layer02.txt");
@@ -230,6 +230,9 @@ public class GamePanel extends JPanel implements Runnable{
 		if(gameState == pauseState)
 		{
 			//nothing
+		}
+		if(gameState == gameOverState) {
+			restart();
 		}
 		
 

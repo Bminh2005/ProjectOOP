@@ -33,7 +33,7 @@ public class UI {
 	public int slotCol = 0;
 	public int slotRow = 0;
 	int subState = 0;
-	
+	public int counter =0;
 	public UI(GamePanel gp)
 	{
 		this.gp = gp;
@@ -113,6 +113,9 @@ public class UI {
 		if(gp.gameState == gp.gameOverState)
 		{
 			drawGameOverScreen();
+		}
+		if(gp.gameState == gp.transition_state) {
+			drawTransition();
 		}
 	}
 	public void drawPlayerLife()
@@ -712,6 +715,7 @@ public class UI {
 			if(gp.keyH.enterPressed == true)
 			{
 				subState = 0;
+				gp.restart();
 				gp.gameState = gp.titleState;
 			}
 		}
@@ -758,6 +762,10 @@ public class UI {
 		int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		int x = tailX - length;
 		return x;
+	}
+	public void drawTransition() {
+		counter++;
+		
 	}
 }
 
