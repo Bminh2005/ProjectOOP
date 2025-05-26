@@ -11,15 +11,12 @@ import main.GamePanel;
 import entity.Character;
 
 public abstract class Monster extends Character {
-	public int spriteNum = 1;
 	public int exp = 2;
-	GamePanel gp;
 	public int attackDelayCounter;
 	boolean attacking = false;
 	int attackingCounter = 0;
 	public Monster(GamePanel gp) {
 		super(gp);
-		this.gp = gp;
 		solidArea.x = 3;
 		solidArea.y = 14;
 		solidArea.width = 30;
@@ -28,7 +25,7 @@ public abstract class Monster extends Character {
 		solidAreaDefaultY = solidArea.y;
 		alive = true;
 		attackDelayCounter = 0;
-
+		spriteNum = 1;
 	}
 
 	@Override
@@ -47,8 +44,11 @@ public abstract class Monster extends Character {
 			attacking = true;
 			attackDelayCounter = 0;
 		}
-		if (CollisionOn == false) {
-
+		if (true) {
+			if(this instanceof Minotuar) {
+				System.out.println(direction);
+			}
+			
 			switch (direction) {
 			case "up":
 				worldY -= speed;
@@ -66,14 +66,7 @@ public abstract class Monster extends Character {
 		}
 
 		spriteCounter++;
-		if (spriteCounter > 15) {
-			if (spriteNum == 1) {
-				spriteNum = 2;
-			} else if (spriteNum == 2) {
-				spriteNum = 1;
-			}
-			spriteCounter = 0;
-		}
+		updateSpriteNum();
 
 		if (invincible == true) {
 			invincibleCounter++;
@@ -87,6 +80,16 @@ public abstract class Monster extends Character {
 		}
 	}
 
+	public void updateSpriteNum() {
+		if (spriteCounter > 15) {
+			if (spriteNum == 1) {
+				spriteNum = 2;
+			} else if (spriteNum == 2) {
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
+		}
+	}
 	public void damagePlayer(int attack) {
 		if (gp.player.invincible == false) {
 			// we can give damage
@@ -167,8 +170,27 @@ public abstract class Monster extends Character {
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 	}
 
+	public void updateDrawImage(int screenX, int screenY) {
+		switch (direction) {
+		case "up":
+			if (!attacking) {
+				image = (spriteNum == 1) ? up1 : up2;
+			}
+			break;
+		case "down":
+			image = (!attacking) ? (spriteNum == 1 ? down1 : down2) : (spriteNum == 1 ? attackDown1 : attackDown2);
+			break;
+		case "left":
+			if (!attacking) {
+				image = (spriteNum == 1) ? left1 : left2;
+			} 
+			break;
+		case "right":
+			image = (!attacking) ? (spriteNum == 1 ? right1 : right2) : (spriteNum == 1 ? attackRight1 : attackRight2);
+			break;
+		}
+	}
 	public void draw(Graphics2D g2) {
-		BufferedImage image = null;
 		int screenX = worldX - gp.player.worldX + gp.player.x;
 		int screenY = worldY - gp.player.worldY + gp.player.y;
 
@@ -176,29 +198,7 @@ public abstract class Monster extends Character {
 				&& worldX - gp.tileSize < gp.player.worldX + gp.player.x
 				&& worldY + gp.tileSize > gp.player.worldY - gp.player.y
 				&& worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
-			switch (direction) {
-				case "up":
-					if (!attacking) {
-						image = (spriteNum == 1) ? up1 : up2;
-					} else {
-						screenY -= gp.tileSize;
-						image = (spriteNum == 1) ? attackUp1 : attackUp2;
-					}
-					break;
-				case "down":
-					image = (!attacking) ? (spriteNum == 1 ? down1 : down2) : (spriteNum == 1 ? attackDown1 : attackDown2);
-					break;
-				case "left":
-					if (!attacking) {
-						image = (spriteNum == 1) ? left1 : left2;
-					} else {
-						screenX -= gp.tileSize;
-						image = (spriteNum == 1) ? attackLeft1 : attackLeft2;
-					}
-					break;
-				case "right":
-					image = (!attacking) ? (spriteNum == 1 ? right1 : right2) : (spriteNum == 1 ? attackRight1 : attackRight2);
-					break;
+				updateDrawImage(screenX, screenY);
 			}
 
 			// MONSTER HP BAR
@@ -244,4 +244,5 @@ public abstract class Monster extends Character {
 
 		}
 	}
-}
+
+

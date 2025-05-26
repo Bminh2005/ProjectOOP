@@ -13,9 +13,7 @@ public class Minotuar extends Monster{
 	SpriteSheet move;
 	SpriteSheet attackImage;
 	String state;
-	String direction;
 	boolean flip;
-	private ChuDongTanCong ai;
 	public Minotuar(GamePanel gp) {
 		super(gp);
 		idle = new SpriteSheet("/monster/minotuar/MinotuarIDLE_480x96.png", 480, 96, 5, 0, 0, 96, 70);
@@ -44,190 +42,54 @@ public class Minotuar extends Monster{
         attack = 10;
         defense = 0;
         exp = 2;
-        direction = "down";
-        
-        this.ai = gp.quaiVatTanCong;
-        
+        direction = "up";
+        actionLockCounter = 0;
 	}
+	@Override
 	public void setAction() {
+		// TODO Auto-generated method stub
 		actionLockCounter++;
-        
-	       
-        if (actionLockCounter == 120) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;
+		 if (actionLockCounter == 120) {
+	            Random random = new Random();
+	            int i = random.nextInt(100) + 1;
 
-            if (i <= 25) {
-                direction = "up";
-            } else if (i <= 50) {
-                direction = "down";
-            } else if (i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
-            }
-            actionLockCounter = 0;
-        }
+	            if (i <= 25) {
+	                direction = "up";
+	            } else if (i <= 50) {
+	                direction = "down";
+	            } else if (i <= 75) {
+	                direction = "left";
+	            } else {
+	                direction = "right";
+	            }
+	            actionLockCounter = 0;
+	            System.out.printf("!111111111111111111111111111111111111111111111111111111111");
+	            
+	            
+		 }
+		 System.out.println(direction);
 	}
-	
-//	public void updateSpriteNum() {
-//		if(this.spriteCounter > 15) {
-//				spriteNum = (spriteNum + 1)%this.move.maxNumber;
-//			spriteCounter = 0;
+	public void updateDrawImage(int screenX, int screenY) {
+		switch (direction) {
+		case "up":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		case "down":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		case "left":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		case "right":
+			image = this.move.getSpriteNum(spriteNum); 
+			break;
+		}
+	}
 	public void updateSpriteNum() {
-		if(this.spriteCounter > 15) {
-				spriteNum = (spriteNum + 1)%this.move.maxNumber;
+		if (spriteCounter > 15) {
+			
+			spriteNum = (spriteNum+1)%move.maxNumber;
 			spriteCounter = 0;
 		}
 	}
-
-	/*
-	 * public void damagePlayer(int attack) { if (gp.player.invincible == false) {
-	 * // we can give damage // gp.playSE(6); gp.player.takeDamge(attack);
-	 * 
-	 * gp.player.invincible = true; } }
-	 */
-	/*
-	 * public void takeDamage(int playerAttack) { this.hp -= playerAttack;
-	 * gp.ui.addMessage(playerAttack + " damage!"); invincible = true; if (this.hp
-	 * <= 0) { dying = true; // checkDrop(); } }
-	 */
-	public void update() {
-        gp.cChecker.checkTile(this);
-		CollisionOn = false;
-		gp.cChecker.checkObject(this, false);
-		gp.cChecker.checkPlayer(this);
-		}
-	public void damagePlayer(int attack) {
-		if (gp.player.invincible == false) {
-			// we can give damage
-//			gp.playSE(6);
-			gp.player.takeDamge(attack);
-
-			gp.player.invincible = true;
-		}
-	}
-/*	public void takeDamage(int playerAttack) {
-		this.hp -= playerAttack;
-		gp.ui.addMessage(playerAttack + " damage!");
-		invincible = true;
-		if (this.hp <= 0) {
-			dying = true;
-//			checkDrop();
-		}
-	}*/
-//	@Override
-//	public void update() {
-//        gp.cChecker.checkTile(this);
-//		CollisionOn = false;
-//		gp.cChecker.checkObject(this, false);
-////		gp.cChecker.checkPlayer(this);
-////		if (this.type == type_monster && contactPlayer == true) {
-////			damagePlayer(attack);
-////		}
-//		this.setAction();
-//		if (CollisionOn == false) {
-//
-//			switch (direction) {
-//			case "up":
-//				worldY -= speed;
-//				break;
-//			case "down":
-//				worldY += speed;
-//				break;
-//			case "left":
-//				worldX -= speed;
-//				break;
-//			case "right":
-//				worldX += speed;
-//				break;
-//			}
-//		}
-//		System.out.println("DANG UPDATE DAY");
-//		spriteCounter++;
-//		if(this.spriteCounter >= 10) {
-//			spriteNum = (spriteNum + 1)%this.move.maxNumber;
-//			spriteCounter = 0;
-//		}
-//		
-//		if (invincible == true) {
-//			invincibleCounter++;
-//			if (invincibleCounter > 40) {
-//				invincible = false;
-//				invincibleCounter = 0;
-//			}
-//		}
-////		if (shotAvailableCounter < 30) {
-////			shotAvailableCounter++;
-////		}
-//	}
-	public void draw(Graphics2D g2) {
-		int screenX = worldX - gp.player.worldX + gp.player.x;
-		int screenY = worldY - gp.player.worldY + gp.player.y;
-		
-		
-		
-				switch(direction) {
-				case "right":
-					this.flip = false;
-					break;
-				case "left":
-					this.flip = true;
-					break;
-				}
-			this.image = this.move.animation[this.spriteNum];
-			
-			if(this.flip) {
-				g2.drawImage(image, screenX + this.width, screenY, -this.width, this.height, null);
-			}
-			else {
-				g2.drawImage(image, screenX, screenY, this.width, this.height, null);
-			}
-			g2.setColor(Color.red);
-			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
-			
-			if (type == 2 && hpBarOn == true) {
-				double oneScale = (double) gp.tileSize / maxHp;
-				double hpBarValue = oneScale * hp;
-
-				g2.setColor(new Color(35, 35, 35));
-				g2.fillRect(screenX - 1, screenY - 16, gp.tileSize + 2, 12);
-
-				g2.setColor(new Color(255, 0, 30));
-				g2.fillRect(screenX, screenY - 15, (int) hpBarValue, 10);
-
-				hpBarCounter++;
-
-				if (hpBarCounter > 600) {
-					hpBarCounter = 0;
-					hpBarOn = false;
-				}
-			}
-
-			if (invincible == true) {
-				hpBarOn = true;
-				hpBarCounter = 0;
-				changeAlpha(g2, 0.4F);
-			}
-			if (dying == true) {
-				dyingAnimation(g2);
-				hpBarOn = false;
-			}
-
-			g2.drawImage(image, screenX, screenY, null);
-			g2.setColor(Color.red);
-			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
-
-			if (attacking) {
-				Color c = new Color(255, 0, 0, 210);
-				g2.setColor(c);
-				g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
-				attacking = false;
-			}
-			changeAlpha(g2, 1F);
-
-	}
-	
-	
-
 }

@@ -81,4 +81,31 @@ public class Skeleton extends Monster {
         actionLockCounter = 0;
         direction = gp.player.direction;
     }
+    
+    public void updateDrawAttack(int screenX, int screenY) {
+    	switch (direction) {
+		case "up":
+			if (!attacking) {
+				image = (spriteNum == 1) ? up1 : up2;
+			} else {
+				screenY -= gp.tileSize;
+				image = (spriteNum == 1) ? attackUp1 : attackUp2;
+			}
+			break;
+		case "down":
+			image = (!attacking) ? (spriteNum == 1 ? down1 : down2) : (spriteNum == 1 ? attackDown1 : attackDown2);
+			break;
+		case "left":
+			if (!attacking) {
+				image = (spriteNum == 1) ? left1 : left2;
+			} else {
+				screenX -= gp.tileSize;
+				image = (spriteNum == 1) ? attackLeft1 : attackLeft2;
+			}
+			break;
+		case "right":
+			image = (!attacking) ? (spriteNum == 1 ? right1 : right2) : (spriteNum == 1 ? attackRight1 : attackRight2);
+			break;
+		}
+    }
 }
