@@ -49,53 +49,23 @@ public class Minotuar extends Monster{
         this.ai = gp.quaiVatTanCong;
         
 	}
+	@Override
 	public void setAction() {
-		actionLockCounter++;
-        
-	       
-        if (actionLockCounter == 120) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;
+		// TODO Auto-generated method stub
+		 if (actionLockCounter == 120) {
+	            Random random = new Random();
+	            int i = random.nextInt(100) + 1;
 
-            if (i <= 25) {
-                direction = "up";
-            } else if (i <= 50) {
-                direction = "down";
-            } else if (i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
-            }
-            actionLockCounter = 0;
-        }
+	            if (i <= 25) {
+	                direction = "up";
+	            } else if (i <= 50) {
+	                direction = "down";
+	            } else if (i <= 75) {
+	                direction = "left";
+	            } else {
+	                direction = "right";
+	            }
+	            actionLockCounter = 0;
 	}
-	
-	public void updateSpriteNum() {
-		if(this.spriteCounter > 15) {
-				spriteNum = (spriteNum + 1)%this.move.maxNumber;
-			spriteCounter = 0;
-		}
 	}
-	public void damagePlayer(int attack) {
-		if (gp.player.invincible == false) {
-			// we can give damage
-//			gp.playSE(6);
-			gp.player.takeDamge(attack);
-
-			gp.player.invincible = true;
-		}
-	}
-
-
-	public void takeDamage(int playerAttack) {
-		this.hp -= playerAttack;
-		gp.ui.addMessage(playerAttack + " damage!");
-		invincible = true;
-		if (this.hp <= 0) {
-			dying = true;
-//			checkDrop();
-		}
-	}
-	
-
 }
