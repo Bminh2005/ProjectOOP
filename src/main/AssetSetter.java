@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC;
 import monster.Bat;
 import monster.Minotuar;
 import monster.Skeleton;
@@ -91,7 +92,11 @@ public class AssetSetter {
 		//gp.monster[i].worldX = gp.tileSize*24;
 		//gp.monster[i].worldY = gp.tileSize*27;
 		//i++;
-
+		gp.npc[0] = new NPC(gp);
+		gp.npc[0].worldX = gp.tileSize* 12;
+		gp.npc[0].worldY = gp.tileSize * 13;
+		
+		
 	}
 	public void setInteractiveTile()
 	{
