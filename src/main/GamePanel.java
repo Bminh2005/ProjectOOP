@@ -61,7 +61,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 	public final int storeState = 7;
-	public final int transition_state = 8;
+	public final int transitionState = 8;
+	public int tempMap;
+	public int tempCol;
+	public int tempRow;
 	private final Map MAP01 = new Map(this, "/map/layer0.txt", "/map/layer1.txt");
 	private final Map MAP02 = new Map(this, "/map/map02.txt", "/map/Map02_layer02.txt");
 	private final Map MAP03 = new Map(this, "/map/Map03.txt", "/map/Map03_layer02.txt");
@@ -244,12 +247,16 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void Teleport(int targetmap, int col, int row ) {
 		playSE(6);
-		num_CurrentMap = targetmap;
-		currentMap = maps[num_CurrentMap];
-		player.worldX = col * tileSize;
-		player.worldY = row * tileSize;
+		gameState = transitionState;
+		tempMap = targetmap;
+		tempCol = col;
+		tempRow = row;
+//		num_CurrentMap = targetmap;
+//		currentMap = maps[num_CurrentMap];
+//		player.worldX = col * tileSize;
+//		player.worldY = row * tileSize;
 	}
-
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
