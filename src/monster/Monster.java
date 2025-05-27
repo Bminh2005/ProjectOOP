@@ -79,7 +79,7 @@ public abstract class Monster extends Character {
 			shotAvailableCounter++;
 		}
 	}
-
+	
 	public void updateSpriteNum() {
 		if (spriteCounter > 15) {
 			if (spriteNum == 1) {
@@ -190,6 +190,9 @@ public abstract class Monster extends Character {
 			break;
 		}
 	}
+	public void drawImage(Graphics2D g2, int screenX, int screenY) {
+		g2.drawImage(image, screenX, screenY, null);
+	}
 	public void draw(Graphics2D g2) {
 		int screenX = worldX - gp.player.worldX + gp.player.x;
 		int screenY = worldY - gp.player.worldY + gp.player.y;
@@ -230,8 +233,9 @@ public abstract class Monster extends Character {
 				hpBarOn = false;
 			}
 
-			g2.drawImage(image, screenX, screenY, null);
+			
 			g2.setColor(Color.red);
+			this.drawImage(g2, screenX, screenY);
 			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 
 			if (attacking) {

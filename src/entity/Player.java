@@ -91,6 +91,8 @@ public class Player extends Character {
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentShield = new OBJ_Shield_Wood(gp);
 		System.out.println(this.state);
+		attack = getAttack();
+		defense = getDefense();
 	}
 
 	public void setDefaultValues() {
@@ -106,8 +108,8 @@ public class Player extends Character {
 		maxMp = 10;
 		mp = this.maxMp;
 
-		attack = 10;
-		defense = 5;
+		attackDefault = 10;
+		defenseDefault = 5;
 
 		strength = 1;
 		dexterity = 1;
@@ -175,11 +177,11 @@ public class Player extends Character {
 
 	public int getAttack() {
 //		attackArea = currentWeapon.attackArea;
-		return attack = attack + strength * currentWeapon.attackValue;
+		return attack = attackDefault + strength * currentWeapon.attackValue;
 	}
 
 	public int getDefense() {
-		return defense = defense + dexterity * currentShield.defenseValue;
+		return defense = defenseDefault + dexterity * currentShield.defenseValue;
 	}
 
 	public void update() {
@@ -286,7 +288,7 @@ public class Player extends Character {
 		if(overx) this.x += dx;
 		if(overy) this.y += dy;
 		this.frameCounter++;
-		refreshStatus();
+		
 	}
 
 	public void idle() {
@@ -494,8 +496,7 @@ public class Player extends Character {
 					// System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width
 					// +" "+ monsterArea.height);
 					if (attackZone.intersects(monsterArea)) {
-						System.out.println("Monster is attacked!");
-						m.takeDamage(this.attack - gp.monster[gp.num_CurrentMap][i].defense);
+						m.takeDamage(this.attack);
 						gp.monster[gp.num_CurrentMap][i].damageReaction();
 						if (gp.monster[gp.num_CurrentMap][i].hp <= 0) {
 							gp.monster[gp.num_CurrentMap][i].dying = true;
@@ -595,7 +596,7 @@ public class Player extends Character {
 			this.image = this.playerWalk.animation[this.spriteNum];
 			break;
 		case "ATTACKING":
-			this.image = this.playerAttack[this.attackType].animation[this.spriteNum];
+			this.image = this.playerAttack[this.attackType].animation[this.spriteNum%this.playerAttack[this.attackType].maxNumber];
 			break;
 		case "DYING":
 			this.image = this.playerDying.animation[this.spriteNum];

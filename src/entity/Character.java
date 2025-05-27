@@ -10,7 +10,9 @@ public class Character extends Entity{
 	public int hp, maxHp;
 	public int mp, maxMp;
 	public int attack;
+	public int attackDefault;
 	public int defense;
+	public int defenseDefault;
 	public int strength;
 	public int speed;
 	public Character(GamePanel gp) {
