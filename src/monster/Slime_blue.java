@@ -52,6 +52,7 @@ public class Slime_blue extends Monster{
         defense = 5;
         exp = 3;
         actionLockCounter = 0;
+		getCurrentSheet = up;
 	}
 
 	@Override

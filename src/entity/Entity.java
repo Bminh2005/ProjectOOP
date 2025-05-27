@@ -32,10 +32,7 @@ public class Entity {
 	// === Character Stats ===
 	// Thuoc tinh nhan vat: mau, mana, cong, thu, kinh nghiem, cap do
 	public String name;
-	
-	
-	
-	public int dexterity;
+	public int dexterity;     // chỉ số khéo léo
 	public int value;
 	public int useCost;
 
@@ -46,7 +43,7 @@ public class Entity {
 	// Cac trang thai hoat dong cua nhan vat
 	public boolean alive = true;
 	public boolean dying = false;
-	public boolean invincible = false;
+	public boolean invincible = false; // bất khả chiến bại =))
 	public boolean hpBarOn = false;
 	public boolean collision = false;
 	public boolean CollisionOn = false;
