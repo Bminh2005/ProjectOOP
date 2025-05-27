@@ -235,12 +235,12 @@ public abstract class Monster extends Character {
 			
 			g2.setColor(Color.red);
 			this.drawImage(g2, screenX, screenY);
-			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
+			if(gp.testMode) g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 
 			if (attacking) {
 				Color c = new Color(255, 0, 0, 210);
 				g2.setColor(c);
-				g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
+				if(gp.testMode)g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 				attacking = false;
 			}
 			changeAlpha(g2, 1F);

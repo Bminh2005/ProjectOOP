@@ -120,7 +120,7 @@ public class MapTile {
 		g2.drawImage(img, x, y, this.width, this.height, null);
 		if(collision) {
 			g2.setColor(Color.RED);
-			g2.drawRect(x + this.collisionArea.x, y + this.collisionArea.y, this.collisionArea.width, this.collisionArea.height);
+			if(gp.testMode) g2.drawRect(x + this.collisionArea.x, y + this.collisionArea.y, this.collisionArea.width, this.collisionArea.height);
 		}
 	}
 }

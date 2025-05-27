@@ -769,8 +769,7 @@ public class UI {
 		return x;
 	}
 	public void drawTransition() {
-		counter++;
-		
+		counter++;		
 	}
 	public void interactNPC(int i) {
 		if( i !=999) {

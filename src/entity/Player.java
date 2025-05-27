@@ -37,7 +37,7 @@ public class Player extends Character {
 	// PLAYER'S IMAGE
 	private SpriteSheet playerIdle;
 	private SpriteSheet playerWalk;
-	public SpriteSheet playerAttack[];
+	public SpriteSheet playerAttack[] = new SpriteSheet[3];
 	private SpriteSheet playerHurt;
 	private SpriteSheet playerRun;
 	private SpriteSheet playerDefend;
@@ -114,7 +114,8 @@ public class Player extends Character {
 		level = 1;
 		state = "NORMAL";
 		attackType = 0;
-
+		
+		this.keyH.attackPressed = false;
 		exp = 0;
 		nextLevelExp = 5;
 		coin = 0;
@@ -384,7 +385,10 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
 			this.spriteNum++;
-			if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
+			if(attackType >= 3 || attackType < 0) attackType = 0;
+			if(this.playerAttack == null) System.out.println("PlayerAttack" + " is NULL");
+			if(this.playerAttack[attackType] == null) System.out.println("PlayerAttack[attackType]" + " is NULL and attackType = " + attackType);
+			if(this.spriteNum == this.playerAttack[attackType].animation.length) {
 				this.spriteNum = 0;
 			}
 		}
@@ -592,7 +596,7 @@ public class Player extends Character {
 			this.image = this.playerWalk.animation[this.spriteNum];
 			break;
 		case "ATTACKING":
-			this.image = this.playerAttack[this.attackType].animation[this.spriteNum%this.playerAttack[this.attackType].maxNumber];
+			this.image = this.playerAttack[this.attackType].animation[this.spriteNum];
 			break;
 		case "DYING":
 			this.image = this.playerDying.animation[this.spriteNum];
@@ -609,14 +613,14 @@ public class Player extends Character {
 		} else {
 			g2.drawImage(image, x, y, this.width, this.height, null);
 		}
-		g2.setColor(Color.RED);
-		g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
+		if(gp.testMode)g2.setColor(Color.RED);
+		if(gp.testMode) g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
 		g2.setColor(Color.BLUE);
 		if(flip) {
 			int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
-			g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
+			if(gp.testMode)g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
 		}
-		else g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
+		else if(gp.testMode)g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
 	}
 	public void pickUpObject(int i)
 	{

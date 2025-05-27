@@ -75,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxWorldRow = 50;
 	public final int maxWorldHeight = maxWorldRow * tileSize;
 	public final int maxWorldWidth = maxWorldRow * tileSize;
-	//public ArrayList<Monster> monsters = new ArrayList<>(); 
+	public boolean testMode = true; 
 	public Player player = new Player(this, keyH);
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -145,6 +145,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void restart()
 	{ 
 		player.setDefaultValues();
+		player.getPlayerImage();
 		player.setItems();
 //		aSetter.setObject();
 		aSetter.setNPC();

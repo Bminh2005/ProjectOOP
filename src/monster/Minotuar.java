@@ -22,8 +22,8 @@ public class Minotuar extends Monster{
 		flip = false;
 		this.height = gp.tileSize*70/50; //70
 		this.width = this.height*96/70; //96
-		solidArea.x = this.height*38/70; //32
-		solidArea.y = this.height*45/70; //45
+		solidArea.x = this.height*38/70 - 5; //32
+		solidArea.y = this.height*45/70 - 6; //45
 		solidArea.width = this.height*30/70; //22
 		solidArea.height = this.height*30/70; //19
 		solidAreaDefaultX = solidArea.x;
@@ -48,8 +48,8 @@ public class Minotuar extends Monster{
         maxHp = 25;
         hp = maxHp;
         state = "MOVE";
-        attack = 10;
-        defense = 0;
+        attack = 30;
+        defense = 10;
         exp = 2;
         direction = "up";
         actionLockCounter = 0;
@@ -88,7 +88,7 @@ public class Minotuar extends Monster{
 		 gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
 		 if(state == "ATTACK") {
 			 direction = "idle";
-			 if(spriteNum == 4) {
+			 if(spriteNum == 3) {
 				 attackZone.x = worldX + attackZoneDefaultX;
 				 attackZone.y = worldY + attackZoneDefaultY;
 				 Rectangle solidPlayer = gp.player.solidArea;
@@ -162,7 +162,7 @@ public class Minotuar extends Monster{
 	
 	public void updateSpriteNum() {
 		System.out.println("++++++++"+ spriteCounter);
-		if (spriteCounter % 20 == 0) {
+		if (spriteCounter % 10 == 0) {
 			switch(state) {
 			case "MOVE":
 				spriteNum = (spriteNum+1)%move.length;
@@ -182,11 +182,11 @@ public class Minotuar extends Monster{
 		int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
 		if(flip) {
 			g2.drawImage(image, screenX + this.width, screenY, -this.width, this.height, null);
-			g2.drawRect(screenX + this.attackZoneDefaultX - range, screenY + this.attackZoneDefaultY, this.attackZone.width, this.attackZone.height);
+			if(gp.testMode) g2.drawRect(screenX + this.attackZoneDefaultX - range, screenY + this.attackZoneDefaultY, this.attackZone.width, this.attackZone.height);
 		}
 		else {
 			g2.drawImage(image, screenX, screenY, this.width, this.height, null);
-			g2.drawRect(screenX + this.attackZoneDefaultX, screenY + this.attackZoneDefaultY, this.attackZone.width, this.attackZone.height);
+			if(gp.testMode) g2.drawRect(screenX + this.attackZoneDefaultX, screenY + this.attackZoneDefaultY, this.attackZone.width, this.attackZone.height);
 		}
 	}
 }
