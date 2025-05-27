@@ -15,6 +15,8 @@ public abstract class Monster extends Character {
 	public int attackDelayCounter;
 	boolean attacking = false;
 	int attackingCounter = 0;
+	public String state;
+	boolean flip;
 	public Monster(GamePanel gp) {
 		super(gp);
 		solidArea.x = 3;
@@ -24,6 +26,7 @@ public abstract class Monster extends Character {
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		alive = true;
+		flip = false;
 		attackDelayCounter = 0;
 		spriteNum = 1;
 	}
@@ -44,11 +47,7 @@ public abstract class Monster extends Character {
 			attacking = true;
 			attackDelayCounter = 0;
 		}
-		if (true) {
-			if(this instanceof Minotuar) {
-				System.out.println(direction);
-			}
-			
+		if (CollisionOn == false) {
 			switch (direction) {
 			case "up":
 				worldY -= speed;

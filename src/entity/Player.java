@@ -22,10 +22,6 @@ public class Player extends Character {
 	public String state;
 	public ArrayList<Item> inventory = new ArrayList<>();
 	
-	// PLAYER attackZone
-	private Rectangle attackZone;
-	private int attackZoneDefaultX;
-	private int attackZoneDefaultY;
 	// PLAYER'S SAITAMA
 	public float saitama;
 	public final float MAX_SAITAMA = 100f;

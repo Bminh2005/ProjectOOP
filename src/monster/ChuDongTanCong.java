@@ -30,7 +30,7 @@ public class ChuDongTanCong {
 		monster.solidArea.x = monster.solidAreaDefaultX;
 		monster.solidArea.y = monster.solidAreaDefaultY;
 	}
-	public void QuaiVatDuoiTheoPlayer(Character monster) {
+	public void QuaiVatDuoiTheoPlayer(Monster monster) {
 		boolean tanCong = false;
 		int warZoneWidth = 6*gp.tileSize;
 		int warZoneHeight = 6*gp.tileSize;
@@ -52,18 +52,35 @@ public class ChuDongTanCong {
 		}
 		
 		if(tanCong) {
-			if(monster.worldX < player.worldX - 15) {
+			if(monster.worldX + monster.solidAreaDefaultX + monster.solidArea.width < player.worldX + player.solidAreaDefaultX - 15) {
 				monster.direction = "right";
 			}
-			else if(monster.worldX > player.worldX + 15) {
+			else if(monster.worldX + monster.solidAreaDefaultX > player.worldX + player.solidAreaDefaultX + player.solidArea.width + 15) {
 				monster.direction = "left";
 			}
-			else if(monster.worldY < player.worldY - 10) {
+			else if(monster.worldY + monster.solidAreaDefaultY + monster.solidArea.height < player.worldY + player.solidAreaDefaultY - 10) {
 				monster.direction = "down";
 			}
-			else if(monster.worldY > player.worldY + 10) {
+			else if(monster.worldY + monster.solidAreaDefaultY > player.worldY + player.solidAreaDefaultY + player.solidArea.height + 10) {
 				monster.direction = "up";
 			}
 		}
+		
+		monster.attackZone.x = monster.worldX + monster.attackZoneDefaultX;
+		 monster.attackZone.y = monster.worldY + monster.attackZoneDefaultY;
+		 Rectangle solidPlayer = gp.player.solidArea;
+		 solidPlayer.x = gp.player.worldX + gp.player.solidAreaDefaultX;
+		 int range = monster.attackZone.width + 2*monster.attackZoneDefaultX - monster.width;
+		 if(monster.flip) monster.attackZone.x -= range;
+		 solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
+		 if(monster.attackZone.intersects(solidPlayer)) {
+			 if(monster.state != "ATTACK") {
+				 monster.state = "ATTACK";
+				 monster.spriteNum = -1;
+				 monster.spriteCounter = 0;
+			 }
+		 }
+		 solidPlayer.x = gp.player.solidAreaDefaultX;
+		 solidPlayer.y = gp.player.solidAreaDefaultY;
 	}
 }

@@ -13,12 +13,7 @@ public class Minotuar extends Monster{
 	BufferedImage idle[];
 	BufferedImage move[];
 	BufferedImage attackImage[];
-	String state;
-	public Rectangle attackZone;
-	public int attackZoneDefaultX;
-	public int attackZoneDefaultY;
 	
-	boolean flip;
 	public Minotuar(GamePanel gp) {
 		super(gp);
 		idle = new SpriteSheet("/monster/minotuar/MinotuarIDLE_480x96.png", 480, 96, 5, 0, 0, 96, 70).animation;
@@ -75,23 +70,43 @@ public class Minotuar extends Monster{
 		                direction = "down";
 		            } else if (i <= 75) {
 		                direction = "left";
-		                this.flip = true;
 		            } else {
 		                direction = "right";
-		                this.flip = false;
 		            }
 		            actionLockCounter = 0;
 			 }
 			 else {
 				 direction = "idle";
-			 }
-	     
-	            
+			 }  
 		 }
-		 System.out.println(direction);
+		 if(direction == "left") {
+			 this.flip = true;
+		 }
+		 if(direction == "right") {
+			 this.flip = false;
+		 }
+		 gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
+		 if(state == "ATTACK") {
+			 direction = "idle";
+			 if(spriteNum == 4) {
+				 attackZone.x = worldX + attackZoneDefaultX;
+				 attackZone.y = worldY + attackZoneDefaultY;
+				 Rectangle solidPlayer = gp.player.solidArea;
+				 solidPlayer.x = gp.player.worldX + gp.player.solidAreaDefaultX;
+				 int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
+				 if(flip) attackZone.x -= range;
+				 solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
+				 if(attackZone.intersects(solidPlayer)) {
+					 gp.player.takeDamge(this.attack);
+				 }
+				 solidPlayer.x = gp.player.solidAreaDefaultX;
+				 solidPlayer.y = gp.player.solidAreaDefaultY;
+			 }
+		 }
 	}
 	public void updateDrawImage(int screenX, int screenY) {
-		if(state == "MOVE")
+		if(state == "MOVE") {
+		if(spriteNum == -1) spriteNum = 0;
 		switch (direction) {
 		case "up":
 			image = move[spriteNum]; 
@@ -106,8 +121,19 @@ public class Minotuar extends Monster{
 			image = move[spriteNum];; 
 			break;
 		}
+		}
 		else if(state == "ATTACK") {
+			if(spriteNum == -1) spriteNum = 0;
 			image = attackImage[spriteNum];
+			System.out.println("------------"+ spriteNum);
+			System.out.println("============"+ attackImage.length);
+			if(spriteNum == attackImage.length - 1) {
+				 this.idle();
+			 }
+		}
+		else if(state == "IDLE") {
+			if(spriteNum == -1) spriteNum = 0;
+			image = idle[spriteNum];
 		}
 	}
 	
@@ -115,10 +141,28 @@ public class Minotuar extends Monster{
 		if (state != "ATTACK") {
 			state = "ATTACK";
 			spriteNum = -1;
+			spriteCounter = 0;
 		}
 	}
+	
+	public void move() {
+		if(state != "MOVE") {
+			state = "MOVE";
+			spriteNum = -1;
+			spriteCounter = 0;
+		}
+	}
+	public void idle() {
+		if(state != "IDLE") {
+			state = "IDLE";
+			spriteNum = -1;
+			spriteCounter = 0;
+		}
+	}
+	
 	public void updateSpriteNum() {
-		if (spriteCounter > 15) {
+		System.out.println("++++++++"+ spriteCounter);
+		if (spriteCounter % 20 == 0) {
 			switch(state) {
 			case "MOVE":
 				spriteNum = (spriteNum+1)%move.length;
@@ -130,7 +174,6 @@ public class Minotuar extends Monster{
 				spriteNum = (spriteNum+1)%idle.length;
 				break;
 			}
-			spriteCounter = 0;
 		}
 	}
 	
