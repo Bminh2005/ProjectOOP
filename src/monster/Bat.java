@@ -66,7 +66,6 @@ public class Bat extends Monster {
     @Override
     public void update() {
         super.update(); // Cập nhật các thuộc tính từ lớp cha
-
         // Cập nhật trạng thái dựa trên HP
         if (hp <= 0) {
             currentState = "die"; // Nếu chết, chuyển sang trạng thái "die"
@@ -90,8 +89,7 @@ public class Bat extends Monster {
     public void setAction() {
         // Di chuyển ngẫu nhiên
     	actionLockCounter++;
-        
-        
+
         if (actionLockCounter == 120) {
         	Random rand = new Random();
             String[] directions = {"up", "down", "left", "right"};

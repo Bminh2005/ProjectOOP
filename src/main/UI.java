@@ -114,7 +114,7 @@ public class UI {
 		{
 			drawGameOverScreen();
 		}
-		if(gp.gameState == gp.transition_state) {
+		if(gp.gameState == gp.transitionState) {
 			drawTransition();
 		}
 	}
@@ -199,6 +199,22 @@ public class UI {
 					messageCounter.remove(i);
 				}
 			}
+		}
+	}
+	public void drawTransition()
+	{
+		counter++;
+		g2.setColor(new Color(0,0,0,counter*5));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		
+		if(counter == 50)
+		{
+			counter = 0;
+			gp.gameState = gp.playState;
+			gp.num_CurrentMap = gp.tempMap;
+			gp.currentMap = gp.maps[gp.num_CurrentMap];
+			gp.player.worldX = gp.tileSize * gp.tempCol;
+			gp.player.worldY = gp.tileSize * gp.tempRow;
 		}
 	}
 	public void drawTitleScreen()
@@ -767,10 +783,6 @@ public class UI {
 		int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		int x = tailX - length;
 		return x;
-	}
-	public void drawTransition() {
-		counter++;
-		
 	}
 }
 
