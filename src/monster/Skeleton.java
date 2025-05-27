@@ -7,6 +7,9 @@ import java.util.Random;
 import entity.Player;
 import main.GamePanel;
 import main.SpriteSheet;
+import object.OBJ_Coin_Bronze;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 
 public class Skeleton extends Monster {
     private ChuDongTanCong ai;
@@ -81,7 +84,18 @@ public class Skeleton extends Monster {
         actionLockCounter = 0;
         direction = gp.player.direction;
     }
-    
+    public void checkDrop() {
+        int i = new Random().nextInt(100) + 1;
+
+        if (i < 50) {
+        	dropItem(new OBJ_ManaCrystal(gp));
+            
+        } else if (i < 75) {
+            dropItem(new OBJ_Heart(gp));
+        } else {
+        	dropItem(new OBJ_Coin_Bronze(gp));
+        }
+    }
     public void updateDrawAttack(int screenX, int screenY) {
     	switch (direction) {
 		case "up":
