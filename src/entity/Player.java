@@ -91,6 +91,8 @@ public class Player extends Character {
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentShield = new OBJ_Shield_Wood(gp);
 		System.out.println(this.state);
+		attack = getAttack();
+		defense = getDefense();
 	}
 
 	public void setDefaultValues() {
@@ -106,8 +108,8 @@ public class Player extends Character {
 		maxMp = 10;
 		mp = this.maxMp;
 
-		attack = 10;
-		defense = 5;
+		attackDefault = 10;
+		defenseDefault = 5;
 
 		strength = 1;
 		dexterity = 1;
@@ -175,11 +177,11 @@ public class Player extends Character {
 
 	public int getAttack() {
 //		attackArea = currentWeapon.attackArea;
-		return attack = attack + strength * currentWeapon.attackValue;
+		return attack = attackDefault + strength * currentWeapon.attackValue;
 	}
 
 	public int getDefense() {
-		return defense = defense + dexterity * currentShield.defenseValue;
+		return defense = defenseDefault + dexterity * currentShield.defenseValue;
 	}
 
 	public void update() {
@@ -286,7 +288,7 @@ public class Player extends Character {
 		if(overx) this.x += dx;
 		if(overy) this.y += dy;
 		this.frameCounter++;
-		refreshStatus();
+		
 	}
 
 	public void idle() {
