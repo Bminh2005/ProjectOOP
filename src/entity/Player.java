@@ -486,7 +486,7 @@ public class Player extends Character {
 				attackZone.x -= range;
 			}
 			System.out.println(attackZone.x + " " + attackZone.y + " " + attackZone.width + " " + attackZone.height);
-			for (int i = 0; i < gp.monster.length; i++) {
+			for (int i = 0; i < gp.monster[gp.num_CurrentMap].length; i++) {
 				Monster m = gp.monster[gp.num_CurrentMap][i];
 				if (m != null && m.hp > 0) {
 					Rectangle monsterArea = new Rectangle(m.worldX + m.solidArea.x, m.worldY + m.solidArea.y,
@@ -495,8 +495,7 @@ public class Player extends Character {
 					// System.out.println(monsterArea.x +" " + monsterArea.y+ " "+ monsterArea.width
 					// +" "+ monsterArea.height);
 					if (attackZone.intersects(monsterArea)) {
-						System.out.println("Monster is attacked!");
-						m.takeDamage(this.attack - gp.monster[gp.num_CurrentMap][i].defense);
+						m.takeDamage(this.attack);
 						gp.monster[gp.num_CurrentMap][i].damageReaction();
 						if (gp.monster[gp.num_CurrentMap][i].hp <= 0) {
 							gp.monster[gp.num_CurrentMap][i].dying = true;
@@ -596,7 +595,7 @@ public class Player extends Character {
 			this.image = this.playerWalk.animation[this.spriteNum];
 			break;
 		case "ATTACKING":
-			this.image = this.playerAttack[this.attackType].animation[this.spriteNum];
+			this.image = this.playerAttack[this.attackType].animation[this.spriteNum%this.playerAttack[this.attackType].maxNumber];
 			break;
 		case "DYING":
 			this.image = this.playerDying.animation[this.spriteNum];

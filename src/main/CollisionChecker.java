@@ -55,7 +55,7 @@ public class CollisionChecker {
 		solid.width = tile.collisionArea.width;
 		switch(entity.direction) {
 		case "up":
-			if(entity.solidArea.intersects(solid)) {
+			if(entity.solidArea.intersects(solid)||entity.solidArea.y <= 0) {
 				while(solid.intersects(entity.solidArea)) {
 					entity.solidArea.y += 1;
 					entity.worldY += 1;
@@ -64,7 +64,7 @@ public class CollisionChecker {
 			}
 			break;
 		case "down":
-			if(entity.solidArea.intersects(solid)) {
+			if(entity.solidArea.intersects(solid)|| entity.solidArea.y + entity.solidArea.height >= gp.tileSize*50) {
 				while(solid.intersects(entity.solidArea)) {
 					entity.solidArea.y -= 1;
 					entity.worldY -= 1;
@@ -73,7 +73,7 @@ public class CollisionChecker {
 			}
 			break;
 		case "left":
-			if(entity.solidArea.intersects(solid)) {
+			if(entity.solidArea.intersects(solid)||entity.solidArea.x <= 0) {
 				while(solid.intersects(entity.solidArea)) {
 					entity.solidArea.x += 1;
 					entity.worldX += 1;
@@ -82,8 +82,7 @@ public class CollisionChecker {
 			}
 			break;
 		case "right":
-			entity.solidArea.x += entity.speed;
-			if(entity.solidArea.intersects(solid)) {
+			if(entity.solidArea.intersects(solid)|| entity.solidArea.x + entity.solidArea.width >= gp.tileSize*50) {
 				while(solid.intersects(entity.solidArea)) {
 					entity.solidArea.x -= 1;
 					entity.worldX -= 1;
