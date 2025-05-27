@@ -52,6 +52,12 @@ public class ChuDongTanCong {
 		}
 		
 		if(tanCong) {
+			if(monster.state != "MOVE" && monster.state != "ATTACK") {
+				 monster.state = "MOVE";
+				 monster.spriteNum = -1;
+				 monster.spriteCounter = 0;
+			 }
+
 			if(monster.worldX + monster.solidAreaDefaultX + monster.solidArea.width < player.worldX + player.solidAreaDefaultX - 15) {
 				monster.direction = "right";
 			}
@@ -73,7 +79,8 @@ public class ChuDongTanCong {
 		 int range = monster.attackZone.width + 2*monster.attackZoneDefaultX - monster.width;
 		 if(monster.flip) monster.attackZone.x -= range;
 		 solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
-		 if(monster.attackZone.intersects(solidPlayer)) {
+		 Rectangle intersection = monster.attackZone.intersection(solidPlayer);
+		 if(monster.attackZone.intersects(solidPlayer) && intersection.width == 5) {
 			 if(monster.state != "ATTACK") {
 				 monster.state = "ATTACK";
 				 monster.spriteNum = -1;
