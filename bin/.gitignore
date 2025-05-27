@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-/main/
-/monster/
-/entity/
-=======
+/npc/
 /entity/
 /main/
 /monster/
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
+/object/

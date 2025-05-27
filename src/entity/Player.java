@@ -340,6 +340,7 @@ public class Player extends Character {
 	}
 
 	public void move() {
+		gp.can_touch = true;
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
 			
@@ -484,7 +485,7 @@ public class Player extends Character {
 				attackZone.x -= range;
 			}
 			System.out.println(attackZone.x + " " + attackZone.y + " " + attackZone.width + " " + attackZone.height);
-			for (int i = 0; i < gp.monster.length; i++) {
+			for (int i = 0; i < gp.monster[gp.num_CurrentMap].length; i++) {
 				Monster m = gp.monster[gp.num_CurrentMap][i];
 				if (m != null && m.hp > 0) {
 					Rectangle monsterArea = new Rectangle(m.worldX + m.solidArea.x, m.worldY + m.solidArea.y,
@@ -650,6 +651,13 @@ public class Player extends Character {
 					gp.ui.addMessage(text);
 					gp.obj[i] = null;
 				}
+			}
+		}
+	}
+	public void checkNPC() {
+		for(int i =0 ;i < gp.npc.length ;i++) {
+			if(gp.cChecker.checkPlayer(gp.npc[i]) && gp.npc[i] != null) {
+					gp.ui.interactNPC(i);
 			}
 		}
 	}

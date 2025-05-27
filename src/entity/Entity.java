@@ -20,8 +20,9 @@ public class Entity {
 	// Anh sprite cho nhan vat va vat pham
 	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 	public BufferedImage titleImage;
-	public BufferedImage image, image2, image3;
-	
+	public BufferedImage image, image2, image3,image4;
+	public String dialogues[] = new String[20];
+	public int dialogues_index =0;
 	// === Position & Size ===
 	// Vi tri trong the gioi va kich thuoc hien thi
 	public int worldX, worldY;
@@ -85,7 +86,9 @@ public class Entity {
 		this.worldX = 0;
 		this.worldY = 0;
 	}
-
+	public void speak() {
+		
+	}
 	public void use(Player entity)
 	{
 		

@@ -772,6 +772,13 @@ public class UI {
 		counter++;
 		
 	}
+	public void interactNPC(int i) {
+		if( i !=999) {
+			gp.gameState = gp.dialogueState;
+			
+		}
+	}
+	
 }
 
 
