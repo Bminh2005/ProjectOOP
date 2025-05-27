@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import entity.Character;
 import entity.Entity;
 import entity.Item;
+import entity.NPC;
 import entity.Player;
 import entity.Projectile;
 import map.Map;
@@ -40,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map[] maps = new Map[maxMap];
 	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
-
+	public NPC [] npc = new NPC[20]; 
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -50,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public UI ui = new UI(this);
 	public CollisionChecker cChecker;
 	public ChuDongTanCong quaiVatTanCong;
-
+	public boolean can_touch = true;
 	//GAME STATE
 	public int gameState;
 	public final int titleState = 0;
@@ -90,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
 		currentMap = maps[1];
 		teleportList.add(new Teleport(
 			    1, 0, 0,   // từ Map 1 tại tile (4,42)
-			    2, 26, 25    // sang Map 2 tile (30,9)
+			    2, 23, 23    // sang Map 2 tile (30,9)
 			));
 		teleportList.add(new Teleport(
 			    2, 23, 23,  // từ Map 2 tile (30,10)
@@ -221,16 +222,14 @@ public class GamePanel extends JPanel implements Runnable{
 			int playerCol = player.worldX/tileSize;
 			int playerRow = player.worldY/tileSize;
 			System.out.println(playerCol +" "+ playerRow);
-			if(playerCol == 4 && playerRow ==42) {
-				System.out.println("True!");
-			}
 			for (Teleport tp : teleportList) {
 		        if (num_CurrentMap == tp.fromMap &&
 		            playerCol == tp.fromCol &&
-		            playerRow == tp.fromRow) {
+		            playerRow == tp.fromRow && can_touch == true) {
 		            this.player.x = this.player.defaultScreenX;
 		            this.player.y = this.player.defaultScreenY;
 		            Teleport(tp.toMap, tp.toCol, tp.toRow);
+		            can_touch = false;
 		            break;
 		        }
 			}
