@@ -13,13 +13,16 @@ public class Minotuar extends Monster{
 	BufferedImage idle[];
 	BufferedImage move[];
 	BufferedImage attackImage[];
-	
+	private int delayAttackCounter;
+	private boolean attackReady;
 	public Minotuar(GamePanel gp) {
 		super(gp);
 		idle = new SpriteSheet("/monster/minotuar/MinotuarIDLE_480x96.png", 480, 96, 5, 0, 0, 96, 70).animation;
 		move = new SpriteSheet("/monster/minotuar/MinotuarMOVE_768x96.png", 768, 96, 8, 0, 0, 96, 70).animation;
 		attackImage = new SpriteSheet("/monster/minotuar/MinotuarATTACK_864x96.png", 864, 96, 9, 0, 0, 96, 70).animation;
 		flip = false;
+		this.attackReady = true;
+		this.delayAttackCounter = 0;
 		this.height = gp.tileSize*70/50; //70
 		this.width = this.height*96/70; //96
 		solidArea.x = this.height*38/70 - 5; //32
@@ -57,7 +60,14 @@ public class Minotuar extends Monster{
 	@Override
 	public void setAction() {
 		// TODO Auto-generated method stub
-		System.out.println(move.length);
+		System.out.println("++++++++++++++++"+ this.delayAttackCounter);
+		if(this.attackReady == false) {
+			delayAttackCounter++;
+			if(delayAttackCounter >= 1000) {
+				delayAttackCounter = 0;
+				this.attackReady = true;
+			}
+		}
 		actionLockCounter++;
 		 if (actionLockCounter == 120) {
 			 if(state == "MOVE") {
@@ -86,22 +96,8 @@ public class Minotuar extends Monster{
 			 this.flip = false;
 		 }
 		 gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
-		 if(state == "ATTACK") {
-			 direction = "idle";
-			 if(spriteNum == 3) {
-				 attackZone.x = worldX + attackZoneDefaultX;
-				 attackZone.y = worldY + attackZoneDefaultY;
-				 Rectangle solidPlayer = gp.player.solidArea;
-				 solidPlayer.x = gp.player.worldX + gp.player.solidAreaDefaultX;
-				 int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
-				 if(flip) attackZone.x -= range;
-				 solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
-				 if(attackZone.intersects(solidPlayer)) {
-					 gp.player.takeDamge(this.attack);
-				 }
-				 solidPlayer.x = gp.player.solidAreaDefaultX;
-				 solidPlayer.y = gp.player.solidAreaDefaultY;
-			 }
+		 if(state == "ATTACK" && attackReady == true) {
+			 this.attack();			 
 		 }
 	}
 	public void updateDrawImage(int screenX, int screenY) {
@@ -115,18 +111,16 @@ public class Minotuar extends Monster{
 			image = move[spriteNum]; 
 			break;
 		case "left":
-			image = move[spriteNum];; 
+			image = move[spriteNum]; 
 			break;
 		case "right":
-			image = move[spriteNum];; 
+			image = move[spriteNum]; 
 			break;
 		}
 		}
-		else if(state == "ATTACK") {
+		else if(state == "ATTACK" && this.attackReady) {
 			if(spriteNum == -1) spriteNum = 0;
 			image = attackImage[spriteNum];
-			System.out.println("------------"+ spriteNum);
-			System.out.println("============"+ attackImage.length);
 			if(spriteNum == attackImage.length - 1) {
 				 this.idle();
 			 }
@@ -143,6 +137,22 @@ public class Minotuar extends Monster{
 			spriteNum = -1;
 			spriteCounter = 0;
 		}
+		direction = "idle";
+		 if(spriteNum == 3) {
+			 attackZone.x = worldX + attackZoneDefaultX;
+			 attackZone.y = worldY + attackZoneDefaultY;
+			 Rectangle solidPlayer = gp.player.solidArea;
+			 solidPlayer.x = gp.player.worldX + gp.player.solidAreaDefaultX;
+			 int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
+			 if(flip) attackZone.x -= range;
+			 solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
+			 if(attackZone.intersects(solidPlayer)) {
+				 gp.player.takeDamge(this.attack);
+			 }
+			 solidPlayer.x = gp.player.solidAreaDefaultX;
+			 solidPlayer.y = gp.player.solidAreaDefaultY;
+		 }
+		 
 	}
 	
 	public void move() {
@@ -161,14 +171,18 @@ public class Minotuar extends Monster{
 	}
 	
 	public void updateSpriteNum() {
-		System.out.println("++++++++"+ spriteCounter);
-		if (spriteCounter % 10 == 0) {
+		if (spriteCounter % 8 == 0) {
 			switch(state) {
 			case "MOVE":
 				spriteNum = (spriteNum+1)%move.length;
 				break;
 			case "ATTACK":
+				
 				spriteNum = (spriteNum+1)%attackImage.length;
+				if(spriteNum == attackImage.length - 1) {
+					this.attackReady = false; 
+				 }
+				if(this.attackReady == false) this.idle();
 				break;
 			case "IDLE":
 				spriteNum = (spriteNum+1)%idle.length;
