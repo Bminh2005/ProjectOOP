@@ -153,7 +153,7 @@ public class Minotuar extends Monster{
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		 if(spriteNum == 3) {
+		 if(spriteNum == 3 && spriteCounter % 8 == 4) {
 			 attackZone.x = worldX + attackZoneDefaultX;
 			 attackZone.y = worldY + attackZoneDefaultY;
 			 Rectangle solidPlayer = gp.player.solidArea;

@@ -101,7 +101,7 @@ public class Player extends Character {
 		tired = false;
 		saitama = MAX_SAITAMA;
 
-		maxHp = 20;
+		maxHp = 30;
 		hp = this.maxHp;
 
 		maxMp = 10;
