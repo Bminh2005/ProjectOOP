@@ -83,11 +83,12 @@ public class Minotuar extends Monster{
 		            } else {
 		                direction = "right";
 		            }
-		            actionLockCounter = 0;
+		            
 			 }
 			 else {
 				 direction = "idle";
 			 }  
+			 actionLockCounter = 0;
 		 }
 		 if(direction == "left") {
 			 this.flip = true;

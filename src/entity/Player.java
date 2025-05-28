@@ -15,6 +15,7 @@ import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+import object.OBJ_ThunderBolt;
 
 public class Player extends Character {
 	KeyHandler keyH;
@@ -55,7 +56,7 @@ public class Player extends Character {
 	
 	public Item currentWeapon;
 	public Item currentShield;
-	public Projectile projectile;
+	public Projectile[] projectile = new Projectile[5];
 	
 	
 	public int level;
@@ -123,7 +124,8 @@ public class Player extends Character {
 
 		// === Projectile ===
 		// Dan ban hoac lua
-		projectile = new OBJ_Fireball(gp);
+		projectile[0] = new OBJ_Fireball(gp);
+		projectile[1] = new OBJ_ThunderBolt(gp);
 
 		// === World Position ===
 		// Vi tri trong the gioi game
@@ -256,22 +258,44 @@ public class Player extends Character {
 				
 				
 			} 
-			else this.idle();
+			else {
+				this.idle();
+				
+			}
 		}
 		} else {
+			this.hp = 0;
 			this.dying();
 		}
 		
-		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
-				&& projectile.haveResource(this) == true) {
+		if (gp.keyH.shotKeyPressed == true && projectile[0].alive == false && shotAvailableCounter == 30
+				&& projectile[0].haveResource(this) == true) {
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
-			projectile.set(worldX, worldY + 10, direction, true, this);
+			projectile[0].set(worldX, worldY + 10, direction, true, this);
 
 			// SUBTRACT THE COST (MANA, AMMO ETC.)
-			projectile.subtractResource(this);
+			projectile[0].subtractResource(this);
 
 			// ADD IT TO THE LIST
-			gp.projectileList.add(projectile);
+			gp.projectileList.add(projectile[0]);
+
+			shotAvailableCounter = 0;
+
+//			gp.playSE(10);
+		}
+		if (shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+		if (gp.keyH.beamPressed == true && projectile[1].alive == false && shotAvailableCounter == 30
+				&& projectile[1].haveResource(this) == true) {
+			// SET DEFAULT COORDINATES, DIRECTION AND USER
+			projectile[1].set(worldX, worldY + 10, direction, true, this);
+
+			// SUBTRACT THE COST (MANA, AMMO ETC.)
+			projectile[1].subtractResource(this);
+
+			// ADD IT TO THE LIST
+			gp.projectileList.add(projectile[1]);
 
 			shotAvailableCounter = 0;
 
@@ -296,6 +320,9 @@ public class Player extends Character {
 		}
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
+		}
+		if(frameCounter % 60 == 0) { 
+			if(this.mp < this.maxMp) this.mp++;
 		}
 
 	}
@@ -515,7 +542,13 @@ public class Player extends Character {
 	
 	public void takeDamge(int damage) {
 		if(damage - defense > 0) {
-			this.hp -= (damage - defense);
+			if((damage - defense) > hp) {
+				this.hp = 0;
+			}
+			else {
+				this.hp -= (damage - defense);
+			}
+			
 		}
 		this.hurting = true;
 		

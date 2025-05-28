@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 	GamePanel gp;
 	
-	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, beamPressed;
 	public boolean attackPressed, damagePressed, diePressed, refreshPressed;
 	public boolean runPressed;
 	public KeyHandler(GamePanel gp)
@@ -190,6 +190,9 @@ public class KeyHandler implements KeyListener{
 		}
 		if (code == KeyEvent.VK_R) {
 			refreshPressed = true;
+		}
+		if (code == KeyEvent.VK_I) {
+			beamPressed = true;
 		}
 	}
 	public void pauseState(int code)
@@ -390,6 +393,9 @@ public class KeyHandler implements KeyListener{
 		}
 	    if (code == KeyEvent.VK_R) {
 			refreshPressed = false;
+		}
+	    if (code == KeyEvent.VK_I) {
+			beamPressed = false;
 		}
 		
 	}
