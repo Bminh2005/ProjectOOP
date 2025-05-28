@@ -156,7 +156,7 @@ public class Player extends Character {
 
 		//solidArea = new Rectangle(17, 23, 32, 32);
 		CollisionOn = false;
-
+		canMove = true;
 		// === Initial Direction ===
 		// Huong di chuyen ban dau
 		direction = "up";
@@ -252,7 +252,7 @@ public class Player extends Character {
 				}
 				this.CollisionOn = false;
 				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
-				if(CollisionOn == false)
+				if(CollisionOn == false && canMove)
 					this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
@@ -367,29 +367,28 @@ public class Player extends Character {
 	}
 
 	public void move() {
-		gp.can_touch = true;
-		if (this.keyH.leftPressed == true) {
-			direction = "left";
-				this.worldX -= this.speed;
-				this.flip = true;
+			gp.can_touch = true;
+			if (this.keyH.leftPressed == true) {
+				direction = "left";
+					this.worldX -= this.speed;
+					this.flip = true;
 
-		}
-		else if (this.keyH.rightPressed == true) {
-			direction = "right";
-				this.worldX += this.speed;
-				this.flip = false;
-				
-		}
-		else if (this.keyH.upPressed == true) {
-			direction = "up";
-				this.worldY -= this.speed;
-		}
-		else if (this.keyH.downPressed == true) {
-			 direction = "down";
-				
-				this.worldY += this.speed;
-		}
-		
+			}
+			else if (this.keyH.rightPressed == true) {
+				direction = "right";
+					this.worldX += this.speed;
+					this.flip = false;
+					
+			}
+			else if (this.keyH.upPressed == true) {
+				direction = "up";
+					this.worldY -= this.speed;
+			}
+			else if (this.keyH.downPressed == true) {
+				 direction = "down";
+					
+					this.worldY += this.speed;
+			}
 	}
 
 

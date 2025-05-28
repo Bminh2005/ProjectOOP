@@ -1,3 +1,4 @@
+
 package monster;
 
 import java.awt.Color;
@@ -15,6 +16,8 @@ public class Minotuar extends Monster{
 	BufferedImage attackImage[];
 	private int delayAttackCounter;
 	private boolean attackReady;
+	private boolean prepareAttack;
+	private int preparingTimeAttack;
 	public Minotuar(GamePanel gp) {
 		super(gp);
 		idle = new SpriteSheet("/monster/minotuar/MinotuarIDLE_480x96.png", 480, 96, 5, 0, 0, 96, 70).animation;
@@ -22,6 +25,8 @@ public class Minotuar extends Monster{
 		attackImage = new SpriteSheet("/monster/minotuar/MinotuarATTACK_864x96.png", 864, 96, 9, 0, 0, 96, 70).animation;
 		flip = false;
 		this.attackReady = true;
+		prepareAttack = false;
+		this.preparingTimeAttack = 0;
 		this.delayAttackCounter = 0;
 		this.height = gp.tileSize*70/50; //70
 		this.width = this.height*96/70; //96
@@ -60,16 +65,25 @@ public class Minotuar extends Monster{
 	@Override
 	public void setAction() {
 		// TODO Auto-generated method stub
-		System.out.println("++++++++++++++++"+ this.delayAttackCounter);
+		//System.out.println("++++++++++++++++"+ this.delayAttackCounter);
 		if(this.attackReady == false) {
 			delayAttackCounter++;
-			if(delayAttackCounter >= 1000) {
+			if(delayAttackCounter >= 70) {
 				delayAttackCounter = 0;
 				this.attackReady = true;
 			}
 		}
+		if(this.prepareAttack) {
+			this.preparingTimeAttack++;
+			if(preparingTimeAttack >= 30) {
+				this.prepareAttack = false;
+				this.preparingTimeAttack = 0;
+				this.spriteNum++;
+			}
+		}
 		actionLockCounter++;
-		 if (actionLockCounter == 120) {
+		System.out.println(state);
+		 if (actionLockCounter >= 120) {
 			 if(state == "MOVE") {
 				 Random random = new Random();
 		            int i = random.nextInt(100) + 1;
@@ -123,7 +137,7 @@ public class Minotuar extends Monster{
 			if(spriteNum == -1) spriteNum = 0;
 			image = attackImage[spriteNum];
 			if(spriteNum == attackImage.length - 1) {
-				 this.idle();
+				 this.move();
 			 }
 		}
 		else if(state == "IDLE") {
@@ -178,12 +192,14 @@ public class Minotuar extends Monster{
 				spriteNum = (spriteNum+1)%move.length;
 				break;
 			case "ATTACK":
-				
-				spriteNum = (spriteNum+1)%attackImage.length;
+				if(spriteNum == 0) {
+					prepareAttack = true;
+				}
+				if(prepareAttack == false) spriteNum = (spriteNum+1)%attackImage.length;
 				if(spriteNum == attackImage.length - 1) {
 					this.attackReady = false; 
 				 }
-				if(this.attackReady == false) this.idle();
+				if(this.attackReady == false) this.move();
 				break;
 			case "IDLE":
 				spriteNum = (spriteNum+1)%idle.length;

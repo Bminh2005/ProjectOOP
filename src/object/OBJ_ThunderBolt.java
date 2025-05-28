@@ -20,7 +20,7 @@ public class OBJ_ThunderBolt extends Projectile{
 		maxHp = 80;
 		hp = maxHp;
 		attack = 15;
-		useCost = 1;
+		useCost = 10;
 		reverse = false;		
 		alive = false;
 		getImage();
@@ -82,33 +82,30 @@ public class OBJ_ThunderBolt extends Projectile{
 	}
 	public void update()
 	{
-		exist++;
+		
+		
 //		gp.cChecker.checkTile(this);
 		if(user == gp.player)
 		{
+			System.out.println("+++:" + alive);
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
 			if(monsterIndex != 999)
 			{
 				gp.player.damageMonsterByProjectile(monsterIndex, attack);
 //				generateParticle(user.projectile, gp.monster[monsterIndex]);
-				if(exist == 2) {
-					alive = false;
-				}
-				exist = 0;
 			}
+			System.out.println("----" + alive);
 		}
 		if(user != gp.player)
 		{
+			System.out.println("+++:" + alive);
 			boolean contactPlayer = gp.cChecker.checkPlayer(this);
 			if(gp.player.invincible == false && contactPlayer == true)
 			{
 				monster.damagePlayer(attack);
 //				generateParticle(user.projectile, gp.player);
-				if(exist == 2) {
-					alive = false;
-				}
-				exist = 0;
 			}
+			System.out.println("----" + alive);
 		}
 		
 		switch(direction)
@@ -123,6 +120,7 @@ public class OBJ_ThunderBolt extends Projectile{
 		if(hp <= 0)
 		{
 			alive = false;
+			gp.player.canMove = true;
 		}
 		
 		spriteCounter++;
@@ -183,6 +181,7 @@ public class OBJ_ThunderBolt extends Projectile{
 				break;
 			}
 			if(alive) {
+				gp.player.canMove = false;
 				if(reverse) {
 					g2.drawImage(image, screenX - gp.tileSize/3 - 2*gp.tileSize, screenY, null);
 					g2.setColor(Color.blue);
@@ -194,7 +193,7 @@ public class OBJ_ThunderBolt extends Projectile{
 					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 				}
 				
-			}
+			}			
 			
 		}
 	}

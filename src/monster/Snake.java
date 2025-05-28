@@ -60,7 +60,7 @@ public class Snake extends Monster {
 		// TODO Auto-generated method stub
 		System.out.println(move.length);
 		actionLockCounter++;
-		if (actionLockCounter == 120) {
+		if (actionLockCounter >= 120) {
 			if (state == "MOVE") {
 				Random random = new Random();
 				int i = random.nextInt(100) + 1;
@@ -88,22 +88,7 @@ public class Snake extends Monster {
 		}
 		gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
 		if (state == "ATTACK") {
-			direction = "idle";
-			if (spriteNum == 3) {
-				attackZone.x = worldX + attackZoneDefaultX;
-				attackZone.y = worldY + attackZoneDefaultY;
-				Rectangle solidPlayer = gp.player.solidArea;
-				solidPlayer.x = gp.player.worldX + gp.player.solidAreaDefaultX;
-				int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
-				if (flip)
-					attackZone.x -= range;
-				solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
-				if (attackZone.intersects(solidPlayer)) {
-					gp.player.takeDamge(this.attack);
-				}
-				solidPlayer.x = gp.player.solidAreaDefaultX;
-				solidPlayer.y = gp.player.solidAreaDefaultY;
-			}
+			this.attack();
 		}
 	}
 
@@ -134,7 +119,7 @@ public class Snake extends Monster {
 			System.out.println("------------" + spriteNum);
 			System.out.println("============" + attackImage.length);
 			if (spriteNum == attackImage.length - 1) {
-				this.idle();
+				this.move();
 			}
 		} else if (state == "IDLE") {
 			if (spriteNum == -1)
@@ -148,6 +133,22 @@ public class Snake extends Monster {
 			state = "ATTACK";
 			spriteNum = -1;
 			spriteCounter = 0;
+		}
+		direction = "idle";
+		if (spriteNum == 3) {
+			attackZone.x = worldX + attackZoneDefaultX;
+			attackZone.y = worldY + attackZoneDefaultY;
+			Rectangle solidPlayer = gp.player.solidArea;
+			solidPlayer.x = gp.player.worldX + gp.player.solidAreaDefaultX;
+			int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
+			if (flip)
+				attackZone.x -= range;
+			solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
+			if (attackZone.intersects(solidPlayer)) {
+				gp.player.takeDamge(this.attack);
+			}
+			solidPlayer.x = gp.player.solidAreaDefaultX;
+			solidPlayer.y = gp.player.solidAreaDefaultY;
 		}
 	}
 
