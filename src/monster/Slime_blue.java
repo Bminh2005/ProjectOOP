@@ -1,6 +1,7 @@
 package monster;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import main.GamePanel;
@@ -8,34 +9,34 @@ import main.SpriteSheet;
 
 public class Slime_blue extends Monster{
 	GamePanel gp;
-	SpriteSheet idle;
-	SpriteSheet up;
-	SpriteSheet down;
-	SpriteSheet right;
-	SpriteSheet left;
-	SpriteSheet dead;
-	SpriteSheet getCurrentSheet;
+	BufferedImage[] idle;
+	BufferedImage[] up;
+	BufferedImage[] down;
+	BufferedImage[] right;
+	BufferedImage[] left;
+	BufferedImage[] dead;
+	BufferedImage[] getCurrentSheet;
 	String state;
 	boolean flip;
 	public Slime_blue(GamePanel gp) {
 		// TODO Auto-generated constructor stub
 		super(gp);
         this.gp = gp;
-        idle = new SpriteSheet("/monster/slime_blue_idle.png", 132, 29, 4, 0, 0, 27, 24);
-		up = new SpriteSheet("/monster/slime_blue_up.png", 218, 40, 7, 0, 0, 27, 24);
-		down = new SpriteSheet("/monster/slime_blue_down.png", 218, 36, 7, 0, 0, 27, 24);
-		right = new SpriteSheet("/monster/slime_blue_right.png", 217, 36, 7, 0, 0, 27, 24);
-		left = new SpriteSheet("/monster/slime_blue_left (2).png", 197, 35, 7, 0, 0, 27, 24);
-		dead = new SpriteSheet("/monster/slime_blue_dead.png", 205, 33, 6, 0, 0, 27, 24);
+        idle = new SpriteSheet("/monster/slime_blue_idle.png", 132, 29, 4, 0, 0, 27, 24).animation;
+		up = new SpriteSheet("/monster/slime_blue_up.png", 218, 40, 7, 0, 0, 27, 24).animation;
+		down = new SpriteSheet("/monster/slime_blue_down.png", 218, 36, 7, 0, 0, 27, 24).animation;
+		right = new SpriteSheet("/monster/slime_blue_right.png", 217, 36, 7, 0, 0, 27, 24).animation;
+		left = new SpriteSheet("/monster/slime_blue_left (2).png", 197, 35, 7, 0, 0, 27, 24).animation;
+		dead = new SpriteSheet("/monster/slime_blue_dead.png", 205, 33, 6, 0, 0, 27, 24).animation;
 		flip = false;
 		/*
-		 * this.height = gp.tileSize*30/50; //70 this.width = this.height*25/70; //96
-		 * solidArea.x = this.height*38/70 - 5; //32 solidArea.y = this.height*45/70 -
-		 * 6; //45 solidArea.width = this.height*30/70; //22 solidArea.height =
-		 * this.height*30/70; //19 solidAreaDefaultX = solidArea.x; solidAreaDefaultY =
-		 * solidArea.y;
+		 * this.height = gp.tileSize * 3; // 70 this.width = this.height *194/114; // 96
+		 * solidArea.x = this.height ; // 32 solidArea.y = this.height * 45 / 70 - 55;
+		 * // 45 solidArea.width = gp.tileSize + gp.tileSize/2; solidArea.height =
+		 * gp.tileSize + gp.tileSize + 10; solidAreaDefaultX = solidArea.x;
+		 * solidAreaDefaultY = solidArea.y;
 		 */
-		this.image = idle.getSpriteNum(0);
+		this.image = idle[0];
 		this.spriteNum = 0;
 		this.spriteCounter = 0;
 		this.speed = 1;
@@ -77,31 +78,31 @@ public class Slime_blue extends Monster{
 				 }
 	}
 	public void updateDrawImage(int screenX, int screenY) {
-		switch (direction) {
-		case "up":
-			image = this.up.getSpriteNum(spriteNum); 
-			getCurrentSheet = up;
-			break;
-		case "down":
-			image = this.down.getSpriteNum(spriteNum); 
-			getCurrentSheet = down;
-			break;
-		case "left":
-			image = this.left.getSpriteNum(spriteNum);
-			getCurrentSheet = left;
-			break;
-		case "right":
-			image = this.right.getSpriteNum(spriteNum);
-			getCurrentSheet = right;
-			break;
-		}
-	}
+			if (spriteNum == -1)
+				spriteNum = 0;
+			switch (direction) {
+			case "up":
+				image = up[spriteNum];
+				break;
+			case "down":
+				image = down[spriteNum];
+				break;
+			case "left":
+				image = left[spriteNum];
+				
+				break;
+			case "right":
+				image = right[spriteNum];
+				
+				break;
+			}
+		} 
 
 	@Override
 	public void dyingAnimation(Graphics2D g2) {
-		if (dyingCounter < dead.maxNumber * 15) {
+		if (dyingCounter < dead.length * 15) {
 	        int frame = dyingCounter / 15; // mỗi frame giữ trong 15 tick
-	        image = dead.getSpriteNum(frame);
+	        image = dead[dyingCounter++];
 	        dyingCounter++;
 	    } else {
 	        // Kết thúc animation, biến mất
@@ -112,13 +113,20 @@ public class Slime_blue extends Monster{
 
 	@Override
 	public void updateSpriteNum() {
-		 spriteCounter++;
-		    int frameDelay = 3;  // giảm xuống cho mượt hơn
-
-		    if (spriteCounter > frameDelay) {
-		        spriteNum = (spriteNum + 1) % getCurrentSheet.maxNumber;
-		        spriteCounter = 0;
-		    }
+		switch (direction) {
+		case "up":
+			spriteNum = (spriteNum + 1) % up.length;
+			break;
+		case "down":
+			spriteNum = (spriteNum + 1) % down.length;
+			break;
+		case "left":
+			spriteNum = (spriteNum + 1) % left.length;
+			break;
+		case "right":
+			spriteNum = (spriteNum + 1) % right.length;
+			break;
+		}
 		}
 
 
