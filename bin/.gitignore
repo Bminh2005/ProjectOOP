@@ -1,7 +1,14 @@
-/npc/
+/InfoBox/
+/Player/
+/entity/
+/font/
 /main/
+/map/
 /monster/
 /monster_snake/
-/entity/
+/npc/
 /object/
+/objects/
 /projectile/
+/sounds/
+/tiles/

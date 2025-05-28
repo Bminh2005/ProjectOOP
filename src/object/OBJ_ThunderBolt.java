@@ -11,6 +11,8 @@ import main.GamePanel;
 
 public class OBJ_ThunderBolt extends Projectile{
 	
+	public int exist = 0;
+	
 	public OBJ_ThunderBolt(GamePanel gp) {
 		super(gp);
 		name = "Thunder Bolt";
@@ -18,7 +20,7 @@ public class OBJ_ThunderBolt extends Projectile{
 		maxHp = 80;
 		hp = maxHp;
 		attack = 15;
-		useCost = 10;
+		useCost = 1;
 		reverse = false;		
 		alive = false;
 		getImage();
@@ -80,6 +82,7 @@ public class OBJ_ThunderBolt extends Projectile{
 	}
 	public void update()
 	{
+		exist++;
 //		gp.cChecker.checkTile(this);
 		if(user == gp.player)
 		{
@@ -88,7 +91,10 @@ public class OBJ_ThunderBolt extends Projectile{
 			{
 				gp.player.damageMonsterByProjectile(monsterIndex, attack);
 //				generateParticle(user.projectile, gp.monster[monsterIndex]);
-				alive = false;
+				if(exist == 2) {
+					alive = false;
+				}
+				exist = 0;
 			}
 		}
 		if(user != gp.player)
@@ -98,7 +104,10 @@ public class OBJ_ThunderBolt extends Projectile{
 			{
 				monster.damagePlayer(attack);
 //				generateParticle(user.projectile, gp.player);
-				alive = false;
+				if(exist == 2) {
+					alive = false;
+				}
+				exist = 0;
 			}
 		}
 		
