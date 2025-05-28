@@ -15,6 +15,7 @@ import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+import object.OBJ_ThunderBolt;
 
 public class Player extends Character {
 	KeyHandler keyH;
@@ -22,10 +23,6 @@ public class Player extends Character {
 	public String state;
 	public ArrayList<Item> inventory = new ArrayList<>();
 	
-	// PLAYER attackZone
-	private Rectangle attackZone;
-	private int attackZoneDefaultX;
-	private int attackZoneDefaultY;
 	// PLAYER'S SAITAMA
 	public float saitama;
 	public final float MAX_SAITAMA = 100f;
@@ -41,7 +38,7 @@ public class Player extends Character {
 	// PLAYER'S IMAGE
 	private SpriteSheet playerIdle;
 	private SpriteSheet playerWalk;
-	public SpriteSheet playerAttack[];
+	public SpriteSheet playerAttack[] = new SpriteSheet[3];
 	private SpriteSheet playerHurt;
 	private SpriteSheet playerRun;
 	private SpriteSheet playerDefend;
@@ -50,16 +47,17 @@ public class Player extends Character {
 	// PROCESS FRAMES
 	private int spriteNum;
 	private int frameCounter;
-	private boolean flip;
+	public boolean flip;
 	private int attackType;
 	private int comboAttackDelayTime;// don vi frames
 	private boolean runningCountAttackDelay;
 	private boolean hurting = false;
+	public boolean canMove = false;
 	public int maxInventorySize = 20;
 	
 	public Item currentWeapon;
 	public Item currentShield;
-	public Projectile projectile;
+	public Projectile[] projectile = new Projectile[5];
 	
 	
 	public int level;
@@ -118,7 +116,8 @@ public class Player extends Character {
 		level = 1;
 		state = "NORMAL";
 		attackType = 0;
-
+		
+		this.keyH.attackPressed = false;
 		exp = 0;
 		nextLevelExp = 5;
 		coin = 0;
@@ -126,7 +125,8 @@ public class Player extends Character {
 
 		// === Projectile ===
 		// Dan ban hoac lua
-		projectile = new OBJ_Fireball(gp);
+		projectile[0] = new OBJ_Fireball(gp);
+		projectile[1] = new OBJ_ThunderBolt(gp);
 
 		// === World Position ===
 		// Vi tri trong the gioi game
@@ -156,7 +156,7 @@ public class Player extends Character {
 
 		//solidArea = new Rectangle(17, 23, 32, 32);
 		CollisionOn = false;
-
+		canMove = true;
 		// === Initial Direction ===
 		// Huong di chuyen ban dau
 		direction = "up";
@@ -252,29 +252,51 @@ public class Player extends Character {
 				}
 				this.CollisionOn = false;
 				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
-				if(CollisionOn == false)
+				if(CollisionOn == false && canMove)
 					this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
 				this.pickUpObject(objIndex);
 				
 				
 			} 
-			else this.idle();
+			else {
+				this.idle();
+				
+			}
 		}
 		} else {
+			this.hp = 0;
 			this.dying();
 		}
 		
-		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30
-				&& projectile.haveResource(this) == true) {
+		if (gp.keyH.shotKeyPressed == true && projectile[0].alive == false && shotAvailableCounter == 30
+				&& projectile[0].haveResource(this) == true) {
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
-			projectile.set(worldX, worldY + 10, direction, true, this);
+			projectile[0].set(worldX, worldY + 10, direction, true, this);
 
 			// SUBTRACT THE COST (MANA, AMMO ETC.)
-			projectile.subtractResource(this);
+			projectile[0].subtractResource(this);
 
 			// ADD IT TO THE LIST
-			gp.projectileList.add(projectile);
+			gp.projectileList.add(projectile[0]);
+
+			shotAvailableCounter = 0;
+
+//			gp.playSE(10);
+		}
+		if (shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+		if (gp.keyH.beamPressed == true && projectile[1].alive == false && shotAvailableCounter == 30
+				&& projectile[1].haveResource(this) == true) {
+			// SET DEFAULT COORDINATES, DIRECTION AND USER
+			projectile[1].set(worldX, worldY + 10, direction, true, this);
+
+			// SUBTRACT THE COST (MANA, AMMO ETC.)
+			projectile[1].subtractResource(this);
+
+			// ADD IT TO THE LIST
+			gp.projectileList.add(projectile[1]);
 
 			shotAvailableCounter = 0;
 
@@ -299,6 +321,9 @@ public class Player extends Character {
 		}
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
+		}
+		if(frameCounter % 60 == 0) { 
+			if(this.mp < this.maxMp) this.mp++;
 		}
 
 	}
@@ -342,30 +367,30 @@ public class Player extends Character {
 	}
 
 	public void move() {
+
 		gp.can_touch = true;
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
-			
 				this.worldX -= this.speed;
 				this.flip = true;
 
-		}
-		else if (this.keyH.rightPressed == true) {
-			direction = "right";
-				this.worldX += this.speed;
-				this.flip = false;
-				
-		}
-		else if (this.keyH.upPressed == true) {
-			direction = "up";
-				this.worldY -= this.speed;
-		}
-		else if (this.keyH.downPressed == true) {
-			 direction = "down";
-				
-				this.worldY += this.speed;
-		}
-		
+
+			}
+			else if (this.keyH.rightPressed == true) {
+				direction = "right";
+					this.worldX += this.speed;
+					this.flip = false;
+					
+			}
+			else if (this.keyH.upPressed == true) {
+				direction = "up";
+					this.worldY -= this.speed;
+			}
+			else if (this.keyH.downPressed == true) {
+				 direction = "down";
+					
+					this.worldY += this.speed;
+			}
 	}
 
 
@@ -388,7 +413,10 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
 			this.spriteNum++;
-			if(this.spriteNum == this.playerAttack[attackType].maxNumber) {
+			if(attackType >= 3 || attackType < 0) attackType = 0;
+			if(this.playerAttack == null) System.out.println("PlayerAttack" + " is NULL");
+			if(this.playerAttack[attackType] == null) System.out.println("PlayerAttack[attackType]" + " is NULL and attackType = " + attackType);
+			if(this.spriteNum == this.playerAttack[attackType].animation.length) {
 				this.spriteNum = 0;
 			}
 		}
@@ -515,7 +543,13 @@ public class Player extends Character {
 	
 	public void takeDamge(int damage) {
 		if(damage - defense > 0) {
-			this.hp -= (damage - defense);
+			if((damage - defense) > hp) {
+				this.hp = 0;
+			}
+			else {
+				this.hp -= (damage - defense);
+			}
+			
 		}
 		this.hurting = true;
 		
@@ -596,7 +630,7 @@ public class Player extends Character {
 			this.image = this.playerWalk.animation[this.spriteNum];
 			break;
 		case "ATTACKING":
-			this.image = this.playerAttack[this.attackType].animation[this.spriteNum%this.playerAttack[this.attackType].maxNumber];
+			this.image = this.playerAttack[this.attackType].animation[this.spriteNum];
 			break;
 		case "DYING":
 			this.image = this.playerDying.animation[this.spriteNum];
@@ -613,14 +647,14 @@ public class Player extends Character {
 		} else {
 			g2.drawImage(image, x, y, this.width, this.height, null);
 		}
-		g2.setColor(Color.RED);
-		g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
+		if(gp.testMode)g2.setColor(Color.RED);
+		if(gp.testMode) g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
 		g2.setColor(Color.BLUE);
 		if(flip) {
 			int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
-			g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
+			if(gp.testMode)g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
 		}
-		else g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
+		else if(gp.testMode)g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
 	}
 	public void pickUpObject(int i)
 	{

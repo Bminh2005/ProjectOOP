@@ -15,12 +15,19 @@ public class NPC extends Character{
 	        setDialogue();
 	}
 	public void getImage() {
+<<<<<<< HEAD
 		image = setup("/monster/skeleton_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		/*
 		 * image2 = setup("/npc/npc_ghost_2.png",4*gp.tileSize/3,4*gp.tileSize/3);
 		 * image3 = setup("/npc/npc_ghost_3.png",4*gp.tileSize/3,4*gp.tileSize/3);
 		 * image4 = setup("/npc/npc_ghost_4.png",4*gp.tileSize/3,4*gp.tileSize/3);
 		 */
+=======
+		image =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+		image2 =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+		image3 =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+		image4 =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 		
 	}
 	public void setDialogue() {

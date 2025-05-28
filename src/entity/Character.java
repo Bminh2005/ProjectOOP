@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
@@ -15,6 +16,9 @@ public class Character extends Entity{
 	public int defenseDefault;
 	public int strength;
 	public int speed;
+	public Rectangle attackZone;
+	public int attackZoneDefaultX;
+	public int attackZoneDefaultY;
 	public Character(GamePanel gp) {
 		super(gp);
 	}

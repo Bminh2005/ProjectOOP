@@ -1,24 +1,11 @@
-<<<<<<< HEAD
-/npc/
 /entity/
-=======
-<<<<<<< HEAD
-/monster/
-/entity/
-=======
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 /main/
-<<<<<<< HEAD
-/monster/
-/object/
-=======
-<<<<<<< HEAD
-/entity/
-=======
-<<<<<<< HEAD
 /map/
-=======
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
+/monster/
+/monster_snake/
+/npc/
+/object/
+/objects/
+/projectile/
+/sounds/
+/tiles/

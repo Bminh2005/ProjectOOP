@@ -15,6 +15,8 @@ public abstract class Monster extends Character {
 	public int attackDelayCounter;
 	boolean attacking = false;
 	int attackingCounter = 0;
+	public String state;
+	boolean flip;
 	public Monster(GamePanel gp) {
 		super(gp);
 		solidArea.x = 3;
@@ -24,6 +26,7 @@ public abstract class Monster extends Character {
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		alive = true;
+		flip = false;
 		attackDelayCounter = 0;
 		spriteNum = 1;
 	}
@@ -44,11 +47,7 @@ public abstract class Monster extends Character {
 			attacking = true;
 			attackDelayCounter = 0;
 		}
-		if (true) {
-			if(this instanceof Minotuar) {
-				System.out.println(direction);
-			}
-			
+		if (CollisionOn == false) {
 			switch (direction) {
 			case "up":
 				worldY -= speed;
@@ -123,7 +122,7 @@ public abstract class Monster extends Character {
 	};
 
 	public void dropItem(Item droppedItem) {
-		for (int i = 0; i < gp.obj[1].length; i++) {
+		for (int i = 0; i < gp.obj[gp.num_CurrentMap].length; i++) {
 			if (gp.obj[gp.num_CurrentMap][i] == null) {
 				gp.obj[gp.num_CurrentMap][i] = droppedItem;
 				gp.obj[gp.num_CurrentMap][i].worldX = worldX; // the dead monster's worldX
@@ -236,12 +235,12 @@ public abstract class Monster extends Character {
 			
 			g2.setColor(Color.red);
 			this.drawImage(g2, screenX, screenY);
-			g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
+			if(gp.testMode) g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 
 			if (attacking) {
 				Color c = new Color(255, 0, 0, 210);
 				g2.setColor(c);
-				g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
+				if(gp.testMode)g2.fillRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
 				attacking = false;
 			}
 			changeAlpha(g2, 1F);

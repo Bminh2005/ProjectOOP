@@ -9,8 +9,9 @@ import monster.Monster;
 
 public class Projectile extends Character{
 	
-	Entity user;
-	Monster monster;
+	public Entity user;
+	public Monster monster;
+	public boolean reverse;
 
 	public Projectile(GamePanel gp) {
 		super(gp);

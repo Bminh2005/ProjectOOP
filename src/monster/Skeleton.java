@@ -1,6 +1,7 @@
 package monster;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -29,6 +30,11 @@ public class Skeleton extends Monster {
         defense = 2;
         exp = 5;
         alive = true;
+        attackZone = new Rectangle();
+		attackZone.x = this.height*34/70;
+		attackZone.y = 0;
+		attackZoneDefaultX = attackZone.x;
+		attackZoneDefaultY = attackZone.y;
         getImage();
         getAttackImage();
         this.ai = gp.quaiVatTanCong;
@@ -76,7 +82,7 @@ public class Skeleton extends Monster {
              }
              actionLockCounter = 0;
          }
-        ai.QuaiVatDuoiTheoPlayer(this);
+//        ai.QuaiVatDuoiTheoPlayer(this);
         ai.attackByTouch(this);
     }
 
