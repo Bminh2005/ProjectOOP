@@ -16,14 +16,14 @@ public class Demon extends Monster {
 
 	public Demon(GamePanel gp) {
 		super(gp);
-		idle = new SpriteSheet("/demon/idle.png", 1329, 150, 5, 12, 4, 130, 130).animation;
-		move = new SpriteSheet("/demon/walk.png", 1903, 150, 7, 16, 14, 126, 126).animation;
-		attackImage = new SpriteSheet("/demon/attack.png", 3913, 150, 14, 0, 3, 174, 142).animation;
+		idle = new SpriteSheet("/demon/SpriteSheet_IDLE.png", 1728, 160, 6, 0, 46, 194, 114).animation;
+		move = new SpriteSheet("/demon/SpriteSheet_MOVE.png", 3456, 160, 12, 0, 46, 194, 114).animation;
+		attackImage = new SpriteSheet("/demon/SpriteSheet_ATTACK.png", 4320, 160, 15, 0, 46, 194, 114).animation;
 
 		flip = false;
-		this.height = gp.tileSize * 70 / 50; // 70
-		this.width = this.height * 96 / 70; // 96
-		solidArea.x = this.height * 38 / 70 - 5; // 32
+		this.height = gp.tileSize * 3; // 70
+		this.width = this.height *194/114; // 96
+		solidArea.x = this.height ; // 32
 		solidArea.y = this.height * 45 / 70 - 25; // 45
 		solidArea.width = gp.tileSize - 10;
 		solidArea.height = gp.tileSize;
