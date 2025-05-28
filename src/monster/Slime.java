@@ -2,6 +2,7 @@ package monster;
 
 import entity.Entity;
 import main.GamePanel;
+import main.SpriteSheet;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
@@ -41,8 +42,7 @@ public class Slime extends Monster {
         right1 = setup("/monster/greenslime_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
         right2 = setup("/monster/greenslime_down_2", 3*gp.tileSize/4, 3*gp.tileSize/4);
     }
-
-
+    
     public void setAction() {
         actionLockCounter++;
         

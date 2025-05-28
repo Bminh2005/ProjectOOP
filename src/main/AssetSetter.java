@@ -2,6 +2,7 @@ package main;
 
 import entity.NPC;
 import monster.Bat;
+import monster.Demon;
 import monster.Minotuar;
 import monster.Skeleton;
 import monster.Slime;
@@ -59,6 +60,10 @@ public class AssetSetter {
 		gp.monster[1][i] = new Snake(gp);
 		gp.monster[1][i].worldX = gp.tileSize*26;
 		gp.monster[1][i].worldY = gp.tileSize*24;
+		i++;
+		gp.monster[1][i] = new Demon(gp);
+		gp.monster[1][i].worldX = gp.tileSize*27;
+		gp.monster[1][i].worldY = gp.tileSize*27;
 		i++;
 		
 		
