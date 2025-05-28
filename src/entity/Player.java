@@ -256,9 +256,13 @@ public class Player extends Character {
 				
 				
 			} 
-			else this.idle();
+			else {
+				this.idle();
+				
+			}
 		}
 		} else {
+			this.hp = 0;
 			this.dying();
 		}
 		
@@ -296,6 +300,9 @@ public class Player extends Character {
 		}
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
+		}
+		if(frameCounter %60 == 0) { 
+			if(this.mp < this.maxMp) this.mp++;
 		}
 
 	}
@@ -515,7 +522,13 @@ public class Player extends Character {
 	
 	public void takeDamge(int damage) {
 		if(damage - defense > 0) {
-			this.hp -= (damage - defense);
+			if((damage - defense) > hp) {
+				this.hp = 0;
+			}
+			else {
+				this.hp -= (damage - defense);
+			}
+			
 		}
 		this.hurting = true;
 		
