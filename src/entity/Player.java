@@ -367,11 +367,13 @@ public class Player extends Character {
 	}
 
 	public void move() {
-			gp.can_touch = true;
-			if (this.keyH.leftPressed == true) {
-				direction = "left";
-					this.worldX -= this.speed;
-					this.flip = true;
+
+		gp.can_touch = true;
+		if (this.keyH.leftPressed == true) {
+			direction = "left";
+				this.worldX -= this.speed;
+				this.flip = true;
+
 
 			}
 			else if (this.keyH.rightPressed == true) {

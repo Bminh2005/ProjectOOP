@@ -11,8 +11,6 @@ import main.GamePanel;
 
 public class OBJ_ThunderBolt extends Projectile{
 	
-	public int exist = 0;
-	
 	public OBJ_ThunderBolt(GamePanel gp) {
 		super(gp);
 		name = "Thunder Bolt";
@@ -82,7 +80,6 @@ public class OBJ_ThunderBolt extends Projectile{
 	}
 	public void update()
 	{
-		
 		
 //		gp.cChecker.checkTile(this);
 		if(user == gp.player)
@@ -194,7 +191,6 @@ public class OBJ_ThunderBolt extends Projectile{
 				}
 				
 			}			
-			
 		}
 	}
 }
