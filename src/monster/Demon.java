@@ -44,7 +44,7 @@ public class Demon extends Monster {
 		this.spriteCounter = 0;
 		this.speed = 1;
 		this.alive = true;
-		name = "Snake";
+		name = "Demon";
 		type = type_monster;
 		maxHp = 25;
 		hp = maxHp;
@@ -82,10 +82,10 @@ public class Demon extends Monster {
 			actionLockCounter = 0;
 		}
 		if (direction == "left") {
-			this.flip = true;
+			this.flip = false;
 		}
 		if (direction == "right") {
-			this.flip = false;
+			this.flip = true;
 		}
 		gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
 		if (state == "ATTACK") {
@@ -136,7 +136,7 @@ public class Demon extends Monster {
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		if (spriteNum == 3) {
+		if (spriteNum == 12) {
 			attackZone.x = worldX + attackZoneDefaultX;
 			attackZone.y = worldY + attackZoneDefaultY;
 			Rectangle solidPlayer = gp.player.solidArea;
@@ -190,7 +190,7 @@ public class Demon extends Monster {
 		g2.setColor(Color.blue);
 		int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
 		if (flip) {
-			g2.drawImage(image, screenX + this.width, screenY, -this.width, this.height, null);
+			g2.drawImage(image, screenX + this.width + this.width/2, screenY, -this.width, this.height, null);
 			if (gp.testMode)
 				g2.drawRect(screenX + this.attackZoneDefaultX - range, screenY + this.attackZoneDefaultY,
 						this.attackZone.width, this.attackZone.height);
