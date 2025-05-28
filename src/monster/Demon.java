@@ -155,7 +155,7 @@ public class Demon extends Monster {
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		if (spriteNum == 12) {
+		if (spriteNum == 12 && spriteCounter % 10 == 5) {
 			attackZone.x = worldX + attackZoneDefaultX;
 			attackZone.y = worldY + attackZoneDefaultY;
 			Rectangle solidPlayer = gp.player.solidArea;
