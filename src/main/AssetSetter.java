@@ -29,7 +29,11 @@ public class AssetSetter {
 
 	public void setNPC()
 	{
-
+		gp.npc[1][0] = new NPC(gp);
+		gp.npc[1][0].worldX = gp.tileSize* 13;
+		gp.npc[1][0].worldY = gp.tileSize * 7;
+		
+		
 	}
 
 	public void setMonster()
@@ -100,9 +104,6 @@ public class AssetSetter {
 		//gp.monster[i].worldX = gp.tileSize*24;
 		//gp.monster[i].worldY = gp.tileSize*27;
 		//i++;
-		gp.npc[0] = new NPC(gp);
-		gp.npc[0].worldX = gp.tileSize* 12;
-		gp.npc[0].worldY = gp.tileSize * 13;
 		
 		
 	}

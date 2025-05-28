@@ -1,7 +1,19 @@
 /entity/
+/main/
+/map/
+/monster/
+/monster_snake/
+/npc/
 /object/
+<<<<<<< HEAD
 /main/
 /projectile/
 /monster/
 /monster_fire_slime/
 /demon/
+=======
+/objects/
+/projectile/
+/sounds/
+/tiles/
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git

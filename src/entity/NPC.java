@@ -10,9 +10,7 @@ public class NPC extends Character{
 	public NPC(GamePanel gp) {
 		super(gp);
 		// TODO Auto-generated constructor stub
-		    CollisionOn = true;
-		    solidArea.width = gp.tileSize ;
-	        solidArea.height = gp.tileSize;
+		    collision = true;
 	        getImage(); 
 	        setDialogue();
 	}
