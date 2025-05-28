@@ -46,12 +46,12 @@ public class Demon extends Monster {
 		this.alive = true;
 		name = "Demon";
 		type = type_monster;
-		maxHp = 25;
+		maxHp = 100;
 		hp = maxHp;
 		state = "MOVE";
-		attack = 30;
-		defense = 10;
-		exp = 15;
+		attack = 50;
+		defense = 30;
+		exp = 30;
 		direction = "up";
 		actionLockCounter = 0;
 	}
@@ -155,7 +155,7 @@ public class Demon extends Monster {
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		if (spriteNum == 12) {
+		if (spriteNum == 12 && spriteCounter % 10 == 5) {
 			attackZone.x = worldX + attackZoneDefaultX;
 			attackZone.y = worldY + attackZoneDefaultY;
 			Rectangle solidPlayer = gp.player.solidArea;

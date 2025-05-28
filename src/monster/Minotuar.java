@@ -53,12 +53,12 @@ public class Minotuar extends Monster{
 		this.alive = true;
 		name = "Minotuar";
         type = type_monster;
-        maxHp = 25;
+        maxHp = 50;
         hp = maxHp;
         state = "MOVE";
         attack = 30;
-        defense = 10;
-        exp = 2;
+        defense = 20;
+        exp = 10;
         direction = "up";
         actionLockCounter = 0;
 	}
@@ -153,7 +153,7 @@ public class Minotuar extends Monster{
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		 if(spriteNum == 3) {
+		 if(spriteNum == 3 && spriteCounter % 8 == 4) {
 			 attackZone.x = worldX + attackZoneDefaultX;
 			 attackZone.y = worldY + attackZoneDefaultY;
 			 Rectangle solidPlayer = gp.player.solidArea;
