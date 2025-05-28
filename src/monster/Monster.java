@@ -122,7 +122,7 @@ public abstract class Monster extends Character {
 	};
 
 	public void dropItem(Item droppedItem) {
-		for (int i = 0; i < gp.obj[1].length; i++) {
+		for (int i = 0; i < gp.obj[gp.num_CurrentMap].length; i++) {
 			if (gp.obj[gp.num_CurrentMap][i] == null) {
 				gp.obj[gp.num_CurrentMap][i] = droppedItem;
 				gp.obj[gp.num_CurrentMap][i].worldX = worldX; // the dead monster's worldX

@@ -768,9 +768,6 @@ public class UI {
 		int x = tailX - length;
 		return x;
 	}
-	public void drawTransition() {
-		counter++;		
-	}
 	public void interactNPC(int i) {
 		if( i !=999) {
 			gp.gameState = gp.dialogueState;

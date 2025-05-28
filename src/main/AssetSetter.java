@@ -6,6 +6,7 @@ import monster.Minotuar;
 import monster.Skeleton;
 import monster.Slime;
 import monster.Slime_blue;
+import monster.Snake;
 import object.OBJ_Coin_Bronze;
 
 public class AssetSetter {
@@ -54,6 +55,8 @@ public class AssetSetter {
 		gp.monster[1][i] = new Minotuar(gp);
 		gp.monster[1][i].worldX = gp.tileSize*27;
 		gp.monster[1][i].worldY = gp.tileSize*21;
+		i++;
+		gp.monster[1][i] = new Snake(gp);
 		gp.monster[1][i].worldX = gp.tileSize*26;
 		gp.monster[1][i].worldY = gp.tileSize*24;
 		i++;
