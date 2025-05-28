@@ -80,7 +80,7 @@ public class ChuDongTanCong {
 		 if(monster.flip) monster.attackZone.x -= range;
 		 solidPlayer.y = gp.player.worldY + gp.player.solidAreaDefaultY;
 		 Rectangle intersection = monster.attackZone.intersection(solidPlayer);
-		 if(monster.attackZone.intersects(solidPlayer) && intersection.width == 5) {
+		 if(monster.attackZone.intersects(solidPlayer) && intersection.width >= 5) {
 			 if(monster.state != "ATTACK") {
 				 monster.state = "ATTACK";
 				 monster.spriteNum = -1;

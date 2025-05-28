@@ -24,9 +24,9 @@ public class Skeleton extends Monster {
         // Thông tin quái vật
         name = "Skeleton";
         speed = 2;
-        maxHp = 10;
+        maxHp = 25;
         hp = maxHp;
-        attack = 5;
+        attack = 15;
         defense = 2;
         exp = 5;
         alive = true;

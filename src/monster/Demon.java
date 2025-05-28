@@ -46,12 +46,12 @@ public class Demon extends Monster {
 		this.alive = true;
 		name = "Demon";
 		type = type_monster;
-		maxHp = 25;
+		maxHp = 100;
 		hp = maxHp;
 		state = "MOVE";
-		attack = 30;
-		defense = 10;
-		exp = 15;
+		attack = 50;
+		defense = 30;
+		exp = 30;
 		direction = "up";
 		actionLockCounter = 0;
 	}

@@ -21,10 +21,10 @@ public class Slime extends Monster {
         direction = "up";
         type = type_monster;
         speed = 1;
-        maxHp = 25;
+        maxHp = 15;
         hp = maxHp;
 
-        attack = 20;
+        attack = 5;
         defense = 0;
         exp = 2;
         

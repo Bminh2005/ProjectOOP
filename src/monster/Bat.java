@@ -23,7 +23,7 @@ public class Bat extends Monster {
         this.gp = gp;
         name = "Bat";
         speed = 2;
-        maxHp = 10;
+        maxHp = 1000;
         hp = maxHp;
         attack = 2;
         direction = "left"; // Hướng di chuyển mặc định
