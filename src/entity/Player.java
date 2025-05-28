@@ -16,6 +16,7 @@ import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 import object.OBJ_ThunderBolt;
+import object.OBJ_ThunderProtect;
 
 public class Player extends Character {
 	KeyHandler keyH;
@@ -127,6 +128,7 @@ public class Player extends Character {
 		// Dan ban hoac lua
 		projectile[0] = new OBJ_Fireball(gp);
 		projectile[1] = new OBJ_ThunderBolt(gp);
+		projectile[2] = new OBJ_ThunderProtect(gp);
 
 		// === World Position ===
 		// Vi tri trong the gioi game
@@ -310,6 +312,24 @@ public class Player extends Character {
 
 			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile[1]);
+
+			shotAvailableCounter = 0;
+
+//			gp.playSE(10);
+		}
+		if (shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+		if (gp.keyH.upPowerPressed == true && projectile[2].alive == false && shotAvailableCounter == 30
+				&& projectile[2].haveResource(this) == true) {
+			// SET DEFAULT COORDINATES, DIRECTION AND USER
+			projectile[2].set(worldX, worldY + 10, direction, true, this);
+
+			// SUBTRACT THE COST (MANA, AMMO ETC.)
+			projectile[2].subtractResource(this);
+
+			// ADD IT TO THE LIST
+			gp.projectileList.add(projectile[2]);
 
 			shotAvailableCounter = 0;
 

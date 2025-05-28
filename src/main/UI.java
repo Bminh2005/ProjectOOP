@@ -114,7 +114,7 @@ public class UI {
 		{
 			drawGameOverScreen();
 		}
-		if(gp.gameState == gp.transitionState) {
+		if(gp.gameState == gp.transition_state) {
 			drawTransition();
 		}
 	}

@@ -26,10 +26,17 @@ public class NPC extends Character{
 	}
 	public void getImage() {
 		image =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+<<<<<<< HEAD
 		image2 = setup("/npc/npc_ghost_2",4*gp.tileSize/3,4*gp.tileSize/3);
 		image3 = setup("/npc/npc_ghost_3",4*gp.tileSize/3,4*gp.tileSize/3);
 		image4 = setup("/npc/npc_ghost_4",4*gp.tileSize/3,4*gp.tileSize/3);
 		 
+=======
+		image2 =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+		image3 =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+		image4 =  setup("/npc/npc_ghost_1",4*gp.tileSize/3,4*gp.tileSize/3);
+		
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
 	}
 	public void setDialogue() {
 
