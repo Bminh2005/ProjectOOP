@@ -790,7 +790,6 @@ public class UI {
 			gp.npc[gp.num_CurrentMap][i].speak();
 		}
 	}
-	
 }
 
 

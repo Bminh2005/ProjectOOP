@@ -251,13 +251,26 @@ public class Player extends Character {
 					this.walk();
 				}
 				this.CollisionOn = false;
+				gp.cChecker.checkEntity(this, gp.npc[gp.num_CurrentMap]);
+				if(CollisionOn == true) {
+					/*
+					 * switch(this.direction) { case "up": this.solidArea.y -= this.speed -1 ;
+					 * break; case "down": this.solidArea.y += this.speed -1 ; break; case "left":
+					 * this.solidArea.x -= this.speed -1 ; break; case "right": this.solidArea.x +=
+					 * this.speed -1 ; break; }
+					 */
+					
+					int npcIndex = gp.cChecker.checkEntity(this,gp.npc[gp.num_CurrentMap]);
+				    if (npcIndex != 999) {
+				        gp.ui.interactNPC(npcIndex); 
+				}
+				}
+				this.CollisionOn = false;
 				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
 				if(CollisionOn == false && canMove)
 					this.move();
 				int objIndex = gp.cChecker.checkObject(this, true);
-				this.pickUpObject(objIndex);
-				
-				
+				this.pickUpObject(objIndex);	
 			} 
 			else {
 				this.idle();
@@ -686,13 +699,6 @@ public class Player extends Character {
 					gp.ui.addMessage(text);
 					gp.obj[i] = null;
 				}
-			}
-		}
-	}
-	public void checkNPC() {
-		for(int i =0 ;i < gp.npc[gp.num_CurrentMap].length ;i++) {
-			if(gp.cChecker.checkPlayer(gp.npc[gp.num_CurrentMap][i]) && gp.npc[gp.num_CurrentMap][i] != null) {
-					gp.ui.interactNPC(i);
 			}
 		}
 	}
