@@ -1,6 +1,8 @@
 package object;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import entity.Entity;
 import entity.Player;
@@ -8,22 +10,16 @@ import entity.Projectile;
 import main.GamePanel;
 
 public class OBJ_ThunderBolt extends Projectile{
-
 	
 	public OBJ_ThunderBolt(GamePanel gp) {
 		super(gp);
 		name = "Thunder Bolt";
-		speed = 5;
+		speed = 0;
 		maxHp = 80;
 		hp = maxHp;
 		attack = 15;
-		useCost = 2;
-		solidArea.x = 12;
-		solidArea.y = 12;
-		solidAreaDefaultX = solidArea.x;
-		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 12;
-		solidArea.height = 12;
+		useCost = 10;
+		reverse = false;		
 		alive = false;
 		getImage();
 		
@@ -31,14 +27,14 @@ public class OBJ_ThunderBolt extends Projectile{
 	
 	public void getImage()
 	{
-		up1 = setup("/projectile/lightning_skill1_frame1", gp.tileSize*3, gp.tileSize);
-		up2 = setup("/projectile/lightning_skill1_frame2", gp.tileSize*3, gp.tileSize);
-		down1 = setup("/projectile/lightning_skill1_frame3", gp.tileSize*3, gp.tileSize);
-		down2 = setup("/projectile/lightning_skill1_frame4", gp.tileSize*3, gp.tileSize);
-		left1 = setup("/projectile/lightning_skill1_frame1", gp.tileSize*3, gp.tileSize);
-		left2 = setup("/projectile/lightning_skill1_frame2", gp.tileSize*3, gp.tileSize);
-		right1 = setup("/projectile/lightning_skill1_frame3", gp.tileSize*3, gp.tileSize);
-		right2 = setup("/projectile/lightning_skill1_frame4", gp.tileSize*3, gp.tileSize);
+		up1 = setup("/projectile/lightning_skill1_frame1", gp.tileSize*3, gp.tileSize*2);
+		up2 = setup("/projectile/lightning_skill1_frame2", gp.tileSize*3, gp.tileSize*2);
+		down1 = setup("/projectile/lightning_skill1_frame3", gp.tileSize*3, gp.tileSize*2);
+		down2 = setup("/projectile/lightning_skill1_frame4", gp.tileSize*3, gp.tileSize*2);
+		left1 = setup("/projectile/lightning_skill1_frame1", gp.tileSize*3, gp.tileSize*2);
+		left2 = setup("/projectile/lightning_skill1_frame2", gp.tileSize*3, gp.tileSize*2);
+		right1 = setup("/projectile/lightning_skill1_frame3", gp.tileSize*3, gp.tileSize*2);
+		right2 = setup("/projectile/lightning_skill1_frame4", gp.tileSize*3, gp.tileSize*2);
 	}
 	public boolean haveResource(Player user)
 	{
@@ -48,6 +44,15 @@ public class OBJ_ThunderBolt extends Projectile{
 			haveResource = true;
 		}
 		return haveResource;
+	}
+	public void set(int worldX, int worldY, String direction, boolean alive, Entity user)
+	{
+		this.worldX = worldX;
+		this.worldY = worldY - gp.tileSize/2;
+		this.direction = direction;
+		this.alive = alive;
+		this.user = user;
+		this.hp = this.maxHp;
 	}
 	public void subtractResource(Player user)
 	{
@@ -72,5 +77,116 @@ public class OBJ_ThunderBolt extends Projectile{
 	{
 		int maxLife = 20;
 		return maxLife;
+	}
+	public void update()
+	{
+//		gp.cChecker.checkTile(this);
+		if(user == gp.player)
+		{
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+			if(monsterIndex != 999)
+			{
+				gp.player.damageMonsterByProjectile(monsterIndex, attack);
+//				generateParticle(user.projectile, gp.monster[monsterIndex]);
+				alive = false;
+			}
+		}
+		if(user != gp.player)
+		{
+			boolean contactPlayer = gp.cChecker.checkPlayer(this);
+			if(gp.player.invincible == false && contactPlayer == true)
+			{
+				monster.damagePlayer(attack);
+//				generateParticle(user.projectile, gp.player);
+				alive = false;
+			}
+		}
+		
+		switch(direction)
+		{
+		case "up": worldY -= speed; break;
+		case "down": worldY += speed; break;
+		case "left": reverse = true; break;
+		case "right": reverse = false; break;
+		}
+		
+		hp--;
+		if(hp <= 0)
+		{
+			alive = false;
+		}
+		
+		spriteCounter++;
+		if(spriteCounter > 12)
+		{
+			if(spriteNum == 1)
+			{
+				spriteNum = 2;
+			}
+			else if(spriteNum == 2)
+			{
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
+		}
+//		if(flip) {
+//			int range = gp.player.attackZone.width + 2*gp.player.attackZoneDefaultX - gp.player.width;
+//			worldX -= range;
+//		}
+		if(reverse) {
+			solidArea.x = -2*gp.tileSize - 2;
+			solidArea.y = 40;
+			solidAreaDefaultX = solidArea.x;
+			solidAreaDefaultY = solidArea.y;
+			solidArea.width = gp.tileSize*3;
+			solidArea.height = 12;
+		}
+		else {
+			solidArea.x = 25;
+			solidArea.y = 40;
+			solidAreaDefaultX = solidArea.x;
+			solidAreaDefaultY = solidArea.y;
+			solidArea.width = gp.tileSize*3 - 15;
+			solidArea.height = 12;
+		}
+	}
+	public void draw(Graphics2D g2) {
+		BufferedImage image = null;
+		int screenX = worldX - gp.player.worldX + gp.player.x;
+		int screenY = worldY - gp.player.worldY + gp.player.y;
+
+		if (worldX + gp.tileSize > gp.player.worldX - gp.player.x
+				&& worldX - gp.tileSize < gp.player.worldX + gp.player.x
+				&& worldY + gp.tileSize > gp.player.worldY - gp.player.y
+				&& worldY - gp.tileSize < gp.player.worldY + gp.player.y) {
+			switch (direction) {
+			case "up":
+				image = (spriteNum == 1) ? up1 : up2;
+				break;
+			case "down":
+				image = (spriteNum == 1) ? down1 : down2;
+				break;
+			case "left":
+				image = (spriteNum == 1) ? left1 : left2;
+				break;
+			case "right":
+				image = (spriteNum == 1) ? right1 : right2;
+				break;
+			}
+			if(alive) {
+				if(reverse) {
+					g2.drawImage(image, screenX - gp.tileSize/3 - 2*gp.tileSize, screenY, null);
+					g2.setColor(Color.blue);
+					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+				}
+				else {
+					g2.drawImage(image, screenX + gp.tileSize/2, screenY, null);
+					g2.setColor(Color.blue);
+					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+				}
+				
+			}
+			
+		}
 	}
 }
