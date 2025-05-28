@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 	public final int storeState = 7;
-	public final int transition_state = 8;
+	public final int transitionState = 8;
 	public int tempMap;
 	public int tempCol;
 	public int tempRow;
@@ -90,26 +90,26 @@ public class GamePanel extends JPanel implements Runnable{
 		maps[3] = MAP03;
 		currentMap = maps[1];
 		teleportList.add(new Teleport(
-			    1, 0, 0,   // từ Map 1 tại tile (4,42)
+			    1, 9, 11,   // từ Map 1 tại tile (4,42)
 			    2, 23, 23    // sang Map 2 tile (30,9)
 			));
 		teleportList.add(new Teleport(
-			    2, 26, 26,  // từ Map 2 tile (30,10)
-			    1, 1, 0    // sang Map 1 tile (42,2)
+			    2, 24, 24,  // từ Map 2 tile (30,10)
+			    1, 9, 10    // sang Map 1 tile (42,2)
 			));
 		teleportList.add(new Teleport(
-				1, 49, 49,
-				3 , 48, 25
+				1, 38, 11,
+				3 ,21,34
 				));
 		teleportList.add(new Teleport(
-				3,48,23,
-				1,47,49));
+				3,21,33,
+				1,39,11));
 		teleportList.add(new Teleport(
-				2,23,49,
-				3,2,24));
+				2,30,17,
+				3,34,18));
 		teleportList.add(new Teleport(
-				3,1,23,
-				2,22,48));
+				3,33,18,
+				2,31,17));
 		processor = new ProcessFrontBehindEntity (this);
 		setupGame();
 	}
@@ -204,6 +204,11 @@ public class GamePanel extends JPanel implements Runnable{
 
 				}
 			}
+			for(int i =0;i< npc[num_CurrentMap].length;i++) {
+				if(npc[num_CurrentMap][i] != null) {
+					npc[num_CurrentMap][i].update();
+				}
+			}
 			for(int i = 0; i < projectileList.size(); i++)
 			{
 				if(projectileList.get(i) != null)
@@ -247,7 +252,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void Teleport(int targetmap, int col, int row ) {
 		playSE(6);
-		gameState = transition_state;
+		gameState = transitionState;
 		tempMap = targetmap;
 		tempCol = col;
 		tempRow = row;

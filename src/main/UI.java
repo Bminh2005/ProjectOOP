@@ -114,7 +114,7 @@ public class UI {
 		{
 			drawGameOverScreen();
 		}
-		if(gp.gameState == gp.transition_state) {
+		if(gp.gameState == gp.transitionState) {
 			drawTransition();
 		}
 	}
@@ -790,7 +790,6 @@ public class UI {
 			gp.npc[gp.num_CurrentMap][i].speak();
 		}
 	}
-	
 }
 
 
