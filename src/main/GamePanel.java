@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map[] maps = new Map[maxMap];
 	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
-	public NPC [] npc = new NPC[20]; 
+	public NPC [][] npc = new NPC[4][20]; 
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 	public final int storeState = 7;
-	public final int transitionState = 8;
+	public final int transition_state = 8;
 	public int tempMap;
 	public int tempCol;
 	public int tempRow;
@@ -94,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable{
 			    2, 23, 23    // sang Map 2 tile (30,9)
 			));
 		teleportList.add(new Teleport(
-			    2, 23, 23,  // từ Map 2 tile (30,10)
+			    2, 26, 26,  // từ Map 2 tile (30,10)
 			    1, 1, 0    // sang Map 1 tile (42,2)
 			));
 		teleportList.add(new Teleport(
@@ -117,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame()
 	{
 //		aSetter.setObject();
-//		aSetter.setNPC();
+		aSetter.setNPC();
 		player.setItems();
 		aSetter.setMonster();
 //		aSetter.setInteractiveTile();
@@ -246,7 +246,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void Teleport(int targetmap, int col, int row ) {
 		playSE(6);
-		gameState = transitionState;
+		gameState = transition_state;
 		tempMap = targetmap;
 		tempCol = col;
 		tempRow = row;
@@ -272,6 +272,13 @@ public class GamePanel extends JPanel implements Runnable{
 			if(monster[num_CurrentMap][i] != null)
 			{
 				entities.add(monster[num_CurrentMap][i]);
+			}
+		}
+		for(int i = 0; i < npc[num_CurrentMap].length; i++)
+		{
+			if(npc[num_CurrentMap][i] != null)
+			{
+				entities.add(npc[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < obj[num_CurrentMap].length; i++)

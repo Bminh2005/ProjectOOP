@@ -775,11 +775,12 @@ public class UI {
 	public void interactNPC(int i) {
 		if( i !=999) {
 			gp.gameState = gp.dialogueState;
-			gp.npc[i].speak();
+			gp.npc[gp.num_CurrentMap][i].speak();
 		}
 	}
 	
 }
+
 
 
 

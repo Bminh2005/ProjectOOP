@@ -10,17 +10,17 @@ public class NPC extends Character{
 	public NPC(GamePanel gp) {
 		super(gp);
 		// TODO Auto-generated constructor stub
-		    CollisionOn = true;
-		    solidArea.width = gp.tileSize ;
-	        solidArea.height = gp.tileSize;
+		    collision = true;
 	        getImage(); 
 	        setDialogue();
 	}
 	public void getImage() {
-		image =  setup("/npc/npc_ghost_1.png",4*gp.tileSize/3,4*gp.tileSize/3);
-		image2 =  setup("/npc/npc_ghost_1.png",4*gp.tileSize/3,4*gp.tileSize/3);
-		image3 =  setup("/npc/npc_ghost_1.png",4*gp.tileSize/3,4*gp.tileSize/3);
-		image4 =  setup("/npc/npc_ghost_1.png",4*gp.tileSize/3,4*gp.tileSize/3);
+		image = setup("/monster/skeleton_down_1", 3*gp.tileSize/4, 3*gp.tileSize/4);
+		/*
+		 * image2 = setup("/npc/npc_ghost_2.png",4*gp.tileSize/3,4*gp.tileSize/3);
+		 * image3 = setup("/npc/npc_ghost_3.png",4*gp.tileSize/3,4*gp.tileSize/3);
+		 * image4 = setup("/npc/npc_ghost_4.png",4*gp.tileSize/3,4*gp.tileSize/3);
+		 */
 		
 	}
 	public void setDialogue() {

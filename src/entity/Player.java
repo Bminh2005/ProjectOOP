@@ -656,8 +656,8 @@ public class Player extends Character {
 		}
 	}
 	public void checkNPC() {
-		for(int i =0 ;i < gp.npc.length ;i++) {
-			if(gp.cChecker.checkPlayer(gp.npc[i]) && gp.npc[i] != null) {
+		for(int i =0 ;i < gp.npc[gp.num_CurrentMap].length ;i++) {
+			if(gp.cChecker.checkPlayer(gp.npc[gp.num_CurrentMap][i]) && gp.npc[gp.num_CurrentMap][i] != null) {
 					gp.ui.interactNPC(i);
 			}
 		}
