@@ -41,7 +41,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map[] maps = new Map[maxMap];
 	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
-	public NPC [][] npc = new NPC[4][20]; 
+	public NPC [][] npc = new NPC[4][20];
+	public Entity npc_Selling[][] = new Entity[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -63,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 6;
 	public final int storeState = 7;
 	public final int transitionState = 8;
+	public final int tradeState = 9;
 	public int tempMap;
 	public int tempCol;
 	public int tempRow;
@@ -209,6 +211,11 @@ public class GamePanel extends JPanel implements Runnable{
 					npc[num_CurrentMap][i].update();
 				}
 			}
+			for(int i = 0; i < npc_Selling[num_CurrentMap].length;i++) {
+				if(npc_Selling[num_CurrentMap][i] != null) {
+					npc_Selling[num_CurrentMap][i].update();
+				}
+			}
 			for(int i = 0; i < projectileList.size(); i++)
 			{
 				if(projectileList.get(i) != null)
@@ -285,6 +292,13 @@ public class GamePanel extends JPanel implements Runnable{
 			if(npc[num_CurrentMap][i] != null)
 			{
 				entities.add(npc[num_CurrentMap][i]);
+			}
+		}
+		for(int i = 0; i < npc_Selling[num_CurrentMap].length; i++)
+		{
+			if(npc_Selling[num_CurrentMap][i] != null)
+			{
+				entities.add(npc_Selling[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < obj[num_CurrentMap].length; i++)

@@ -22,7 +22,7 @@ public class Player extends Character {
 	KeyHandler keyH;
 	int speed;
 	public String state;
-	public ArrayList<Item> inventory = new ArrayList<>();
+	
 	
 	// PLAYER'S SAITAMA
 	public float saitama;
@@ -54,10 +54,6 @@ public class Player extends Character {
 	private boolean runningCountAttackDelay;
 	private boolean hurting = false;
 	public boolean canMove = false;
-	public int maxInventorySize = 20;
-	
-	public Item currentWeapon;
-	public Item currentShield;
 	public Projectile[] projectile = new Projectile[5];
 	
 	
@@ -585,8 +581,6 @@ public class Player extends Character {
 			this.hurting = true;
 		}
 		
-		
-		
 	}
 	public void setDefaultPositions() {
 		worldX = gp.tileSize * 24;
@@ -610,10 +604,10 @@ public class Player extends Character {
 	}
 
 	public void selectItem() {
-		int itemIndex = gp.ui.getItemIndexOnSlot();
+		int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
 
 		if (itemIndex < inventory.size()) {
-			Item selectedItem = inventory.get(itemIndex);
+			Entity selectedItem = inventory.get(itemIndex);
 
 			if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
 				currentWeapon = selectedItem;
@@ -633,7 +627,6 @@ public class Player extends Character {
 			}
 		}
 	}
-
 	public void checkLevelUp() {
 		if (exp >= nextLevelExp) {
 			level++;

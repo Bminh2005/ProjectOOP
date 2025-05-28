@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC;
+import entity.NPC_SellingItem;
 import monster.Bat;
 import monster.Demon;
 import monster.Minotuar;
@@ -29,9 +30,16 @@ public class AssetSetter {
 
 	public void setNPC()
 	{
-		gp.npc[1][0] = new NPC(gp);
-		gp.npc[1][0].worldX = gp.tileSize* 13;
-		gp.npc[1][0].worldY = gp.tileSize * 7;
+		int i = 0;
+		gp.npc[1][i] = new NPC(gp);
+		gp.npc[1][i].worldX = gp.tileSize* 13;
+		gp.npc[1][i].worldY = gp.tileSize * 7;
+		i++;
+		i = 0;
+		gp.npc_Selling[1][i] = new NPC_SellingItem(gp);
+		gp.npc_Selling[1][i].worldX = gp.tileSize* 21;
+		gp.npc_Selling[1][i].worldY = gp.tileSize * 21;
+		i++;
 		
 		
 	}
