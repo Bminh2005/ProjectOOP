@@ -33,16 +33,17 @@ public class AssetSetter {
 	{
 		int i = 0;
 		gp.npc[1][i] = new NPC(gp);
-		gp.npc[1][i].worldX = gp.tileSize* 13;
-		gp.npc[1][i].worldY = gp.tileSize * 7;
+		gp.npc[1][i].worldX = gp.tileSize* 26;
+		gp.npc[1][i].worldY = gp.tileSize * 21;
 		i++;
-		i = 0;
+		
+	}
+	public void setNPC_Selling() {
+		int i = 0;
 		gp.npc_Selling[1][i] = new NPC_SellingItem(gp);
 		gp.npc_Selling[1][i].worldX = gp.tileSize* 21;
 		gp.npc_Selling[1][i].worldY = gp.tileSize * 21;
 		i++;
-		
-		
 	}
 
 	public void setMonster()

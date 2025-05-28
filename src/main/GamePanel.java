@@ -107,6 +107,7 @@ public class GamePanel extends JPanel implements Runnable{
 	{
 //		aSetter.setObject();
 		aSetter.setNPC();
+		aSetter.setNPC_Selling();
 		aSetter.setTeleport();
 		player.setItems();
 		aSetter.setMonster();
@@ -196,7 +197,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 				}
 			}
-			for(int i =0;i< npc[num_CurrentMap].length;i++) {
+			for(int i = 0; i < npc[num_CurrentMap].length;i++) {
 				if(npc[num_CurrentMap][i] != null) {
 					npc[num_CurrentMap][i].update();
 				}
