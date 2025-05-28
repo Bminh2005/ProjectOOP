@@ -85,7 +85,7 @@ public class OBJ_ThunderProtect extends Projectile{
 		if(user == gp.player)
 		{
 			System.out.println("+++:" + alive);
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999)
 			{
 				gp.player.damageMonsterByProjectile(monsterIndex, attack);

@@ -193,21 +193,21 @@ public class CollisionChecker {
 			}
 		}
 	}
-	public int checkEntity(Character entity, Character[] target)
+	public int checkEntity(Character entity, Character[][] target)
 	{
 		int index = 999;
 		
-		for(int i = 0; i < target.length; i++)
+		for(int i = 0; i < target[gp.num_CurrentMap].length; i++)
 		{
-			if(target[i] != null)
+			if(target[gp.num_CurrentMap][i] != null)
 			{
 				//Get entity's solid area position
 				entity.solidArea.x = entity.worldX + entity.solidArea.x;
 				entity.solidArea.y = entity.worldY + entity.solidArea.y;
 				
 				// Get the object's solid area position
-				target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
-				target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
+				target[gp.num_CurrentMap][i].solidArea.x = target[gp.num_CurrentMap][i].worldX + target[gp.num_CurrentMap][i].solidArea.x;
+				target[gp.num_CurrentMap][i].solidArea.y = target[gp.num_CurrentMap][i].worldY + target[gp.num_CurrentMap][i].solidArea.y;
 				
 				switch(entity.direction)
 				{
@@ -228,9 +228,9 @@ public class CollisionChecker {
 		
 					break;
 				}
-				if(entity.solidArea.intersects(target[i].solidArea))
+				if(entity.solidArea.intersects(target[gp.num_CurrentMap][i].solidArea))
 				{
-					if(target[i] != entity)
+					if(target[gp.num_CurrentMap][i] != entity)
 					{
 						entity.CollisionOn = true;
 						index = i;
@@ -239,8 +239,8 @@ public class CollisionChecker {
 				}
 				entity.solidArea.x = entity.solidAreaDefaultX;
 				entity.solidArea.y = entity.solidAreaDefaultY;
-				target[i].solidArea.x = target[i].solidAreaDefaultX;
-				target[i].solidArea.y = target[i].solidAreaDefaultY;
+				target[gp.num_CurrentMap][i].solidArea.x = target[gp.num_CurrentMap][i].solidAreaDefaultX;
+				target[gp.num_CurrentMap][i].solidArea.y = target[gp.num_CurrentMap][i].solidAreaDefaultY;
 				
 			}
 				

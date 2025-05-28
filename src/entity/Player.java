@@ -22,8 +22,7 @@ public class Player extends Character {
 	KeyHandler keyH;
 	int speed;
 	public String state;
-	
-	
+
 	// PLAYER'S SAITAMA
 	public float saitama;
 	public final float MAX_SAITAMA = 100f;
@@ -55,8 +54,7 @@ public class Player extends Character {
 	private boolean hurting = false;
 	public boolean canMove = false;
 	public Projectile[] projectile = new Projectile[5];
-	
-	
+
 	public int level;
 	public int nextLevel;
 	public int exp;
@@ -64,7 +62,7 @@ public class Player extends Character {
 	public int coin;
 	public int defaultScreenX;
 	public int defaultScreenY;
-	
+	public boolean attackCanceled;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -76,8 +74,8 @@ public class Player extends Character {
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		solidArea.width = 22; // = 21*gp.tileSize/40
-		solidArea.height = 22; //= 18*gp.tileSize/40
-		//(31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
+		solidArea.height = 22; // = 18*gp.tileSize/40
+		// (31, 14, 22, 26) FIX 40 --> 48 (37, 17, 30, 32)
 		attackZone = new Rectangle(37, 17, 40, 40);
 		attackZoneDefaultX = attackZone.x;
 		attackZoneDefaultY = attackZone.y;
@@ -113,7 +111,7 @@ public class Player extends Character {
 		level = 1;
 		state = "NORMAL";
 		attackType = 0;
-		
+
 		this.keyH.attackPressed = false;
 		exp = 0;
 		nextLevelExp = 5;
@@ -137,7 +135,7 @@ public class Player extends Character {
 		y = (gp.screenHeight / 2) - (gp.tileSize / 2);
 		defaultScreenX = x;
 		defaultScreenY = y;
-		
+
 		frameCounter = 0;
 		flip = false;
 
@@ -152,7 +150,7 @@ public class Player extends Character {
 		height = gp.tileSize;
 		width = gp.tileSize * 53 / 40;
 
-		//solidArea = new Rectangle(17, 23, 32, 32);
+		// solidArea = new Rectangle(17, 23, 32, 32);
 		CollisionOn = false;
 		canMove = true;
 		// === Initial Direction ===
@@ -186,7 +184,7 @@ public class Player extends Character {
 		refreshStatus();
 		// System.out.println("SAITAMA = " + this.saitama);
 		// System.out.println("SPEED = " + this.speed);
-		
+
 		boolean overx = this.worldX >= gp.maxWorldWidth - (gp.screenWidth + this.width) * 10 / 20
 				|| this.worldX <= (gp.screenWidth - this.width) * 10 / 20;
 		boolean overy = this.worldY >= gp.maxWorldHeight - (gp.screenHeight + this.height) * 10 / 20
@@ -200,7 +198,7 @@ public class Player extends Character {
 				this.attackType = 0;
 			}
 		}
-		
+
 		if (hp > 0) {
 			if (this.invincible) {
 				this.invincibleCounter++;
@@ -213,15 +211,15 @@ public class Player extends Character {
 			if (hurting) {
 				this.hurt();
 			}
-			
+
 			else {
-			if (this.state.equals("RUN") == false) {
-				if (this.saitama < this.MAX_SAITAMA)
-					this.saitama += this.SAITAMA_RECOVER_RATE * 1f / 60f;
-			}
-			if (this.saitama >= this.MIN_SAITAMA_TO_RUN)
-				this.tired = false;
-			if (this.keyH.attackPressed == true) {
+				if (this.state.equals("RUN") == false) {
+					if (this.saitama < this.MAX_SAITAMA)
+						this.saitama += this.SAITAMA_RECOVER_RATE * 1f / 60f;
+				}
+				if (this.saitama >= this.MIN_SAITAMA_TO_RUN)
+					this.tired = false;
+				if (this.keyH.attackPressed == true) {
 					this.runningCountAttackDelay = false;
 					this.comboAttackDelayTime = 0;
 					this.attack();
@@ -236,50 +234,38 @@ public class Player extends Character {
 						this.runningCountAttackDelay = true;
 						this.idle();
 					}
-				}
-			else if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
-					|| this.keyH.rightPressed == true) {
+				} else if (this.keyH.upPressed == true || this.keyH.downPressed == true || this.keyH.leftPressed == true
+						|| this.keyH.rightPressed == true || keyH.enterPressed == true) {
+
+					if (this.saitama <= 0)
+						this.tired = true;
+					if (this.keyH.runPressed && this.tired == false) {
+						this.run();
+					} else {
+
+						this.walk();
+					}
+//					this.CollisionOn = false;
+					// CHECk NPC COLLISION
+					int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+					interactNPC(npcIndex);
 				
-				if (this.saitama <= 0)
-					this.tired = true;
-				if (this.keyH.runPressed && this.tired == false) {
-					this.run();
+//					this.CollisionOn = false;
+//					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+					if (CollisionOn == false && canMove)
+						this.move();
+					int objIndex = gp.cChecker.checkObject(this, true);
+					this.pickUpObject(objIndex);
 				} else {
-					
-					this.walk();
+					this.idle();
+
 				}
-				this.CollisionOn = false;
-				gp.cChecker.checkEntity(this, gp.npc[gp.num_CurrentMap]);
-				if(CollisionOn == true) {
-					/*
-					 * switch(this.direction) { case "up": this.solidArea.y -= this.speed -1 ;
-					 * break; case "down": this.solidArea.y += this.speed -1 ; break; case "left":
-					 * this.solidArea.x -= this.speed -1 ; break; case "right": this.solidArea.x +=
-					 * this.speed -1 ; break; }
-					 */
-					
-					int npcIndex = gp.cChecker.checkEntity(this,gp.npc[gp.num_CurrentMap]);
-				    if (npcIndex != 999) {
-				        gp.ui.interactNPC(npcIndex); 
-				}
-				}
-				this.CollisionOn = false;
-				gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
-				if(CollisionOn == false && canMove)
-					this.move();
-				int objIndex = gp.cChecker.checkObject(this, true);
-				this.pickUpObject(objIndex);	
-			} 
-			else {
-				this.idle();
-				
 			}
-		}
 		} else {
 			this.hp = 0;
 			this.dying();
 		}
-		
+
 		if (gp.keyH.shotKeyPressed == true && projectile[0].alive == false && shotAvailableCounter == 30
 				&& projectile[0].haveResource(this) == true) {
 			// SET DEFAULT COORDINATES, DIRECTION AND USER
@@ -336,12 +322,38 @@ public class Player extends Character {
 		}
 		dx = this.worldX - dx;
 		dy = this.worldY - dy;
-		if(overx) this.x += dx;
-		if(overy) this.y += dy;
+		if (overx)
+			this.x += dx;
+		if (overy)
+			this.y += dy;
 		this.frameCounter++;
 		checkLevelUp();
+		if(keyH.enterPressed == true && attackCanceled == false)
+		{
+//			gp.playSE(7);
+			attacking = true;
+			spriteCounter = 0;
+		}
+		
+		attackCanceled = false;
+		
+		gp.keyH.enterPressed = false;
 	}
-
+	public void interactNPC(int i)
+	{
+		if(gp.keyH.enterPressed == true)
+		{
+			if(i != 999)
+			{
+				attackCanceled = true;
+				gp.gameState = gp.dialogueState;
+				gp.npc_Selling[gp.num_CurrentMap][i].speak();
+			}	
+			
+		}
+		
+		
+	}
 	public void idle() {
 		if (this.state.equals("IDLE") == false) {
 			this.spriteNum = -1;
@@ -351,8 +363,9 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
 		}
-		if(frameCounter % 60 == 0) { 
-			if(this.mp < this.maxMp) this.mp++;
+		if (frameCounter % 60 == 0) {
+			if (this.mp < this.maxMp)
+				this.mp++;
 		}
 
 	}
@@ -400,28 +413,23 @@ public class Player extends Character {
 		gp.can_touch = true;
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
-				this.worldX -= this.speed;
-				this.flip = true;
+			this.worldX -= this.speed;
+			this.flip = true;
 
+		} else if (this.keyH.rightPressed == true) {
+			direction = "right";
+			this.worldX += this.speed;
+			this.flip = false;
 
-			}
-			else if (this.keyH.rightPressed == true) {
-				direction = "right";
-					this.worldX += this.speed;
-					this.flip = false;
-					
-			}
-			else if (this.keyH.upPressed == true) {
-				direction = "up";
-					this.worldY -= this.speed;
-			}
-			else if (this.keyH.downPressed == true) {
-				 direction = "down";
-					
-					this.worldY += this.speed;
-			}
+		} else if (this.keyH.upPressed == true) {
+			direction = "up";
+			this.worldY -= this.speed;
+		} else if (this.keyH.downPressed == true) {
+			direction = "down";
+
+			this.worldY += this.speed;
+		}
 	}
-
 
 	// System.out.println(this.worldX +" "+ this.worldY);
 
@@ -442,10 +450,13 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
 			this.spriteNum++;
-			if(attackType >= 3 || attackType < 0) attackType = 0;
-			if(this.playerAttack == null) System.out.println("PlayerAttack" + " is NULL");
-			if(this.playerAttack[attackType] == null) System.out.println("PlayerAttack[attackType]" + " is NULL and attackType = " + attackType);
-			if(this.spriteNum == this.playerAttack[attackType].animation.length) {
+			if (attackType >= 3 || attackType < 0)
+				attackType = 0;
+			if (this.playerAttack == null)
+				System.out.println("PlayerAttack" + " is NULL");
+			if (this.playerAttack[attackType] == null)
+				System.out.println("PlayerAttack[attackType]" + " is NULL and attackType = " + attackType);
+			if (this.spriteNum == this.playerAttack[attackType].animation.length) {
 				this.spriteNum = 0;
 			}
 		}
@@ -453,26 +464,26 @@ public class Player extends Character {
 
 	public void hurt() {
 		System.out.println("Player is injured!");
-		if(this.state.equals("HURT") == false) {
+		if (this.state.equals("HURT") == false) {
 			this.frameCounter = 0;
 			this.spriteNum = -1;
 			this.state = "HURT";
 		}
 		if (this.frameCounter % 5 == 0) {
-			this.spriteNum++;	
+			this.spriteNum++;
 		}
 		System.out.println("-----------------------------" + spriteNum);
 		if (this.spriteNum == this.playerHurt.maxNumber) {
 			this.spriteNum = 0;
 			hurting = false;
-			this.state = "IDLE";		
+			this.state = "IDLE";
 		}
 		if (this.flip)
 			this.worldX += 1;
 		else
 			this.worldX -= 1;
 		System.out.println("HP = " + this.hp);
-		
+
 	}
 
 	public void dying() {
@@ -483,12 +494,11 @@ public class Player extends Character {
 		}
 		if (this.frameCounter % 10 == 0) {
 			this.spriteNum++;
-			if(this.spriteNum == this.playerDying.maxNumber - 1) {
+			if (this.spriteNum == this.playerDying.maxNumber - 1) {
 				gp.gameState = gp.gameOverState;
 			}
 		}
-		System.out.println("----------------------------"+ this.spriteNum);
-		
+		System.out.println("----------------------------" + this.spriteNum);
 
 	}
 
@@ -536,7 +546,7 @@ public class Player extends Character {
 	}
 
 	public void checkAttackonMonster() {
-		int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
+		int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
 		if (this.state.equals("ATTACKING")) {
 			this.attackZone.x = this.worldX + this.attackZoneDefaultX;
 			this.attackZone.y = this.worldY + this.attackZoneDefaultY;
@@ -569,19 +579,19 @@ public class Player extends Character {
 			this.attackZone.y = this.attackZoneDefaultY;
 		}
 	}
-	
+
 	public void takeDamge(int damage) {
-		if(damage - this.defense > 0) {
-			if((damage - this.defense) > this.hp) {
+		if (damage - this.defense > 0) {
+			if ((damage - this.defense) > this.hp) {
 				this.hp = 0;
-			}
-			else {
+			} else {
 				this.hp -= (damage - this.defense);
 			}
 			this.hurting = true;
 		}
-		
+
 	}
+
 	public void setDefaultPositions() {
 		worldX = gp.tileSize * 24;
 		worldY = gp.tileSize * 24;
@@ -620,13 +630,14 @@ public class Player extends Character {
 			}
 			if (selectedItem.type == type_consumable) {
 				selectedItem.use(this);
-				if(inventory.get(itemIndex).checkUse == true) {
+				if (inventory.get(itemIndex).checkUse == true) {
 					inventory.remove(itemIndex);
 				}
-				
+
 			}
 		}
 	}
+
 	public void checkLevelUp() {
 		if (exp >= nextLevelExp) {
 			level++;
@@ -643,17 +654,19 @@ public class Player extends Character {
 //			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
-			
+
 		}
 	}
+
 	public void refreshStatus() {
-		if(gp.keyH.refreshPressed == true) {
+		if (gp.keyH.refreshPressed == true) {
 			setDefaultValues();
-		if(keyH.refreshPressed == true) {
-			restoreLifeAndMana();
+			if (keyH.refreshPressed == true) {
+				restoreLifeAndMana();
+			}
 		}
 	}
-	}
+
 	public void draw(Graphics2D g2) {
 		switch (state) {
 		case "IDLE":
@@ -680,40 +693,37 @@ public class Player extends Character {
 		} else {
 			g2.drawImage(image, x, y, this.width, this.height, null);
 		}
-		if(gp.testMode)g2.setColor(Color.RED);
-		if(gp.testMode) g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
+		if (gp.testMode)
+			g2.setColor(Color.RED);
+		if (gp.testMode)
+			g2.drawRect(x + solidArea.x, y + solidArea.y, solidArea.width, solidArea.height);
 		g2.setColor(Color.BLUE);
-		if(flip) {
-			int range = this.attackZone.width + 2*this.attackZoneDefaultX - this.width;
-			if(gp.testMode)g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
-		}
-		else if(gp.testMode)g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
+		if (flip) {
+			int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
+			if (gp.testMode)
+				g2.drawRect(x + attackZone.x - range, y + attackZone.y, attackZone.width, attackZone.height);
+		} else if (gp.testMode)
+			g2.drawRect(x + attackZone.x, y + attackZone.y, attackZone.width, attackZone.height);
 	}
-	public void pickUpObject(int i)
-	{
-		if(i != 999)
-		{
-			if(gp.obj[gp.num_CurrentMap][i] != null) {
+
+	public void pickUpObject(int i) {
+		if (i != 999) {
+			if (gp.obj[gp.num_CurrentMap][i] != null) {
 				gp.playSE(1);
-			//PICKUP ONLY ITEMS
-				if(gp.obj[gp.num_CurrentMap][i].type == type_pickUpOnly)
-				{
+				// PICKUP ONLY ITEMS
+				if (gp.obj[gp.num_CurrentMap][i].type == type_pickUpOnly) {
 					gp.obj[gp.num_CurrentMap][i].use(this);
 					gp.obj[gp.num_CurrentMap][i] = null;
 				}
-				//INVENTORY ITEMS
-				else
-				{
+				// INVENTORY ITEMS
+				else {
 					String text;
-					
-					if(inventory.size() != maxInventorySize)
-					{
+
+					if (inventory.size() != maxInventorySize) {
 						inventory.add(gp.obj[gp.num_CurrentMap][i]);
-	//					gp.playSE(1);
+						// gp.playSE(1);
 						text = "Got a " + gp.obj[gp.num_CurrentMap][i].name + "!";
-					}
-					else
-					{
+					} else {
 						text = "You cannot carry any more!";
 					}
 					gp.ui.addMessage(text);

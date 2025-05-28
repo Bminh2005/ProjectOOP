@@ -29,6 +29,7 @@ public class Entity {
 	public Entity currentWeapon;
 	public Entity currentShield;
 	public boolean checkUse;
+	public boolean attacking;
 	public int price;
 	
 	// === Position & Size ===
@@ -67,6 +68,7 @@ public class Entity {
 	// === Counters & Timers ===
 	// Dem thoi gian cho hoat anh, trang thai, cooldown
 	public int spriteCounter = 0;
+	int dialogueIndex = 0;
 	public int spriteNum = 1;
 
 	public int actionLockCounter = 0;
@@ -97,7 +99,28 @@ public class Entity {
 		this.worldY = 0;
 	}
 	public void speak() {
+		if(dialogues[dialogueIndex] == null)
+		{
+			dialogueIndex = 0;
+		}
+		gp.ui.currentDialogue = dialogues[dialogueIndex];
+		dialogueIndex++;
 		
+		switch(gp.player.direction)
+		{
+		case "up":
+			direction = "down";
+			break;
+		case "down":
+			direction = "up";
+			break;
+		case "left":
+			direction = "right";
+			break;
+		case "right":
+			direction = "left";
+			break;
+		}
 	}
 	public void setAction() {
 		

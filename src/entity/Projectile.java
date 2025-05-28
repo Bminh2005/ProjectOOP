@@ -32,7 +32,7 @@ public class Projectile extends Character{
 //		gp.cChecker.checkTile(this);
 		if(user == gp.player)
 		{
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999)
 			{
 				gp.player.damageMonsterByProjectile(monsterIndex, attack);
