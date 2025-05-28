@@ -47,7 +47,7 @@ public class Player extends Character {
 	// PROCESS FRAMES
 	private int spriteNum;
 	private int frameCounter;
-	private boolean flip;
+	public boolean flip;
 	private int attackType;
 	private int comboAttackDelayTime;// don vi frames
 	private boolean runningCountAttackDelay;
@@ -369,7 +369,6 @@ public class Player extends Character {
 		gp.can_touch = true;
 		if (this.keyH.leftPressed == true) {
 			direction = "left";
-			
 				this.worldX -= this.speed;
 				this.flip = true;
 
