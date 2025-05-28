@@ -82,7 +82,7 @@ public class Skeleton extends Monster {
              }
              actionLockCounter = 0;
          }
-        ai.QuaiVatDuoiTheoPlayer(this);
+//        ai.QuaiVatDuoiTheoPlayer(this);
         ai.attackByTouch(this);
     }
 

@@ -301,7 +301,7 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
 		}
-		if(frameCounter %60 == 0) { 
+		if(frameCounter % 60 == 0) { 
 			if(this.mp < this.maxMp) this.mp++;
 		}
 
