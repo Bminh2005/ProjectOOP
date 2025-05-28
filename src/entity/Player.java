@@ -101,7 +101,7 @@ public class Player extends Character {
 		tired = false;
 		saitama = MAX_SAITAMA;
 
-		maxHp = 20;
+		maxHp = 30;
 		hp = this.maxHp;
 
 		maxMp = 10;
@@ -343,7 +343,7 @@ public class Player extends Character {
 		if(overx) this.x += dx;
 		if(overy) this.y += dy;
 		this.frameCounter++;
-		
+		checkLevelUp();
 	}
 
 	public void idle() {
@@ -575,16 +575,19 @@ public class Player extends Character {
 	}
 	
 	public void takeDamge(int damage) {
-		if(damage - defense > 0) {
-			if((damage - defense) > hp) {
+		if(damage - this.defense > 0) {
+			System.out.println("+++++++++++++HP" + this.hp);
+			System.out.println("++++++++DEF: "+ this.defense);
+			System.out.println("=========DAMAGE: " + damage);
+			if((damage - this.defense) > this.hp) {
 				this.hp = 0;
 			}
 			else {
-				this.hp -= (damage - defense);
+				this.hp -= (damage - this.defense);
 			}
-			
+			this.hurting = true;
 		}
-		this.hurting = true;
+		
 		
 		
 	}
@@ -626,7 +629,10 @@ public class Player extends Character {
 			}
 			if (selectedItem.type == type_consumable) {
 				selectedItem.use(this);
-				inventory.remove(itemIndex);
+				if(inventory.get(itemIndex).checkUse == true) {
+					inventory.remove(itemIndex);
+				}
+				
 			}
 		}
 	}
@@ -635,7 +641,10 @@ public class Player extends Character {
 		if (exp >= nextLevelExp) {
 			level++;
 			nextLevelExp = nextLevelExp * 2;
-			maxHp += 4;
+			maxHp += 5;
+			hp = maxHp;
+			maxMp += 2;
+			mp = maxMp;
 			strength++;
 			dexterity++;
 			attack = getAttack();
@@ -644,6 +653,7 @@ public class Player extends Character {
 //			gp.playSE(8);
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
+			
 		}
 	}
 	public void refreshStatus() {

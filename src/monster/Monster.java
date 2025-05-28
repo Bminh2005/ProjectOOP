@@ -100,7 +100,7 @@ public abstract class Monster extends Character {
 	}
 
 	public void takeDamage(int playerAttack) {
-		this.hp -= playerAttack;
+		this.hp -= (playerAttack - this.defense);
 		gp.ui.addMessage(playerAttack + " damage!");
 		invincible = true;
 		if (this.hp <= 0) {
