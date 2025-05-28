@@ -25,9 +25,23 @@ public class OBJ_Potion_Red extends Item{
 	
 	public void use(Player player)
 	{
-		gp.gameState = gp.dialogueState;
-		gp.ui.currentDialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
-		player.hp += value;
+		if(player.hp == player.maxHp) {
+			gp.gameState = gp.dialogueState;
+			gp.ui.currentDialogue = "You cannot drink more!";
+			checkUse = false;
+		}
+		else {
+			checkUse = true;
+			gp.gameState = gp.dialogueState;
+			gp.ui.currentDialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
+			if((player.hp + value) > player.maxHp) {
+				player.hp = player.maxHp;
+			}
+			else {
+				player.hp += value;
+			}
+		}
+		
 //		gp.playSE(2);
 	}
 
