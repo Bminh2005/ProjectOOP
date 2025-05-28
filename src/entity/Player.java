@@ -52,6 +52,7 @@ public class Player extends Character {
 	private int comboAttackDelayTime;// don vi frames
 	private boolean runningCountAttackDelay;
 	private boolean hurting = false;
+	public boolean canMove = false;
 	public int maxInventorySize = 20;
 	
 	public Item currentWeapon;
