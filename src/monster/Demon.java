@@ -18,25 +18,25 @@ public class Demon extends Monster {
 		super(gp);
 		idle = new SpriteSheet("/demon/SpriteSheet_IDLE.png", 1728, 160, 6, 0, 46, 194, 114).animation;
 		move = new SpriteSheet("/demon/SpriteSheet_MOVE.png", 3456, 160, 12, 0, 46, 194, 114).animation;
-		attackImage = new SpriteSheet("/demon/SpriteSheet_ATTACK.png", 4320, 160, 15, 0, 46, 194, 114).animation;
+		attackImage = new SpriteSheet("/demon/SpriteSheet_ATTACK.png", 4320, 160, 15, 40, 40, 185, 120).animation;
 
 		flip = false;
 		this.height = gp.tileSize * 3; // 70
 		this.width = this.height *194/114; // 96
 		solidArea.x = this.height ; // 32
-		solidArea.y = this.height * 45 / 70 - 25; // 45
-		solidArea.width = gp.tileSize - 10;
-		solidArea.height = gp.tileSize;
+		solidArea.y = this.height * 45 / 70 - 55; // 45
+		solidArea.width = gp.tileSize + gp.tileSize/2;
+		solidArea.height = gp.tileSize + gp.tileSize + 10;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 
 		attackZone = new Rectangle();
-		attackZone.x = this.height * 34 / 70;
+		attackZone.x = this.height * 34 / 70 - gp.tileSize - 20;
 		attackZone.y = 0;
 		attackZoneDefaultX = attackZone.x;
 		attackZoneDefaultY = attackZone.y;
 
-		attackZone.width = this.height * 51 / 70; // 22
+		attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
 		attackZone.height = this.height * 69 / 70;
 		this.image = idle[0];
 
@@ -86,6 +86,7 @@ public class Demon extends Monster {
 		}
 		if (direction == "right") {
 			this.flip = true;
+			
 		}
 		gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
 		if (state == "ATTACK") {
@@ -94,6 +95,24 @@ public class Demon extends Monster {
 	}
 
 	public void updateDrawImage(int screenX, int screenY) {
+		if(flip) {
+			attackZone.x = this.height - 5*gp.tileSize - 20;
+			attackZone.y = 0;
+			attackZoneDefaultX = attackZone.x;
+			attackZoneDefaultY = attackZone.y;
+
+			attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
+			attackZone.height = this.height * 69 / 70;
+		}
+		else {
+			attackZone.x = this.height * 34 / 70 - gp.tileSize - 20;
+			attackZone.y = 0;
+			attackZoneDefaultX = attackZone.x;
+			attackZoneDefaultY = attackZone.y;
+
+			attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
+			attackZone.height = this.height * 69 / 70;
+		}
 		if (state == "MOVE") {
 			if (spriteNum == -1)
 				spriteNum = 0;
