@@ -19,7 +19,7 @@ import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
-public class NPC_SellingItem extends Character {
+public class NPC_SellingItem extends NPC {
 
 	public NPC_SellingItem(GamePanel gp) {
 		super(gp);

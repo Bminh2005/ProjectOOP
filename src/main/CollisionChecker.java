@@ -150,7 +150,7 @@ public class CollisionChecker {
 		
 		return index;
 	}
-	//NPC or MONSTER
+	//NPC_Dialogue or MONSTER
 	public void checkCharacter(Character c1, Character c2) {
 		c1.solidArea.x = c1.worldX + c1.solidAreaDefaultX;
 		c1.solidArea.y = c1.worldY + c1.solidAreaDefaultY;

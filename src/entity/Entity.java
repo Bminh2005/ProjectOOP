@@ -42,14 +42,10 @@ public class Entity {
 	// === Character Stats ===
 	// Thuoc tinh nhan vat: mau, mana, cong, thu, kinh nghiem, cap do
 	public String name;
-	public int dexterity;     // chỉ số khéo léo
-	public int value;
-	public int useCost;
+     // chỉ số khéo léo
 	public int attackValue;
 	public int defenseValue;
 
-	// === Equipment & Items ===
-	// Vu khi, la chan va du an (dan, lua, etc.)
 
 	// === Entity State ===
 	// Cac trang thai hoat dong cua nhan vat
@@ -68,14 +64,7 @@ public class Entity {
 	// === Counters & Timers ===
 	// Dem thoi gian cho hoat anh, trang thai, cooldown
 	public int spriteCounter = 0;
-	int dialogueIndex = 0;
 	public int spriteNum = 1;
-
-	public int actionLockCounter = 0;
-	public int invincibleCounter = 0;
-	public int shotAvailableCounter = 0;
-	public int dyingCounter = 0;
-	public int hpBarCounter = 0;
 
 	// === Entity Types ===
 	// Phan loai doi tuong (nguoi choi, quai, vu khi, vat pham,...)
@@ -98,37 +87,7 @@ public class Entity {
 		this.worldX = 0;
 		this.worldY = 0;
 	}
-	public void speak() {
-		if(dialogues[dialogueIndex] == null)
-		{
-			dialogueIndex = 0;
-		}
-		gp.ui.currentDialogue = dialogues[dialogueIndex];
-		dialogueIndex++;
-		
-		switch(gp.player.direction)
-		{
-		case "up":
-			direction = "down";
-			break;
-		case "down":
-			direction = "up";
-			break;
-		case "left":
-			direction = "right";
-			break;
-		case "right":
-			direction = "left";
-			break;
-		}
-	}
-	public void setAction() {
-		
-	}
-	public void use(Player entity)
-	{
-		
-	}
+	
 	public void draw(Graphics2D g2) {
 		int screenX = worldX - gp.player.worldX + gp.player.x;
 		int screenY = worldY - gp.player.worldY + gp.player.y;
@@ -154,9 +113,7 @@ public class Entity {
 		return image;
 	}
 
-//	public BufferedImage setup(BufferedImage image, int width, int height) {
-//		UtilityTool uTool = new UtilityTool();
-//		image = uTool.scaleImage(image, width, height);
-//		return image;
-//	}
+	public void use(Player player) {
+		
+	}
 }

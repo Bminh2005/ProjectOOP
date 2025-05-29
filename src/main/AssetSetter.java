@@ -1,6 +1,6 @@
 package main;
 
-import entity.NPC;
+import entity.NPC_Dialogue;
 import entity.NPC_SellingItem;
 import map.Teleport;
 import monster.Bat;
@@ -32,20 +32,16 @@ public class AssetSetter {
 	public void setNPC()
 	{
 		int i = 0;
-		gp.npc[1][i] = new NPC(gp);
+		gp.npc[1][i] = new NPC_Dialogue(gp);
 		gp.npc[1][i].worldX = gp.tileSize* 26;
+		gp.npc[1][i].worldY = gp.tileSize * 21;
+		i++;
+		gp.npc[1][i] = new NPC_SellingItem(gp);
+		gp.npc[1][i].worldX = gp.tileSize* 21;
 		gp.npc[1][i].worldY = gp.tileSize * 21;
 		i++;
 		
 	}
-	public void setNPC_Selling() {
-		int i = 0;
-		gp.npc_Selling[1][i] = new NPC_SellingItem(gp);
-		gp.npc_Selling[1][i].worldX = gp.tileSize* 21;
-		gp.npc_Selling[1][i].worldY = gp.tileSize * 21;
-		i++;
-	}
-
 	public void setMonster()
 	{
 		//Map 01

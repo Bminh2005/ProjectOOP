@@ -845,7 +845,7 @@ public class UI {
 	{
 		//DRAW PLAYER INVENTORY
 		drawInventory(gp.player, false);
-		//DRAW NPC INVENTORY
+		//DRAW NPC_Dialogue INVENTORY
 		drawInventory(npc, true);
 		
 		//DRAW HINT WINDOW

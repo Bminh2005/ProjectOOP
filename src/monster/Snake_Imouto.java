@@ -9,50 +9,51 @@ import java.util.Random;
 import main.GamePanel;
 import main.SpriteSheet;
 
-public class Demon extends Monster {
+public class Snake_Imouto extends Monster {
 	BufferedImage idle[];
 	BufferedImage move[];
 	BufferedImage attackImage[];
-
-	public Demon(GamePanel gp) {
+	private int delayAttackCounter;
+	private boolean attackReady;
+	private boolean prepareAttack;
+	private int preparingTimeAttack;
+	public Snake_Imouto(GamePanel gp) {
 		super(gp);
-		idle = new SpriteSheet("/demon/SpriteSheet_IDLE.png", 1728, 160, 6, 0, 46, 194, 114).animation;
-		move = new SpriteSheet("/demon/SpriteSheet_MOVE.png", 3456, 160, 12, 0, 46, 194, 114).animation;
-		attackImage = new SpriteSheet("/demon/SpriteSheet_ATTACK.png", 4320, 160, 15, 40, 40, 185, 120).animation;
-
+		idle = new SpriteSheet("/snake_imouto/Idle.png", 896, 128, 7, 12, 34, 94, 94).animation;
+		move = new SpriteSheet("/snake_imouto/Walk.png", 1664, 128, 13, 3, 28, 100, 100).animation;
+		attackImage = new SpriteSheet("/snake_imouto/Attack_3.png", 896, 128, 7, 26, 34, 94, 94).animation;
 		flip = false;
-		this.height = gp.tileSize * 3; // 70
-		this.width = this.height *194/114; // 96
-		solidArea.x = this.height ; // 32
-		solidArea.y = this.height * 45 / 70 - 55 + (gp.tileSize + gp.tileSize + 10)/2; // 45
-		solidArea.width = gp.tileSize + gp.tileSize/2;
-		solidArea.height = (gp.tileSize + gp.tileSize + 10)/2;
+		this.height = gp.tileSize * 70 / 50; // 70
+		this.width = this.height * 96 / 70; // 96
+		solidArea.x = this.height * 38 / 70 - 5; // 32
+		solidArea.y = this.height * 45 / 70 - 25; // 45
+		solidArea.width = gp.tileSize - 10;
+		solidArea.height = gp.tileSize;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 
 		attackZone = new Rectangle();
-		attackZone.x = this.height * 34 / 70 - gp.tileSize - 20;
+		attackZone.x = this.height * 34 / 70;
 		attackZone.y = 0;
 		attackZoneDefaultX = attackZone.x;
 		attackZoneDefaultY = attackZone.y;
 
-		attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
-		attackZone.height = (this.height * 69 / 70)/2;
+		attackZone.width = this.height * 51 / 70; // 22
+		attackZone.height = this.height * 69 / 70;
 		this.image = idle[0];
 
 		this.spriteNum = 0;
 		this.spriteCounter = 0;
 		this.speed = 1;
 		this.alive = true;
-		name = "Demon";
+		name = "Snake";
 		type = type_monster;
-		maxHp = 100;
+		maxHp = 25;
 		hp = maxHp;
 		state = "MOVE";
-		attack = 50;
-		defense = 30;
-		exp = 30;
-		coin = 30;
+		attack = 30;
+		defense = 10;
+		exp = 15;
 		direction = "up";
 		actionLockCounter = 0;
 	}
@@ -60,7 +61,21 @@ public class Demon extends Monster {
 	@Override
 	public void setAction() {
 		// TODO Auto-generated method stub
-		System.out.println(move.length);
+		if(this.attackReady == false) {
+			delayAttackCounter++;
+			if(delayAttackCounter >= 70) {
+				delayAttackCounter = 0;
+				this.attackReady = true;
+			}
+		}
+		if(this.prepareAttack) {
+			this.preparingTimeAttack++;
+			if(preparingTimeAttack >= 30) {
+				this.prepareAttack = false;
+				this.preparingTimeAttack = 0;
+				this.spriteNum++;
+			}
+		}
 		actionLockCounter++;
 		if (actionLockCounter >= 120) {
 			if (state == "MOVE") {
@@ -83,11 +98,10 @@ public class Demon extends Monster {
 			actionLockCounter = 0;
 		}
 		if (direction == "left") {
-			this.flip = false;
+			this.flip = true;
 		}
 		if (direction == "right") {
-			this.flip = true;
-			
+			this.flip = false;
 		}
 		gp.quaiVatTanCong.QuaiVatDuoiTheoPlayer(this);
 		if (state == "ATTACK") {
@@ -96,24 +110,6 @@ public class Demon extends Monster {
 	}
 
 	public void updateDrawImage(int screenX, int screenY) {
-		if(flip) {
-			attackZone.x = this.height - 5*gp.tileSize - 20;
-			attackZone.y = (this.height * 69 / 70)/2;
-			attackZoneDefaultX = attackZone.x;
-			attackZoneDefaultY = attackZone.y;
-
-			attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
-			attackZone.height = (this.height * 69 / 70)/2;
-		}
-		else {
-			attackZone.x = this.height * 34 / 70 - gp.tileSize - 20;
-			attackZone.y = (this.height * 69 / 70)/2;
-			attackZoneDefaultX = attackZone.x;
-			attackZoneDefaultY = attackZone.y;
-
-			attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
-			attackZone.height = (this.height * 69 / 70)/2;
-		}
 		if (state == "MOVE") {
 			if (spriteNum == -1)
 				spriteNum = 0;
@@ -137,8 +133,6 @@ public class Demon extends Monster {
 			if (spriteNum == -1)
 				spriteNum = 0;
 			image = attackImage[spriteNum];
-			System.out.println("------------" + spriteNum);
-			System.out.println("============" + attackImage.length);
 			if (spriteNum == attackImage.length - 1) {
 				this.move();
 			}
@@ -156,7 +150,7 @@ public class Demon extends Monster {
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		if (spriteNum == 12 && spriteCounter % 10 == 5) {
+		if (spriteNum == 3 && spriteCounter % 5 == 4) {
 			attackZone.x = worldX + attackZoneDefaultX;
 			attackZone.y = worldY + attackZoneDefaultY;
 			Rectangle solidPlayer = gp.player.solidArea;
@@ -190,17 +184,23 @@ public class Demon extends Monster {
 	}
 
 	public void updateSpriteNum() {
-		System.out.println("++++++++" + spriteCounter);
-		if (spriteCounter % 10 == 0) {
-			switch (state) {
+		if (spriteCounter % 5 == 0) {
+			switch(state) {
 			case "MOVE":
-				spriteNum = (spriteNum + 1) % move.length;
+				spriteNum = (spriteNum+1)%move.length;
 				break;
 			case "ATTACK":
-				spriteNum = (spriteNum + 1) % attackImage.length;
+				if(spriteNum == 0) {
+					prepareAttack = true;
+				}
+				if(prepareAttack == false) spriteNum = (spriteNum+1)%attackImage.length;
+				if(spriteNum == attackImage.length - 1) {
+					this.attackReady = false; 
+				 }
+				if(this.attackReady == false) this.move();
 				break;
 			case "IDLE":
-				spriteNum = (spriteNum + 1) % idle.length;
+				spriteNum = (spriteNum+1)%idle.length;
 				break;
 			}
 		}
@@ -210,7 +210,7 @@ public class Demon extends Monster {
 		g2.setColor(Color.blue);
 		int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
 		if (flip) {
-			g2.drawImage(image, screenX + this.width + this.width/2, screenY, -this.width, this.height, null);
+			g2.drawImage(image, screenX + this.width, screenY, -this.width, this.height, null);
 			if (gp.testMode)
 				g2.drawRect(screenX + this.attackZoneDefaultX - range, screenY + this.attackZoneDefaultY,
 						this.attackZone.width, this.attackZone.height);
