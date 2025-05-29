@@ -245,13 +245,17 @@ public class Player extends Character {
 
 						this.walk();
 					}
-//					this.CollisionOn = false;
+					this.CollisionOn = false;
 					// CHECk NPC COLLISION
 					int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 					interactNPC(npcIndex);
-				
+
+					//this.CollisionOn = false;
+					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+
 					this.CollisionOn = false;
 //					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+
 					if (CollisionOn == false && canMove)
 						this.move();
 					int objIndex = gp.cChecker.checkObject(this, true);
@@ -348,7 +352,10 @@ public class Player extends Character {
 				attackCanceled = true;
 				gp.gameState = gp.dialogueState;
 				gp.npc_Selling[gp.num_CurrentMap][i].speak();
-			}	
+			}
+			else {
+				gp.gameState = gp.playState;
+			}
 			
 		}
 		

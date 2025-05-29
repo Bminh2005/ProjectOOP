@@ -80,22 +80,22 @@ public class NPC extends Character{
 	public void update() {
 		if(flip) {
 			solidArea.x = -40; // = 17*gp.tileSize/40
-			solidArea.y = 26; // = 22*gp.tileSize/40
+			solidArea.y = 25; // = 22*gp.tileSize/40
 			solidAreaDefaultX = solidArea.x;
 			solidAreaDefaultY = solidArea.y;
-			solidArea.width = 22; // = 21*gp.tileSize/40
-			solidArea.height = 22; //= 18*gp.tileSize/40
+			solidArea.width = 21; // = 21*gp.tileSize/40
+			solidArea.height = 21; //= 18*gp.tileSize/40
 		}
 		else {
-			solidArea.x = 22; // = 17*gp.tileSize/40
-			solidArea.y = 26; // = 22*gp.tileSize/40
+			solidArea.x = 21; // = 17*gp.tileSize/40
+			solidArea.y = 25; // = 22*gp.tileSize/40
 			solidAreaDefaultX = solidArea.x;
 			solidAreaDefaultY = solidArea.y;
-			solidArea.width = 22; // = 21*gp.tileSize/40
-			solidArea.height = 22; //= 18*gp.tileSize/40
+			solidArea.width = 21; // = 21*gp.tileSize/40
+			solidArea.height = 21; //= 18*gp.tileSize/40
 		}
-		setAction();
 		checkCollision();
+		//setAction();
 		spriteCounter++;
 		if (spriteCounter > 15) {
 			if (spriteNum == 1) {
@@ -106,7 +106,8 @@ public class NPC extends Character{
 			}
 			spriteCounter = 0;
 		}
-		if (CollisionOn == false) {
+	}
+/*		if (CollisionOn == false) {
 			switch (direction) {
 			case "up":
 				worldY -= speed;
@@ -122,7 +123,7 @@ public class NPC extends Character{
 				break;
 			}
 		}
-	}
+	}*/
 	public void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		int screenX = worldX - gp.player.worldX + gp.player.x;

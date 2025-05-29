@@ -1,13 +1,11 @@
+/npc_selling/
+/monster/
+/object/
 <<<<<<< HEAD
 /entity/
 /main/
-/npc_selling/
-/monster/
 =======
-/demon/
-/entity/
-/monster/
-/object/
 >>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
 /map/
 /objects/
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
