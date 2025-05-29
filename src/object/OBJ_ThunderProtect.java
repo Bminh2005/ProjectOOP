@@ -18,7 +18,7 @@ public class OBJ_ThunderProtect extends Projectile{
 		maxHp = 180;
 		hp = maxHp;
 		attack = 0;
-		useCost = 7;
+		useCost = 8;
 		breakDefense = 1;
 		reverse = false;		
 		alive = false;

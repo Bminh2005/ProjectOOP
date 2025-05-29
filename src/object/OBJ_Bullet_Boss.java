@@ -17,8 +17,8 @@ public class OBJ_Bullet_Boss extends Projectile{
 		speed = 5;
 		maxHp = 180;
 		hp = maxHp;
-		attack = 15;
-		useCost = 7;
+		attack = 30;
+		useCost = 20;
 		breakDefense = 1;
 		reverse = false;		
 		alive = false;

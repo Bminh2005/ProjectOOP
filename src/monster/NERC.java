@@ -136,7 +136,7 @@ public class NERC extends Monster {
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		if (spriteNum == 3 && spriteCounter % 10 == 5) {
+		if (spriteNum == 3 && spriteCounter % 17 == 11) {
 			attackZone.x = worldX + attackZoneDefaultX;
 			attackZone.y = worldY + attackZoneDefaultY;
 			Rectangle solidPlayer = gp.player.solidArea;
@@ -170,8 +170,7 @@ public class NERC extends Monster {
 	}
 
 	public void updateSpriteNum() {
-		System.out.println("++++++++" + spriteCounter);
-		if (spriteCounter % 10 == 0) {
+		if (spriteCounter % 17 == 0) {
 			switch (state) {
 			case "MOVE":
 				spriteNum = (spriteNum + 1) % move.length;

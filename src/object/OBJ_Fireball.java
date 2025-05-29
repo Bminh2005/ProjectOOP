@@ -17,7 +17,7 @@ public class OBJ_Fireball extends Projectile{
 		maxHp = 80;
 		hp = maxHp;
 		attack = 15;
-		useCost = 2;
+		useCost = 3;
 		solidArea.x = 12;
 		solidArea.y = 12;
 		solidAreaDefaultX = solidArea.x;
