@@ -42,12 +42,6 @@ public abstract class Monster extends Character {
 //		if (this.type == type_monster && contactPlayer == true) {
 //			damagePlayer(attack);
 //		}
-		attackDelayCounter++;
-		if(attackDelayCounter == 25) {
-			gp.quaiVatTanCong.attackByTouch(this);
-			attacking = true;
-			attackDelayCounter = 0;
-		}
 		if (CollisionOn == false) {
 			switch (direction) {
 			case "up":

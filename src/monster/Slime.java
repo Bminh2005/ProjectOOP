@@ -28,7 +28,7 @@ public class Slime extends Monster {
         defense = 0;
         exp = 2;
         
-
+        
         getImage(); 
     }
 
@@ -62,6 +62,12 @@ public class Slime extends Monster {
             }
             actionLockCounter = 0;
         }
+        attackDelayCounter++;
+		if(attackDelayCounter == 25) {
+			gp.quaiVatTanCong.attackByTouch(this);
+			attacking = true;
+			attackDelayCounter = 0;
+		}
         
 //
 //        int i = new Random().nextInt(100) + 1;

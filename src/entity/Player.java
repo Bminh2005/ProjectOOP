@@ -470,10 +470,6 @@ public class Player extends Character {
 		this.state = "ATTACKING";
 		if (this.frameCounter % 20 == 0) {
 			gp.playSE(4);
-			if (flip)
-				this.worldX -= 3;
-			else
-				this.worldX += 3;
 		}
 		if (this.frameCounter % 5 == 0) {
 			// System.out.println(this.spriteNum);
