@@ -11,12 +11,12 @@ public class OBJ_sword_03 extends Item {
     	type = type_sword;
 		name = "Jusdice sword";
 		down1 = setup("/objects/sword_03", 3*gp.tileSize/4, 3*gp.tileSize/4);
-		attackValue = 1;
+		attackValue = 4;
 //		attackArea.width = 36;
 //		attackArea.height = 36;
 		description = "[" + name + "]\nAn Jusdice sword ON BEHALF OF GOD.";
 		
-		price = 10;
+		price = 17;
 	}
 
 }
