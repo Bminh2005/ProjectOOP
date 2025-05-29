@@ -17,5 +17,7 @@ public class OBJ_Shield_Wood extends Item{
 		down1 = setup("/objects/shield_wood", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		defenseValue = 3;
 		description = "[" + name + "]\nMade by wood.";
+		
+		price = 10;
 	}
 }

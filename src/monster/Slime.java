@@ -77,9 +77,11 @@ public class Slime extends Monster {
         int i = new Random().nextInt(100) + 1;
 
         if (i < 50) {
-            dropItem(new OBJ_Coin_Bronze(gp));
+//            dropItem(new OBJ_Coin_Bronze(gp));
+            dropItem(new OBJ_ManaCrystal(gp));
         } else if (i < 75) {
-            dropItem(new OBJ_Heart(gp));
+//            dropItem(new OBJ_Heart(gp));
+            dropItem(new OBJ_ManaCrystal(gp));
         } else {
             dropItem(new OBJ_ManaCrystal(gp));
         }

@@ -441,7 +441,7 @@ public class UI {
 				g2.setColor(new Color(240,190,90));
 				g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 			}
-			g2.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+			g2.drawImage(entity.inventory.get(i).down1, slotX + 6, slotY + 6, null);
 			
 			slotX += slotSize;
 			
