@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import entity.Projectile;
 import map.MapLayer;
 import map.MapTile;
 
@@ -196,7 +197,7 @@ public class CollisionChecker {
 	public int checkEntity(Character entity, Character[][] target)
 	{
 		int index = 999;
-
+		
 	    for(int i = 0; i < target[gp.num_CurrentMap].length; i++)
 	    {
 	        if(target[gp.num_CurrentMap][i] != null)
@@ -225,6 +226,7 @@ public class CollisionChecker {
 	                {
 	                    entity.CollisionOn = true;
 	                    index = i;
+	                    if(entity instanceof Projectile == false) {
 	                    switch(entity.direction) {
 	            		case "up":
 	            			if(entityArea.intersects(targetArea)) {
@@ -271,7 +273,7 @@ public class CollisionChecker {
 	            			}
 	            			break;
 	            		}
-	                    
+	                   }
 	                    
 	                    break;  // Nếu muốn dừng ở va chạm đầu tiên
 	                }
