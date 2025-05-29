@@ -379,7 +379,7 @@ public class KeyHandler implements KeyListener{
 				{
 					gp.ui.commandNum = 2;
 				}
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 			if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
 			{
@@ -388,7 +388,7 @@ public class KeyHandler implements KeyListener{
 				{
 					gp.ui.commandNum = 0;
 				}
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(gp.ui.subState == 1)
@@ -415,7 +415,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.playerSlotRow != 0)
 			{
 				gp.ui.playerSlotRow--;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
@@ -423,7 +423,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.playerSlotRow != 3)
 			{
 				gp.ui.playerSlotRow++;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT)
@@ -431,7 +431,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.playerSlotCol != 0)
 			{
 				gp.ui.playerSlotCol--;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
@@ -439,7 +439,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.playerSlotCol != 4)
 			{
 				gp.ui.playerSlotCol++;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 	}
@@ -450,7 +450,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.npcSlotRow != 0)
 			{
 				gp.ui.npcSlotRow--;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN)
@@ -458,7 +458,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.npcSlotRow != 3)
 			{
 				gp.ui.npcSlotRow++;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT)
@@ -466,7 +466,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.npcSlotCol != 0)
 			{
 				gp.ui.npcSlotCol--;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 		if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT)
@@ -474,7 +474,7 @@ public class KeyHandler implements KeyListener{
 			if(gp.ui.npcSlotCol != 4)
 			{
 				gp.ui.npcSlotCol++;
-				gp.playSE(9);
+//				gp.playSE(9);
 			}
 		}
 	}

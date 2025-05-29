@@ -250,7 +250,7 @@ public class Player extends Character {
 					int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 					interactNPC(npcIndex);
 				
-//					this.CollisionOn = false;
+					this.CollisionOn = false;
 //					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 					if (CollisionOn == false && canMove)
 						this.move();

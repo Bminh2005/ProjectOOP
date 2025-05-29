@@ -15,9 +15,9 @@ public class OBJ_ThunderProtect extends Projectile{
 		super(gp);
 		name = "Thunder Bolt";
 		speed = 0;
-		maxHp = 120;
+		maxHp = 180;
 		hp = maxHp;
-		attack = 15;
+		attack = 10;
 		useCost = 2;
 		reverse = false;		
 		alive = false;

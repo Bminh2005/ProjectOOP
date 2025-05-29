@@ -9,19 +9,19 @@ public class OBJ_ManaCrystal extends Item{
 	public OBJ_ManaCrystal(GamePanel gp) {
 		super(gp);
 		
-		type = type_pickUpOnly;
+		type = type_consumable;
 		name = "Mana Crystal";
-		value = 5;
+		value = 10;
 		down1 = setup("/objects/manacrystal_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		image = setup("/objects/manacrystal_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		image2 = setup("/objects/manacrystal_blank", 3*gp.tileSize/4, 3*gp.tileSize/4);
+		
+		price = 30;
 	}
 	public void use(Player entity)
 	{
-		gp.ui.addMessage("Mana + " + value);
-		if(entity.mp + value > entity.maxMp) {
-			entity.mp = entity.maxMp;
-		}
-		else entity.mp += value;
+		gp.ui.addMessage("Exp + " + value);
+		entity.mp += value;
+		gp.player.checkLevelUp();
 	}
 }

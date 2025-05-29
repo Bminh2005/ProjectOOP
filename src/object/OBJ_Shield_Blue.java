@@ -16,5 +16,7 @@ public class OBJ_Shield_Blue extends Item {
 		defenseValue = 5;
 		description = "[" + name + "]\nA shiny blue shield.";
 		
+		price = 15;
+		
 	}
 }
