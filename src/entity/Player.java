@@ -250,13 +250,12 @@ public class Player extends Character {
 					int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 					interactNPC(npcIndex);
 				
-<<<<<<< HEAD
 					//this.CollisionOn = false;
 					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-=======
+
 					this.CollisionOn = false;
 //					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP
+
 					if (CollisionOn == false && canMove)
 						this.move();
 					int objIndex = gp.cChecker.checkObject(this, true);
