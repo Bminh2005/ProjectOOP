@@ -18,7 +18,7 @@ public class OBJ_Potion_Red extends Item{
 		type = type_consumable;
 		name = "Red Potion";
 		value = 5;
-		down1 = setup("/objects/potion_red",gp.tileSize, gp.tileSize);
+		down1 = setup("/objects/potion_red",3*gp.tileSize/4, 3*gp.tileSize/4);
 		description = "[" + name + "]\nHeals your life by " + value + ".";
 		
 		price = 10;

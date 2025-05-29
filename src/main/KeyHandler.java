@@ -42,6 +42,7 @@ public class KeyHandler implements KeyListener{
 		else if(gp.gameState == gp.characterState)
 		{
 			characterState(code);
+			playerInventory(code);
 		}
 		//OPTIONS STATE
 		else if(gp.gameState == gp.optionsState)

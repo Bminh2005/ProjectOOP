@@ -9,8 +9,8 @@ public class OBJ_ManaCrystal extends Item{
 	public OBJ_ManaCrystal(GamePanel gp) {
 		super(gp);
 		
-		type = type_consumable;
-		name = "Mana Crystal";
+		type = type_pickUpOnly;
+		name = "Exp Crystal";
 		value = 10;
 		down1 = setup("/objects/manacrystal_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
 		image = setup("/objects/manacrystal_full", 3*gp.tileSize/4, 3*gp.tileSize/4);
@@ -21,7 +21,7 @@ public class OBJ_ManaCrystal extends Item{
 	public void use(Player entity)
 	{
 		gp.ui.addMessage("Exp + " + value);
-		entity.mp += value;
+		entity.exp += value;
 		gp.player.checkLevelUp();
 	}
 }

@@ -641,6 +641,7 @@ public class Player extends Character {
 	public void checkLevelUp() {
 		if (exp >= nextLevelExp) {
 			level++;
+			nextLevel = level + 1;
 			nextLevelExp = nextLevelExp * 2;
 			maxHp += 5;
 			hp = maxHp;
