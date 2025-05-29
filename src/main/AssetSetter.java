@@ -49,10 +49,7 @@ public class AssetSetter {
 		//Map 01
 		int i = 0;
 		
-		gp.monster[1][i] = new Slime(gp);
-		gp.monster[1][i].worldX = gp.tileSize*21;
-		gp.monster[1][i].worldY = gp.tileSize*21;
-		i++;
+		//SLIME
 		gp.monster[1][i] = new Slime(gp);
 		gp.monster[1][i].worldX = gp.tileSize*20;
 		gp.monster[1][i].worldY = gp.tileSize*21;
@@ -61,6 +58,74 @@ public class AssetSetter {
 		gp.monster[1][i].worldX = gp.tileSize*20;
 		gp.monster[1][i].worldY = gp.tileSize*20;
 		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*19;
+		gp.monster[1][i].worldY = gp.tileSize*20;
+		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*19;
+		gp.monster[1][i].worldY = gp.tileSize*19;
+		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*20;
+		gp.monster[1][i].worldY = gp.tileSize*19;
+		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*21;
+		gp.monster[1][i].worldY = gp.tileSize*19;
+		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*19;
+		gp.monster[1][i].worldY = gp.tileSize*21;
+		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*21;
+		gp.monster[1][i].worldY = gp.tileSize*20;
+		i++;
+		gp.monster[1][i] = new Slime(gp);
+		gp.monster[1][i].worldX = gp.tileSize*21;
+		gp.monster[1][i].worldY = gp.tileSize*21;
+		i++;
+		
+		//Medusa
+		gp.monster[1][i] = new Medusa(gp);
+		gp.monster[1][i].worldX = gp.tileSize*13;
+		gp.monster[1][i].worldY = gp.tileSize*18;
+		i++;
+		gp.monster[1][i] = new Medusa(gp);
+		gp.monster[1][i].worldX = gp.tileSize*14;
+		gp.monster[1][i].worldY = gp.tileSize*18;
+		i++;
+		gp.monster[1][i] = new Medusa(gp);
+		gp.monster[1][i].worldX = gp.tileSize*15;
+		gp.monster[1][i].worldY = gp.tileSize*18;
+		i++;
+		
+		//Minotuar
+		gp.monster[1][i] = new Minotuar(gp);
+		gp.monster[1][i].worldX = gp.tileSize*27;
+		gp.monster[1][i].worldY = gp.tileSize*20;
+		i++;
+		
+		//Map 02
+		i = 0;
+		gp.monster[2][i] = new Slime(gp);
+		gp.monster[2][i].worldX = gp.tileSize*26;
+		gp.monster[2][i].worldY = gp.tileSize*24;
+		i++;
+		gp.monster[2][i] = new NERC(gp);
+		gp.monster[2][i].worldX = gp.tileSize*27;
+		gp.monster[2][i].worldY = gp.tileSize*29;
+		i++;
+		gp.monster[2][i] = new NERC(gp);
+		gp.monster[2][i].worldX = gp.tileSize*34;
+		gp.monster[2][i].worldY = gp.tileSize*35;
+		i++;
+		gp.monster[2][i] = new NERC(gp);
+		gp.monster[2][i].worldX = gp.tileSize*45;
+		gp.monster[2][i].worldY = gp.tileSize*46;
+		
+		
 		gp.monster[1][i] = new Bat(gp);
 		gp.monster[1][i].worldX = gp.tileSize * 27;  
 		gp.monster[1][i].worldY = gp.tileSize * 21;
@@ -81,10 +146,7 @@ public class AssetSetter {
 		gp.monster[1][i].worldX = gp.tileSize*29;
 		gp.monster[1][i].worldY = gp.tileSize*25;
 		i++;
-		gp.monster[1][i] = new Medusa(gp);
-		gp.monster[1][i].worldX = gp.tileSize*28;
-		gp.monster[1][i].worldY = gp.tileSize*26;
-		i++;
+		
 		
 		
 		
@@ -93,23 +155,7 @@ public class AssetSetter {
 		gp.monster[1][i].worldY = gp.tileSize*24;
 		i++;
 		
-		//Map 02
-		i = 0;
-		gp.monster[2][i] = new Slime(gp);
-		gp.monster[2][i].worldX = gp.tileSize*26;
-		gp.monster[2][i].worldY = gp.tileSize*24;
-		i++;
-		gp.monster[2][i] = new NERC(gp);
-		gp.monster[2][i].worldX = gp.tileSize*27;
-		gp.monster[2][i].worldY = gp.tileSize*29;
-		i++;
-		gp.monster[2][i] = new NERC(gp);
-		gp.monster[2][i].worldX = gp.tileSize*34;
-		gp.monster[2][i].worldY = gp.tileSize*35;
-		i++;
-		gp.monster[2][i] = new NERC(gp);
-		gp.monster[2][i].worldX = gp.tileSize*45;
-		gp.monster[2][i].worldY = gp.tileSize*46;
+		
 		//Map 03
 		i = 0;
 		gp.monster[3][i] = new Slime(gp);
