@@ -14,6 +14,8 @@ import entity.Character;
 import entity.Entity;
 import entity.Item;
 import entity.NPC;
+import entity.NPC_Dialogue;
+import entity.NPC_SellingItem;
 import entity.Player;
 import entity.Projectile;
 import map.Map;
@@ -33,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxScreenRow = 12;
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
-	public ArrayList<Teleport> teleportList = new ArrayList<>();
+	public Teleport[][] teleportList = new Teleport[4][10];
 	public ArrayList<Projectile> projectileList = new ArrayList<>();
 	public int num_CurrentMap = 1;
 	public int maxMap = 4;
@@ -41,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map[] maps = new Map[maxMap];
 	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
-	public NPC [][] npc = new NPC[4][20]; 
+	public NPC [][] npc = new NPC[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -63,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gameOverState = 6;
 	public final int storeState = 7;
 	public final int transitionState = 8;
+	public final int tradeState = 9;
 	public int tempMap;
 	public int tempCol;
 	public int tempRow;
@@ -89,27 +92,14 @@ public class GamePanel extends JPanel implements Runnable{
 		maps[2]= MAP02;
 		maps[3] = MAP03;
 		currentMap = maps[1];
-		teleportList.add(new Teleport(
-			    1, 9, 11,   // từ Map 1 tại tile (4,42)
-			    2, 23, 23    // sang Map 2 tile (30,9)
-			));
-		teleportList.add(new Teleport(
-			    2, 24, 24,  // từ Map 2 tile (30,10)
-			    1, 9, 10    // sang Map 1 tile (42,2)
-			));
-		teleportList.add(new Teleport(
-				1, 38, 11,
-				3 ,21,34
-				));
-		teleportList.add(new Teleport(
-				3,21,33,
-				1,39,11));
-		teleportList.add(new Teleport(
-				2,30,17,
-				3,34,18));
-		teleportList.add(new Teleport(
-				3,33,18,
-				2,31,17));
+		/*
+		 * teleportList.add(new Teleport( 1, 9, 11, // từ Map 1 tại tile (4,42) 2, 23,
+		 * 23 // sang Map 2 tile (30,9) )); teleportList.add(new Teleport( 2, 24, 24, //
+		 * từ Map 2 tile (30,10) 1, 9, 10 // sang Map 1 tile (42,2) ));
+		 * teleportList.add(new Teleport( 1, 38, 11, 3 ,21,34 )); teleportList.add(new
+		 * Teleport( 3,21,33, 1,39,11)); teleportList.add(new Teleport( 2,30,17,
+		 * 3,34,18)); teleportList.add(new Teleport( 3,33,18, 2,31,17));
+		 */
 		processor = new ProcessFrontBehindEntity (this);
 		setupGame();
 	}
@@ -118,6 +108,7 @@ public class GamePanel extends JPanel implements Runnable{
 	{
 //		aSetter.setObject();
 		aSetter.setNPC();
+		aSetter.setTeleport();
 		player.setItems();
 		aSetter.setMonster();
 //		aSetter.setInteractiveTile();
@@ -141,6 +132,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setNPC();
 		aSetter.setMonster();
 		aSetter.setObject();
+		aSetter.setTeleport();
 	}
 	public void restart()
 	{ 
@@ -151,6 +143,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setNPC();
 		aSetter.setMonster();
 //		aSetter.setInteractiveTile();
+		aSetter.setTeleport();
 	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -204,9 +197,14 @@ public class GamePanel extends JPanel implements Runnable{
 
 				}
 			}
-			for(int i =0;i< npc[num_CurrentMap].length;i++) {
+			for(int i = 0; i < npc[num_CurrentMap].length;i++) {
 				if(npc[num_CurrentMap][i] != null) {
 					npc[num_CurrentMap][i].update();
+				}
+			}
+			for(int i = 0; i < teleportList[num_CurrentMap].length;i++) {
+				if(teleportList[num_CurrentMap][i] != null) {
+					teleportList[num_CurrentMap][i].update();
 				}
 			}
 			for(int i = 0; i < projectileList.size(); i++)
@@ -225,20 +223,17 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 //			cube.update();
 			//System.out.println(player.worldX +" "+ player.worldY);
+			System.out.println("Current Map: " + num_CurrentMap);
 			int playerCol = player.worldX/tileSize;
 			int playerRow = player.worldY/tileSize;
 			System.out.println(playerCol +" "+ playerRow);
-			for (Teleport tp : teleportList) {
-		        if (num_CurrentMap == tp.fromMap &&
-		            playerCol == tp.fromCol &&
-		            playerRow == tp.fromRow && can_touch == true) {
-		            this.player.x = this.player.defaultScreenX;
-		            this.player.y = this.player.defaultScreenY;
-		            Teleport(tp.toMap, tp.toCol, tp.toRow);
-		            can_touch = false;
-		            break;
-		        }
-			}
+			/*
+			 * for (Teleport tp : teleportList) { if (num_CurrentMap == tp.fromMap &&
+			 * playerCol == tp.fromCol && playerRow == tp.fromRow && can_touch == true) {
+			 * this.player.x = this.player.defaultScreenX; this.player.y =
+			 * this.player.defaultScreenY; Teleport(tp.toMap, tp.toCol, tp.toRow); can_touch
+			 * = false; break; } }
+			 */
 		}
 		if(gameState == pauseState)
 		{
@@ -247,21 +242,14 @@ public class GamePanel extends JPanel implements Runnable{
 		if(gameState == gameOverState) {
 			restart();
 		}
-		
-
-	}
-	public void Teleport(int targetmap, int col, int row ) {
-		playSE(6);
-		gameState = transitionState;
-		tempMap = targetmap;
-		tempCol = col;
-		tempRow = row;
-//		num_CurrentMap = targetmap;
-//		currentMap = maps[num_CurrentMap];
-//		player.worldX = col * tileSize;
-//		player.worldY = row * tileSize;
 	}
 	
+	/*
+	 * public void Teleport(int targetmap, int col, int row ) { playSE(6); gameState
+	 * = transitionState; tempMap = targetmap; tempCol = col; tempRow = row; //
+	 * num_CurrentMap = targetmap; // currentMap = maps[num_CurrentMap]; //
+	 * player.worldX = col * tileSize; // player.worldY = row * tileSize; }
+	 */	 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
@@ -285,6 +273,20 @@ public class GamePanel extends JPanel implements Runnable{
 			if(npc[num_CurrentMap][i] != null)
 			{
 				entities.add(npc[num_CurrentMap][i]);
+			}
+		}
+		for(int i = 0; i < npc[num_CurrentMap].length; i++)
+		{
+			if(npc[num_CurrentMap][i] != null)
+			{
+				entities.add(npc[num_CurrentMap][i]);
+			}
+		}
+		for(int i = 0; i < teleportList[num_CurrentMap].length; i++)
+		{
+			if(teleportList[num_CurrentMap][i] != null)
+			{
+				entities.add(teleportList[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < obj[num_CurrentMap].length; i++)

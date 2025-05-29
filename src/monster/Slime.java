@@ -78,10 +78,8 @@ public class Slime extends Monster {
 
         if (i < 50) {
             dropItem(new OBJ_Coin_Bronze(gp));
-        } else if (i < 75) {
-            dropItem(new OBJ_Heart(gp));
         } else {
-            dropItem(new OBJ_ManaCrystal(gp));
+            dropItem(new OBJ_Heart(gp));
         }
     }
     public void damageReaction()

@@ -24,9 +24,9 @@ public class Demon extends Monster {
 		this.height = gp.tileSize * 3; // 70
 		this.width = this.height *194/114; // 96
 		solidArea.x = this.height ; // 32
-		solidArea.y = this.height * 45 / 70 - 55; // 45
+		solidArea.y = this.height * 45 / 70 - 55 + (gp.tileSize + gp.tileSize + 10)/2; // 45
 		solidArea.width = gp.tileSize + gp.tileSize/2;
-		solidArea.height = gp.tileSize + gp.tileSize + 10;
+		solidArea.height = (gp.tileSize + gp.tileSize + 10)/2;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 
@@ -37,7 +37,7 @@ public class Demon extends Monster {
 		attackZoneDefaultY = attackZone.y;
 
 		attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
-		attackZone.height = this.height * 69 / 70;
+		attackZone.height = (this.height * 69 / 70)/2;
 		this.image = idle[0];
 
 		this.spriteNum = 0;
@@ -52,6 +52,7 @@ public class Demon extends Monster {
 		attack = 50;
 		defense = 30;
 		exp = 30;
+		coin = 30;
 		direction = "up";
 		actionLockCounter = 0;
 	}
@@ -97,21 +98,21 @@ public class Demon extends Monster {
 	public void updateDrawImage(int screenX, int screenY) {
 		if(flip) {
 			attackZone.x = this.height - 5*gp.tileSize - 20;
-			attackZone.y = 0;
+			attackZone.y = (this.height * 69 / 70)/2;
 			attackZoneDefaultX = attackZone.x;
 			attackZoneDefaultY = attackZone.y;
 
 			attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
-			attackZone.height = this.height * 69 / 70;
+			attackZone.height = (this.height * 69 / 70)/2;
 		}
 		else {
 			attackZone.x = this.height * 34 / 70 - gp.tileSize - 20;
-			attackZone.y = 0;
+			attackZone.y = (this.height * 69 / 70)/2;
 			attackZoneDefaultX = attackZone.x;
 			attackZoneDefaultY = attackZone.y;
 
 			attackZone.width = this.height * 51 / 70 + 2*gp.tileSize + 20; // 22
-			attackZone.height = this.height * 69 / 70;
+			attackZone.height = (this.height * 69 / 70)/2;
 		}
 		if (state == "MOVE") {
 			if (spriteNum == -1)

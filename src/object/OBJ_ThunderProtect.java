@@ -15,10 +15,11 @@ public class OBJ_ThunderProtect extends Projectile{
 		super(gp);
 		name = "Thunder Bolt";
 		speed = 0;
-		maxHp = 120;
+		maxHp = 180;
 		hp = maxHp;
-		attack = 15;
-		useCost = 2;
+		attack = 0;
+		useCost = 7;
+		breakDefense = 1;
 		reverse = false;		
 		alive = false;
 		getImage();
@@ -85,10 +86,10 @@ public class OBJ_ThunderProtect extends Projectile{
 		if(user == gp.player)
 		{
 			System.out.println("+++:" + alive);
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999)
 			{
-				gp.player.damageMonsterByProjectile(monsterIndex, attack);
+				gp.player.damageMonsterByProjectile(monsterIndex, attack, breakDefense);
 //				generateParticle(user.projectile, gp.monster[monsterIndex]);
 			}
 			System.out.println("----" + alive);

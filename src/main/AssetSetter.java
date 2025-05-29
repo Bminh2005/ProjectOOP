@@ -1,6 +1,8 @@
 package main;
 
-import entity.NPC;
+import entity.NPC_Dialogue;
+import entity.NPC_SellingItem;
+import map.Teleport;
 import monster.Bat;
 import monster.Demon;
 import monster.Minotuar;
@@ -29,13 +31,17 @@ public class AssetSetter {
 
 	public void setNPC()
 	{
-		gp.npc[1][0] = new NPC(gp);
-		gp.npc[1][0].worldX = gp.tileSize* 13;
-		gp.npc[1][0].worldY = gp.tileSize * 7;
-		
+		int i = 0;
+		gp.npc[1][i] = new NPC_Dialogue(gp);
+		gp.npc[1][i].worldX = gp.tileSize* 26;
+		gp.npc[1][i].worldY = gp.tileSize * 21;
+		i++;
+		gp.npc[1][i] = new NPC_SellingItem(gp);
+		gp.npc[1][i].worldX = gp.tileSize* 21;
+		gp.npc[1][i].worldY = gp.tileSize * 21;
+		i++;
 		
 	}
-
 	public void setMonster()
 	{
 		//Map 01
@@ -107,10 +113,33 @@ public class AssetSetter {
 		
 		
 	}
+	public void setTeleport() {
+		gp.teleportList[1][0] = new Teleport(gp,1,9,11,2,23,23);
+		gp.teleportList[1][0].worldX = gp.tileSize * 9;
+		gp.teleportList[1][0].worldY = gp.tileSize *11;
+		gp.teleportList[1][1] = new Teleport(gp,1,38,11,3,21,34);
+		gp.teleportList[1][1].worldX = gp.tileSize * 38;
+		gp.teleportList[1][1].worldY = gp.tileSize* 11;
+		
+		gp.teleportList[2][0] = new Teleport(gp,2,24,24,1,9,10);
+		gp.teleportList[2][0].worldX = gp.tileSize*24;
+		gp.teleportList[2][0].worldY = gp.tileSize*24;
+		gp.teleportList[2][1] = new Teleport(gp,2,30,17,3,34,18);
+		gp.teleportList[2][1].worldX = gp.tileSize*30;
+		gp.teleportList[2][1].worldY = gp.tileSize*17;
+		
+		
+		gp.teleportList[3][0] = new Teleport(gp,3,21,33,1,39,11);
+		gp.teleportList[3][0].worldX = gp.tileSize*21;
+		gp.teleportList[3][0].worldY = gp.tileSize*33;
+		gp.teleportList[3][1] = new Teleport(gp,3,33,18,2,31,17);
+		gp.teleportList[3][1].worldX = gp.tileSize*33;
+		gp.teleportList[3][1].worldY = gp.tileSize*18;
+	}
 	public void setInteractiveTile()
 	{
 
-
+		
 
 
 	}

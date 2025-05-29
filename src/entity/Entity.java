@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -23,6 +24,14 @@ public class Entity {
 	public BufferedImage image, image2, image3,image4;
 	public String dialogues[] = new String[20];
 	public int dialogues_index =0;
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public final int maxInventorySize = 20;
+	public Entity currentWeapon;
+	public Entity currentShield;
+	public boolean checkUse;
+	public boolean attacking;
+	public int price;
+	
 	// === Position & Size ===
 	// Vi tri trong the gioi va kich thuoc hien thi
 	public int worldX, worldY;
@@ -33,12 +42,10 @@ public class Entity {
 	// === Character Stats ===
 	// Thuoc tinh nhan vat: mau, mana, cong, thu, kinh nghiem, cap do
 	public String name;
-	public int dexterity;     // chỉ số khéo léo
-	public int value;
-	public int useCost;
+     // chỉ số khéo léo
+	public int attackValue;
+	public int defenseValue;
 
-	// === Equipment & Items ===
-	// Vu khi, la chan va du an (dan, lua, etc.)
 
 	// === Entity State ===
 	// Cac trang thai hoat dong cua nhan vat
@@ -58,12 +65,6 @@ public class Entity {
 	// Dem thoi gian cho hoat anh, trang thai, cooldown
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-
-	public int actionLockCounter = 0;
-	public int invincibleCounter = 0;
-	public int shotAvailableCounter = 0;
-	public int dyingCounter = 0;
-	public int hpBarCounter = 0;
 
 	// === Entity Types ===
 	// Phan loai doi tuong (nguoi choi, quai, vu khi, vat pham,...)
@@ -86,13 +87,7 @@ public class Entity {
 		this.worldX = 0;
 		this.worldY = 0;
 	}
-	public void speak() {
-		
-	}
-	public void use(Player entity)
-	{
-		
-	}
+	
 	public void draw(Graphics2D g2) {
 		int screenX = worldX - gp.player.worldX + gp.player.x;
 		int screenY = worldY - gp.player.worldY + gp.player.y;
@@ -118,9 +113,7 @@ public class Entity {
 		return image;
 	}
 
-	public BufferedImage setup(BufferedImage image, int width, int height) {
-		UtilityTool uTool = new UtilityTool();
-		image = uTool.scaleImage(image, width, height);
-		return image;
+	public void use(Player player) {
+		
 	}
 }

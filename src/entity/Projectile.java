@@ -10,8 +10,10 @@ import monster.Monster;
 public class Projectile extends Character{
 	
 	public Entity user;
+	public int useCost;
 	public Monster monster;
 	public boolean reverse;
+	public int breakDefense = 0;
 
 	public Projectile(GamePanel gp) {
 		super(gp);
@@ -32,10 +34,10 @@ public class Projectile extends Character{
 //		gp.cChecker.checkTile(this);
 		if(user == gp.player)
 		{
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster[gp.num_CurrentMap]);
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999)
 			{
-				gp.player.damageMonsterByProjectile(monsterIndex, attack);
+				gp.player.damageMonsterByProjectile(monsterIndex, attack, breakDefense);
 //				generateParticle(user.projectile, gp.monster[monsterIndex]);
 				alive = false;
 			}

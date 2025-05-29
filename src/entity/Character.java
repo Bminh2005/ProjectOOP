@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import main.GamePanel;
 
@@ -19,6 +20,11 @@ public class Character extends Entity{
 	public Rectangle attackZone;
 	public int attackZoneDefaultX;
 	public int attackZoneDefaultY;
+	public int actionLockCounter = 0;
+	public int invincibleCounter = 0;
+	public int shotAvailableCounter = 0;
+	public int dyingCounter = 0;
+	public int hpBarCounter = 0;
 	public Character(GamePanel gp) {
 		super(gp);
 	}

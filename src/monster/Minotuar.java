@@ -59,6 +59,7 @@ public class Minotuar extends Monster{
         attack = 30;
         defense = 20;
         exp = 10;
+        coin = 10; 
         direction = "up";
         actionLockCounter = 0;
 	}
