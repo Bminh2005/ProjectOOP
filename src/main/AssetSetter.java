@@ -10,7 +10,6 @@ import monster.Skeleton;
 import monster.Slime;
 import monster.Slime_blue;
 import monster.Snake;
-import monster.Snake_Imouto;
 import object.OBJ_Coin_Bronze;
 
 public class AssetSetter {
@@ -41,6 +40,7 @@ public class AssetSetter {
 		gp.npc[1][i].worldX = gp.tileSize* 21;
 		gp.npc[1][i].worldY = gp.tileSize * 21;
 		i++;
+		
 	}
 	public void setMonster()
 	{
@@ -55,7 +55,7 @@ public class AssetSetter {
 		gp.monster[1][i].worldX = gp.tileSize*20;
 		gp.monster[1][i].worldY = gp.tileSize*21;
 		i++;
-		gp.monster[1][i] = new Snake_Imouto(gp);
+		gp.monster[1][i] = new Slime(gp);
 		gp.monster[1][i].worldX = gp.tileSize*20;
 		gp.monster[1][i].worldY = gp.tileSize*20;
 		i++;

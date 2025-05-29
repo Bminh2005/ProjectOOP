@@ -246,11 +246,11 @@ public class Player extends Character {
 						this.walk();
 					}
 					this.CollisionOn = false;
-
 					// CHECk NPC_Dialogue COLLISION
 					int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 					interactNPC(npcIndex);
 
+					//this.CollisionOn = false;
 					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
 					this.CollisionOn = false;
@@ -351,6 +351,8 @@ public class Player extends Character {
 			{
 				attackCanceled = true;
 				gp.gameState = gp.dialogueState;
+				
+				gp.npc[gp.num_CurrentMap][i].speak();
 			}
 			else {
 				gp.gameState = gp.playState;

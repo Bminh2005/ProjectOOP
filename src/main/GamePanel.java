@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
 	public NPC [][] npc = new NPC[4][20];
+//	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
 	Sound se = new Sound();
