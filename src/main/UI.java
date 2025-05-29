@@ -29,11 +29,10 @@ public class UI {
 	public boolean messageOn = false;
 	ArrayList<String> message = new ArrayList<>();
 	ArrayList<Integer> messageCounter = new ArrayList<>();
-	public Entity entity;
 	public boolean gameFinished = false;
 	public String currentDialogue = "";
-	public int commandNum = 0;
-	public int titleScreenState = 0; // 0: the first screen, 1: the second screen
+	public int commandNum = 0; //dau mui ten 
+	//public int titleScreenState = 0; // 0: the first screen, 1: the second screen
 	public int slotCol = 0;
 	public int slotRow = 0;
 	public int playerSlotCol = 0;

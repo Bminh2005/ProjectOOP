@@ -307,6 +307,7 @@ public class GamePanel extends JPanel implements Runnable{
 		for(Entity e: entities) {
 			e.draw(g2);
 		}
+		
 		currentMap.draw(g2, 2);
 		processor.draw(g2, currentMap.getLayer2(), entities);
 //		projectileList.clear();

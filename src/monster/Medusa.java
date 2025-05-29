@@ -168,8 +168,8 @@ public class Medusa extends Monster {
 			spriteCounter = 0;
 		}
 	}
+	
 	public void updateSpriteNum() {
-		System.out.println("++++++++" + spriteCounter);
 		if (spriteCounter % 16 == 7 || spriteCounter % 16 == 15) {
 			switch (state) {
 			case "MOVE":

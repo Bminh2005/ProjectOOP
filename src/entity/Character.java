@@ -31,7 +31,9 @@ public class Character extends Entity{
 	public boolean invincible = false; // bất khả chiến bại =))
 	public boolean hpBarOn = false;
 	public String direction = "down";
-	
+	public boolean attacking;
+	public Item currentWeapon;
+	public Item currentShield;
 	public ArrayList<Item> inventory = new ArrayList<>();
 	public final int maxInventorySize = 20;
 	public Character(GamePanel gp) {

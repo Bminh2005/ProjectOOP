@@ -46,6 +46,7 @@ public class Player extends Character {
 	private SpriteSheet playerDefend;
 	private SpriteSheet playerDying;
 
+	
 	// PROCESS FRAMES
 	private int spriteNum;
 	private int frameCounter;

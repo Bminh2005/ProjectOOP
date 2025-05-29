@@ -22,10 +22,8 @@ public class Entity {
 	public BufferedImage titleImage;
 	public BufferedImage image, image2, image3,image4;
 
-	public Item currentWeapon;
-	public Item currentShield;
 	public boolean checkUse;
-	public boolean attacking;
+
 	public int price;
 	
 	// === Position & Size ===

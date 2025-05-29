@@ -2,7 +2,7 @@ package entity;
 
 import main.GamePanel;
 
-public class NPC extends Character{
+public abstract class NPC extends Character{
 	public int dialoguesIndex;
 	public String dialogues[] = new String[20];
 	public void speak() {
