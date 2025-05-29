@@ -24,9 +24,9 @@ public class Demon extends Monster {
 		this.height = gp.tileSize * 3; // 70
 		this.width = this.height *194/114; // 96
 		solidArea.x = this.height ; // 32
-		solidArea.y = this.height * 45 / 70 - 55 + (gp.tileSize + gp.tileSize + 10)/2; // 45
+		solidArea.y = this.height * 45 / 70 - 55; // 45
 		solidArea.width = gp.tileSize + gp.tileSize/2;
-		solidArea.height = (gp.tileSize + gp.tileSize + 10)/2;
+		solidArea.height = gp.tileSize + gp.tileSize + 10;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 

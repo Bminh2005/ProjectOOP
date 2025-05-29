@@ -126,8 +126,8 @@ public class Player extends Character {
 
 		// === World Position ===
 		// Vi tri trong the gioi game
-		worldX = 24 * gp.tileSize;
-		worldY = 24 * gp.tileSize;
+		worldX = 25 * gp.tileSize;
+		worldY = 19 * gp.tileSize;
 
 		// === Screen Position & Animation ===
 		// Vi tri hien thi tren man hinh va hoat anh
