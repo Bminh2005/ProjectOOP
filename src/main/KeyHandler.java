@@ -52,7 +52,11 @@ public class KeyHandler implements KeyListener{
 		//GAME OVER STATE
 		else if(gp.gameState == gp.gameOverState)
 		{
+//			gp.stopMusic();
+//			gp.playSE(3);
 			gameOverState(code);
+			
+			
 		}
 		//TRADE STATE
 		else if(gp.gameState == gp.tradeState)

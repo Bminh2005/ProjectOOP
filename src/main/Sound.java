@@ -17,10 +17,10 @@ public class Sound implements Playable{
 	public Sound(){
 		soundURL[0] =getClass().getResource("/sounds/Theme.wav");
 		soundURL[1] =getClass().getResource("/sounds/CollectItem.wav");
-		//soundURL[2] =getClass().getResource("res/sounds/gameover.wav");
+		soundURL[2] =getClass().getResource("/sounds/gameover.wav");
 		//soundURL[3] =getClass().getResource("/sounds/MonsterSword.mp3");
 		soundURL[4] =getClass().getResource("/sounds/player_attack.wav");
-		//soundURL[5] =getClass().getResource("res/sounds/receivedamage.wav");
+		soundURL[5] =getClass().getResource("/sounds/receivedamage.wav");
 		soundURL[6] =getClass().getResource("/sounds/teleport.wav");
 	}
 	public void setFile(int i) {

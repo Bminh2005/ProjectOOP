@@ -35,6 +35,7 @@ public class Player extends Character {
 	private final int DEFAULT_SPEED = 3;
 	private final int TIRED_SPEED = 2;
 	private final int RUN_SPEED = 5;
+	
 
 	// PLAYER'S IMAGE
 	private SpriteSheet playerIdle;
@@ -116,7 +117,7 @@ public class Player extends Character {
 		this.keyH.attackPressed = false;
 		exp = 0;
 		nextLevelExp = 5;
-		coin = 0;
+		coin = 5000;
 		nextLevel = level + 1;
 
 		// === Projectile ===
@@ -648,7 +649,7 @@ public class Player extends Character {
 		int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
 
 		if (itemIndex < inventory.size()) {
-			Entity selectedItem = inventory.get(itemIndex);
+			Item selectedItem = inventory.get(itemIndex);
 
 			if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
 				currentWeapon = selectedItem;
@@ -682,8 +683,12 @@ public class Player extends Character {
 			dexterity++;
 			attack = getAttack();
 			defense = getDefense();
-
-//			gp.playSE(8);
+			for(int i = 0; i < projectile.length; i++) {
+				if(projectile[i] != null && i != 2) {
+					projectile[i].attack += 3;
+				}
+				
+			}
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "You are level " + level + " now!\n" + "You feel stronger!";
 

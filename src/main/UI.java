@@ -16,6 +16,8 @@ import object.OBJ_ManaCrystal;
 import object.PlayerInfoBox;
 import entity.Entity;
 import entity.NPC_SellingItem;
+import entity.Character;
+import entity.Item;
 
 public class UI {
 	
@@ -57,14 +59,14 @@ public class UI {
 		}
 		
 		//CREATE HUD OBJECT
-		Entity heart = new OBJ_Heart(gp);
+		Item heart = new OBJ_Heart(gp);
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3;
-		Entity crystal = new OBJ_ManaCrystal(gp);
+		Item crystal = new OBJ_ManaCrystal(gp);
 		crystal_full = crystal.image;
 		crystal_blank = crystal.image2;
-		Entity bronzeCoin = new OBJ_Coin_Bronze(gp);
+		Item bronzeCoin = new OBJ_Coin_Bronze(gp);
 		coin = bronzeCoin.down1;
 	}
 	public void addMessage(String text)
@@ -393,7 +395,7 @@ public class UI {
 		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize + 20, textY - 15, null);
 		
 	}
-	public void drawInventory(Entity entity, boolean cursor)
+	public void drawInventory(Character entity, boolean cursor)
 	{
 		int frameX = 0;
 		int frameY = 0;

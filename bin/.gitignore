@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-/map/
-=======
 /main/
-/monster/
 /entity/
-/map/
-/object/
->>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
-/snake_onee/
-/objects/
-/snake_imouto/
-/projectile/
-/npc_selling/
+/monster/
