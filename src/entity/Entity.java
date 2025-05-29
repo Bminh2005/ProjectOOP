@@ -20,10 +20,6 @@ public class Entity {
 	// === Image & Sprite ===
 	// Anh sprite cho nhan vat va vat pham
 	public BufferedImage image;
-
-	public boolean checkUse;
-
-	public int price;
 	
 	// === Position & Size ===
 	// Vi tri trong the gioi va kich thuoc hien thi

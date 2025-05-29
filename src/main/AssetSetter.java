@@ -193,8 +193,20 @@ public class AssetSetter {
 		gp.monster[2][i].worldY = gp.tileSize*13;
 		i++;
 		gp.monster[2][i] = new Medusa(gp);
-		gp.monster[2][i].worldX = gp.tileSize*31;
+		gp.monster[2][i].worldX = gp.tileSize*32;
 		gp.monster[2][i].worldY = gp.tileSize*14;
+		i++;
+		gp.monster[2][i] = new Gorgon(gp);
+		gp.monster[2][i].worldX = gp.tileSize*31;
+		gp.monster[2][i].worldY = gp.tileSize*11;
+		i++;
+		gp.monster[2][i] = new Gorgon(gp);
+		gp.monster[2][i].worldX = gp.tileSize*31;
+		gp.monster[2][i].worldY = gp.tileSize*10;
+		i++;
+		gp.monster[2][i] = new Gorgon(gp);
+		gp.monster[2][i].worldX = gp.tileSize*31;
+		gp.monster[2][i].worldY = gp.tileSize*15;
 		i++;
 		//Minotuar
 		gp.monster[2][i] = new Minotuar(gp);

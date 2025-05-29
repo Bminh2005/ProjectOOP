@@ -42,6 +42,12 @@ public abstract class Monster extends Character {
 //		if (this.type == type_monster && contactPlayer == true) {
 //			damagePlayer(attack);
 //		}
+		attackDelayCounter++;
+		if(attackDelayCounter == 25) {
+			gp.quaiVatTanCong.attackByTouch(this);
+			attacking = true;
+			attackDelayCounter = 0;
+		}
 		if (CollisionOn == false) {
 			switch (direction) {
 			case "up":
@@ -230,8 +236,6 @@ public abstract class Monster extends Character {
 				dyingAnimation(g2);
 				hpBarOn = false;
 			}
-
-			
 			g2.setColor(Color.red);
 			this.drawImage(g2, screenX, screenY);
 			if(gp.testMode) g2.drawRect(screenX + this.solidAreaDefaultX, screenY + this.solidAreaDefaultY, this.solidArea.width, this.solidArea.height);
@@ -243,7 +247,6 @@ public abstract class Monster extends Character {
 				attacking = false;
 			}
 			changeAlpha(g2, 1F);
-
 		}
 	}
 
