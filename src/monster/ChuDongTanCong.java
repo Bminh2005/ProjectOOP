@@ -37,17 +37,17 @@ public class ChuDongTanCong {
 		int safeZoneWidth = 10*gp.tileSize;
 		int safeZoneHeight = 10*gp.tileSize;
 		Player player = gp.player;
-		if(player.worldX <= monster.worldX + warZoneWidth/2 
-				&& player.worldX >= monster.worldX - warZoneWidth/2
-				&& player.worldY <= monster.worldY + warZoneHeight/2
-				&& player.worldY >= monster.worldY - warZoneHeight/2
+		if(player.worldX + player.solidAreaDefaultX <= monster.worldX + monster.solidAreaDefaultX + warZoneWidth/2 
+				&& player.worldX + player.solidAreaDefaultX >= monster.worldX + monster.solidAreaDefaultX - warZoneWidth/2
+				&& player.worldY + player.solidAreaDefaultX <= monster.worldY + monster.solidAreaDefaultY+ warZoneHeight/2
+				&& player.worldY + player.solidAreaDefaultX >= monster.worldY + monster.solidAreaDefaultY - warZoneHeight/2
 				) {
 			tanCong = true;
 		}
-		if(player.worldX < monster.worldX - safeZoneWidth/2
-				|| player.worldX > monster.worldX + safeZoneWidth/2
-				|| player.worldY > monster.worldY + safeZoneHeight/2
-				|| player.worldY < monster.worldY - safeZoneHeight/2) {
+		if(player.worldX + player.solidAreaDefaultX < monster.worldX + monster.solidAreaDefaultX - safeZoneWidth/2
+				|| player.worldX + player.solidAreaDefaultX > monster.worldX + monster.solidAreaDefaultX + safeZoneWidth/2
+				|| player.worldY + player.solidAreaDefaultX > monster.worldY + monster.solidAreaDefaultY + safeZoneHeight/2
+				|| player.worldY + player.solidAreaDefaultX < monster.worldY + monster.solidAreaDefaultY - safeZoneHeight/2) {
 			tanCong = false;
 		}
 		

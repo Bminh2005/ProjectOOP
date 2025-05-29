@@ -66,6 +66,7 @@ public class Player extends Character {
 	public int defaultScreenX;
 	public int defaultScreenY;
 	public boolean attackCanceled;
+	public BufferedImage titleImage;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -390,6 +391,10 @@ public class Player extends Character {
 			this.frameCounter = 0;
 			this.state = "IDLE";
 		}
+		if (frameCounter % 10 == 9) {
+			if (this.mp < this.maxMp)
+				this.mp++;
+		}
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
 		}
@@ -430,10 +435,6 @@ public class Player extends Character {
 		this.state = "WALK";
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerWalk.maxNumber;
-		}
-		if (frameCounter % 240 == 0) {
-			if (this.mp < this.maxMp)
-				this.mp++;
 		}
 	}
 

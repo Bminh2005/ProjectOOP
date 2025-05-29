@@ -19,8 +19,7 @@ public class Entity {
 
 	// === Image & Sprite ===
 	// Anh sprite cho nhan vat va vat pham
-	public BufferedImage titleImage;
-	public BufferedImage image, image2, image3,image4;
+	public BufferedImage image;
 
 	public boolean checkUse;
 
