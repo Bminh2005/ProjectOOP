@@ -181,13 +181,18 @@ public class OBJ_ThunderProtect extends Projectile{
 			if(alive) {
 				if(reverse) {
 					g2.drawImage(image, screenX - gp.tileSize + 8, screenY - 8, null);
-					g2.setColor(Color.blue);
-					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					if(gp.testMode) {
+						g2.setColor(Color.blue);
+						g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					}
+					
 				}
 				else {
 					g2.drawImage(image, screenX - gp.tileSize + 8, screenY - 8, null);
-					g2.setColor(Color.blue);
-					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					if(gp.testMode) {
+						g2.setColor(Color.blue);
+						g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					}
 				}
 				
 			}			

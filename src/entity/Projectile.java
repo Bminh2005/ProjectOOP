@@ -115,8 +115,10 @@ public class Projectile extends Character{
 			}
 			if(alive)
 			g2.drawImage(image, screenX, screenY, null);
-			g2.setColor(Color.blue);
-			g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+			if(gp.testMode) {
+				g2.setColor(Color.blue);
+				g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+			}
 
 		}
 	}
