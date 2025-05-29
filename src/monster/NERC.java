@@ -20,10 +20,11 @@ public class NERC extends Monster {
 		move = new SpriteSheet("/monster/nerc/Boss_nerc-idle.png", 1280, 128, 8, 40, 41, 89, 87).animation;
 		attackImage = new SpriteSheet("/monster/nerc/Boss_nerc-attack3.png", 2720, 128, 17, 42, 47, 77, 77).animation;
 		flip = false;
-		this.height = gp.tileSize * 70 / 50 + 10; // 70
-		this.width = this.height * 96 / 70 + 5; // 96
+
+		this.height = gp.tileSize * 70 / 50; // 70
+		this.width = this.height * 96 / 70; // 96
 		solidArea.x = this.height * 38 / 70 - 5; // 32
-		solidArea.y = this.height * 45 / 70 - 28; // 45
+		solidArea.y = this.height * 45 / 70 - 25; // 45
 		solidArea.width = gp.tileSize - 10;
 		solidArea.height = gp.tileSize;
 		solidAreaDefaultX = solidArea.x;
@@ -35,7 +36,7 @@ public class NERC extends Monster {
 		attackZoneDefaultX = attackZone.x;
 		attackZoneDefaultY = attackZone.y;
 
-		attackZone.width = this.height * 51 / 70 + 10; // 22
+		attackZone.width = this.height * 51 / 70; // 22
 		attackZone.height = this.height * 69 / 70;
 		this.image = idle[0];
 
@@ -116,6 +117,8 @@ public class NERC extends Monster {
 			if (spriteNum == -1)
 				spriteNum = 0;
 			image = attackImage[spriteNum];
+			System.out.println("------------" + spriteNum);
+			System.out.println("============" + attackImage.length);
 			if (spriteNum == attackImage.length - 1) {
 				this.move();
 			}
@@ -167,6 +170,7 @@ public class NERC extends Monster {
 	}
 
 	public void updateSpriteNum() {
+		System.out.println("++++++++" + spriteCounter);
 		if (spriteCounter % 10 == 0) {
 			switch (state) {
 			case "MOVE":
