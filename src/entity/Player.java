@@ -253,8 +253,8 @@ public class Player extends Character {
 					//this.CollisionOn = false;
 					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
-					//this.CollisionOn = false;
-					//int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+					this.CollisionOn = false;
+//					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
 					if (CollisionOn == false && canMove)
 						this.move();

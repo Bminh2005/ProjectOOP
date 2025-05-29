@@ -1,6 +1,13 @@
-/entity/
+/InfoBox/
+/Player/
+/demon/
+/font/
+/monster_snake/
+/npc/
+/objects/
+/projectile/
+/sounds/
+/tiles/
 /main/
 /monster/
-/npc_selling/
-/object/
-/map/
+/snake_imouto/
