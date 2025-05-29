@@ -201,6 +201,7 @@ public class CollisionChecker {
 	    {
 	        if(target[gp.num_CurrentMap][i] != null)
 	        {
+	        	Character t = target[gp.num_CurrentMap][i];
 	            // Tạo vùng va chạm tạm cho entity
 	            Rectangle entityArea = new Rectangle(
 	                entity.worldX + entity.solidAreaDefaultX,
@@ -211,28 +212,11 @@ public class CollisionChecker {
 
 	            // Tạo vùng va chạm tạm cho target entity
 	            Rectangle targetArea = new Rectangle(
-	                target[gp.num_CurrentMap][i].worldX + target[gp.num_CurrentMap][i].solidAreaDefaultX,
-	                target[gp.num_CurrentMap][i].worldY + target[gp.num_CurrentMap][i].solidAreaDefaultY,
-	                target[gp.num_CurrentMap][i].solidArea.width,
-	                target[gp.num_CurrentMap][i].solidArea.height
+	                t.worldX + t.solidAreaDefaultX,
+	                t.worldY + t.solidAreaDefaultY,
+	                t.solidArea.width,
+	                t.solidArea.height
 	            );
-
-	            // Điều chỉnh vùng va chạm theo hướng đi của entity
-	            switch(entity.direction)
-	            {
-	                case "up":
-	                    entityArea.y -= entity.speed;
-	                    break;
-	                case "down":
-	                    entityArea.y += entity.speed;
-	                    break;
-	                case "left":
-	                    entityArea.x -= entity.speed;
-	                    break;
-	                case "right":
-	                    entityArea.x += entity.speed;
-	                    break;
-	            }
 
 	            // Kiểm tra va chạm
 	            if(entityArea.intersects(targetArea))
@@ -241,6 +225,55 @@ public class CollisionChecker {
 	                {
 	                    entity.CollisionOn = true;
 	                    index = i;
+	                    switch(entity.direction) {
+	            		case "up":
+	            			if(entityArea.intersects(targetArea)) {
+	            				while(entityArea.intersects(targetArea)) {
+	            					entityArea.y += 1;
+	            					entity.worldY += 1;
+	            					targetArea.y -= 1;
+	            					t.worldY -= 1;
+	            				}
+	            				entity.worldY += 1;
+	            				t.worldY -= 1;
+	            			}
+	            			break;
+	            		case "down":
+	            			if(entityArea.intersects(targetArea)) {
+	            				while(entityArea.intersects(targetArea)) {
+	            					entityArea.y -= 1;
+	            					entity.worldY -= 1;
+	            					targetArea.y += 1;
+	            					t.worldY += 1;
+	            				}
+	            				entity.worldY -= 1;
+	            			}
+	            			break;
+	            		case "left":
+	            			if(entityArea.intersects(targetArea)) {
+	            				while(entityArea.intersects(targetArea)) {
+	            					entityArea.x += 1;
+	            					entity.worldX += 1;
+	            					targetArea.x -= 1;
+	            					t.worldX -= 1;
+	            				}
+	            				entity.worldX += 1;
+	            			}
+	            			break;
+	            		case "right":
+	            			if(entityArea.intersects(targetArea)) {
+	            				while(entityArea.intersects(targetArea)) {
+	            					entityArea.x -= 1;
+	            					entity.worldX -= 1;
+	            					targetArea.x += 1;
+	            					t.worldX += 1;
+	            				}
+	            				entity.worldX -= 1;
+	            			}
+	            			break;
+	            		}
+	                    
+	                    
 	                    break;  // Nếu muốn dừng ở va chạm đầu tiên
 	                }
 	            }
