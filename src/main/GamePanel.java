@@ -14,6 +14,7 @@ import entity.Character;
 import entity.Entity;
 import entity.Item;
 import entity.NPC;
+import entity.NPC_SellingItem;
 import entity.Player;
 import entity.Projectile;
 import map.Map;
@@ -42,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Item obj[][] = new Item[4][20];
 	public Monster[][] monster = new Monster[4][20];
 	public NPC [][] npc = new NPC[4][20];
-	public Entity npc_Selling[][] = new Entity[4][20];
+	public NPC_SellingItem npc_Selling[][] = new NPC_SellingItem[4][20];
 //	public Projectile projectile[] = new Projectile[20];
 	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
@@ -197,14 +198,14 @@ public class GamePanel extends JPanel implements Runnable{
 
 				}
 			}
-			for(int i = 0; i < npc[num_CurrentMap].length;i++) {
-				if(npc[num_CurrentMap][i] != null) {
-					npc[num_CurrentMap][i].update();
-				}
-			}
 			for(int i = 0; i < npc_Selling[num_CurrentMap].length;i++) {
 				if(npc_Selling[num_CurrentMap][i] != null) {
 					npc_Selling[num_CurrentMap][i].update();
+				}
+			}
+			for(int i = 0; i < npc[num_CurrentMap].length;i++) {
+				if(npc[num_CurrentMap][i] != null) {
+					npc[num_CurrentMap][i].update();
 				}
 			}
 			for(int i = 0; i < teleportList[num_CurrentMap].length;i++) {
@@ -285,6 +286,13 @@ public class GamePanel extends JPanel implements Runnable{
 			if(npc_Selling[num_CurrentMap][i] != null)
 			{
 				entities.add(npc_Selling[num_CurrentMap][i]);
+			}
+		}
+		for(int i = 0; i < npc[num_CurrentMap].length; i++)
+		{
+			if(npc[num_CurrentMap][i] != null)
+			{
+				entities.add(npc[num_CurrentMap][i]);
 			}
 		}
 		for(int i = 0; i < teleportList[num_CurrentMap].length; i++)
