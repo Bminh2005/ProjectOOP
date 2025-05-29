@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
 	GamePanel gp;
 	
 	public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, beamPressed;
-	public boolean attackPressed, damagePressed, diePressed, refreshPressed, upPowerPressed;
+	public boolean attackPressed, damagePressed, diePressed, refreshPressed, upPowerPressed, boomPressed;
 	public boolean runPressed;
 	public KeyHandler(GamePanel gp)
 	{
@@ -202,6 +202,9 @@ public class KeyHandler implements KeyListener{
 		}
 		if (code == KeyEvent.VK_K) {
 			upPowerPressed = true;
+		}
+		if (code == KeyEvent.VK_O) {
+			boomPressed = true;
 		}
 	}
 	public void pauseState(int code)
@@ -524,7 +527,9 @@ public class KeyHandler implements KeyListener{
 	    if (code == KeyEvent.VK_K) {
 			upPowerPressed = false;
 		}
-		
+	    if (code == KeyEvent.VK_O) {
+			boomPressed = false;
+		}
 	}
 
 	@Override

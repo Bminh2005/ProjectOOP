@@ -18,6 +18,12 @@ import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
+import object.OBJ_sword_01;
+import object.OBJ_sword_02;
+import object.OBJ_sword_03;
+import object.OBJ_sword_04;
+import object.OBJ_sword_05;
+import object.OBJ_sword_06;
 
 public class NPC_SellingItem extends NPC {
 
@@ -68,6 +74,12 @@ public class NPC_SellingItem extends NPC {
 //		inventory.add(new OBJ_Axe(gp));
 		inventory.add(new OBJ_Shield_Wood(gp));
 		inventory.add(new OBJ_Shield_Blue(gp));
+		inventory.add(new OBJ_sword_01(gp));
+		inventory.add(new OBJ_sword_02(gp));
+		inventory.add(new OBJ_sword_03(gp));
+		inventory.add(new OBJ_sword_04(gp));
+		inventory.add(new OBJ_sword_05(gp));
+		inventory.add(new OBJ_sword_06(gp));
 	}
 
 	public void speak() {

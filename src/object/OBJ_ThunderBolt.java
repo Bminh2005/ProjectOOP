@@ -181,13 +181,17 @@ public class OBJ_ThunderBolt extends Projectile{
 				gp.player.canMove = false;
 				if(reverse) {
 					g2.drawImage(image, screenX - gp.tileSize/3 - 6*gp.tileSize + 24, screenY, null);
-					g2.setColor(Color.blue);
-					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					if(gp.testMode) {
+						g2.setColor(Color.blue);
+						g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					}
 				}
 				else {
 					g2.drawImage(image, screenX, screenY, null);
-					g2.setColor(Color.blue);
-					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					if(gp.testMode) {
+						g2.setColor(Color.blue);
+						g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					}
 				}
 				
 			}			

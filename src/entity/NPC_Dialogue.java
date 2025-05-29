@@ -39,11 +39,11 @@ public class NPC_Dialogue extends NPC{
 
     }
 	public void speak() {
-        if (dialogues[dialogues_index] == null) {
-        	dialogues_index = 0;
+        if (dialogues[dialoguesIndex] == null) {
+        	dialoguesIndex = 0;
         }
-        gp.ui.currentDialogue = dialogues[dialogues_index];
-        dialogues_index = (dialogues_index + 1)%dialogues.length;
+        gp.ui.currentDialogue = dialogues[dialoguesIndex];
+        dialoguesIndex = (dialoguesIndex + 1)%dialogues.length;
     }
 	public void setAction() {
 		actionLockCounter++;

@@ -10,6 +10,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.SpriteSheet;
 import monster.Monster;
+import object.OBJ_Bullet_Boss;
 import object.OBJ_Fireball;
 import object.OBJ_Potion_Red;
 import object.OBJ_Shield_Blue;
@@ -34,6 +35,7 @@ public class Player extends Character {
 	private final int DEFAULT_SPEED = 3;
 	private final int TIRED_SPEED = 2;
 	private final int RUN_SPEED = 5;
+	
 
 	// PLAYER'S IMAGE
 	private SpriteSheet playerIdle;
@@ -115,7 +117,7 @@ public class Player extends Character {
 		this.keyH.attackPressed = false;
 		exp = 0;
 		nextLevelExp = 5;
-		coin = 0;
+		coin = 5000;
 		nextLevel = level + 1;
 
 		// === Projectile ===
@@ -123,11 +125,12 @@ public class Player extends Character {
 		projectile[0] = new OBJ_Fireball(gp);
 		projectile[1] = new OBJ_ThunderBolt(gp);
 		projectile[2] = new OBJ_ThunderProtect(gp);
+		projectile[3] = new OBJ_Bullet_Boss(gp);
 
 		// === World Position ===
 		// Vi tri trong the gioi game
-		worldX = 24 * gp.tileSize;
-		worldY = 24 * gp.tileSize;
+		worldX = 25 * gp.tileSize;
+		worldY = 19 * gp.tileSize;
 
 		// === Screen Position & Animation ===
 		// Vi tri hien thi tren man hinh va hoat anh
@@ -316,6 +319,24 @@ public class Player extends Character {
 
 			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile[2]);
+
+			shotAvailableCounter = 0;
+
+//			gp.playSE(10);
+		}
+		if (shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+		if (gp.keyH.boomPressed == true && projectile[3].alive == false && shotAvailableCounter == 30
+				&& projectile[3].haveResource(this) == true) {
+			// SET DEFAULT COORDINATES, DIRECTION AND USER
+			projectile[3].set(worldX, worldY + 10, direction, true, this);
+
+			// SUBTRACT THE COST (MANA, AMMO ETC.)
+			projectile[3].subtractResource(this);
+
+			// ADD IT TO THE LIST
+			gp.projectileList.add(projectile[3]);
 
 			shotAvailableCounter = 0;
 
@@ -628,7 +649,7 @@ public class Player extends Character {
 		int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
 
 		if (itemIndex < inventory.size()) {
-			Entity selectedItem = inventory.get(itemIndex);
+			Item selectedItem = inventory.get(itemIndex);
 
 			if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
 				currentWeapon = selectedItem;

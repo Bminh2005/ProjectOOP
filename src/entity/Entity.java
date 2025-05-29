@@ -19,15 +19,11 @@ public class Entity {
 
 	// === Image & Sprite ===
 	// Anh sprite cho nhan vat va vat pham
-	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
 	public BufferedImage titleImage;
 	public BufferedImage image, image2, image3,image4;
-	public String dialogues[] = new String[20];
-	public int dialogues_index =0;
-	public ArrayList<Entity> inventory = new ArrayList<>();
-	public final int maxInventorySize = 20;
-	public Entity currentWeapon;
-	public Entity currentShield;
+
+	public Item currentWeapon;
+	public Item currentShield;
 	public boolean checkUse;
 	public boolean attacking;
 	public int price;
@@ -37,22 +33,12 @@ public class Entity {
 	public int worldX, worldY;
 	public int x, y;
 	public int width, height;
-	public String direction = "down";
+
 
 	// === Character Stats ===
 	// Thuoc tinh nhan vat: mau, mana, cong, thu, kinh nghiem, cap do
 	public String name;
-     // chỉ số khéo léo
-	public int attackValue;
-	public int defenseValue;
-
-
-	// === Entity State ===
 	// Cac trang thai hoat dong cua nhan vat
-	public boolean alive = true;
-	public boolean dying = false;
-	public boolean invincible = false; // bất khả chiến bại =))
-	public boolean hpBarOn = false;
 	public boolean collision = false;
 	public boolean CollisionOn = false;
 

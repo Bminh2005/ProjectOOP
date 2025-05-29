@@ -3,15 +3,15 @@ package entity;
 import main.GamePanel;
 
 public class NPC extends Character{
-	int dialogueIndex;
-	
+	public int dialoguesIndex;
+	public String dialogues[] = new String[20];
 	public void speak() {
-		if(dialogues[dialogueIndex] == null)
+		if(dialogues[dialoguesIndex] == null)
 		{
-			dialogueIndex = 0;
+			dialoguesIndex = 0;
 		}
-		gp.ui.currentDialogue = dialogues[dialogueIndex];
-		dialogueIndex++;
+		gp.ui.currentDialogue = dialogues[dialoguesIndex];
+		dialoguesIndex++;
 		
 		switch(gp.player.direction)
 		{
@@ -33,7 +33,7 @@ public class NPC extends Character{
 	public NPC(GamePanel gp) {
 		super(gp);
 		// TODO Auto-generated constructor stub
-		dialogueIndex = 0;
+		dialoguesIndex = 0;
 	}
 	
 }

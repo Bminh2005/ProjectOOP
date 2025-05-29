@@ -31,9 +31,9 @@ public class Minotuar extends Monster{
 		this.height = gp.tileSize*70/50; //70
 		this.width = this.height*96/70; //96
 		solidArea.x = this.height*38/70 - 5; //32
-		solidArea.y = this.height*45/70 - 6; //45
+		solidArea.y = this.height*45/70 - 20; //45
 		solidArea.width = this.height*30/70; //22
-		solidArea.height = this.height*30/70; //19
+		solidArea.height = this.height*30/70 + 7; //19
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
