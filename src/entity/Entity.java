@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -23,6 +24,14 @@ public class Entity {
 	public BufferedImage image, image2, image3,image4;
 	public String dialogues[] = new String[20];
 	public int dialogues_index =0;
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public final int maxInventorySize = 20;
+	public Entity currentWeapon;
+	public Entity currentShield;
+	public boolean checkUse;
+	public boolean attacking;
+	public int price;
+	
 	// === Position & Size ===
 	// Vi tri trong the gioi va kich thuoc hien thi
 	public int worldX, worldY;
@@ -36,6 +45,8 @@ public class Entity {
 	public int dexterity;     // chỉ số khéo léo
 	public int value;
 	public int useCost;
+	public int attackValue;
+	public int defenseValue;
 
 	// === Equipment & Items ===
 	// Vu khi, la chan va du an (dan, lua, etc.)
@@ -57,6 +68,7 @@ public class Entity {
 	// === Counters & Timers ===
 	// Dem thoi gian cho hoat anh, trang thai, cooldown
 	public int spriteCounter = 0;
+	int dialogueIndex = 0;
 	public int spriteNum = 1;
 
 	public int actionLockCounter = 0;
@@ -87,6 +99,30 @@ public class Entity {
 		this.worldY = 0;
 	}
 	public void speak() {
+		if(dialogues[dialogueIndex] == null)
+		{
+			dialogueIndex = 0;
+		}
+		gp.ui.currentDialogue = dialogues[dialogueIndex];
+		dialogueIndex++;
+		
+		switch(gp.player.direction)
+		{
+		case "up":
+			direction = "down";
+			break;
+		case "down":
+			direction = "up";
+			break;
+		case "left":
+			direction = "right";
+			break;
+		case "right":
+			direction = "left";
+			break;
+		}
+	}
+	public void setAction() {
 		
 	}
 	public void use(Player entity)
@@ -118,9 +154,9 @@ public class Entity {
 		return image;
 	}
 
-	public BufferedImage setup(BufferedImage image, int width, int height) {
-		UtilityTool uTool = new UtilityTool();
-		image = uTool.scaleImage(image, width, height);
-		return image;
-	}
+//	public BufferedImage setup(BufferedImage image, int width, int height) {
+//		UtilityTool uTool = new UtilityTool();
+//		image = uTool.scaleImage(image, width, height);
+//		return image;
+//	}
 }

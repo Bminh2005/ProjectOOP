@@ -1,6 +1,8 @@
 package monster;
 
 import main.GamePanel;
+import main.UtilityTool;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -62,6 +64,11 @@ public class Bat extends Monster {
             e.printStackTrace();
         }
     }
+    public BufferedImage setup(BufferedImage image, int width, int height) {
+		UtilityTool uTool = new UtilityTool();
+		image = uTool.scaleImage(image, width, height);
+		return image;
+	}
 
     @Override
     public void update() {
