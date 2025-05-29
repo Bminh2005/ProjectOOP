@@ -31,7 +31,7 @@ public class MapLayer {
     	tiles[9] = new MapTile(gp, "/tiles/lane12.png");
     	tiles[10] = new MapTile(gp, "/tiles/tree0.png", 48, 63, true, 25, 65, 25, 20);
     	tiles[11] = new MapTile(gp, "/tiles/tree1.png", true, 0, 30, 48, 18);
-    	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 28, 45, true);
+    	tiles[12] = new MapTile(gp, "/tiles/tree2.png", 80, 96, true,21 ,52 ,30 ,28);
     	tiles[13] = new MapTile(gp, "/tiles/rock1.png", true, 5, 20, 40, 20);
     	tiles[14] = new MapTile(gp, "/tiles/tree3.png", 80, 96, true,20 ,48 ,32 ,32);
     	tiles[15] = new MapTile(gp, "/tiles/tile006.png");
