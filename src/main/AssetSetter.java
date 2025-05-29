@@ -8,7 +8,7 @@ import monster.Demon;
 import monster.Minotuar;
 import monster.Skeleton;
 import monster.Slime;
-import monster.Slime_blue;
+import monster.NERC;
 import monster.Snake;
 import object.OBJ_Coin_Bronze;
 
@@ -92,15 +92,15 @@ public class AssetSetter {
 		gp.monster[2][i].worldX = gp.tileSize*26;
 		gp.monster[2][i].worldY = gp.tileSize*24;
 		i++;
-		gp.monster[2][i] = new Slime_blue(gp);
+		gp.monster[2][i] = new NERC(gp);
 		gp.monster[2][i].worldX = gp.tileSize*27;
 		gp.monster[2][i].worldY = gp.tileSize*29;
 		i++;
-		gp.monster[2][i] = new Slime_blue(gp);
+		gp.monster[2][i] = new NERC(gp);
 		gp.monster[2][i].worldX = gp.tileSize*34;
 		gp.monster[2][i].worldY = gp.tileSize*35;
 		i++;
-		gp.monster[2][i] = new Slime_blue(gp);
+		gp.monster[2][i] = new NERC(gp);
 		gp.monster[2][i].worldX = gp.tileSize*45;
 		gp.monster[2][i].worldY = gp.tileSize*46;
 		//Map 03
