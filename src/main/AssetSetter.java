@@ -10,6 +10,8 @@ import monster.Skeleton;
 import monster.Slime;
 import monster.NERC;
 import monster.Snake;
+import monster.Gorgon;
+import monster.Medusa;
 import object.OBJ_Coin_Bronze;
 
 public class AssetSetter {
@@ -75,6 +77,15 @@ public class AssetSetter {
 		gp.monster[1][i].worldX = gp.tileSize*27;
 		gp.monster[1][i].worldY = gp.tileSize*27;
 		i++;
+		gp.monster[1][i] = new Gorgon(gp);
+		gp.monster[1][i].worldX = gp.tileSize*29;
+		gp.monster[1][i].worldY = gp.tileSize*25;
+		i++;
+		gp.monster[1][i] = new Medusa(gp);
+		gp.monster[1][i].worldX = gp.tileSize*28;
+		gp.monster[1][i].worldY = gp.tileSize*26;
+		i++;
+		
 		
 		
 		gp.monster[1][i] = new Skeleton(gp);

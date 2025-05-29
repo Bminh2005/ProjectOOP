@@ -9,19 +9,16 @@ import java.util.Random;
 import main.GamePanel;
 import main.SpriteSheet;
 
-public class Snake_Imouto extends Monster {
+public class Medusa extends Monster {
 	BufferedImage idle[];
 	BufferedImage move[];
 	BufferedImage attackImage[];
-	private int delayAttackCounter;
-	private boolean attackReady;
-	private boolean prepareAttack;
-	private int preparingTimeAttack;
-	public Snake_Imouto(GamePanel gp) {
+
+	public Medusa(GamePanel gp) {
 		super(gp);
-		idle = new SpriteSheet("/snake_imouto/Idle.png", 896, 128, 7, 12, 34, 94, 94).animation;
-		move = new SpriteSheet("/snake_imouto/Walk.png", 1664, 128, 13, 3, 28, 100, 100).animation;
-		attackImage = new SpriteSheet("/snake_imouto/Attack_3.png", 896, 128, 7, 26, 34, 94, 94).animation;
+		idle = new SpriteSheet("/snake_onee/Idle.png", 896, 128, 7, 12, 34, 94, 94).animation;
+		move = new SpriteSheet("/snake_onee/Walk.png", 1664, 128, 13, 3, 28, 100, 100).animation;
+		attackImage = new SpriteSheet("/snake_onee/Attack_1.png", 2048, 128, 16, 0, 33, 110, 95).animation;
 		flip = false;
 		this.height = gp.tileSize * 70 / 50; // 70
 		this.width = this.height * 96 / 70; // 96
@@ -54,6 +51,7 @@ public class Snake_Imouto extends Monster {
 		attack = 30;
 		defense = 10;
 		exp = 15;
+		coin = 10;
 		direction = "up";
 		actionLockCounter = 0;
 	}
@@ -61,21 +59,7 @@ public class Snake_Imouto extends Monster {
 	@Override
 	public void setAction() {
 		// TODO Auto-generated method stub
-		if(this.attackReady == false) {
-			delayAttackCounter++;
-			if(delayAttackCounter >= 70) {
-				delayAttackCounter = 0;
-				this.attackReady = true;
-			}
-		}
-		if(this.prepareAttack) {
-			this.preparingTimeAttack++;
-			if(preparingTimeAttack >= 30) {
-				this.prepareAttack = false;
-				this.preparingTimeAttack = 0;
-				this.spriteNum++;
-			}
-		}
+		System.out.println(move.length);
 		actionLockCounter++;
 		if (actionLockCounter >= 120) {
 			if (state == "MOVE") {
@@ -133,6 +117,8 @@ public class Snake_Imouto extends Monster {
 			if (spriteNum == -1)
 				spriteNum = 0;
 			image = attackImage[spriteNum];
+			System.out.println("------------" + spriteNum);
+			System.out.println("============" + attackImage.length);
 			if (spriteNum == attackImage.length - 1) {
 				this.move();
 			}
@@ -150,7 +136,7 @@ public class Snake_Imouto extends Monster {
 			spriteCounter = 0;
 		}
 		direction = "idle";
-		if (spriteNum == 3 && spriteCounter % 5 == 4) {
+		if (spriteNum == 3 && (spriteCounter % 16 == 7 || spriteCounter % 16 == 15)) {
 			attackZone.x = worldX + attackZoneDefaultX;
 			attackZone.y = worldY + attackZoneDefaultY;
 			Rectangle solidPlayer = gp.player.solidArea;
@@ -182,30 +168,22 @@ public class Snake_Imouto extends Monster {
 			spriteCounter = 0;
 		}
 	}
-
 	public void updateSpriteNum() {
-		if (spriteCounter % 5 == 0) {
-			switch(state) {
+		System.out.println("++++++++" + spriteCounter);
+		if (spriteCounter % 16 == 7 || spriteCounter % 16 == 15) {
+			switch (state) {
 			case "MOVE":
-				spriteNum = (spriteNum+1)%move.length;
+				spriteNum = (spriteNum + 1) % move.length;
 				break;
 			case "ATTACK":
-				if(spriteNum == 0) {
-					prepareAttack = true;
-				}
-				if(prepareAttack == false) spriteNum = (spriteNum+1)%attackImage.length;
-				if(spriteNum == attackImage.length - 1) {
-					this.attackReady = false; 
-				 }
-				if(this.attackReady == false) this.move();
+				spriteNum = (spriteNum + 1) % attackImage.length;
 				break;
 			case "IDLE":
-				spriteNum = (spriteNum+1)%idle.length;
+				spriteNum = (spriteNum + 1) % idle.length;
 				break;
 			}
 		}
 	}
-
 	public void drawImage(Graphics2D g2, int screenX, int screenY) {
 		g2.setColor(Color.blue);
 		int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;
