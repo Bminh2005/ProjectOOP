@@ -13,29 +13,31 @@ public class OBJ_Bullet_Boss extends Projectile{
 	
 	public OBJ_Bullet_Boss(GamePanel gp) {
 		super(gp);
-		name = "Thunder Bolt";
-		speed = 0;
+		name = "Bullet Boss";
+		speed = 5;
 		maxHp = 180;
 		hp = maxHp;
-		attack = 0;
+		attack = 15;
 		useCost = 7;
 		breakDefense = 1;
 		reverse = false;		
 		alive = false;
+		this.width = gp.tileSize*2;
+		this.height = gp.tileSize;
 		getImage();
 		
 	}
 	
 	public void getImage()
 	{
-		up1 = setup("/projectile/lightning_skill5_frame3", gp.tileSize*3, gp.tileSize*2);
-		up2 = setup("/projectile/lightning_skill5_frame4", gp.tileSize*3, gp.tileSize*2);
-		down1 = setup("/projectile/lightning_skill5_frame4", gp.tileSize*3, gp.tileSize*2);
-		down2 = setup("/projectile/lightning_skill5_frame3", gp.tileSize*3, gp.tileSize*2);
-		left1 = setup("/projectile/lightning_skill5_frame3", gp.tileSize*3, gp.tileSize*2);
-		left2 = setup("/projectile/lightning_skill5_frame4", gp.tileSize*3, gp.tileSize*2);
-		right1 = setup("/projectile/lightning_skill5_frame4", gp.tileSize*3, gp.tileSize*2);
-		right2 = setup("/projectile/lightning_skill5_frame3", gp.tileSize*3, gp.tileSize*2);
+		up1 = setup("/projectile/BossBullet1", gp.tileSize*2, gp.tileSize);
+		up2 = setup("/projectile/BossBullet2", gp.tileSize*2, gp.tileSize);
+		down1 = setup("/projectile/BossBullet3", gp.tileSize*2, gp.tileSize);
+		down2 = setup("/projectile/BossBullet1", gp.tileSize*2, gp.tileSize);
+		left1 = setup("/projectile/BossBullet2", gp.tileSize*2, gp.tileSize);
+		left2 = setup("/projectile/BossBullet3", gp.tileSize*2, gp.tileSize);
+		right1 = setup("/projectile/BossBullet2", gp.tileSize*2, gp.tileSize);
+		right2 = setup("/projectile/BossBullet3", gp.tileSize*2, gp.tileSize);
 	}
 	public boolean haveResource(Player user)
 	{
@@ -110,8 +112,8 @@ public class OBJ_Bullet_Boss extends Projectile{
 		{
 		case "up": worldY -= speed; break;
 		case "down": worldY += speed; break;
-		case "left": reverse = true; break;
-		case "right": reverse = false; break;
+		case "left": reverse = true; worldX -= speed; break;
+		case "right": reverse = false; worldX += speed; break;
 		}
 		
 		hp--;
@@ -180,14 +182,14 @@ public class OBJ_Bullet_Boss extends Projectile{
 			}
 			if(alive) {
 				if(reverse) {
-					g2.drawImage(image, screenX - gp.tileSize + 8, screenY - 8, null);
+					g2.drawImage(image, screenX - gp.tileSize + 8 + this.width, screenY + gp.tileSize/2 - 10,-this.width, this.height, null);
 					g2.setColor(Color.blue);
-					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					if(gp.testMode) g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 				}
 				else {
-					g2.drawImage(image, screenX - gp.tileSize + 8, screenY - 8, null);
+					g2.drawImage(image, screenX - gp.tileSize + 8, screenY + gp.tileSize/2 - 10, null);
 					g2.setColor(Color.blue);
-					g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+					if(gp.testMode) g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 				}
 				
 			}			
