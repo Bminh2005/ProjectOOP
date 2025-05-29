@@ -17,8 +17,9 @@ public class OBJ_ThunderProtect extends Projectile{
 		speed = 0;
 		maxHp = 180;
 		hp = maxHp;
-		attack = 10;
-		useCost = 2;
+		attack = 0;
+		useCost = 7;
+		breakDefense = 1;
 		reverse = false;		
 		alive = false;
 		getImage();
@@ -88,7 +89,7 @@ public class OBJ_ThunderProtect extends Projectile{
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999)
 			{
-				gp.player.damageMonsterByProjectile(monsterIndex, attack);
+				gp.player.damageMonsterByProjectile(monsterIndex, attack, breakDefense);
 //				generateParticle(user.projectile, gp.monster[monsterIndex]);
 			}
 			System.out.println("----" + alive);

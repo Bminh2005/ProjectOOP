@@ -51,6 +51,7 @@ public class Snake extends Monster {
 		attack = 30;
 		defense = 10;
 		exp = 15;
+		coin = 10;
 		direction = "up";
 		actionLockCounter = 0;
 	}
@@ -167,7 +168,6 @@ public class Snake extends Monster {
 			spriteCounter = 0;
 		}
 	}
-
 	public void updateSpriteNum() {
 		System.out.println("++++++++" + spriteCounter);
 		if (spriteCounter % 10 == 0) {
@@ -184,7 +184,6 @@ public class Snake extends Monster {
 			}
 		}
 	}
-
 	public void drawImage(Graphics2D g2, int screenX, int screenY) {
 		g2.setColor(Color.blue);
 		int range = this.attackZone.width + 2 * this.attackZoneDefaultX - this.width;

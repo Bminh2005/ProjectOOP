@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /InfoBox/
 /Player/
 /demon/
@@ -11,3 +12,10 @@
 /main/
 /monster/
 /snake_imouto/
+=======
+/npc_selling/
+/entity/
+/main/
+/monster/
+>>>>>>> branch 'main' of https://github.com/Bminh2005/ProjectOOP.git
+/object/

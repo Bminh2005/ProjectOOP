@@ -54,15 +54,16 @@ public class Minotuar extends Monster {
 		this.speed = 1;
 		this.alive = true;
 		name = "Minotuar";
-		type = type_monster;
-		maxHp = 50;
-		hp = maxHp;
-		state = "MOVE";
-		attack = 30;
-		defense = 20;
-		exp = 10;
-		direction = "up";
-		actionLockCounter = 0;
+        type = type_monster;
+        maxHp = 50;
+        hp = maxHp;
+        state = "MOVE";
+        attack = 30;
+        defense = 20;
+        exp = 10;
+        coin = 10; 
+        direction = "up";
+        actionLockCounter = 0;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import entity.Character;
 
 public abstract class Monster extends Character {
 	public int exp = 2;
+	public int coin = 0;
 	public int attackDelayCounter;
 	boolean attacking = false;
 	int attackingCounter = 0;
@@ -100,8 +101,12 @@ public abstract class Monster extends Character {
 	}
 
 	public void takeDamage(int playerAttack) {
-		this.hp -= (playerAttack - this.defense);
-		gp.ui.addMessage(playerAttack + " damage!");
+		if(playerAttack - this.defense > 0) {
+			this.hp -= (playerAttack - this.defense);
+			gp.ui.addMessage((playerAttack - this.defense) + " damage!");
+		}
+		gp.ui.addMessage("0  damage!");
+		
 		invincible = true;
 		if (this.hp <= 0) {
 			dying = true;

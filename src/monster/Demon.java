@@ -52,6 +52,7 @@ public class Demon extends Monster {
 		attack = 50;
 		defense = 30;
 		exp = 30;
+		coin = 30;
 		direction = "up";
 		actionLockCounter = 0;
 	}

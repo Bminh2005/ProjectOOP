@@ -48,8 +48,6 @@ public class Entity {
 	public int attackValue;
 	public int defenseValue;
 
-	// === Equipment & Items ===
-	// Vu khi, la chan va du an (dan, lua, etc.)
 
 	// === Entity State ===
 	// Cac trang thai hoat dong cua nhan vat
@@ -70,12 +68,6 @@ public class Entity {
 	public int spriteCounter = 0;
 	int dialogueIndex = 0;
 	public int spriteNum = 1;
-
-	public int actionLockCounter = 0;
-	public int invincibleCounter = 0;
-	public int shotAvailableCounter = 0;
-	public int dyingCounter = 0;
-	public int hpBarCounter = 0;
 
 	// === Entity Types ===
 	// Phan loai doi tuong (nguoi choi, quai, vu khi, vat pham,...)
@@ -153,10 +145,4 @@ public class Entity {
 		}
 		return image;
 	}
-
-//	public BufferedImage setup(BufferedImage image, int width, int height) {
-//		UtilityTool uTool = new UtilityTool();
-//		image = uTool.scaleImage(image, width, height);
-//		return image;
-//	}
 }
