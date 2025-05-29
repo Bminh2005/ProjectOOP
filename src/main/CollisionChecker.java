@@ -195,7 +195,7 @@ public class CollisionChecker {
 	}
 	public int checkEntity(Character entity, Character[][] target)
 	{
-	    int index = 999;
+		int index = 999;
 
 	    for(int i = 0; i < target[gp.num_CurrentMap].length; i++)
 	    {
@@ -235,7 +235,6 @@ public class CollisionChecker {
 	            					t.worldY -= 1;
 	            				}
 	            				entity.worldY += 1;
-	            				t.worldY -= 1;
 	            			}
 	            			break;
 	            		case "down":
