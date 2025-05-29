@@ -249,7 +249,7 @@ public class Player extends Character {
 					// CHECk NPC COLLISION
 					int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 					interactNPC(npcIndex);
-
+				
 					//this.CollisionOn = false;
 					int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
@@ -370,6 +370,10 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerIdle.maxNumber;
 		}
+		if (frameCounter % 60 == 0) {
+			if (this.mp < this.maxMp)
+				this.mp++;
+		}
 
 	}
 
@@ -408,10 +412,7 @@ public class Player extends Character {
 		if (this.frameCounter % 5 == 0) {
 			this.spriteNum = (this.spriteNum + 1) % this.playerWalk.maxNumber;
 		}
-		if (frameCounter % 240 == 0) {
-			if (this.mp < this.maxMp)
-				this.mp++;
-		}
+
 	}
 
 	public void move() {
@@ -508,7 +509,7 @@ public class Player extends Character {
 
 	}
 
-	public void damageMonsterByProjectile(int i, int attack, int breakDefense) {
+	public void damageMonsterByProjectile(int i, int attack) {
 		if (i != 999) {
 
 			if (gp.monster[gp.num_CurrentMap][i].invincible == false) {
@@ -518,8 +519,6 @@ public class Player extends Character {
 				if (damage < 0) {
 					damage = 0;
 				}
-				gp.monster[gp.num_CurrentMap][i].defense -= breakDefense;
-				gp.ui.addMessage("- " + breakDefense + " defense");
 				gp.monster[gp.num_CurrentMap][i].hp -= damage;
 				gp.ui.addMessage(damage + " damage!");
 
@@ -578,8 +577,6 @@ public class Player extends Character {
 							gp.ui.addMessage("Killed the " + gp.monster[gp.num_CurrentMap][i].name + "!");
 							gp.ui.addMessage("Exp + " + gp.monster[gp.num_CurrentMap][i].exp);
 							exp += gp.monster[gp.num_CurrentMap][i].exp;
-							gp.ui.addMessage("Coin + " + gp.monster[gp.num_CurrentMap][i].coin);
-							coin += gp.monster[gp.num_CurrentMap][i].coin;
 							checkLevelUp();
 						}
 					}
@@ -620,7 +617,7 @@ public class Player extends Character {
 		inventory.add(currentShield);
 		inventory.add(new OBJ_Potion_Red(gp));
 		inventory.add(new OBJ_Potion_Red(gp));
-//		inventory.add(new OBJ_Shield_Blue(gp));
+		inventory.add(new OBJ_Shield_Blue(gp));
 	}
 
 	public void selectItem() {

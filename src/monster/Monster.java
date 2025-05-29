@@ -12,7 +12,6 @@ import entity.Character;
 
 public abstract class Monster extends Character {
 	public int exp = 2;
-	public int coin = 0;
 	public int attackDelayCounter;
 	boolean attacking = false;
 	int attackingCounter = 0;

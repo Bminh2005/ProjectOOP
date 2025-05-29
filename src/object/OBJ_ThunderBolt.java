@@ -88,7 +88,7 @@ public class OBJ_ThunderBolt extends Projectile{
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			if(monsterIndex != 999)
 			{
-				gp.player.damageMonsterByProjectile(monsterIndex, attack, breakDefense);
+				gp.player.damageMonsterByProjectile(monsterIndex, attack);
 //				generateParticle(user.projectile, gp.monster[monsterIndex]);
 			}
 			System.out.println("----" + alive);
